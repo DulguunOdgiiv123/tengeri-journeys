@@ -154,9 +154,39 @@ section { scroll-margin-top: 72px; }
 .journeys { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 28px; }
 @media (min-width: 1100px) {
   .journeys.all { grid-template-columns: repeat(3, 1fr); }
-  .journeys.all .trip:first-child, .journeys.all .trip:last-child { grid-column: span 2; }
-  .journeys.all .trip:first-child .trip-media, .journeys.all .trip:last-child .trip-media { aspect-ratio: 16 / 7; }
+  .journeys.all .trip:first-child { grid-column: span 2; }
+  .journeys.all .trip:first-child .trip-media { aspect-ratio: 16 / 7; }
 }
+
+/* Destinations */
+.regions-band { padding-block: clamp(48px, 6vw, 80px) 0; }
+.regions { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+.region {
+  position: relative; display: flex; flex-direction: column; justify-content: flex-end; gap: 2px;
+  aspect-ratio: 3 / 4; max-width: 100%; border-radius: var(--radius); overflow: hidden; isolation: isolate;
+  padding: 16px; color: #fff; text-align: left; font: inherit; border: 0; cursor: pointer; background: var(--ink);
+}
+.region img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; transition: transform .6s ease; }
+.region::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(8,15,26,0) 40%, rgba(8,15,26,.78) 100%); }
+.region:hover img { transform: scale(1.06); }
+.region strong { font-family: var(--f-display); font-weight: 500; font-size: 1.15rem; line-height: 1.15; }
+.region span { font-size: .85rem; color: rgba(255,255,255,.82); }
+@media (max-width: 900px) {
+  .regions { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 6px; }
+  .region { flex: 0 0 min(44%, 200px); scroll-snap-align: start; }
+}
+
+/* Floating chat */
+.chat-fab {
+  position: fixed; z-index: 40;
+  right: calc(18px + env(safe-area-inset-right, 0px)); bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+  display: inline-flex; align-items: center; gap: 10px; padding: 13px 18px 13px 14px; border-radius: 999px;
+  background: var(--sand); color: #1a1206; font: 600 .95rem var(--f-body); text-decoration: none;
+  box-shadow: 0 14px 30px -12px rgba(8,15,26,.55); transition: transform .2s ease;
+}
+.chat-fab:hover { transform: translateY(-2px); }
+.chat-fab svg { width: 22px; height: 22px; flex: none; }
+@media (max-width: 520px) { .chat-fab span { display: none; } .chat-fab { padding: 14px; } }
 .trip { display: flex; flex-direction: column; background: var(--surface); border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); transition: transform .3s ease, box-shadow .3s ease; }
 .trip:hover { transform: translateY(-4px); box-shadow: 0 24px 50px -28px rgba(16,27,41,.45); }
 .trip-media { position: relative; aspect-ratio: 4 / 3; max-width: 100%; overflow: hidden; }
@@ -292,9 +322,38 @@ section { scroll-margin-top: 72px; }
 .strip figcaption { position: absolute; left: 12px; bottom: 12px; color: #fff; font: 500 .75rem var(--f-mono); letter-spacing: .05em; background: rgba(8,15,26,.55); padding: 6px 9px; border-radius: 6px; backdrop-filter: blur(4px); }
 @media (max-width: 720px) { .strip { grid-template-columns: 1fr 1fr; grid-template-rows: 260px 160px 160px; } .strip figure:first-child { grid-column: span 2; grid-row: auto; } }
 
-/* FAQ */
-.faq-grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: clamp(28px, 5vw, 80px); }
+/* Help centre */
+.faq-grid { display: grid; grid-template-columns: 260px 1fr; gap: clamp(28px, 5vw, 72px); align-items: start; }
 @media (max-width: 900px) { .faq-grid { grid-template-columns: 1fr; } }
+.faq-side { display: grid; gap: 20px; position: sticky; top: calc(88px + env(safe-area-inset-top, 0px)); }
+@media (max-width: 900px) { .faq-side { position: static; } }
+.faq-cats { list-style: none; margin: 0; padding: 0; display: grid; border-top: 1px solid var(--line); }
+.faq-cats button {
+  width: 100%; display: flex; justify-content: space-between; gap: 12px; padding: 13px 4px; background: none; border: 0;
+  border-bottom: 1px solid var(--line); color: var(--muted); font: 500 1rem var(--f-body); cursor: pointer; text-align: left;
+}
+.faq-cats button:hover { color: var(--ink); }
+.faq-cats button[aria-pressed="true"] { color: var(--sky); font-weight: 600; }
+.faq-cats .n { font-family: var(--f-mono); font-size: .78rem; font-variant-numeric: tabular-nums; }
+@media (max-width: 900px) {
+  .faq-cats { display: flex; gap: 8px; overflow-x: auto; border: 0; padding-bottom: 4px; }
+  .faq-cats button { width: auto; white-space: nowrap; border: 1px solid var(--line); border-radius: 999px; padding: 9px 14px; }
+  .faq-cats button[aria-pressed="true"] { border-color: var(--sky); background: var(--sky-soft); }
+}
+.faq-search { position: relative; margin-bottom: 20px; }
+.faq-search input {
+  width: 100%; font: 400 1.05rem var(--f-body); color: var(--ink); background: var(--bg);
+  border: 1px solid var(--line); border-radius: 999px; padding: 15px 20px 15px 50px;
+}
+.faq-search input:focus { outline: 2px solid var(--sky); outline-offset: 1px; }
+.faq-search svg { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; color: var(--muted); }
+.faq-cat-label { font-family: var(--f-mono); font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; color: var(--sand); display: block; margin-bottom: 4px; font-weight: 500; }
+.faq-empty { padding: 28px 0; color: var(--muted); }
+.faq-empty a { color: var(--sky); }
+.side-card { border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; display: grid; gap: 8px; font-size: .95rem; background: var(--bg); }
+.side-card p { color: var(--muted); }
+.side-card a { color: var(--sky); font-weight: 600; }
+@media (max-width: 900px) { .side-card { display: none; } }
 details { border-bottom: 1px solid var(--line); }
 details:first-of-type { border-top: 1px solid var(--line); }
 summary { cursor: pointer; list-style: none; padding: 20px 40px 20px 0; font-weight: 600; font-size: 1.08rem; position: relative; }
@@ -358,7 +417,7 @@ footer a:hover { color: var(--ink); }
       <li><a href="#map">Map</a></li>
       <li><a href="#seasons">When to go</a></li>
       <li><a href="#how">How it works</a></li>
-      <li><a href="#faq">Travel info</a></li>
+      <li><a href="#faq">Help centre</a></li>
     </ul>
     <a class="btn btn-primary" href="#plan">Plan my trip</a>
   </nav>
@@ -392,18 +451,31 @@ footer a:hover { color: var(--ink); }
     </div>
   </section>
 
+  <section class="regions-band" aria-labelledby="regions-title">
+    <div class="wrap">
+      <div class="section-head" style="margin-bottom:24px">
+        <div class="eyebrow"><b>Destinations</b><span class="coord">5 regions · 1 country</span></div>
+        <h2 id="regions-title">Where do you want to go?</h2>
+      </div>
+      <div class="regions" id="regions"></div>
+    </div>
+  </section>
+
   <section id="journeys" class="band">
     <div class="wrap">
       <div class="section-head">
-        <div class="eyebrow"><b>Journeys</b><span class="coord">7 itineraries · 3 to 12 days</span></div>
+        <div class="eyebrow"><b>Journeys</b><span class="coord">8 itineraries · 3 to 12 days</span></div>
         <h2>Routes we know by heart</h2>
         <p>Every itinerary runs as a small-group departure or as a private trip on your dates. All include a Mongolian guide, a driver, meals outside the city and every night's stay.</p>
       </div>
       <div class="filters" role="group" aria-label="Filter journeys">
         <button class="chip" type="button" data-filter="all" aria-pressed="true">All journeys</button>
+        <button class="chip" type="button" data-filter="gobi" aria-pressed="false">Gobi</button>
+        <button class="chip" type="button" data-filter="north" aria-pressed="false">Khövsgöl &amp; north</button>
+        <button class="chip" type="button" data-filter="central" aria-pressed="false">Central</button>
+        <button class="chip" type="button" data-filter="west" aria-pressed="false">Altai &amp; far west</button>
+        <button class="chip" type="button" data-filter="winter" aria-pressed="false">Winter</button>
         <button class="chip" type="button" data-filter="festival" aria-pressed="false">Festivals</button>
-        <button class="chip" type="button" data-filter="adventure" aria-pressed="false">Adventure</button>
-        <button class="chip" type="button" data-filter="culture" aria-pressed="false">Nomadic culture</button>
         <button class="chip" type="button" data-filter="short" aria-pressed="false">Under a week</button>
       </div>
       <div class="journeys all" id="journey-list"></div>
@@ -502,19 +574,25 @@ footer a:hover { color: var(--ink); }
   </section>
 
   <section id="faq" class="band map-band">
-    <div class="wrap faq-grid">
-      <div class="section-head" style="margin:0;align-content:start">
-        <div class="eyebrow"><b>Travel info</b></div>
-        <h2>Good to know before you fly</h2>
-        <p>Still unsure? Our planners answer every question personally.</p>
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow"><b>Help centre</b><span class="coord" id="faq-count"></span></div>
+        <h2>Questions travellers ask us</h2>
+        <p>Search or browse by topic. If your question isn't here, a planner will answer it personally.</p>
       </div>
-      <div>
-        <details open><summary>Do I need a visa for Mongolia?</summary><p>Citizens of many countries, including the United States, Canada, Japan, South Korea and several European countries, can enter visa-free for a set number of days. Rules change, so check with your nearest Mongolian embassy. If you need a visa, we provide the invitation letter.</p></details>
-        <details><summary>How do I get there?</summary><p>Fly into Chinggis Khaan International Airport (UBN), about 50 km south of Ulaanbaatar. There are direct flights from Seoul, Beijing, Tokyo, Istanbul and Frankfurt, among others. We meet every guest on arrival.</p></details>
-        <details><summary>What is a ger camp like?</summary><p>A ger is a round felt tent heated by a wood stove. Tourist ger camps have proper beds, hot showers and a dining hall. Family stays are simpler, with shared facilities, and are the highlight of most trips.</p></details>
-        <details><summary>How fit do I need to be?</summary><p>Most journeys suit anyone who can walk a few hours a day and sit in a vehicle on rough roads. The Altai Tavan Bogd trek needs good fitness. Horse riding is optional and beginners are welcome.</p></details>
-        <details><summary>Can I use cards and my phone?</summary><p>The currency is the tögrög (MNT). Cards work in Ulaanbaatar; carry cash for the countryside. Mobile coverage reaches most soums (district centres), but not open steppe or mountains.</p></details>
-        <details><summary>What about dietary needs?</summary><p>Traditional food is meat and dairy heavy. Our cooks prepare vegetarian, vegan and gluten-free meals when you tell us in advance.</p></details>
+      <div class="faq-grid">
+        <aside class="faq-side">
+          <ul class="faq-cats" id="faq-cats" aria-label="Question topics"></ul>
+          <div class="side-card"><strong>Still need help?</strong><p>Planners reply within one working day, Monday to Saturday, Ulaanbaatar time (UTC+8).</p><a href="#plan">Ask a question →</a></div>
+        </aside>
+        <div>
+          <div class="faq-search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <label for="faq-q" class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Search questions</label>
+            <input id="faq-q" type="search" placeholder="Search, e.g. visa, cancellation, cold" autocomplete="off">
+          </div>
+          <div id="faq-list"></div>
+        </div>
       </div>
     </div>
   </section>
@@ -542,6 +620,11 @@ footer a:hover { color: var(--ink); }
   </section>
 </main>
 
+<a class="chat-fab" href="#plan" aria-label="Chat with a planner">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 10h8M8 13h5"/></svg>
+  <span>Chat with a planner</span>
+</a>
+
 <footer>
   <div class="wrap">
     <div class="foot-grid">
@@ -558,7 +641,8 @@ footer a:hover { color: var(--ink); }
       <a href="https://commons.wikimedia.org/wiki/File:Kazakh_Eagle_Hunter_with_Golden_Eagle_in_Bayan_Olgii_region,_Mongolia.jpg" target="_blank" rel="noopener">eagle hunter</a> by Ceyhun Kavakci (CC BY-SA 2.0);
       <a href="https://commons.wikimedia.org/wiki/File:202408_Orkhon_Valley_03.jpg" target="_blank" rel="noopener">Orkhon Valley</a> by Jonashtand (CC BY-SA 4.0);
       <a href="https://commons.wikimedia.org/wiki/File:Altai_Tavan_Bogd_-_Potanin_glacier_-_panoramio.jpg" target="_blank" rel="noopener">Potanin Glacier</a> (CC BY 3.0);
-      <a href="https://commons.wikimedia.org/wiki/File:Gorkhi-Terelj_National_Park.jpg" target="_blank" rel="noopener">Gorkhi-Terelj</a> (CC BY-SA 4.0).
+      <a href="https://commons.wikimedia.org/wiki/File:Gorkhi-Terelj_National_Park.jpg" target="_blank" rel="noopener">Gorkhi-Terelj</a> (CC BY-SA 4.0);
+      <a href="https://commons.wikimedia.org/wiki/File:Mongolia_-_panoramio_(3).jpg" target="_blank" rel="noopener">horses in winter</a> by AwOiSoAk KaOsIoWa (CC BY-SA 3.0).
       <br>© 2026 Tengeri Journeys.</p>
   </div>
 </footer>
@@ -586,33 +670,72 @@ footer a:hover { color: var(--ink); }
 
   // Overland legs are drawn solid, legs marked with "~" are flights.
   const TRIPS = [
-    { id: "gobi", name: "Gobi Crossing", days: 8, season: "May–Sep", level: "Moderate", price: 1890, img: "img/dunes2.jpg", tag: "Desert", cats: ["adventure"],
+    { id: "gobi", name: "Gobi Crossing", days: 8, season: "May–Sep", level: "Moderate", price: 1890, img: "img/dunes2.jpg", tag: "Desert", cats: ["gobi", "adventure"],
       text: "Climb the singing dunes of Khongoryn Els, walk the ice gorge of Yolyn Am and hunt for dinosaur fossils at the Flaming Cliffs.",
       route: ["ub", "tsagaan", "yolyn", "khongor", "bayanzag", "ub"] },
-    { id: "khuvsgul", name: "Khövsgöl & the Reindeer Herders", days: 10, season: "Jun–Aug", level: "Moderate", price: 2290, img: "img/lake.jpg", tag: "Taiga", cats: ["adventure", "culture"],
+    { id: "khuvsgul", name: "Khövsgöl & the Reindeer Herders", days: 10, season: "Jun–Aug", level: "Moderate", price: 2290, img: "img/lake.jpg", tag: "Taiga", cats: ["north", "adventure", "culture"],
       text: "Kayak Mongolia's deepest lake, then ride into the taiga to spend two nights with Dukha reindeer-herding families.",
       route: ["ub", "amar", "murun", "khuvsgul", "tsaatan", "khuvsgul", "murun", "~ub"] },
-    { id: "naadam", name: "Naadam Festival", days: 7, season: "9–15 Jul 2027", level: "Easy", price: 2390, img: "img/naadam.jpg", tag: "Festival", cats: ["festival", "culture"],
+    { id: "naadam", name: "Naadam Festival", days: 7, season: "9–15 Jul 2027", level: "Easy", price: 2390, img: "img/naadam.jpg", tag: "Festival", cats: ["central", "festival", "culture"],
       text: "Front-row seats for wrestling, archery and the horse race with child jockeys, then a countryside Naadam with a herding family.",
       route: ["ub", "terelj", "ub", "khustai", "elsen", "kharkhorin", "ub"] },
-    { id: "eagle", name: "Golden Eagle Festival", days: 8, season: "Early Oct 2027", level: "Moderate", price: 2690, img: "img/eagle.jpg", tag: "Festival", cats: ["festival", "culture"],
+    { id: "eagle", name: "Golden Eagle Festival", days: 8, season: "Early Oct 2027", level: "Moderate", price: 2690, img: "img/eagle.jpg", tag: "Festival", cats: ["west", "festival", "culture"],
       text: "Fly to the far west to meet Kazakh eagle hunters, stay in their winter homes and watch the competition in the Altai foothills.",
       route: ["ub", "~olgii"] },
-    { id: "orkhon", name: "Orkhon Valley & Karakorum", days: 6, season: "May–Sep", level: "Easy", price: 1390, img: "img/orkhon.jpg", tag: "Heritage", cats: ["culture", "short"],
+    { id: "orkhon", name: "Orkhon Valley & Karakorum", days: 6, season: "May–Sep", level: "Easy", price: 1390, img: "img/orkhon.jpg", tag: "Heritage", cats: ["central", "culture", "short"],
       text: "See wild Przewalski's horses at Khustai, ride in the mini-Gobi dunes and visit Erdene Zuu, the monastery built from Chinggis Khaan's old capital.",
       route: ["ub", "khustai", "elsen", "kharkhorin", "orkhon", "ub"] },
-    { id: "altai", name: "Altai Tavan Bogd Trek", days: 12, season: "Jul–Aug", level: "Challenging", price: 3150, img: "img/altai.jpg", tag: "Expedition", cats: ["adventure"],
+    { id: "altai", name: "Altai Tavan Bogd Trek", days: 12, season: "Jul–Aug", level: "Challenging", price: 3150, img: "img/altai.jpg", tag: "Expedition", cats: ["west", "adventure"],
       text: "Trek with Bactrian camels to base camp below Mongolia's highest peak, Khüiten (4,374 m), and the Potanin Glacier.",
       route: ["ub", "~olgii", "tavanbogd", "olgii", "~ub"] },
-    { id: "terelj", name: "Terelj Ger Escape", days: 3, season: "All year", level: "Easy", price: 520, img: "img/terelj.jpg", tag: "Short break", cats: ["short", "culture"],
+    { id: "terelj", name: "Terelj Ger Escape", days: 3, season: "All year", level: "Easy", price: 520, img: "img/terelj.jpg", tag: "Short break", cats: ["central", "short", "culture"],
       text: "Granite valleys an hour and a half from the capital. Ride horses, hike to Aryapala meditation temple and sleep in a heated ger.",
-      route: ["ub", "terelj", "ub"] }
+      route: ["ub", "terelj", "ub"] },
+    { id: "winter", name: "Frozen Khövsgöl Ice Festival", days: 7, season: "Late Feb–Mar", level: "Moderate", price: 1790, img: "img/winter.jpg", tag: "Winter", cats: ["north", "winter", "festival"],
+      text: "Ride horse sleds across a frozen lake 1.6 metres thick, watch ice sculpting and stay warm in a stove-heated ger at −25 °C.",
+      route: ["ub", "~murun", "khuvsgul", "murun", "~ub"] }
+  ];
+
+  const REGIONS = [
+    { id: "gobi", name: "Gobi Desert", img: "img/dunes2.jpg" },
+    { id: "north", name: "Khövsgöl & north", img: "img/lake.jpg" },
+    { id: "central", name: "Central steppe", img: "img/orkhon.jpg" },
+    { id: "west", name: "Altai & far west", img: "img/altai.jpg" },
+    { id: "winter", name: "Winter", img: "img/winter.jpg" }
+  ];
+
+  const FAQ_CATS = [
+    { id: "booking", name: "Booking & payment" },
+    { id: "entry", name: "Visa & arrival" },
+    { id: "trip", name: "On the trip" },
+    { id: "safety", name: "Health & safety" },
+    { id: "winter", name: "Winter travel" }
+  ];
+  const FAQ = [
+    { c: "booking", q: "How do I book a journey?", a: "Send us an inquiry with your dates and interests. A planner replies with an itinerary and price within one working day. When you are happy with it, a 20% deposit confirms your place." },
+    { c: "booking", q: "When is the balance due?", a: "The remaining balance is due 60 days before departure. For bookings made less than 60 days ahead, we ask for full payment at booking." },
+    { c: "booking", q: "Do small-group departures run with only a few people?", a: "Yes. Group departures are guaranteed from two guests, so you will never be cancelled for low numbers once you hold a confirmed booking." },
+    { c: "booking", q: "What is your cancellation policy?", a: "Cancel more than 60 days before departure and we refund your deposit minus a small administration fee. Closer to departure, part of the cost is non-refundable because camps and flights are paid in advance. Full terms come with your booking confirmation." },
+    { c: "booking", q: "Do I need travel insurance?", a: "Yes. Your policy must cover medical treatment and emergency evacuation from remote areas. We ask for the policy number before departure." },
+    { c: "entry", q: "Do I need a visa for Mongolia?", a: "Citizens of many countries, including the United States, Canada, Japan, South Korea and several European countries, can enter visa-free for a set number of days. Rules change, so check with your nearest Mongolian embassy. If you need a visa, we provide the invitation letter." },
+    { c: "entry", q: "How do I get to Mongolia?", a: "Fly into Chinggis Khaan International Airport (UBN), about 50 km south of Ulaanbaatar. There are direct flights from Seoul, Beijing, Tokyo, Istanbul and Frankfurt, among others. The Trans-Mongolian railway is a slower, scenic option." },
+    { c: "entry", q: "Will someone meet me at the airport?", a: "Yes. Your guide meets every guest in the arrivals hall with a name sign, whatever time your flight lands, and drives you to your hotel." },
+    { c: "trip", q: "What is a ger camp like?", a: "A ger is a round felt tent heated by a wood stove. Tourist ger camps have proper beds, hot showers and a dining hall. Family stays are simpler, with shared facilities, and are the highlight of most trips." },
+    { c: "trip", q: "What should I pack?", a: "Layers. Even in July, nights on the steppe can drop close to freezing, and the Gobi is windy. Bring a warm fleece, a windproof jacket, sun protection, and comfortable walking shoes. We send a full packing list after booking." },
+    { c: "trip", q: "Can I use cards and my phone?", a: "The currency is the tögrög (MNT). Cards work in Ulaanbaatar; carry cash for the countryside. Mobile coverage reaches most soums (district centres), but not open steppe or mountains." },
+    { c: "trip", q: "What about dietary needs?", a: "Traditional food is meat and dairy heavy. Our cooks prepare vegetarian, vegan and gluten-free meals when you tell us in advance." },
+    { c: "trip", q: "Are there baggage limits on domestic flights?", a: "Domestic flights to Ölgii and Mörön have tighter limits than international ones. We confirm the exact allowance for your flight and can store extra luggage in Ulaanbaatar." },
+    { c: "safety", q: "How fit do I need to be?", a: "Most journeys suit anyone who can walk a few hours a day and sit in a vehicle on rough roads. The Altai Tavan Bogd trek needs good fitness. Horse riding is optional and beginners are welcome." },
+    { c: "safety", q: "Is Mongolia safe for travellers?", a: "Mongolia is generally a safe and welcoming country. In Ulaanbaatar, watch for pickpockets in crowded markets and on buses, as in any big city. In the countryside, the main risks are road travel and weather, which our drivers know well." },
+    { c: "safety", q: "What happens if someone gets sick or injured?", a: "Guides carry a first-aid kit and are trained in wilderness first aid. Remote routes carry a satellite phone, and our Ulaanbaatar team arranges transfer to a clinic or hospital when needed." },
+    { c: "winter", q: "How cold is it in winter?", a: "Daytime temperatures from December to February are typically −15 to −30 °C, with dry air and bright sunshine. Gers and hotels are kept warm, and you spend most of your outdoor time in short, active spells." },
+    { c: "winter", q: "Do I need special clothing for a winter trip?", a: "Bring thermal base layers, a down jacket, insulated boots and good gloves. We lend each guest a traditional deel (felt-lined robe) for the countryside." }
   ];
 
   const MONTHS = [
     { m: "Jan", full: "January",   hi: -16, lo: -27, note: "The coldest month. Clear, still days, frozen rivers and almost no other travellers.", event: null, trips: ["terelj"] },
-    { m: "Feb", full: "February",  hi: -11, lo: -24, note: "Families gather for the lunar new year with steamed buuz dumplings and visits to elders.", event: "Tsagaan Sar, the lunar new year, usually falls in February.", trips: ["terelj"] },
-    { m: "Mar", full: "March",     hi: -1,  lo: -15, note: "Sunny and dry with long days returning. Lakes stay frozen solid.", event: "Ice Festival on frozen Lake Khövsgöl and the Thousand Camel Festival in the Gobi.", trips: ["terelj"] },
+    { m: "Feb", full: "February",  hi: -11, lo: -24, note: "Families gather for the lunar new year with steamed buuz dumplings and visits to elders.", event: "Tsagaan Sar, the lunar new year, usually falls in February.", trips: ["winter", "terelj"] },
+    { m: "Mar", full: "March",     hi: -1,  lo: -15, note: "Sunny and dry with long days returning. Lakes stay frozen solid.", event: "Ice Festival on frozen Lake Khövsgöl and the Thousand Camel Festival in the Gobi.", trips: ["winter", "terelj"] },
     { m: "Apr", full: "April",     hi: 8,   lo: -6,  note: "A windy thaw. Herders move to spring camps and newborn lambs and camel calves arrive.", event: null, trips: ["terelj"] },
     { m: "May", full: "May",       hi: 16,  lo: 2,   note: "Ger camps reopen in mid-May and green returns to the steppe. Great value before the summer peak.", event: null, trips: ["orkhon", "gobi", "terelj"] },
     { m: "Jun", full: "June",      hi: 21,  lo: 8,   note: "Long days and wildflowers. The ideal time for the Gobi before midsummer heat.", event: null, trips: ["gobi", "khuvsgul", "orkhon", "terelj"] },
@@ -649,14 +772,26 @@ footer a:hover { color: var(--ink); }
       </div>
     </article>`).join("");
 
-  document.querySelectorAll(".chip").forEach(chip => chip.addEventListener("click", () => {
-    document.querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", c === chip));
-    const f = chip.dataset.filter;
+  function applyFilter(f) {
+    document.querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", c.dataset.filter === f));
     list.classList.toggle("all", f === "all");
     list.querySelectorAll(".trip").forEach(card => {
       card.hidden = !(f === "all" || card.dataset.cats.split(" ").includes(f));
     });
-  }));
+  }
+  document.querySelectorAll(".chip").forEach(chip => chip.addEventListener("click", () => applyFilter(chip.dataset.filter)));
+
+  /* Destination tiles */
+  const regionsEl = $("#regions");
+  regionsEl.innerHTML = REGIONS.map(r => {
+    const n = TRIPS.filter(t => t.cats.includes(r.id)).length;
+    return `<button class="region" type="button" data-region="${r.id}"><img src="${r.img}" alt="" loading="lazy"><strong>${r.name}</strong><span>${n} ${n === 1 ? "journey" : "journeys"}</span></button>`;
+  }).join("");
+  regionsEl.addEventListener("click", e => {
+    const b = e.target.closest("[data-region]"); if (!b) return;
+    applyFilter(b.dataset.region);
+    $("#journeys").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+  });
 
   /* Map */
   const svg = $("#map-svg");
@@ -749,6 +884,29 @@ footer a:hover { color: var(--ink); }
       <div><span class="coord">Good journeys this month</span><div class="pill-row" style="margin-top:8px">${mo.trips.map(id => `<span class="pill">${byId[id].name}</span>`).join("")}</div></div>`;
   }
   pick(6);
+
+  /* Help centre */
+  const esc = t => t.replace(/[&<>"]/g, ch => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[ch]));
+  const catName = Object.fromEntries(FAQ_CATS.map(c => [c.id, c.name]));
+  let faqCat = "all";
+  $("#faq-count").textContent = `${FAQ.length} answers · ${FAQ_CATS.length} topics`;
+  $("#faq-cats").innerHTML = [{ id: "all", name: "All questions" }, ...FAQ_CATS].map(c =>
+    `<li><button type="button" data-cat="${c.id}" aria-pressed="${c.id === "all"}">${c.name}<span class="n">${c.id === "all" ? FAQ.length : FAQ.filter(f => f.c === c.id).length}</span></button></li>`).join("");
+  function renderFaq() {
+    const q = $("#faq-q").value.trim().toLowerCase();
+    const items = FAQ.filter(f => (faqCat === "all" || f.c === faqCat) && (!q || (f.q + " " + f.a).toLowerCase().includes(q)));
+    $("#faq-list").innerHTML = items.length
+      ? items.map((f, i) => `<details${i === 0 && !q ? " open" : ""}><summary>${faqCat === "all" ? `<span class="faq-cat-label">${catName[f.c]}</span>` : ""}${f.q}</summary><p>${f.a}</p></details>`).join("")
+      : `<p class="faq-empty">No questions match “${esc($("#faq-q").value.trim())}”. <a href="#plan">Ask a planner directly</a> and we'll answer within one working day.</p>`;
+  }
+  $("#faq-cats").addEventListener("click", e => {
+    const b = e.target.closest("[data-cat]"); if (!b) return;
+    faqCat = b.dataset.cat;
+    document.querySelectorAll("#faq-cats button").forEach(x => x.setAttribute("aria-pressed", x === b));
+    renderFaq();
+  });
+  $("#faq-q").addEventListener("input", renderFaq);
+  renderFaq();
 
   /* Inquiry form */
   $("#f-trip").insertAdjacentHTML("beforeend", TRIPS.map(t => `<option value="${t.id}">${t.name}</option>`).join(""));
