@@ -124,7 +124,11 @@ img { max-width: 100%; display: block; }
 .script { font-family: var(--f-script); writing-mode: vertical-lr; font-size: clamp(2rem, 3vw, 2.8rem); line-height: 1; color: rgba(255,255,255,.85); user-select: none; }
 .script-cap { writing-mode: vertical-rl; font-family: var(--f-mono); font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.7); }
 .hero-script { display: flex; gap: 12px; align-items: flex-end; }
-@media (max-width: 640px) { .hero-script { display: none; } .hero-inner { grid-template-columns: 1fr; } }
+@media (max-width: 640px) {
+  .hero-script { display: none; } .hero-inner { grid-template-columns: 1fr; }
+  .hero::after { background: linear-gradient(180deg, rgba(8,15,26,.35) 0%, rgba(8,15,26,.55) 40%, rgba(8,15,26,.82) 100%); }
+  .hero h1 em { color: #d6e6ff; }
+}
 .facts { position: relative; border-top: 1px solid rgba(255,255,255,.25); background: rgba(8,15,26,.35); backdrop-filter: blur(8px); }
 .facts ul { list-style: none; margin: 0; display: grid; grid-template-columns: repeat(4, 1fr); padding-block: 18px; gap: 16px; }
 .facts li { display: grid; gap: 2px; min-width: 0; }
@@ -175,7 +179,6 @@ section { scroll-margin-top: 72px; }
 /* Map */
 .map-band { background: var(--surface); border-block: 1px solid var(--line); }
 .map-grid { display: grid; grid-template-columns: 300px 1fr; gap: clamp(24px, 4vw, 56px); align-items: start; }
-@media (max-width: 900px) { .map-grid { grid-template-columns: 1fr; } }
 .route-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
 .route-list button {
   width: 100%; text-align: left; display: grid; grid-template-columns: 1fr auto; gap: 2px 12px; align-items: baseline;
@@ -205,6 +208,22 @@ section { scroll-margin-top: 72px; }
 .legend i { display: inline-block; width: 24px; height: 0; border-top: 3px solid var(--sand); }
 .legend i.f { border-top: 2px dashed var(--sand); }
 
+@media (max-width: 900px) {
+  .map-grid { grid-template-columns: 1fr; }
+  .map-wrap { order: -1; margin-inline: -8px; }
+  .route-list { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; scroll-snap-type: x mandatory; }
+  .route-list li { flex: 0 0 auto; scroll-snap-align: start; }
+  .route-list button { width: auto; border-color: var(--line); padding: 10px 14px; }
+  .route-list .r-stops { display: none; }
+}
+@media (max-width: 600px) {
+  .map-label { font-size: 28px; stroke-width: 7px; }
+  .map-label:not(.on) { display: none; }
+  .map-grat-label { font-size: 18px; }
+  .map-route { stroke-width: 5; }
+  .map-dot { r: 7; }
+  .map-label[data-k="bayanzag"] { text-anchor: end; transform: translateX(-12px); }
+}
 /* Seasons */
 .season-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: clamp(28px, 4vw, 64px); align-items: start; }
 @media (max-width: 900px) { .season-grid { grid-template-columns: 1fr; } }
@@ -659,6 +678,7 @@ footer a:hover { color: var(--ink); }
     const c = el("circle", { cx: x, cy: y, r: p.cap ? 6 : 4.5, class: p.cap ? "map-dot cap" : "map-dot" }, dotLayer);
     const t = el("text", { x: x + p.dx, y: y + p.dy, class: "map-label", "text-anchor": p.anchor || "start" }, dotLayer);
     t.textContent = p.name;
+    t.dataset.k = k;
     dots[k] = { c, t, cap: p.cap };
   }
 
