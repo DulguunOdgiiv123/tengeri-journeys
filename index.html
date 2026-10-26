@@ -3,634 +3,728 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>Tengeri Journeys</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="Small-group and private journeys across Mongolia: the Gobi, Khövsgöl, Naadam, the Golden Eagle Festival and the Altai.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;700&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+Mongolian&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+Mongolian&display=swap">
 <style>
-/* Layout: "horizon line" — full-bleed photo bands alternate with calm text bands; every section is anchored by its real coordinates, like a waypoint on a route. */
+/* Layout: a set of short, nav-driven views (Home, Journeys, When to go, Experience, Help, Plan) instead of one long scroll.
+   Identity: the Mongolian flag's blue and Soyombo gold on clean white, framed by the traditional "alkhan khee" meander border. */
 :root {
-  --bg: #f3f5f6;          /* felt white, cool */
-  --surface: #ffffff;
-  --ink: #101b29;         /* night steppe */
-  --muted: #566476;
-  --line: #d6dee6;
-  --sky: #1c56a3;         /* khadag blue */
-  --sky-soft: #e3ecf8;
-  --sand: #b9803a;        /* Gobi sand */
-  --sand-soft: #f3e8d8;
-  --on-photo: #ffffff;
-  --shade: rgba(8, 15, 26, .62);
+  color-scheme: light;
+  --paper: #ffffff;
+  --mist: #f0f4fa;         /* pale steppe sky */
+  --ink: #0c1a30;
+  --muted: #56667c;
+  --line: #dfe6ef;
+  --blue: #1150b0;         /* eternal blue */
+  --blue-deep: #0a3378;
+  --gold: #f4b93a;         /* Soyombo gold */
+  --red: #c4272f;          /* flag red, used only for festival tags */
+  --night: #0a1a33;
+  --on-dark-soft: rgba(255,255,255,.74);
 
   --f-display: "Unbounded", "Arial Black", system-ui, sans-serif;
+  --f-accent: "Instrument Serif", Georgia, "Times New Roman", serif;
   --f-body: "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
-  --f-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --f-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
   --f-script: "Noto Sans Mongolian", serif;
 
-  --step--1: .8125rem;
-  --step-0: 1.0625rem;
-  --step-1: 1.25rem;
-  --step-2: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
-  --step-3: clamp(2rem, 1.4rem + 2.6vw, 3.25rem);
-  --step-4: clamp(2.4rem, 1.4rem + 4.6vw, 5.2rem);
+  --nav-h: 72px;
+  --wrap: 1240px;
+  --r-lg: 24px;
+  --r-md: 16px;
+  --ease: cubic-bezier(.2, .7, .2, 1);
 
-  --wrap: 1200px;
-  --radius: 14px;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #0b131e; --surface: #121d2b; --ink: #e8edf3; --muted: #9aa8b9; --line: #23324a;
-    --sky: #79a9f0; --sky-soft: #172a45; --sand: #e2b06e; --sand-soft: #2a2218;
-    --on-photo: #ffffff; --shade: rgba(4, 8, 14, .7);
-    color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --bg: #0b131e; --surface: #121d2b; --ink: #e8edf3; --muted: #9aa8b9; --line: #23324a;
-  --sky: #79a9f0; --sky-soft: #172a45; --sand: #e2b06e; --sand-soft: #2a2218;
-  --on-photo: #ffffff; --shade: rgba(4, 8, 14, .7);
-  color-scheme: dark;
+  --khee-blue: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='10'%3E%3Cpath d='M0 9H3V1H11V9H16M11 6H7V4' fill='none' stroke='%231150b0' stroke-width='1.3'/%3E%3C/svg%3E");
+  --khee-gold: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='10'%3E%3Cpath d='M0 9H3V1H11V9H16M11 6H7V4' fill='none' stroke='%23f4b93a' stroke-width='1.3'/%3E%3C/svg%3E");
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } }
-body {
-  background: var(--bg); color: var(--ink);
-  font-family: var(--f-body); font-size: var(--step-0); line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-}
-body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 60; background: var(--bg); }
-h1, h2, h3 { font-family: var(--f-display); font-weight: 500; line-height: 1.08; letter-spacing: -.02em; margin: 0; text-wrap: balance; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
+body { background: var(--paper); color: var(--ink); font-family: var(--f-body); font-size: 1.0625rem; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+body.lock { overflow: hidden; }
+h1, h2, h3 { font-family: var(--f-display); font-weight: 500; line-height: 1.06; letter-spacing: -.025em; margin: 0; text-wrap: balance; }
+h1 em, h2 em { font-family: var(--f-accent); font-style: italic; font-weight: 400; letter-spacing: -.01em; }
 p { margin: 0; }
 a { color: inherit; }
-img { max-width: 100%; display: block; }
-:focus-visible { outline: 3px solid var(--sky); outline-offset: 3px; border-radius: 4px; }
+img, video { max-width: 100%; display: block; }
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; border-radius: 6px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 .wrap {
   width: 100%; max-width: calc(var(--wrap) + 64px); margin-inline: auto;
   padding-left: max(16px, env(safe-area-inset-left, 0px));
   padding-right: max(16px, env(safe-area-inset-right, 0px));
 }
-@media (min-width: 720px) { .wrap { padding-left: max(32px, env(safe-area-inset-left, 0px)); padding-right: max(32px, env(safe-area-inset-right, 0px)); } }
+@media (min-width: 760px) { .wrap { padding-left: max(32px, env(safe-area-inset-left, 0px)); padding-right: max(32px, env(safe-area-inset-right, 0px)); } }
 
-.coord { font-family: var(--f-mono); font-size: var(--step--1); letter-spacing: .04em; color: var(--muted); font-variant-numeric: tabular-nums; }
-.eyebrow { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-.eyebrow b { font-family: var(--f-body); font-weight: 600; text-transform: uppercase; letter-spacing: .14em; font-size: var(--step--1); color: var(--sand); }
-.eyebrow::after { content: ""; flex: 1 1 60px; height: 1px; background: var(--line); }
+.khee { height: 10px; background: var(--khee-blue) repeat-x left center; opacity: .45; }
+.khee.gold { background-image: var(--khee-gold); opacity: .8; }
+.eyebrow { display: inline-flex; align-items: center; gap: 10px; font: 600 .78rem/1 var(--f-body); letter-spacing: .16em; text-transform: uppercase; color: var(--blue); }
+.eyebrow::before { content: ""; width: 22px; height: 2px; background: currentColor; }
+.mono { font-family: var(--f-mono); font-size: .8rem; letter-spacing: .03em; font-variant-numeric: tabular-nums; }
+.lede { color: var(--muted); font-size: 1.2rem; line-height: 1.55; max-width: 58ch; }
 
-.btn {
-  display: inline-flex; align-items: center; gap: 10px; justify-content: center;
-  font: 600 1rem/1 var(--f-body); padding: 15px 22px; border-radius: 999px;
-  text-decoration: none; border: 1.5px solid transparent; cursor: pointer;
-  transition: transform .2s ease, background-color .2s ease, color .2s ease;
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; font: 600 1rem/1 var(--f-body); padding: 16px 24px; border-radius: 999px; border: 1.5px solid transparent; text-decoration: none; cursor: pointer; transition: transform .25s var(--ease), background-color .25s, color .25s; }
+.btn:hover { transform: translateY(-2px); }
+.btn-gold { background: var(--gold); color: var(--night); box-shadow: 0 10px 30px -12px rgba(244,185,58,.8); }
+.btn-blue { background: var(--blue); color: #fff; box-shadow: 0 10px 30px -14px rgba(17,80,176,.9); }
+.btn-blue:hover { background: var(--blue-deep); }
+.btn-glass { color: #fff; border-color: rgba(255,255,255,.55); background: rgba(255,255,255,.08); backdrop-filter: blur(8px); }
+.btn .arr { transition: transform .25s var(--ease); }
+.btn:hover .arr { transform: translateX(4px); }
+
+/* ---------- Nav bar ---------- */
+.nav-bar { position: fixed; inset: 0 0 auto; z-index: 60; padding-top: env(safe-area-inset-top, 0px); color: #fff; transition: background-color .35s, color .35s, box-shadow .35s; }
+.nav-bar.solid { background: rgba(255,255,255,.9); backdrop-filter: saturate(1.5) blur(16px); color: var(--ink); box-shadow: 0 1px 0 var(--line); }
+.nav-bar.menu-open { background: var(--night); color: #fff; box-shadow: none; }
+.nav-inner { height: var(--nav-h); display: flex; align-items: center; gap: 24px; }
+.brand { display: inline-flex; align-items: center; gap: 11px; text-decoration: none; font: 600 1.06rem/1 var(--f-display); letter-spacing: -.02em; white-space: nowrap; }
+.brand svg { width: 34px; height: 34px; flex: none; }
+.nav-links { display: flex; gap: 6px; list-style: none; margin: 0 0 0 auto; padding: 0; }
+.nav-links a { display: block; padding: 9px 14px; border-radius: 999px; text-decoration: none; font-weight: 500; font-size: .97rem; opacity: .86; transition: opacity .2s, background-color .2s; }
+.nav-links a:hover { opacity: 1; background: color-mix(in srgb, currentColor 10%, transparent); }
+.nav-links a[aria-current="page"] { opacity: 1; background: color-mix(in srgb, currentColor 12%, transparent); }
+.nav-cta { padding: 12px 20px; font-size: .95rem; }
+.burger { display: none; margin-left: auto; width: 46px; height: 46px; border-radius: 50%; border: 1.5px solid color-mix(in srgb, currentColor 35%, transparent); background: transparent; color: inherit; cursor: pointer; position: relative; }
+.burger span { position: absolute; left: 13px; right: 13px; height: 2px; background: currentColor; border-radius: 2px; transition: transform .3s var(--ease), opacity .2s; }
+.burger span:nth-child(1) { top: 16px; } .burger span:nth-child(2) { top: 22px; } .burger span:nth-child(3) { top: 28px; }
+.burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+.nav-bar > .khee { position: absolute; left: 0; right: 0; bottom: -10px; opacity: 0; transition: opacity .35s; }
+.nav-bar.solid > .khee { opacity: .35; }
+.nav-bar.menu-open > .khee { opacity: 0; }
+@media (max-width: 960px) { .nav-links, .nav-cta { display: none; } .burger { display: block; } }
+
+.menu { position: fixed; inset: 0; z-index: 55; background: var(--night); color: #fff; padding-top: calc(var(--nav-h) + env(safe-area-inset-top, 0px) + 24px); padding-bottom: calc(32px + env(safe-area-inset-bottom, 0px)); display: flex; flex-direction: column; overflow-y: auto; }
+.menu .wrap { display: flex; flex-direction: column; flex: 1; }
+.menu ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.menu li a { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,.12); text-decoration: none; font: 500 clamp(1.6rem, 7vw, 2.4rem)/1.1 var(--f-display); letter-spacing: -.02em; }
+.menu li a span { font: 400 .8rem var(--f-mono); color: var(--gold); }
+.menu li a[aria-current="page"] { color: var(--gold); }
+.menu-foot { margin-top: auto; padding-top: 32px; display: grid; gap: 14px; color: var(--on-dark-soft); }
+
+/* ---------- Views ---------- */
+[data-view] { animation: viewIn .55s var(--ease) both; }
+@keyframes viewIn { from { transform: translateY(14px); } to { transform: none; } }
+.page-head { background: var(--mist); padding-top: calc(var(--nav-h) + env(safe-area-inset-top, 0px) + clamp(40px, 6vw, 72px)); position: relative; }
+.page-head .wrap { display: grid; gap: 16px; padding-bottom: clamp(36px, 5vw, 56px); }
+.page-head h1 { font-size: clamp(2.2rem, 1.3rem + 3.6vw, 4rem); max-width: 18ch; }
+.page-head h1 em { color: var(--blue); }
+.page-head > .khee { position: absolute; left: 0; right: 0; bottom: 0; }
+.section { padding-block: clamp(56px, 7vw, 96px); }
+.sec-head { display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; margin-bottom: clamp(24px, 3vw, 40px); }
+.sec-head > div:first-child { display: grid; gap: 12px; }
+.sec-head h2 { font-size: clamp(1.8rem, 1.2rem + 2.4vw, 3rem); max-width: 20ch; }
+.sec-head h2 em { color: var(--blue); }
+
+/* ---------- Home: hero ---------- */
+.hero { position: relative; isolation: isolate; overflow: hidden; color: #fff; min-height: clamp(640px, 92vh, 880px); display: flex; align-items: center; padding-top: calc(var(--nav-h) + env(safe-area-inset-top, 0px)); padding-bottom: 110px; }
+.hero-bg { position: absolute; inset: 0; z-index: -2; }
+.hero-bg img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 60%; animation: drift 24s ease-out both; }
+@keyframes drift { from { transform: scale(1.08); } to { transform: scale(1); } }
+.hero::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(95deg, rgba(6,16,34,.82) 0%, rgba(6,16,34,.55) 42%, rgba(6,16,34,.12) 72%), linear-gradient(0deg, rgba(6,16,34,.55), transparent 40%); }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr); gap: 40px; align-items: center; width: 100%; }
+.hero-copy { display: grid; gap: 26px; justify-items: start; }
+.hero .eyebrow { color: var(--gold); }
+.hero h1 { font-size: clamp(2.7rem, 1.1rem + 5.4vw, 6rem); line-height: .98; }
+.hero h1 .l { display: block; animation: rise .9s var(--ease) both; }
+.hero h1 .l:nth-child(2) { animation-delay: .08s; }
+.hero h1 em { color: var(--gold); font-size: 1.1em; line-height: .9; }
+@keyframes rise { from { transform: translateY(24px); } to { transform: none; } }
+.hero-lede { font-size: clamp(1.08rem, 1rem + .35vw, 1.3rem); line-height: 1.55; max-width: 44ch; color: rgba(255,255,255,.9); }
+.hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+.trust { display: flex; flex-wrap: wrap; gap: 8px 20px; list-style: none; margin: 0; padding: 0; font-size: .92rem; color: rgba(255,255,255,.85); }
+.trust li { display: inline-flex; align-items: center; gap: 8px; }
+.trust li::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--gold); }
+
+.reel-stack { position: relative; height: 540px; max-width: 100%; }
+.reel-card { position: absolute; margin: 0; border-radius: 26px; overflow: hidden; border: 6px solid rgba(255,255,255,.95); box-shadow: 0 40px 70px -30px rgba(0,0,0,.75); background: #0a1019; aspect-ratio: 9 / 16; }
+.reel-card .reel-frame { border-radius: 0; height: 100%; }
+.reel-card.a { width: 250px; right: 6%; top: 0; transform: rotate(4deg); animation: floatA 7s ease-in-out infinite; }
+.reel-card.b { width: 200px; right: 52%; top: 120px; transform: rotate(-7deg); animation: floatB 8s ease-in-out infinite; }
+@keyframes floatA { 50% { transform: rotate(4deg) translateY(-10px); } }
+@keyframes floatB { 50% { transform: rotate(-7deg) translateY(8px); } }
+.reel-chip { position: absolute; left: 10px; bottom: 10px; z-index: 1; font: 600 .74rem var(--f-body); background: rgba(255,255,255,.92); color: var(--ink); padding: 6px 10px; border-radius: 999px; }
+.script { position: absolute; right: -8px; bottom: 6px; font-family: var(--f-script); writing-mode: vertical-lr; font-size: 2.4rem; line-height: 1; color: rgba(255,255,255,.75); user-select: none; }
+@media (max-width: 980px) {
+  .hero-grid { grid-template-columns: 1fr; } .reel-stack { display: none; }
+  .hero::after { background: linear-gradient(180deg, rgba(6,16,34,.5) 0%, rgba(6,16,34,.62) 50%, rgba(6,16,34,.8) 100%); }
 }
-.btn:hover { transform: translateY(-1px); }
-.btn-primary { background: var(--sky); color: var(--bg); }
-.btn-ghost { border-color: currentColor; color: inherit; background: transparent; }
-.btn-photo { background: var(--on-photo); color: #101b29; }
-.btn-photo-ghost { border-color: rgba(255,255,255,.7); color: var(--on-photo); background: rgba(255,255,255,.06); backdrop-filter: blur(6px); }
 
-/* Header */
-.site-header {
-  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50;
-  background: color-mix(in srgb, var(--bg) 88%, transparent);
-  backdrop-filter: saturate(1.4) blur(12px);
-  border-bottom: 1px solid var(--line);
-}
-.nav { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-block: 14px; }
-.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-family: var(--f-display); font-weight: 500; font-size: 1.05rem; letter-spacing: -.01em; }
-.brand svg { width: 30px; height: 30px; flex: none; }
-.nav-links { display: flex; gap: 28px; list-style: none; margin: 0; padding: 0; font-weight: 500; font-size: .97rem; }
-.nav-links a { text-decoration: none; color: var(--muted); transition: color .2s; }
-.nav-links a:hover { color: var(--ink); }
-.nav .btn { padding: 11px 18px; font-size: .95rem; }
-@media (max-width: 880px) { .nav-links { display: none; } }
-
-/* Hero */
-.hero { position: relative; color: var(--on-photo); isolation: isolate; overflow: hidden; }
-.hero-img { position: absolute; inset: 0; z-index: -2; }
-.hero-img img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 62%; transform: scale(1.06); animation: drift 22s ease-out forwards; }
-@keyframes drift { to { transform: scale(1); } }
-.hero::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(8,15,26,.15) 0%, rgba(8,15,26,.05) 35%, rgba(8,15,26,.72) 100%); }
-.hero-inner { position: relative; display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: end; padding-block: clamp(140px, 22vw, 260px) 40px; }
-.hero h1 { font-size: var(--step-4); font-weight: 500; max-width: 13ch; text-shadow: 0 2px 30px rgba(0,0,0,.25); }
-.hero h1 em { font-style: normal; color: #bcd5ff; }
-.hero-lede { margin-top: 22px; max-width: 46ch; font-size: var(--step-1); line-height: 1.5; color: rgba(255,255,255,.92); }
-.hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
-.script { font-family: var(--f-script); writing-mode: vertical-lr; font-size: clamp(2rem, 3vw, 2.8rem); line-height: 1; color: rgba(255,255,255,.85); user-select: none; }
-.script-cap { writing-mode: vertical-rl; font-family: var(--f-mono); font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.7); }
-.hero-script { display: flex; gap: 12px; align-items: flex-end; }
-@media (max-width: 640px) {
-  .hero-script { display: none; } .hero-inner { grid-template-columns: 1fr; }
-  .hero::after { background: linear-gradient(180deg, rgba(8,15,26,.35) 0%, rgba(8,15,26,.55) 40%, rgba(8,15,26,.82) 100%); }
-  .hero h1 em { color: #d6e6ff; }
-}
-.facts { position: relative; border-top: 1px solid rgba(255,255,255,.25); background: rgba(8,15,26,.35); backdrop-filter: blur(8px); }
-.facts ul { list-style: none; margin: 0; display: grid; grid-template-columns: repeat(4, 1fr); padding-block: 18px; gap: 16px; }
-.facts li { display: grid; gap: 2px; min-width: 0; }
-.facts strong { font-family: var(--f-display); font-weight: 500; font-size: clamp(1.1rem, 2vw, 1.5rem); font-variant-numeric: tabular-nums; }
-.facts span { font-size: .85rem; color: rgba(255,255,255,.78); }
-@media (max-width: 720px) { .facts ul { grid-template-columns: repeat(2, 1fr); } }
-
-/* Sections */
-section { scroll-margin-top: 72px; }
-.band { padding-block: clamp(72px, 9vw, 128px); }
-.section-head { display: grid; gap: 18px; margin-bottom: clamp(32px, 4vw, 56px); }
-.section-head h2 { font-size: var(--step-3); max-width: 20ch; }
-.section-head p { color: var(--muted); max-width: 60ch; font-size: var(--step-1); line-height: 1.5; }
-
-/* Journeys */
-.filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
-.chip {
-  font: 500 .95rem/1 var(--f-body); padding: 10px 16px; border-radius: 999px; cursor: pointer;
-  background: transparent; color: var(--ink); border: 1px solid var(--line); transition: all .2s;
-}
-.chip:hover { border-color: var(--sky); }
-.chip[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
-.journeys { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 28px; }
-@media (min-width: 1100px) {
-  .journeys.all { grid-template-columns: repeat(3, 1fr); }
-  .journeys.all .trip:first-child { grid-column: span 2; }
-  .journeys.all .trip:first-child .trip-media { aspect-ratio: 16 / 7; }
-}
-
-/* Destinations */
-.regions-band { padding-block: clamp(48px, 6vw, 80px) 0; }
-.regions { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
-.region {
-  position: relative; display: flex; flex-direction: column; justify-content: flex-end; gap: 2px;
-  aspect-ratio: 3 / 4; max-width: 100%; border-radius: var(--radius); overflow: hidden; isolation: isolate;
-  padding: 16px; color: #fff; text-align: left; font: inherit; border: 0; cursor: pointer; background: var(--ink);
-}
-.region img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; transition: transform .6s ease; }
-.region::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(8,15,26,0) 40%, rgba(8,15,26,.78) 100%); }
-.region:hover img { transform: scale(1.06); }
-.region strong { font-family: var(--f-display); font-weight: 500; font-size: 1.15rem; line-height: 1.15; }
-.region span { font-size: .85rem; color: rgba(255,255,255,.82); }
+/* Boarding-pass "next departure" */
+.ticket-wrap { position: relative; z-index: 3; margin-top: -64px; }
+.ticket { display: grid; grid-template-columns: 210px 1fr auto; align-items: stretch; background: var(--paper); border-radius: 22px; box-shadow: 0 30px 60px -28px rgba(10,26,51,.45), 0 0 0 1px var(--line); overflow: hidden; }
+.ticket-stub { background: var(--blue); color: #fff; padding: 22px 24px; display: grid; align-content: center; gap: 4px; }
+.ticket-stub small { font: 500 .7rem var(--f-mono); letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.75); }
+.ticket-stub strong { font: 500 2rem/1 var(--f-display); letter-spacing: -.02em; }
+.ticket-stub span { font-size: .9rem; color: rgba(255,255,255,.85); }
+.ticket-fields { display: grid; grid-template-columns: 1.6fr repeat(3, 1fr); gap: 16px; padding: 22px 28px; align-items: center; position: relative; border-left: 2px dashed var(--line); }
+.ticket-fields::before, .ticket-fields::after { content: ""; position: absolute; left: -12px; width: 22px; height: 22px; border-radius: 50%; background: var(--paper); box-shadow: inset 0 0 0 1px var(--line); }
+.ticket-fields::before { top: -12px; } .ticket-fields::after { bottom: -12px; }
+.tf { display: grid; gap: 4px; min-width: 0; }
+.tf small { font: 500 .68rem var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.tf b { font-weight: 600; font-size: 1.02rem; font-variant-numeric: tabular-nums; }
+.ticket-go { display: flex; align-items: center; padding: 18px 24px; }
 @media (max-width: 900px) {
-  .regions { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 6px; }
-  .region { flex: 0 0 min(44%, 200px); scroll-snap-align: start; }
+  .ticket { grid-template-columns: 1fr; }
+  .ticket-fields { grid-template-columns: 1fr 1fr; border-left: 0; border-top: 2px dashed var(--line); }
+  .ticket-fields::before, .ticket-fields::after { display: none; }
+  .ticket-go { padding: 0 28px 22px; }
+  .ticket-go .btn { width: 100%; }
 }
 
-/* Steppe in motion */
-.motion { background: var(--ink); color: var(--bg); overflow: hidden; }
-.motion .section-head p { color: color-mix(in srgb, var(--bg) 72%, transparent); }
-.motion .eyebrow::after { background: color-mix(in srgb, var(--bg) 22%, transparent); }
-.motion .coord { color: color-mix(in srgb, var(--bg) 62%, transparent); }
-.reels { display: grid; grid-template-columns: repeat(3, minmax(0, 330px)); justify-content: center; gap: clamp(14px, 2.4vw, 32px); align-items: start; }
-.reel { margin: 0; display: grid; gap: 14px; min-width: 0; }
-.reel:nth-child(2) { margin-top: clamp(0px, 5vw, 64px); }
-.reel-frame { position: relative; aspect-ratio: 9 / 16; max-width: 100%; border-radius: 22px; overflow: hidden; background: #0a1019; box-shadow: 0 30px 60px -30px rgba(0,0,0,.7); }
-.reel-frame video { width: 100%; height: 100%; object-fit: cover; display: block; }
-.reel-frame::after { content: ""; position: absolute; inset: auto 0 0; height: 30%; background: linear-gradient(180deg, transparent, rgba(8,15,26,.55)); pointer-events: none; }
-.reel-toggle {
-  position: absolute; right: 12px; bottom: 12px; z-index: 1; width: 40px; height: 40px; border-radius: 50%; border: 0; cursor: pointer;
-  display: grid; place-items: center; background: rgba(255,255,255,.18); color: #fff; backdrop-filter: blur(8px);
-}
-.reel-toggle:hover { background: rgba(255,255,255,.3); }
-.reel-toggle svg { width: 16px; height: 16px; }
-.reel figcaption { display: grid; gap: 2px; padding-inline: 4px; }
-.reel figcaption strong { font-weight: 600; font-size: 1.02rem; }
-.reel figcaption span { font-size: .88rem; color: color-mix(in srgb, var(--bg) 65%, transparent); }
-@media (max-width: 760px) {
-  .reels { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; justify-content: flex-start; padding-bottom: 8px; }
-  .reel { flex: 0 0 min(68%, 280px); scroll-snap-align: center; }
-  .reel:nth-child(2) { margin-top: 0; }
+/* Destinations accordion */
+.dest { display: flex; gap: 12px; height: 500px; }
+.dest-tile { position: relative; flex: 1; min-width: 0; border: 0; padding: 0; border-radius: var(--r-lg); overflow: hidden; isolation: isolate; cursor: pointer; color: #fff; text-align: left; font: inherit; background: var(--night); transition: flex-grow .7s var(--ease); }
+.dest-tile.on { flex-grow: 3.6; }
+.dest-tile img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; transition: transform 1s var(--ease); }
+.dest-tile:hover img { transform: scale(1.05); }
+.dest-tile::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(6,16,34,.05) 30%, rgba(6,16,34,.82) 100%); }
+.dest-label { position: absolute; left: 18px; bottom: 22px; writing-mode: vertical-rl; transform: rotate(180deg); font: 500 1.1rem var(--f-display); letter-spacing: -.01em; white-space: nowrap; transition: opacity .3s; }
+.dest-body { position: absolute; left: 0; right: 0; bottom: 0; padding: 28px; display: grid; gap: 8px; opacity: 0; transform: translateY(12px); transition: opacity .4s .15s, transform .5s .15s var(--ease); }
+.dest-tile.on .dest-label { opacity: 0; }
+.dest-tile.on .dest-body { opacity: 1; transform: none; }
+.dest-count { font: 500 .72rem var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--gold); }
+.dest-body strong { font: 500 clamp(1.5rem, 1rem + 1.4vw, 2.2rem)/1.05 var(--f-display); letter-spacing: -.02em; }
+.dest-desc { max-width: 38ch; color: rgba(255,255,255,.86); }
+.dest-go { font-weight: 600; margin-top: 6px; }
+@media (max-width: 860px) {
+  .dest { height: auto; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 6px; }
+  .dest-tile, .dest-tile.on { flex: 0 0 min(80%, 320px); height: 400px; scroll-snap-align: start; }
+  .dest-label { display: none; }
+  .dest-body { opacity: 1; transform: none; padding: 22px; }
 }
 
-/* Floating chat */
-.chat-fab {
-  position: fixed; z-index: 40;
-  right: calc(18px + env(safe-area-inset-right, 0px)); bottom: calc(18px + env(safe-area-inset-bottom, 0px));
-  display: inline-flex; align-items: center; gap: 10px; padding: 13px 18px 13px 14px; border-radius: 999px;
-  background: var(--sand); color: #1a1206; font: 600 .95rem var(--f-body); text-decoration: none;
-  box-shadow: 0 14px 30px -12px rgba(8,15,26,.55); transition: transform .2s ease;
-}
-.chat-fab:hover { transform: translateY(-2px); }
-.chat-fab svg { width: 22px; height: 22px; flex: none; }
-@media (max-width: 520px) { .chat-fab span { display: none; } .chat-fab { padding: 14px; } }
-.trip { display: flex; flex-direction: column; background: var(--surface); border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); transition: transform .3s ease, box-shadow .3s ease; }
-.trip:hover { transform: translateY(-4px); box-shadow: 0 24px 50px -28px rgba(16,27,41,.45); }
-.trip-media { position: relative; aspect-ratio: 4 / 3; max-width: 100%; overflow: hidden; }
-.trip-media img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s ease; }
-.trip:hover .trip-media img { transform: scale(1.05); }
-.trip-tag { position: absolute; left: 14px; top: 14px; background: rgba(8,15,26,.6); color: #fff; backdrop-filter: blur(6px); font: 500 .75rem/1 var(--f-mono); letter-spacing: .06em; padding: 7px 10px; border-radius: 999px; text-transform: uppercase; }
-.trip-body { display: flex; flex-direction: column; gap: 12px; padding: 22px 22px 24px; flex: 1; }
-.trip h3 { font-size: 1.3rem; font-weight: 500; }
-.trip p { color: var(--muted); font-size: .98rem; }
-.trip-meta { display: grid; grid-template-columns: repeat(3, auto); justify-content: start; gap: 6px 20px; font-size: .88rem; margin-top: auto; padding-top: 14px; border-top: 1px dashed var(--line); }
-.trip-meta dt { font-family: var(--f-mono); font-size: .7rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
-.trip-meta dd { margin: 0; font-weight: 600; font-variant-numeric: tabular-nums; }
-.trip-meta div { display: grid; gap: 2px; }
-.trip-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
-.price { font-family: var(--f-display); font-size: 1.15rem; font-weight: 500; }
-.price small { font-family: var(--f-body); font-size: .8rem; color: var(--muted); font-weight: 400; }
-.link-btn { background: none; border: 0; padding: 6px 0; font: 600 .95rem var(--f-body); color: var(--sky); cursor: pointer; text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
-.note { margin-top: 22px; font-size: .88rem; color: var(--muted); }
+/* Journey cards */
+.tcard { position: relative; display: flex; flex-direction: column; justify-content: space-between; aspect-ratio: 4 / 5; max-width: 100%; border: 0; padding: 18px; border-radius: 22px; overflow: hidden; isolation: isolate; color: #fff; text-align: left; font: inherit; cursor: pointer; background: var(--night); }
+.tcard img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; transition: transform 1s var(--ease); }
+.tcard::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(6,16,34,.25) 0%, rgba(6,16,34,0) 30%, rgba(6,16,34,.88) 100%); }
+.tcard:hover img { transform: scale(1.06); }
+.tag { align-self: flex-start; font: 500 .7rem/1 var(--f-mono); letter-spacing: .1em; text-transform: uppercase; padding: 8px 11px; border-radius: 999px; background: rgba(255,255,255,.18); color: #fff; backdrop-filter: blur(8px); }
+.tag.red { background: var(--red); }
+.tag.ice { background: #e8f1ff; color: var(--blue-deep); }
+.tcard-body { display: grid; gap: 8px; }
+.tcard-meta { font: 500 .78rem var(--f-mono); color: rgba(255,255,255,.8); letter-spacing: .02em; }
+.tcard-body strong { font: 500 1.3rem/1.12 var(--f-display); letter-spacing: -.02em; }
+.tcard-foot { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,.22); font-size: .92rem; color: rgba(255,255,255,.85); }
+.tcard-foot b { color: #fff; font-size: 1.05rem; }
+.arrow { width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; background: var(--gold); color: var(--night); font-weight: 700; transition: transform .3s var(--ease); }
+.tcard:hover .arrow { transform: rotate(-45deg); }
 
-/* Map */
-.map-band { background: var(--surface); border-block: 1px solid var(--line); }
-.map-grid { display: grid; grid-template-columns: 300px 1fr; gap: clamp(24px, 4vw, 56px); align-items: start; }
-.route-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
-.route-list button {
-  width: 100%; text-align: left; display: grid; grid-template-columns: 1fr auto; gap: 2px 12px; align-items: baseline;
-  background: transparent; border: 1px solid transparent; color: var(--ink); padding: 12px 14px; border-radius: 10px; cursor: pointer; font: inherit; transition: background .2s, border-color .2s;
+.rail { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(260px, calc((100% - 54px) / 4)); gap: 18px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: 4px; }
+.rail::-webkit-scrollbar { display: none; }
+.rail .tcard { scroll-snap-align: start; }
+.rail-ctl { display: flex; gap: 10px; align-items: center; }
+.round { width: 50px; height: 50px; border-radius: 50%; border: 1.5px solid var(--line); background: var(--paper); color: var(--ink); cursor: pointer; font-size: 1.15rem; transition: border-color .2s, background-color .2s, color .2s; }
+.round:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
+.link { color: var(--blue); font-weight: 600; text-decoration: none; margin-left: 8px; }
+.link:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+/* Why us */
+.why { background: var(--mist); }
+.why-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: clamp(32px, 5vw, 80px); align-items: center; }
+.why-copy { display: grid; gap: 18px; justify-items: start; }
+.why-copy h2 { font-size: clamp(1.8rem, 1.2rem + 2.2vw, 2.8rem); }
+.why-copy h2 em { color: var(--blue); }
+.promise { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.promise div { background: var(--paper); border-radius: var(--r-md); padding: 22px; display: grid; gap: 6px; align-content: start; }
+.promise strong { font: 500 2.2rem/1 var(--f-display); color: var(--blue); letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+.promise h3 { font: 600 1.05rem var(--f-body); letter-spacing: 0; }
+.promise p { color: var(--muted); font-size: .95rem; }
+.facts { display: flex; flex-wrap: wrap; gap: 8px 28px; margin-top: 8px; color: var(--muted); }
+.facts b { color: var(--ink); font-weight: 600; }
+@media (max-width: 900px) { .why-grid { grid-template-columns: 1fr; } }
+@media (max-width: 480px) { .promise { grid-template-columns: 1fr; } }
+
+/* CTA band */
+.cta { position: relative; isolation: isolate; overflow: hidden; color: #fff; border-radius: 28px; }
+.cta img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
+.cta::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(6,16,34,.82), rgba(6,16,34,.35)); }
+.cta-inner { padding: clamp(40px, 6vw, 80px); display: grid; gap: 20px; justify-items: start; max-width: 640px; }
+.cta .eyebrow { color: var(--gold); }
+.cta h2 { font-size: clamp(1.9rem, 1.2rem + 2.6vw, 3.2rem); }
+.cta h2 em { color: var(--gold); }
+.cta p { color: rgba(255,255,255,.86); font-size: 1.12rem; }
+
+/* ---------- Journeys view ---------- */
+.filters { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { font: 500 .95rem/1 var(--f-body); padding: 11px 17px; border-radius: 999px; border: 1.5px solid var(--line); background: var(--paper); color: var(--ink); cursor: pointer; transition: all .2s; }
+.chip:hover { border-color: var(--blue); }
+.chip[aria-pressed="true"] { background: var(--blue); border-color: var(--blue); color: #fff; }
+.tgrid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; margin-top: 26px; }
+.tgrid .tcard { aspect-ratio: 3 / 4; }
+@media (max-width: 1100px) { .tgrid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 760px) { .tgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; } .tgrid .tcard { padding: 14px; } .tgrid .tcard-body strong { font-size: 1.05rem; } .tgrid .arrow { display: none; } }
+.note { margin-top: 20px; font-size: .88rem; color: var(--muted); }
+
+/* Trip dialog */
+.modal { width: min(1120px, calc(100% - 32px)); max-width: none; max-height: calc(100dvh - 40px); padding: 0; border: 0; border-radius: 28px; background: var(--paper); color: var(--ink); overflow: auto; box-shadow: 0 50px 100px -30px rgba(0,0,0,.6); }
+.modal::backdrop { background: rgba(6,16,34,.62); backdrop-filter: blur(6px); }
+.modal[open] { animation: pop .45s var(--ease); }
+@keyframes pop { from { transform: translateY(24px) scale(.98); } to { transform: none; } }
+.m-grid { display: grid; grid-template-columns: 1fr 1fr; }
+.m-media { background: var(--mist); display: grid; grid-template-rows: auto 1fr; }
+.m-media img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.m-map { padding: 18px 20px 22px; display: grid; gap: 8px; align-content: start; }
+.m-map svg { width: 100%; height: auto; }
+.legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: .82rem; color: var(--muted); }
+.legend i { display: inline-block; width: 22px; vertical-align: middle; margin-right: 6px; border-top: 3px solid var(--blue); }
+.legend i.f { border-top: 2px dashed var(--blue); }
+.m-body { padding: clamp(24px, 3.5vw, 44px); display: grid; gap: 20px; align-content: start; }
+.m-body h2 { font-size: clamp(1.7rem, 1.2rem + 1.6vw, 2.5rem); }
+.m-body .tag.plain { background: var(--mist); color: var(--blue); }
+.m-facts { display: grid; grid-template-columns: repeat(4, auto); justify-content: start; gap: 8px 26px; padding-block: 14px; border-block: 1px solid var(--line); }
+.m-facts div { display: grid; gap: 2px; }
+.m-facts small { font: 500 .68rem var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.m-facts b { font-weight: 600; font-variant-numeric: tabular-nums; }
+.plan { list-style: none; margin: 0; padding: 0; display: grid; }
+.plan li { display: grid; grid-template-columns: 62px 1fr; gap: 14px; position: relative; padding-bottom: 14px; }
+.plan li::before { content: ""; position: absolute; left: 30px; top: 26px; bottom: 0; width: 2px; background: var(--line); }
+.plan li:last-child::before { display: none; }
+.plan .d { font: 500 .78rem/1 var(--f-mono); color: var(--blue); background: var(--mist); border-radius: 999px; padding: 7px 0; text-align: center; height: max-content; position: relative; z-index: 1; }
+.plan p { font-size: .98rem; }
+.incl { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0; padding: 0; }
+.incl li { font-size: .86rem; padding: 6px 12px; border-radius: 999px; background: var(--mist); }
+.m-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.m-actions .mono { color: var(--muted); }
+.m-close { position: absolute; top: 14px; right: 14px; z-index: 2; width: 44px; height: 44px; border-radius: 50%; border: 0; background: rgba(255,255,255,.92); color: var(--ink); font-size: 1.4rem; line-height: 1; cursor: pointer; box-shadow: 0 6px 20px -8px rgba(0,0,0,.4); }
+.m-label { font: 600 .75rem var(--f-body); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: -10px; }
+@media (max-width: 860px) {
+  .modal { width: calc(100% - 16px); max-height: calc(100dvh - 16px); border-radius: 22px; }
+  .m-grid { grid-template-columns: 1fr; }
+  .m-media { display: contents; }
+  .m-media img { order: 0; }
+  .m-body { order: 1; }
+  .m-map { order: 2; background: var(--mist); }
+  .m-facts { grid-template-columns: repeat(2, auto); }
 }
-.route-list button:hover { background: var(--sky-soft); }
-.route-list button[aria-pressed="true"] { background: var(--sky-soft); border-color: var(--sky); }
-.route-list .r-name { font-weight: 600; }
-.route-list .r-days { font-family: var(--f-mono); font-size: .78rem; color: var(--muted); }
-.route-list .r-stops { grid-column: 1 / -1; font-size: .85rem; color: var(--muted); }
-.map-wrap { min-width: 0; }
-.map-svg { width: 100%; height: auto; display: block; overflow: visible; }
-.map-land { fill: var(--sky-soft); stroke: var(--sky); stroke-width: 1.5; stroke-linejoin: round; }
-.map-grat { stroke: var(--line); stroke-width: 1; stroke-dasharray: 2 6; fill: none; }
-.map-grat-label { fill: var(--muted); font: 11px var(--f-mono); }
-.map-route { fill: none; stroke: var(--sand); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1000; stroke-dashoffset: 1000; animation: draw 1.6s ease forwards; }
-.map-route.flight { stroke-dasharray: 6 8; stroke-dashoffset: 0; animation: none; stroke-width: 2.2; }
+
+/* Map shapes */
+.map-land { fill: #dce7f7; stroke: var(--blue); stroke-width: 1.6; stroke-linejoin: round; }
+.map-grat { stroke: #c9d6e8; stroke-width: 1; stroke-dasharray: 2 6; fill: none; }
+.map-route { fill: none; stroke: var(--blue); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1200; stroke-dashoffset: 1200; animation: draw 1.4s var(--ease) forwards; }
+.map-route.flight { stroke-dasharray: 7 9; stroke-dashoffset: 0; animation: none; stroke-width: 2.6; }
 @keyframes draw { to { stroke-dashoffset: 0; } }
-.map-dot { fill: var(--surface); stroke: var(--muted); stroke-width: 1.5; }
-.map-dot.on { fill: var(--sand); stroke: var(--surface); stroke-width: 2.5; }
-.map-dot.cap { fill: var(--ink); stroke: var(--surface); stroke-width: 2; }
-.map-label { fill: var(--muted); font: 500 12.5px var(--f-body); paint-order: stroke; stroke: var(--surface); stroke-width: 4px; stroke-linejoin: round; }
-.map-label.on { fill: var(--ink); font-weight: 600; }
-.map-caption { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-top: 14px; }
-.legend { display: flex; gap: 18px; flex-wrap: wrap; font-size: .85rem; color: var(--muted); }
-.legend span { display: inline-flex; align-items: center; gap: 8px; }
-.legend i { display: inline-block; width: 24px; height: 0; border-top: 3px solid var(--sand); }
-.legend i.f { border-top: 2px dashed var(--sand); }
+.map-dot.on { fill: var(--gold); stroke: var(--night); stroke-width: 2; }
+.map-dot.cap { fill: var(--night); stroke: #fff; stroke-width: 2.5; }
+.map-label { fill: var(--ink); font: 600 20px var(--f-body); paint-order: stroke; stroke: #f0f4fa; stroke-width: 6px; stroke-linejoin: round; }
 
-@media (max-width: 900px) {
-  .map-grid { grid-template-columns: 1fr; }
-  .map-wrap { order: -1; margin-inline: -8px; }
-  .route-list { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; scroll-snap-type: x mandatory; }
-  .route-list li { flex: 0 0 auto; scroll-snap-align: start; }
-  .route-list button { width: auto; border-color: var(--line); padding: 10px 14px; }
-  .route-list .r-stops { display: none; }
-}
-@media (max-width: 600px) {
-  .map-label { font-size: 28px; stroke-width: 7px; }
-  .map-label:not(.on) { display: none; }
-  .map-grat-label { font-size: 18px; }
-  .map-route { stroke-width: 5; }
-  .map-dot { r: 7; }
-  .map-label[data-k="bayanzag"] { text-anchor: end; transform: translateX(-12px); }
-}
-/* Seasons */
-.season-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: clamp(28px, 4vw, 64px); align-items: start; }
+/* ---------- When to go ---------- */
+.season-grid { display: grid; grid-template-columns: 1.35fr 1fr; gap: clamp(24px, 4vw, 56px); align-items: start; }
 @media (max-width: 900px) { .season-grid { grid-template-columns: 1fr; } }
-.chart-box { min-width: 0; }
+.chart-card { background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-lg); padding: clamp(16px, 2.5vw, 28px); min-width: 0; }
 .temp-chart { width: 100%; height: auto; display: block; }
 .temp-chart .grid { stroke: var(--line); stroke-width: 1; }
 .temp-chart .zero { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 4; }
 .temp-chart .axis { fill: var(--muted); font: 11px var(--f-mono); }
-.temp-chart .bar { fill: var(--sky); opacity: .28; transition: opacity .2s; }
+.temp-chart .bar { fill: #b9cdeb; transition: fill .2s; }
 .temp-chart .col { cursor: pointer; }
-.temp-chart .col:hover .bar { opacity: .5; }
-.temp-chart .col.on .bar { opacity: 1; fill: var(--sand); }
+.temp-chart .col:hover .bar { fill: #8fb0e0; }
+.temp-chart .col.on .bar { fill: var(--blue); }
 .temp-chart .m { fill: var(--muted); font: 600 12px var(--f-body); }
 .temp-chart .col.on .m { fill: var(--ink); }
+.temp-chart .val { fill: var(--ink); font: 600 11px var(--f-mono); opacity: 0; }
+.temp-chart .col.on .val { opacity: 1; }
 .temp-chart .hit { fill: transparent; }
 .temp-chart .col:focus-visible { outline: none; }
-.temp-chart .col:focus-visible .hit { stroke: var(--sky); stroke-width: 2; }
-.month-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(22px, 3vw, 32px); display: grid; gap: 16px; }
-.month-card h3 { font-size: var(--step-2); }
-.temps { display: flex; gap: 28px; font-variant-numeric: tabular-nums; }
-.temps div { display: grid; }
-.temps strong { font-family: var(--f-display); font-weight: 500; font-size: 2rem; line-height: 1.1; }
-.temps span { font-family: var(--f-mono); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
-.event { background: var(--sand-soft); border-radius: 10px; padding: 12px 14px; font-size: .95rem; }
-.event b { color: var(--sand); }
-.pill-row { display: flex; flex-wrap: wrap; gap: 8px; }
-.pill { font-size: .85rem; font-weight: 500; padding: 6px 12px; border-radius: 999px; background: var(--sky-soft); color: var(--ink); }
+.temp-chart .col:focus-visible .hit { stroke: var(--gold); stroke-width: 2; }
 .chart-note { margin-top: 10px; font-size: .82rem; color: var(--muted); }
+.month-card { background: var(--night); color: #fff; border-radius: var(--r-lg); padding: clamp(24px, 3vw, 36px); display: grid; gap: 18px; position: relative; overflow: hidden; }
+.month-card > .khee { position: absolute; left: 0; right: 0; top: 0; }
+.month-card h3 { font-size: 2.2rem; }
+.month-card .mono { color: var(--gold); }
+.temps { display: flex; gap: 32px; font-variant-numeric: tabular-nums; }
+.temps div { display: grid; }
+.temps strong { font: 500 2.4rem/1.05 var(--f-display); letter-spacing: -.03em; }
+.temps span { font: 500 .7rem var(--f-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--on-dark-soft); }
+.month-card p { color: var(--on-dark-soft); }
+.event { background: rgba(244,185,58,.14); border: 1px solid rgba(244,185,58,.4); border-radius: 12px; padding: 12px 14px; font-size: .95rem; color: #fff; }
+.event b { color: var(--gold); }
+.pill-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.pill { font: 500 .86rem var(--f-body); padding: 7px 13px; border-radius: 999px; background: rgba(255,255,255,.1); color: #fff; border: 1px solid rgba(255,255,255,.18); cursor: pointer; }
+.pill:hover { background: rgba(255,255,255,.2); }
 
-/* Ger band */
-.ger { position: relative; color: var(--on-photo); isolation: isolate; overflow: hidden; }
-.ger > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
-.ger::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(8,15,26,.82) 0%, rgba(8,15,26,.55) 50%, rgba(8,15,26,.1) 100%); }
-.ger-inner { padding-block: clamp(90px, 12vw, 170px); display: grid; gap: 22px; max-width: 640px; }
-.ger h2 { font-size: var(--step-3); }
-.ger p { font-size: var(--step-1); line-height: 1.55; color: rgba(255,255,255,.9); }
-.ger .eyebrow b { color: #f0c68a; }
-.ger .eyebrow::after { background: rgba(255,255,255,.3); }
-.ger .coord { color: rgba(255,255,255,.75); }
+/* ---------- Experience ---------- */
+.story { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 5vw, 72px); align-items: center; }
+.story-img { position: relative; }
+.story-img img { width: 100%; aspect-ratio: 5 / 4; object-fit: cover; border-radius: var(--r-lg); }
+.badge { position: absolute; right: -14px; bottom: -14px; background: var(--gold); color: var(--night); border-radius: 50%; width: 120px; height: 120px; display: grid; place-items: center; text-align: center; font: 600 .82rem/1.2 var(--f-body); padding: 14px; transform: rotate(-8deg); }
+.story-copy { display: grid; gap: 18px; }
+.story-copy h2 { font-size: clamp(1.8rem, 1.2rem + 2.2vw, 2.8rem); }
+.story-copy h2 em { color: var(--blue); }
+.customs { list-style: none; margin: 6px 0 0; padding: 0; display: grid; gap: 12px; }
+.customs li { display: grid; grid-template-columns: 34px 1fr; gap: 12px; align-items: center; }
+.customs li span { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: var(--mist); color: var(--blue); font: 600 .9rem var(--f-display); }
+@media (max-width: 860px) { .story { grid-template-columns: 1fr; } .badge { right: 10px; } }
 
-/* Promise */
-.promise { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-top: 1px solid var(--line); }
-.promise > div { padding: 28px 24px 8px 0; display: grid; gap: 10px; align-content: start; }
-.promise > div + div { padding-left: 24px; border-left: 1px solid var(--line); }
-.promise strong { font-family: var(--f-display); font-weight: 500; font-size: 2.4rem; color: var(--sky); line-height: 1; font-variant-numeric: tabular-nums; }
-.promise h3 { font-family: var(--f-body); font-weight: 600; font-size: 1.1rem; letter-spacing: 0; }
-.promise p { color: var(--muted); font-size: .97rem; }
-@media (max-width: 900px) { .promise { grid-template-columns: 1fr 1fr; } .promise > div:nth-child(3) { padding-left: 0; border-left: 0; } .promise > div:nth-child(n+3) { border-top: 1px solid var(--line); } }
-@media (max-width: 520px) { .promise { grid-template-columns: 1fr; } .promise > div + div { padding-left: 0; border-left: 0; border-top: 1px solid var(--line); } }
+.motion { background: var(--night); color: #fff; border-radius: 32px; padding: clamp(32px, 5vw, 64px); position: relative; overflow: hidden; }
+.motion > .khee { position: absolute; left: 0; right: 0; top: 0; }
+.motion .sec-head h2 em { color: var(--gold); }
+.motion .eyebrow { color: var(--gold); }
+.motion .lede { color: var(--on-dark-soft); }
+.reels { display: grid; grid-template-columns: repeat(3, minmax(0, 320px)); justify-content: center; gap: clamp(14px, 2.4vw, 32px); align-items: start; }
+.reel { margin: 0; display: grid; gap: 12px; min-width: 0; }
+.reel:nth-child(2) { margin-top: clamp(0px, 4vw, 56px); }
+.reel-frame { position: relative; aspect-ratio: 9 / 16; max-width: 100%; border-radius: 22px; overflow: hidden; background: #050b14; }
+.reel-frame video { width: 100%; height: 100%; object-fit: cover; }
+.reel figcaption { display: grid; gap: 2px; padding-inline: 4px; }
+.reel figcaption strong { font-weight: 600; }
+.reel figcaption span { font-size: .88rem; color: var(--on-dark-soft); }
+.vt { position: absolute; right: 12px; bottom: 12px; z-index: 2; width: 40px; height: 40px; border-radius: 50%; border: 0; cursor: pointer; display: grid; place-items: center; background: rgba(255,255,255,.22); color: #fff; backdrop-filter: blur(8px); }
+.vt:hover { background: rgba(255,255,255,.36); }
+.vt svg { width: 15px; height: 15px; }
+.reel-card .vt { right: 10px; bottom: 10px; width: 34px; height: 34px; }
+@media (max-width: 760px) {
+  .reels { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; justify-content: flex-start; padding-bottom: 8px; }
+  .reel { flex: 0 0 min(66%, 260px); scroll-snap-align: center; }
+  .reel:nth-child(2) { margin-top: 0; }
+}
 
-/* Steps */
-.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; counter-reset: s; }
-.steps li { counter-increment: s; display: grid; gap: 10px; align-content: start; position: relative; padding-top: 52px; }
-.steps li::before { content: counter(s); position: absolute; top: 0; left: 0; width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; font: 500 .95rem var(--f-display); background: var(--ink); color: var(--bg); }
-.steps li:not(:last-child)::after { content: ""; position: absolute; top: 19px; left: 50px; right: -16px; border-top: 1.5px dashed var(--line); }
-.steps h3 { font-family: var(--f-body); font-weight: 600; font-size: 1.15rem; letter-spacing: 0; }
-.steps p { color: var(--muted); font-size: .98rem; }
-@media (max-width: 900px) { .steps { grid-template-columns: 1fr 1fr; } .steps li::after { display: none; } }
-@media (max-width: 520px) { .steps { grid-template-columns: 1fr; } }
+.mosaic { display: grid; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: 250px 250px; gap: 12px; }
+.mosaic figure { margin: 0; position: relative; overflow: hidden; border-radius: 18px; min-width: 0; }
+.mosaic figure:first-child { grid-row: span 2; }
+.mosaic img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s var(--ease); }
+.mosaic figure:hover img { transform: scale(1.05); }
+.mosaic figcaption { position: absolute; left: 12px; bottom: 12px; color: #fff; font: 500 .74rem var(--f-mono); background: rgba(6,16,34,.55); padding: 6px 10px; border-radius: 8px; backdrop-filter: blur(4px); }
+@media (max-width: 760px) { .mosaic { grid-template-columns: 1fr 1fr; grid-template-rows: 240px 150px 150px; } .mosaic figure:first-child { grid-column: span 2; grid-row: auto; } }
 
-/* Gallery strip */
-.strip { display: grid; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: 240px 240px; gap: 12px; }
-.strip figure { margin: 0; position: relative; overflow: hidden; border-radius: 10px; min-width: 0; }
-.strip figure:first-child { grid-row: span 2; }
-.strip img { width: 100%; height: 100%; object-fit: cover; }
-.strip figcaption { position: absolute; left: 12px; bottom: 12px; color: #fff; font: 500 .75rem var(--f-mono); letter-spacing: .05em; background: rgba(8,15,26,.55); padding: 6px 9px; border-radius: 6px; backdrop-filter: blur(4px); }
-@media (max-width: 720px) { .strip { grid-template-columns: 1fr 1fr; grid-template-rows: 260px 160px 160px; } .strip figure:first-child { grid-column: span 2; grid-row: auto; } }
-
-/* Help centre */
+/* ---------- Help ---------- */
 .faq-grid { display: grid; grid-template-columns: 260px 1fr; gap: clamp(28px, 5vw, 72px); align-items: start; }
 @media (max-width: 900px) { .faq-grid { grid-template-columns: 1fr; } }
-.faq-side { display: grid; gap: 20px; position: sticky; top: calc(88px + env(safe-area-inset-top, 0px)); }
+.faq-side { display: grid; gap: 20px; position: sticky; top: calc(var(--nav-h) + env(safe-area-inset-top, 0px) + 24px); }
 @media (max-width: 900px) { .faq-side { position: static; } }
-.faq-cats { list-style: none; margin: 0; padding: 0; display: grid; border-top: 1px solid var(--line); }
-.faq-cats button {
-  width: 100%; display: flex; justify-content: space-between; gap: 12px; padding: 13px 4px; background: none; border: 0;
-  border-bottom: 1px solid var(--line); color: var(--muted); font: 500 1rem var(--f-body); cursor: pointer; text-align: left;
-}
-.faq-cats button:hover { color: var(--ink); }
-.faq-cats button[aria-pressed="true"] { color: var(--sky); font-weight: 600; }
-.faq-cats .n { font-family: var(--f-mono); font-size: .78rem; font-variant-numeric: tabular-nums; }
+.faq-cats { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.faq-cats button { width: 100%; display: flex; justify-content: space-between; gap: 12px; padding: 12px 14px; background: none; border: 0; border-radius: 12px; color: var(--muted); font: 500 1rem var(--f-body); cursor: pointer; text-align: left; }
+.faq-cats button:hover { color: var(--ink); background: var(--mist); }
+.faq-cats button[aria-pressed="true"] { color: #fff; background: var(--blue); }
+.faq-cats .n { font: 400 .78rem var(--f-mono); opacity: .8; }
 @media (max-width: 900px) {
-  .faq-cats { display: flex; gap: 8px; overflow-x: auto; border: 0; padding-bottom: 4px; }
-  .faq-cats button { width: auto; white-space: nowrap; border: 1px solid var(--line); border-radius: 999px; padding: 9px 14px; }
-  .faq-cats button[aria-pressed="true"] { border-color: var(--sky); background: var(--sky-soft); }
+  .faq-cats { display: flex; overflow-x: auto; padding-bottom: 4px; }
+  .faq-cats button { width: auto; white-space: nowrap; border: 1.5px solid var(--line); border-radius: 999px; padding: 9px 14px; }
+  .faq-cats button[aria-pressed="true"] { border-color: var(--blue); }
 }
-.faq-search { position: relative; margin-bottom: 20px; }
-.faq-search input {
-  width: 100%; font: 400 1.05rem var(--f-body); color: var(--ink); background: var(--bg);
-  border: 1px solid var(--line); border-radius: 999px; padding: 15px 20px 15px 50px;
-}
-.faq-search input:focus { outline: 2px solid var(--sky); outline-offset: 1px; }
-.faq-search svg { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; color: var(--muted); }
-.faq-cat-label { font-family: var(--f-mono); font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; color: var(--sand); display: block; margin-bottom: 4px; font-weight: 500; }
+.faq-search { position: relative; margin-bottom: 18px; }
+.faq-search input { width: 100%; font: 400 1.05rem var(--f-body); color: var(--ink); background: var(--mist); border: 1.5px solid transparent; border-radius: 999px; padding: 16px 20px 16px 52px; }
+.faq-search input:focus { outline: none; border-color: var(--blue); background: var(--paper); }
+.faq-search svg { position: absolute; left: 19px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; color: var(--muted); }
+details.qa { border-bottom: 1px solid var(--line); }
+details.qa summary { cursor: pointer; list-style: none; padding: 20px 52px 20px 0; font-weight: 600; font-size: 1.08rem; position: relative; }
+details.qa summary::-webkit-details-marker { display: none; }
+details.qa summary::after { content: "+"; position: absolute; right: 0; top: 50%; transform: translateY(-50%); width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; background: var(--mist); color: var(--blue); font: 400 1.3rem/1 var(--f-body); transition: transform .3s var(--ease), background-color .2s; }
+details.qa[open] summary::after { transform: translateY(-50%) rotate(45deg); background: var(--blue); color: #fff; }
+details.qa p { padding: 0 0 22px; color: var(--muted); max-width: 64ch; }
+.qa-cat { display: block; font: 500 .7rem var(--f-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--blue); margin-bottom: 4px; }
 .faq-empty { padding: 28px 0; color: var(--muted); }
-.faq-empty a { color: var(--sky); }
-.side-card { border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; display: grid; gap: 8px; font-size: .95rem; background: var(--bg); }
-.side-card p { color: var(--muted); }
-.side-card a { color: var(--sky); font-weight: 600; }
+.faq-empty a { color: var(--blue); font-weight: 600; }
+.side-card { border-radius: var(--r-md); padding: 20px; display: grid; gap: 8px; font-size: .95rem; background: var(--night); color: #fff; }
+.side-card p { color: var(--on-dark-soft); }
+.side-card a { color: var(--gold); font-weight: 600; }
 @media (max-width: 900px) { .side-card { display: none; } }
-details { border-bottom: 1px solid var(--line); }
-details:first-of-type { border-top: 1px solid var(--line); }
-summary { cursor: pointer; list-style: none; padding: 20px 40px 20px 0; font-weight: 600; font-size: 1.08rem; position: relative; }
-summary::-webkit-details-marker { display: none; }
-summary::after { content: "+"; position: absolute; right: 4px; top: 50%; transform: translateY(-50%); font: 400 1.6rem/1 var(--f-display); color: var(--sky); transition: transform .25s; }
-details[open] summary::after { transform: translateY(-50%) rotate(45deg); }
-details p { padding: 0 0 22px; color: var(--muted); max-width: 62ch; }
 
-/* Inquiry */
-.inquiry { background: var(--ink); color: var(--bg); }
-.inquiry .eyebrow::after { background: color-mix(in srgb, var(--bg) 25%, transparent); }
-.inquiry .coord { color: color-mix(in srgb, var(--bg) 65%, transparent); }
-.inq-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: clamp(32px, 5vw, 80px); }
-@media (max-width: 900px) { .inq-grid { grid-template-columns: 1fr; } }
-.inq-copy { display: grid; gap: 22px; align-content: start; }
-.inq-copy h2 { font-size: var(--step-3); }
-.inq-copy p { color: color-mix(in srgb, var(--bg) 75%, transparent); font-size: var(--step-1); line-height: 1.5; max-width: 44ch; }
+/* ---------- Plan ---------- */
+.plan-grid { display: grid; grid-template-columns: 1fr 1.15fr; gap: clamp(32px, 5vw, 72px); align-items: start; }
+@media (max-width: 960px) { .plan-grid { grid-template-columns: 1fr; } }
+.plan-copy { display: grid; gap: 24px; }
+.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; counter-reset: s; }
+.steps li { counter-increment: s; display: grid; grid-template-columns: 44px 1fr; gap: 14px; }
+.steps li::before { content: counter(s); width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: var(--blue); color: #fff; font: 500 1rem var(--f-display); }
+.steps h3 { font: 600 1.05rem var(--f-body); letter-spacing: 0; }
+.steps p { color: var(--muted); font-size: .96rem; }
+.contact { display: grid; gap: 10px; padding: 20px; border-radius: var(--r-md); background: var(--mist); }
 .contact-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font-family: var(--f-mono); font-size: .95rem; }
-.contact-row .copy { font: 600 .8rem var(--f-body); padding: 7px 12px; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--bg) 40%, transparent); background: transparent; color: var(--bg); cursor: pointer; }
-form.inq { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; background: color-mix(in srgb, var(--bg) 6%, transparent); border: 1px solid color-mix(in srgb, var(--bg) 16%, transparent); padding: clamp(20px, 3vw, 32px); border-radius: var(--radius); }
+.copy { font: 600 .8rem var(--f-body); padding: 7px 12px; border-radius: 999px; border: 1.5px solid var(--line); background: var(--paper); color: var(--ink); cursor: pointer; }
+form.inq { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; background: var(--paper); border-radius: var(--r-lg); padding: clamp(22px, 3vw, 36px); box-shadow: 0 30px 70px -40px rgba(10,26,51,.5), 0 0 0 1px var(--line); }
 form.inq .full { grid-column: 1 / -1; }
+form.inq h2 { font-size: 1.5rem; }
 @media (max-width: 560px) { form.inq { grid-template-columns: 1fr; } }
 .field { display: grid; gap: 6px; min-width: 0; }
-.field label { font-size: .82rem; font-weight: 500; color: color-mix(in srgb, var(--bg) 75%, transparent); }
-.field input, .field select, .field textarea {
-  width: 100%; font: 400 1rem var(--f-body); color: var(--bg); background: color-mix(in srgb, var(--bg) 8%, transparent);
-  border: 1px solid color-mix(in srgb, var(--bg) 22%, transparent); border-radius: 10px; padding: 12px 14px;
-}
-.field select option { color: #101b29; background: #fff; }
+.field label { font-size: .84rem; font-weight: 600; }
+.field input, .field select, .field textarea { width: 100%; font: 400 1rem var(--f-body); color: var(--ink); background: var(--mist); border: 1.5px solid transparent; border-radius: 12px; padding: 13px 14px; }
+.field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--blue); background: var(--paper); }
 .field textarea { min-height: 110px; resize: vertical; }
-.field input::placeholder, .field textarea::placeholder { color: color-mix(in srgb, var(--bg) 45%, transparent); }
-.field input:focus, .field select:focus, .field textarea:focus { outline: 2px solid var(--sky); outline-offset: 1px; }
-.field .err { font-size: .8rem; color: #ffb4a8; min-height: 1em; }
+.field .err { font-size: .8rem; color: var(--red); min-height: 1em; }
 .form-actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
-.form-actions .btn-primary { background: var(--bg); color: var(--ink); }
-.form-actions small { color: color-mix(in srgb, var(--bg) 60%, transparent); font-size: .82rem; }
-.done { grid-column: 1 / -1; display: grid; gap: 10px; padding: 20px; border-radius: 10px; background: color-mix(in srgb, var(--sky) 22%, transparent); }
-.done h3 { font-size: 1.3rem; }
+.form-actions small { color: var(--muted); }
+.done { grid-column: 1 / -1; display: grid; gap: 10px; padding: 24px; border-radius: var(--r-md); background: var(--mist); }
+.done h3 { font-size: 1.4rem; }
 
-/* Footer */
-footer { padding-block: 56px 40px; font-size: .9rem; color: var(--muted); }
-.foot-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 32px; }
-@media (max-width: 760px) { .foot-grid { grid-template-columns: 1fr; } }
-footer h4 { margin: 0 0 12px; font-family: var(--f-mono); font-weight: 500; font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink); }
+/* ---------- Footer ---------- */
+footer { background: var(--night); color: var(--on-dark-soft); font-size: .92rem; position: relative; }
+footer > .khee { position: absolute; left: 0; right: 0; top: 0; }
+.foot { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 32px; padding-block: 56px 28px; }
+@media (max-width: 760px) { .foot { grid-template-columns: 1fr 1fr; } .foot > :first-child { grid-column: 1 / -1; } }
+footer .brand { color: #fff; }
+footer h4 { margin: 0 0 12px; font: 500 .72rem var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--gold); }
 footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
-footer a { color: var(--muted); }
-footer a:hover { color: var(--ink); }
-.credits { margin-top: 40px; padding-top: 22px; border-top: 1px solid var(--line); font-size: .78rem; line-height: 1.7; }
+footer a { text-decoration: none; }
+footer a:hover { color: #fff; }
+.foot-base { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-block: 18px 28px; border-top: 1px solid rgba(255,255,255,.12); font-size: .8rem; }
+.foot-base summary { cursor: pointer; }
+.credits { margin-top: 10px; line-height: 1.7; max-width: 90ch; }
+.credits a { text-decoration: underline; }
+
+/* Floating chat */
+.chat-fab { position: fixed; z-index: 40; right: calc(18px + env(safe-area-inset-right, 0px)); bottom: calc(18px + env(safe-area-inset-bottom, 0px)); display: inline-flex; align-items: center; gap: 10px; padding: 13px 18px 13px 14px; border-radius: 999px; background: var(--gold); color: var(--night); font: 600 .95rem var(--f-body); text-decoration: none; box-shadow: 0 14px 30px -12px rgba(10,26,51,.6); transition: transform .25s var(--ease); }
+.chat-fab:hover { transform: translateY(-3px); }
+.chat-fab svg { width: 22px; height: 22px; flex: none; }
+body[data-view="plan"] .chat-fab { display: none; }
+@media (max-width: 520px) { .chat-fab span { display: none; } .chat-fab { padding: 14px; } }
 </style>
 </head>
 <body>
 
-<header class="site-header">
-  <nav class="wrap nav" aria-label="Main">
-    <a class="brand" href="#top" aria-label="Tengeri Journeys home">
-      <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="15" fill="var(--sky)"/><path d="M5 21c3-4 6-6 11-6s8 2 11 6" fill="none" stroke="var(--bg)" stroke-width="2"/><circle cx="16" cy="10" r="3" fill="var(--sand)"/></svg>
+<header class="nav-bar" id="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#home" aria-label="Tengeri Journeys home">
+      <svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="16" fill="#1150b0"/><circle cx="17" cy="12" r="4" fill="#f4b93a"/><path d="M4 23c4-4 8-6 13-6s9 2 13 6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></svg>
       Tengeri Journeys
     </a>
     <ul class="nav-links">
-      <li><a href="#journeys">Journeys</a></li>
-      <li><a href="#map">Map</a></li>
-      <li><a href="#seasons">When to go</a></li>
-      <li><a href="#how">How it works</a></li>
-      <li><a href="#faq">Help centre</a></li>
+      <li><a href="#journeys" data-nav="journeys">Journeys</a></li>
+      <li><a href="#seasons" data-nav="seasons">When to go</a></li>
+      <li><a href="#experience" data-nav="experience">Experience</a></li>
+      <li><a href="#help" data-nav="help">Help</a></li>
     </ul>
-    <a class="btn btn-primary" href="#plan">Plan my trip</a>
-  </nav>
+    <a class="btn btn-gold nav-cta" href="#plan">Plan my trip</a>
+    <button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="khee" aria-hidden="true"></div>
 </header>
 
-<main id="top">
-  <section class="hero" aria-labelledby="hero-title">
-    <div class="hero-img"><img src="img/dunes.jpg" alt="A camel caravan crossing the plain below the Khongoryn Els sand dunes in the Gobi Desert" fetchpriority="high"></div>
-    <div class="wrap hero-inner">
-      <div>
-        <p class="coord" style="color:rgba(255,255,255,.8)">43.78° N · 102.30° E · Khongoryn Els, Gobi</p>
-        <h1 id="hero-title" style="margin-top:18px">Under the <em>eternal blue sky</em></h1>
-        <p class="hero-lede">Small-group and private journeys across Mongolia, led by Mongolian guides who grew up on the steppe. Sleep in family gers, ride with herders, and cross the Gobi by camel.</p>
-        <div class="hero-ctas">
-          <a class="btn btn-photo" href="#journeys">Explore journeys</a>
-          <a class="btn btn-photo-ghost" href="#plan">Talk to a local planner</a>
+<div class="menu" id="menu" hidden>
+  <div class="wrap">
+    <ul>
+      <li><a href="#home" data-nav="home">Home <span>start</span></a></li>
+      <li><a href="#journeys" data-nav="journeys">Journeys <span>8 trips</span></a></li>
+      <li><a href="#seasons" data-nav="seasons">When to go <span>12 months</span></a></li>
+      <li><a href="#experience" data-nav="experience">Experience <span>video</span></a></li>
+      <li><a href="#help" data-nav="help">Help centre <span>18 answers</span></a></li>
+      <li><a href="#plan" data-nav="plan">Plan my trip <span>→</span></a></li>
+    </ul>
+    <div class="menu-foot">
+      <div class="khee gold" aria-hidden="true"></div>
+      <span class="mono">hello@tengeri-journeys.mn</span>
+      <span class="mono">+976 7011 0000 · WhatsApp</span>
+    </div>
+  </div>
+</div>
+
+<main>
+  <!-- ================= HOME ================= -->
+  <div data-view="home">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-bg"><img src="img/dunes.jpg" alt="A camel caravan crossing the plain below the Khongoryn Els sand dunes in the Gobi Desert" fetchpriority="high"></div>
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow">Small-group journeys · Mongolia</span>
+          <h1 id="hero-title"><span class="l">Mongolia,</span><span class="l"><em>under the eternal blue sky</em></span></h1>
+          <p class="hero-lede">Ride with herders, sleep in family gers and cross the Gobi by camel, guided by Mongolians who grew up on the steppe.</p>
+          <div class="hero-ctas">
+            <a class="btn btn-gold" href="#journeys">Explore journeys <span class="arr">→</span></a>
+            <a class="btn btn-glass" href="#plan">Talk to a local planner</a>
+          </div>
+          <ul class="trust">
+            <li>Locally owned in Ulaanbaatar</li>
+            <li>8 guests at most</li>
+            <li>English-speaking guides</li>
+          </ul>
+        </div>
+        <div class="reel-stack" aria-label="Video clips from the steppe">
+          <figure class="reel-card b"><div class="reel-frame"><video src="video/horses.mp4" poster="video/horses.jpg" muted loop playsinline preload="metadata" aria-label="A herd of dark horses galloping across the steppe"></video><button class="vt" type="button" aria-label="Pause video"></button></div><span class="reel-chip">Summer pasture</span></figure>
+          <figure class="reel-card a"><div class="reel-frame"><video src="video/eagle.mp4" poster="video/eagle.jpg" muted loop playsinline preload="metadata" aria-label="An eagle hunter on horseback with a golden eagle raised on his arm"></video><button class="vt" type="button" aria-label="Pause video"></button></div><span class="reel-chip">Eagle hunter</span></figure>
+          <span class="script" aria-hidden="true">ᠮᠣᠩᠭᠣᠯ</span>
         </div>
       </div>
-      <div class="hero-script" aria-hidden="true">
-        <span class="script-cap">Mongol Uls</span>
-        <span class="script">ᠮᠣᠩᠭᠣᠯ ᠤᠯᠤᠰ</span>
-      </div>
-    </div>
-    <div class="facts">
-      <ul class="wrap">
-        <li><strong>1,564,116 km²</strong><span>of open country</span></li>
-        <li><strong>~2 people</strong><span>per square kilometre</span></li>
-        <li><strong>~250 days</strong><span>of sunshine a year</span></li>
-        <li><strong>8 guests</strong><span>maximum per group</span></li>
-      </ul>
-    </div>
-  </section>
+    </section>
 
-  <section class="regions-band" aria-labelledby="regions-title">
-    <div class="wrap">
-      <div class="section-head" style="margin-bottom:24px">
-        <div class="eyebrow"><b>Destinations</b><span class="coord">5 regions · 1 country</span></div>
-        <h2 id="regions-title">Where do you want to go?</h2>
-      </div>
-      <div class="regions" id="regions"></div>
-    </div>
-  </section>
-
-  <section id="journeys" class="band">
-    <div class="wrap">
-      <div class="section-head">
-        <div class="eyebrow"><b>Journeys</b><span class="coord">8 itineraries · 3 to 12 days</span></div>
-        <h2>Routes we know by heart</h2>
-        <p>Every itinerary runs as a small-group departure or as a private trip on your dates. All include a Mongolian guide, a driver, meals outside the city and every night's stay.</p>
-      </div>
-      <div class="filters" role="group" aria-label="Filter journeys">
-        <button class="chip" type="button" data-filter="all" aria-pressed="true">All journeys</button>
-        <button class="chip" type="button" data-filter="gobi" aria-pressed="false">Gobi</button>
-        <button class="chip" type="button" data-filter="north" aria-pressed="false">Khövsgöl &amp; north</button>
-        <button class="chip" type="button" data-filter="central" aria-pressed="false">Central</button>
-        <button class="chip" type="button" data-filter="west" aria-pressed="false">Altai &amp; far west</button>
-        <button class="chip" type="button" data-filter="winter" aria-pressed="false">Winter</button>
-        <button class="chip" type="button" data-filter="festival" aria-pressed="false">Festivals</button>
-        <button class="chip" type="button" data-filter="short" aria-pressed="false">Under a week</button>
-      </div>
-      <div class="journeys all" id="journey-list"></div>
-      <p class="note">Prices are per person, twin share, in US dollars, excluding international flights. Private departures are quoted on request.</p>
-    </div>
-  </section>
-
-  <section class="band motion" aria-labelledby="motion-title">
-    <div class="wrap">
-      <div class="section-head">
-        <div class="eyebrow"><b>The steppe in motion</b><span class="coord">Summer on the steppe</span></div>
-        <h2 id="motion-title">Herds, horses and hunters</h2>
-        <p>Herders here still count their wealth in the five kinds of livestock: horses, camels, cattle, sheep and goats. This is the Mongolia you will travel through.</p>
-      </div>
-      <div class="reels">
-        <figure class="reel">
-          <div class="reel-frame"><video src="video/horses.mp4" poster="video/horses.jpg" muted loop playsinline preload="metadata" aria-label="A herd of dark horses galloping across green steppe below a rocky hill"></video><button class="reel-toggle" type="button" aria-label="Pause video"></button></div>
-          <figcaption><strong>A herd at full gallop</strong><span>Summer pasture</span></figcaption>
-        </figure>
-        <figure class="reel">
-          <div class="reel-frame"><video src="video/eagle.mp4" poster="video/eagle.jpg" muted loop playsinline preload="metadata" aria-label="An eagle hunter riding a chestnut horse with a golden eagle raised on his arm"></video><button class="reel-toggle" type="button" aria-label="Pause video"></button></div>
-          <figcaption><strong>Eagle hunter on horseback</strong><span>A Kazakh tradition of the far west</span></figcaption>
-        </figure>
-        <figure class="reel">
-          <div class="reel-frame"><video src="video/herd.mp4" poster="video/herd.jpg" muted loop playsinline preload="metadata" aria-label="Hundreds of sheep and goats grazing on a wide green plain below misty mountains"></video><button class="reel-toggle" type="button" aria-label="Pause video"></button></div>
-          <figcaption><strong>Sheep and goats before the rain</strong><span>A mixed herd on open steppe</span></figcaption>
-        </figure>
+    <div class="wrap ticket-wrap">
+      <div class="ticket">
+        <div class="ticket-stub"><small>Next departure</small><strong>9 Jul</strong><span>2027 · Ulaanbaatar</span></div>
+        <div class="ticket-fields">
+          <div class="tf"><small>Journey</small><b>Naadam Festival</b></div>
+          <div class="tf"><small>Dates</small><b>9–15 Jul</b></div>
+          <div class="tf"><small>Length</small><b>7 days</b></div>
+          <div class="tf"><small>From</small><b>$2,390</b></div>
+        </div>
+        <div class="ticket-go"><button class="btn btn-blue" type="button" data-trip="naadam">View journey <span class="arr">→</span></button></div>
       </div>
     </div>
-  </section>
 
-  <section id="map" class="band map-band">
-    <div class="wrap">
-      <div class="section-head">
-        <div class="eyebrow"><b>The map</b><span class="coord">41.6°–52.1° N · 87.7°–119.9° E</span></div>
-        <h2>From the Altai glaciers to the Gobi dunes</h2>
-        <p>Mongolia is roughly three times the size of France, with only a few thousand kilometres of paved road. Pick a journey to see where it goes.</p>
+    <section class="section" aria-labelledby="dest-title">
+      <div class="wrap">
+        <div class="sec-head">
+          <div><span class="eyebrow">Destinations</span><h2 id="dest-title">Five landscapes, <em>one country</em></h2></div>
+          <p class="lede" style="max-width:40ch">From Siberian taiga to the Gobi Desert, in a country three times the size of France.</p>
+        </div>
+        <div class="dest" id="dest"></div>
       </div>
-      <div class="map-grid">
-        <ul class="route-list" id="route-list"></ul>
-        <div class="map-wrap">
-          <svg class="map-svg" id="map-svg" viewBox="0 0 900 450" role="img" aria-label="Map of Mongolia showing the selected journey route"></svg>
-          <div class="map-caption">
-            <div class="legend"><span><i></i>Overland</span><span><i class="f"></i>Domestic flight</span></div>
-            <span class="coord" id="map-km"></span>
+    </section>
+
+    <section class="section" style="padding-top:0" aria-labelledby="rail-title">
+      <div class="wrap">
+        <div class="sec-head">
+          <div><span class="eyebrow">Signature journeys</span><h2 id="rail-title">Routes we <em>know by heart</em></h2></div>
+          <div class="rail-ctl">
+            <button class="round" type="button" id="rail-prev" aria-label="Previous journeys">←</button>
+            <button class="round" type="button" id="rail-next" aria-label="Next journeys">→</button>
+            <a class="link" href="#journeys">All journeys →</a>
+          </div>
+        </div>
+        <div class="rail" id="rail"></div>
+      </div>
+    </section>
+
+    <section class="section why" aria-labelledby="why-title">
+      <div class="wrap why-grid">
+        <div class="why-copy">
+          <span class="eyebrow">Why Tengeri</span>
+          <h2 id="why-title">Travel with people who <em>call the steppe home</em></h2>
+          <p class="lede">We are a Mongolian team in Ulaanbaatar. We plan every route ourselves, work with herding families we have known for years and pay them fairly.</p>
+          <div class="facts mono"><span><b>1,564,116</b> km²</span><span><b>~2</b> people per km²</span><span>More horses than people</span></div>
+        </div>
+        <div class="promise">
+          <div><strong>8</strong><h3>Guests at most</h3><p>One vehicle, one guide, one table at dinner.</p></div>
+          <div><strong>100%</strong><h3>Mongolian guides</h3><p>Trained in wilderness first aid.</p></div>
+          <div><strong>4×4</strong><h3>Proper vehicles</h3><p>Land Cruisers and the classic UAZ van.</p></div>
+          <div><strong>24/7</strong><h3>Support on the ground</h3><p>Satellite phones on remote routes.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="cta">
+          <img src="img/lake.jpg" alt="" loading="lazy">
+          <div class="cta-inner">
+            <span class="eyebrow">Plan your journey</span>
+            <h2>Your Mongolia starts with <em>one message</em></h2>
+            <p>Tell us your dates. A planner in Ulaanbaatar replies within one working day.</p>
+            <a class="btn btn-gold" href="#plan">Plan my trip <span class="arr">→</span></a>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
 
-  <section id="seasons" class="band">
-    <div class="wrap">
-      <div class="section-head">
-        <div class="eyebrow"><b>When to go</b><span class="coord">Ulaanbaatar · 1,350 m above sea level</span></div>
-        <h2>Twelve months, four very different countries</h2>
-        <p>Ulaanbaatar is the coldest capital in the world, yet summer days on the steppe are warm and long. Choose a month to see the weather and what's happening.</p>
+  <!-- ================= JOURNEYS ================= -->
+  <div data-view="journeys" hidden>
+    <section class="page-head">
+      <div class="wrap">
+        <span class="eyebrow">Journeys</span>
+        <h1>Eight ways to <em>cross Mongolia</em></h1>
+        <p class="lede">Every journey runs as a small-group departure or privately on your dates, with a Mongolian guide, a driver and every night's stay included. Open a journey for its route and day-by-day plan.</p>
       </div>
-      <div class="season-grid">
-        <div class="chart-box">
+      <div class="khee" aria-hidden="true"></div>
+    </section>
+    <section class="section" style="padding-top:36px">
+      <div class="wrap">
+        <div class="filters" role="group" aria-label="Filter journeys">
+          <button class="chip" type="button" data-filter="all" aria-pressed="true">All</button>
+          <button class="chip" type="button" data-filter="gobi" aria-pressed="false">Gobi</button>
+          <button class="chip" type="button" data-filter="north" aria-pressed="false">Khövsgöl &amp; north</button>
+          <button class="chip" type="button" data-filter="central" aria-pressed="false">Central</button>
+          <button class="chip" type="button" data-filter="west" aria-pressed="false">Altai &amp; far west</button>
+          <button class="chip" type="button" data-filter="winter" aria-pressed="false">Winter</button>
+          <button class="chip" type="button" data-filter="festival" aria-pressed="false">Festivals</button>
+          <button class="chip" type="button" data-filter="short" aria-pressed="false">Under a week</button>
+        </div>
+        <div class="tgrid" id="tgrid"></div>
+        <p class="note">Prices are per person, twin share, in US dollars, excluding international flights.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- ================= WHEN TO GO ================= -->
+  <div data-view="seasons" hidden>
+    <section class="page-head">
+      <div class="wrap">
+        <span class="eyebrow">When to go</span>
+        <h1>Twelve months, <em>four different countries</em></h1>
+        <p class="lede">Ulaanbaatar is the coldest capital in the world, yet summer on the steppe is warm and long. Pick a month to see the weather, the festivals and the journeys that fit.</p>
+      </div>
+      <div class="khee" aria-hidden="true"></div>
+    </section>
+    <section class="section" style="padding-top:40px">
+      <div class="wrap season-grid">
+        <div class="chart-card">
           <svg class="temp-chart" id="temp-chart" viewBox="0 0 640 340" role="group" aria-label="Average monthly temperature range in Ulaanbaatar. Select a month."></svg>
-          <p class="chart-note">Bars show the average daily low to high in Ulaanbaatar, °C. The Gobi runs warmer in summer; the north and the Altai run colder.</p>
+          <p class="chart-note">Average daily low to high in Ulaanbaatar (1,350 m), °C. The Gobi runs warmer in summer; the north and the Altai run colder.</p>
         </div>
         <article class="month-card" id="month-card" aria-live="polite"></article>
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
 
-  <section class="ger" aria-labelledby="ger-title">
-    <img src="img/yurt.jpg" alt="Inside a family ger: painted orange furniture, a stove and a table set with bread and milk tea" loading="lazy">
-    <div class="wrap">
-      <div class="ger-inner">
-        <div class="eyebrow"><b>Stay with herders</b><span class="coord">Orkhon Valley · UNESCO World Heritage</span></div>
-        <h2 id="ger-title">The door of a ger always faces south</h2>
-        <p>Guests sit on the west side, the stove burns at the centre, and there is always milk tea. On our journeys you spend nights with families we have known for years. You help with the milking, learn to saddle a horse, and pay your hosts directly and fairly.</p>
+  <!-- ================= EXPERIENCE ================= -->
+  <div data-view="experience" hidden>
+    <section class="page-head">
+      <div class="wrap">
+        <span class="eyebrow">Experience</span>
+        <h1>Life on the steppe, <em>up close</em></h1>
+        <p class="lede">Nights in family gers, herds on the move and traditions that have outlived empires.</p>
       </div>
-    </div>
-  </section>
-
-  <section class="band">
-    <div class="wrap">
-      <div class="section-head">
-        <div class="eyebrow"><b>Why travel with us</b><span class="coord">Ulaanbaatar office · 47.92° N, 106.92° E</span></div>
-        <h2>Local from the first email to the last airport transfer</h2>
+      <div class="khee" aria-hidden="true"></div>
+    </section>
+    <section class="section" style="padding-top:48px">
+      <div class="wrap story">
+        <div class="story-img"><img src="img/yurt.jpg" alt="Inside a family ger: painted orange furniture, a stove and a table set with bread and milk tea" loading="lazy"><span class="badge">Family stays on every journey</span></div>
+        <div class="story-copy">
+          <span class="eyebrow">Stay with herders</span>
+          <h2>The door of a ger <em>always faces south</em></h2>
+          <p class="lede">Guests sit on the west side, the stove burns at the centre and there is always milk tea. You help with the milking, learn to saddle a horse and pay your hosts directly.</p>
+          <ul class="customs">
+            <li><span>1</span><p>Step over the threshold, never on it.</p></li>
+            <li><span>2</span><p>Accept a bowl with your right hand, the left lightly supporting the elbow.</p></li>
+            <li><span>3</span><p>Move clockwise inside the ger, following the sun.</p></li>
+          </ul>
+        </div>
       </div>
-      <div class="promise">
-        <div><strong>8</strong><h3>Guests at most</h3><p>One vehicle, one guide, one table at dinner. Small groups leave less of a footprint on fragile grassland.</p></div>
-        <div><strong>100%</strong><h3>Mongolian guides</h3><p>English-speaking guides from Ulaanbaatar, the Gobi and Bayan-Ölgii, trained in wilderness first aid.</p></div>
-        <div><strong>4×4</strong><h3>Proper vehicles</h3><p>Land Cruisers and the legendary Russian UAZ van, driven by mechanics who can fix anything on the road.</p></div>
-        <div><strong>24/7</strong><h3>Support on the ground</h3><p>Satellite phones on remote routes and an Ulaanbaatar team on call for the whole trip.</p></div>
+    </section>
+    <section class="section" style="padding-top:0">
+      <div class="wrap">
+        <div class="motion">
+          <div class="khee gold" aria-hidden="true"></div>
+          <div class="sec-head">
+            <div><span class="eyebrow">The steppe in motion</span><h2>Herds, horses <em>and hunters</em></h2></div>
+            <p class="lede" style="max-width:44ch">Herders still count their wealth in the five kinds of livestock: horses, camels, cattle, sheep and goats.</p>
+          </div>
+          <div class="reels">
+            <figure class="reel"><div class="reel-frame"><video src="video/horses.mp4" poster="video/horses.jpg" muted loop playsinline preload="metadata" aria-label="A herd of dark horses galloping across green steppe below a rocky hill"></video><button class="vt" type="button" aria-label="Pause video"></button></div><figcaption><strong>A herd at full gallop</strong><span>Summer pasture</span></figcaption></figure>
+            <figure class="reel"><div class="reel-frame"><video src="video/eagle.mp4" poster="video/eagle.jpg" muted loop playsinline preload="metadata" aria-label="An eagle hunter riding a chestnut horse with a golden eagle raised on his arm"></video><button class="vt" type="button" aria-label="Pause video"></button></div><figcaption><strong>Eagle hunter on horseback</strong><span>A Kazakh tradition of the far west</span></figcaption></figure>
+            <figure class="reel"><div class="reel-frame"><video src="video/herd.mp4" poster="video/herd.jpg" muted loop playsinline preload="metadata" aria-label="Hundreds of sheep and goats grazing on a wide green plain below misty mountains"></video><button class="vt" type="button" aria-label="Pause video"></button></div><figcaption><strong>Sheep and goats before the rain</strong><span>A mixed herd on open steppe</span></figcaption></figure>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
-
-  <section id="how" class="band" style="padding-top:0">
-    <div class="wrap">
-      <div class="section-head">
-        <div class="eyebrow"><b>How it works</b><span class="coord">From first message to departure</span></div>
-        <h2>Four steps to the steppe</h2>
-      </div>
-      <ol class="steps">
-        <li><h3>Tell us your dates</h3><p>Send a short note with when you can travel, who is coming and what you hope to see.</p></li>
-        <li><h3>Get a draft itinerary</h3><p>A planner in Ulaanbaatar replies within one working day with a route, a price and honest advice.</p></li>
-        <li><h3>Shape it together</h3><p>Add a horse trek, swap a camp, slow the pace. A 20% deposit confirms your place.</p></li>
-        <li><h3>Land in Ulaanbaatar</h3><p>Your guide meets you at Chinggis Khaan International Airport and the journey begins.</p></li>
-      </ol>
-    </div>
-  </section>
-
-  <section class="band" style="padding-top:0" aria-label="Photo gallery">
-    <div class="wrap">
-      <div class="strip">
+    </section>
+    <section class="section" style="padding-top:0" aria-label="Photo gallery">
+      <div class="wrap mosaic">
         <figure><img src="img/naadam.jpg" alt="A young jockey on a grey horse at the Naadam horse race" loading="lazy"><figcaption>Naadam horse race · July</figcaption></figure>
-        <figure><img src="img/yak.jpg" alt="A long-haired yak grazing in Yolyn Am" loading="lazy"><figcaption>Yolyn Am · 2,200 m</figcaption></figure>
+        <figure><img src="img/yak.jpg" alt="A long-haired yak grazing in Yolyn Am" loading="lazy"><figcaption>Yolyn Am</figcaption></figure>
         <figure><img src="img/bayanzag.jpg" alt="Red sandstone cliffs of Bayanzag" loading="lazy"><figcaption>Flaming Cliffs</figcaption></figure>
         <figure><img src="img/terelj.jpg" alt="Green valleys and forested ridges of Gorkhi-Terelj National Park" loading="lazy"><figcaption>Gorkhi-Terelj</figcaption></figure>
-        <figure><img src="img/yolyn.jpg" alt="Horse riders in a wide valley below rocky hills at Yolyn Am" loading="lazy"><figcaption>Gurvan Saikhan</figcaption></figure>
+        <figure><img src="img/yolyn.jpg" alt="Horse riders in a wide valley below rocky hills" loading="lazy"><figcaption>Gurvan Saikhan</figcaption></figure>
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
 
-  <section id="faq" class="band map-band">
-    <div class="wrap">
-      <div class="section-head">
-        <div class="eyebrow"><b>Help centre</b><span class="coord" id="faq-count"></span></div>
-        <h2>Questions travellers ask us</h2>
-        <p>Search or browse by topic. If your question isn't here, a planner will answer it personally.</p>
+  <!-- ================= HELP ================= -->
+  <div data-view="help" hidden>
+    <section class="page-head">
+      <div class="wrap">
+        <span class="eyebrow">Help centre</span>
+        <h1>Questions travellers <em>ask us</em></h1>
+        <p class="lede" id="faq-count"></p>
       </div>
-      <div class="faq-grid">
+      <div class="khee" aria-hidden="true"></div>
+    </section>
+    <section class="section" style="padding-top:40px">
+      <div class="wrap faq-grid">
         <aside class="faq-side">
           <ul class="faq-cats" id="faq-cats" aria-label="Question topics"></ul>
           <div class="side-card"><strong>Still need help?</strong><p>Planners reply within one working day, Monday to Saturday, Ulaanbaatar time (UTC+8).</p><a href="#plan">Ask a question →</a></div>
@@ -638,37 +732,68 @@ footer a:hover { color: var(--ink); }
         <div>
           <div class="faq-search">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-            <label for="faq-q" class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Search questions</label>
+            <label for="faq-q" class="sr-only">Search questions</label>
             <input id="faq-q" type="search" placeholder="Search, e.g. visa, cancellation, cold" autocomplete="off">
           </div>
           <div id="faq-list"></div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
 
-  <section id="plan" class="band inquiry">
-    <div class="wrap inq-grid">
-      <div class="inq-copy">
-        <div class="eyebrow"><b>Plan your journey</b><span class="coord">Reply within 1 working day</span></div>
-        <h2>Tell us about your trip</h2>
-        <p>Share your dates and interests and a planner in Ulaanbaatar will send a tailored itinerary and price. No payment needed to ask.</p>
-        <div class="contact-row"><span id="email-text">hello@tengeri-journeys.mn</span><button class="copy" type="button" id="copy-email">Copy</button></div>
-        <div class="contact-row"><span>+976 7011 0000 · WhatsApp</span></div>
+  <!-- ================= PLAN ================= -->
+  <div data-view="plan" hidden>
+    <section class="page-head">
+      <div class="wrap">
+        <span class="eyebrow">Plan your journey</span>
+        <h1>Tell us about <em>your trip</em></h1>
+        <p class="lede">No payment needed to ask. A planner in Ulaanbaatar replies within one working day with a route and a price.</p>
       </div>
-      <form class="inq" id="inq-form" novalidate>
-        <div class="field"><label for="f-name">Full name</label><input id="f-name" name="name" autocomplete="name" placeholder="Anna Schmidt" required><span class="err" id="e-name"></span></div>
-        <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" placeholder="anna@example.com" required><span class="err" id="e-email"></span></div>
-        <div class="field"><label for="f-trip">Journey</label><select id="f-trip" name="trip"><option value="">Not sure yet</option></select></div>
-        <div class="field"><label for="f-month">Preferred month</label><select id="f-month" name="month"></select></div>
-        <div class="field"><label for="f-size">Travellers</label><input id="f-size" name="size" type="number" min="1" max="20" value="2"></div>
-        <div class="field"><label for="f-style">Trip style</label><select id="f-style" name="style"><option>Small group</option><option>Private</option></select></div>
-        <div class="field full"><label for="f-msg">Anything else?</label><textarea id="f-msg" name="msg" placeholder="We'd love to ride horses and stay with a family for a night."></textarea></div>
-        <div class="form-actions full"><button class="btn btn-primary" type="submit">Send inquiry</button><small>We never share your details.</small></div>
-      </form>
-    </div>
-  </section>
+      <div class="khee" aria-hidden="true"></div>
+    </section>
+    <section class="section" style="padding-top:40px">
+      <div class="wrap plan-grid">
+        <div class="plan-copy">
+          <ol class="steps">
+            <li><div><h3>Tell us your dates</h3><p>When you can travel, who is coming and what you hope to see.</p></div></li>
+            <li><div><h3>Get a draft itinerary</h3><p>A route, a price and honest advice within one working day.</p></div></li>
+            <li><div><h3>Shape it together</h3><p>Add a horse trek or slow the pace. A 20% deposit confirms your place.</p></div></li>
+            <li><div><h3>Land in Ulaanbaatar</h3><p>Your guide meets you at Chinggis Khaan International Airport.</p></div></li>
+          </ol>
+          <div class="contact">
+            <div class="contact-row"><span id="email-text">hello@tengeri-journeys.mn</span><button class="copy" type="button" id="copy-email">Copy</button></div>
+            <div class="contact-row"><span>+976 7011 0000 · WhatsApp</span></div>
+          </div>
+        </div>
+        <form class="inq" id="inq-form" novalidate>
+          <h2 class="full">Inquiry</h2>
+          <div class="field"><label for="f-name">Full name</label><input id="f-name" name="name" autocomplete="name" placeholder="Anna Schmidt" required><span class="err" id="e-name"></span></div>
+          <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" placeholder="anna@example.com" required><span class="err" id="e-email"></span></div>
+          <div class="field"><label for="f-trip">Journey</label><select id="f-trip" name="trip"><option value="">Not sure yet</option></select></div>
+          <div class="field"><label for="f-month">Preferred month</label><select id="f-month" name="month"></select></div>
+          <div class="field"><label for="f-size">Travellers</label><input id="f-size" name="size" type="number" min="1" max="20" value="2"></div>
+          <div class="field"><label for="f-style">Trip style</label><select id="f-style" name="style"><option>Small group</option><option>Private</option></select></div>
+          <div class="field full"><label for="f-msg">Anything else?</label><textarea id="f-msg" name="msg" placeholder="We'd love to ride horses and stay with a family for a night."></textarea></div>
+          <div class="form-actions full"><button class="btn btn-blue" type="submit">Send inquiry <span class="arr">→</span></button><small>We never share your details.</small></div>
+        </form>
+      </div>
+    </section>
+  </div>
 </main>
+
+<dialog class="modal" id="trip-modal" aria-labelledby="m-title">
+  <button class="m-close" type="button" id="m-close" aria-label="Close">×</button>
+  <div class="m-grid">
+    <div class="m-media">
+      <img id="m-img" src="img/dunes2.jpg" alt="">
+      <div class="m-map">
+        <svg id="m-map" viewBox="0 0 900 450" role="img" aria-label="Route map"></svg>
+        <div class="legend"><span><i></i>Overland</span><span><i class="f"></i>Domestic flight</span><span class="mono" id="m-km"></span></div>
+      </div>
+    </div>
+    <div class="m-body" id="m-body"></div>
+  </div>
+</dialog>
 
 <a class="chat-fab" href="#plan" aria-label="Chat with a planner">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 10h8M8 13h5"/></svg>
@@ -676,82 +801,120 @@ footer a:hover { color: var(--ink); }
 </a>
 
 <footer>
-  <div class="wrap">
-    <div class="foot-grid">
-      <div>
-        <a class="brand" href="#top" style="color:var(--ink)">Tengeri Journeys</a>
-        <p style="margin-top:12px;max-width:40ch">A Mongolian travel company based in Ulaanbaatar. Licensed tour operator. Member of the Mongolian Tourism Association.</p>
-      </div>
-      <div><h4>Journeys</h4><ul id="foot-trips"></ul></div>
-      <div><h4>Company</h4><ul><li><a href="#how">How it works</a></li><li><a href="#faq">Travel info</a></li><li><a href="#plan">Contact</a></li><li><span>Seoul Street 21, Ulaanbaatar</span></li></ul></div>
+  <div class="khee gold" aria-hidden="true"></div>
+  <div class="wrap foot">
+    <div style="display:grid;gap:14px;align-content:start">
+      <a class="brand" href="#home">
+        <svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="16" fill="#1150b0"/><circle cx="17" cy="12" r="4" fill="#f4b93a"/><path d="M4 23c4-4 8-6 13-6s9 2 13 6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></svg>
+        Tengeri Journeys
+      </a>
+      <p style="max-width:40ch">A Mongolian travel company based in Ulaanbaatar, running small-group and private journeys across the country.</p>
     </div>
-    <p class="credits">Photos via Wikimedia Commons:
-      <a href="https://commons.wikimedia.org/wiki/File:Camels_at_Khongoryn_Els_01.jpg" target="_blank" rel="noopener">Khongoryn Els</a>, <a href="https://commons.wikimedia.org/wiki/File:Khongoryn_Els_05.jpg" target="_blank" rel="noopener">dunes</a>, <a href="https://commons.wikimedia.org/wiki/File:Naadam_2023_-_Horse_racing_09.jpg" target="_blank" rel="noopener">Naadam</a>, <a href="https://commons.wikimedia.org/wiki/File:Yurt_in_Orkhon_Valley.jpg" target="_blank" rel="noopener">ger interior</a>, <a href="https://commons.wikimedia.org/wiki/File:Yolyn_Am_02.jpg" target="_blank" rel="noopener">Yolyn Am</a>, <a href="https://commons.wikimedia.org/wiki/File:Yak_at_Yolyn_Am_03.jpg" target="_blank" rel="noopener">yak</a>, <a href="https://commons.wikimedia.org/wiki/File:Bayanzag_09.jpg" target="_blank" rel="noopener">Bayanzag</a> by Bernard Gagnon (CC0);
-      <a href="https://commons.wikimedia.org/wiki/File:On_Lake_Hovsgol_(3756943119).jpg" target="_blank" rel="noopener">Lake Khövsgöl</a> by lamoix (CC BY 2.0);
-      <a href="https://commons.wikimedia.org/wiki/File:Kazakh_Eagle_Hunter_with_Golden_Eagle_in_Bayan_Olgii_region,_Mongolia.jpg" target="_blank" rel="noopener">eagle hunter</a> by Ceyhun Kavakci (CC BY-SA 2.0);
-      <a href="https://commons.wikimedia.org/wiki/File:202408_Orkhon_Valley_03.jpg" target="_blank" rel="noopener">Orkhon Valley</a> by Jonashtand (CC BY-SA 4.0);
-      <a href="https://commons.wikimedia.org/wiki/File:Altai_Tavan_Bogd_-_Potanin_glacier_-_panoramio.jpg" target="_blank" rel="noopener">Potanin Glacier</a> (CC BY 3.0);
-      <a href="https://commons.wikimedia.org/wiki/File:Gorkhi-Terelj_National_Park.jpg" target="_blank" rel="noopener">Gorkhi-Terelj</a> (CC BY-SA 4.0);
-      <a href="https://commons.wikimedia.org/wiki/File:Mongolia_-_panoramio_(3).jpg" target="_blank" rel="noopener">horses in winter</a> by AwOiSoAk KaOsIoWa (CC BY-SA 3.0).
-      <br>© 2026 Tengeri Journeys.</p>
+    <div><h4>Explore</h4><ul><li><a href="#journeys">Journeys</a></li><li><a href="#seasons">When to go</a></li><li><a href="#experience">Experience</a></li><li><a href="#help">Help centre</a></li></ul></div>
+    <div><h4>Contact</h4><ul><li class="mono">hello@tengeri-journeys.mn</li><li class="mono">+976 7011 0000</li><li>Seoul Street 21, Ulaanbaatar</li><li><a href="#plan">Send an inquiry →</a></li></ul></div>
+  </div>
+  <div class="wrap foot-base">
+    <span>© 2026 Tengeri Journeys</span>
+    <details>
+      <summary>Photo credits</summary>
+      <p class="credits">Videos © Tengeri Journeys. Photos via Wikimedia Commons:
+        <a href="https://commons.wikimedia.org/wiki/File:Camels_at_Khongoryn_Els_01.jpg" target="_blank" rel="noopener">Khongoryn Els</a>, <a href="https://commons.wikimedia.org/wiki/File:Khongoryn_Els_05.jpg" target="_blank" rel="noopener">dunes</a>, <a href="https://commons.wikimedia.org/wiki/File:Naadam_2023_-_Horse_racing_09.jpg" target="_blank" rel="noopener">Naadam</a>, <a href="https://commons.wikimedia.org/wiki/File:Yurt_in_Orkhon_Valley.jpg" target="_blank" rel="noopener">ger interior</a>, <a href="https://commons.wikimedia.org/wiki/File:Yolyn_Am_02.jpg" target="_blank" rel="noopener">Yolyn Am</a>, <a href="https://commons.wikimedia.org/wiki/File:Yak_at_Yolyn_Am_03.jpg" target="_blank" rel="noopener">yak</a>, <a href="https://commons.wikimedia.org/wiki/File:Bayanzag_09.jpg" target="_blank" rel="noopener">Bayanzag</a> by Bernard Gagnon (CC0);
+        <a href="https://commons.wikimedia.org/wiki/File:On_Lake_Hovsgol_(3756943119).jpg" target="_blank" rel="noopener">Lake Khövsgöl</a> by lamoix (CC BY 2.0);
+        <a href="https://commons.wikimedia.org/wiki/File:Kazakh_Eagle_Hunter_with_Golden_Eagle_in_Bayan_Olgii_region,_Mongolia.jpg" target="_blank" rel="noopener">eagle hunter</a> by Ceyhun Kavakci (CC BY-SA 2.0);
+        <a href="https://commons.wikimedia.org/wiki/File:202408_Orkhon_Valley_03.jpg" target="_blank" rel="noopener">Orkhon Valley</a> by Jonashtand (CC BY-SA 4.0);
+        <a href="https://commons.wikimedia.org/wiki/File:Altai_Tavan_Bogd_-_Potanin_glacier_-_panoramio.jpg" target="_blank" rel="noopener">Potanin Glacier</a> (CC BY 3.0);
+        <a href="https://commons.wikimedia.org/wiki/File:Gorkhi-Terelj_National_Park.jpg" target="_blank" rel="noopener">Gorkhi-Terelj</a> (CC BY-SA 4.0);
+        <a href="https://commons.wikimedia.org/wiki/File:Mongolia_-_panoramio_(3).jpg" target="_blank" rel="noopener">horses in winter</a> by AwOiSoAk KaOsIoWa (CC BY-SA 3.0).</p>
+    </details>
   </div>
 </footer>
 
 <script>
 (() => {
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const smooth = calm ? "auto" : "smooth";
+  const usd = n => "$" + n.toLocaleString("en-US");
+  const esc = t => t.replace(/[&<>"]/g, ch => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[ch]));
+
+  /* ---------- Data ---------- */
   const PLACES = {
-    ub:        { name: "Ulaanbaatar",        lat: 47.92, lon: 106.92, cap: true, dx: 10, dy: 16 },
-    terelj:    { name: "Terelj",             lat: 47.98, lon: 107.45, dx: 10, dy: -8 },
-    khustai:   { name: "Khustai",            lat: 47.72, lon: 105.88, dx: -10, dy: 18, anchor: "end" },
-    elsen:     { name: "Elsen Tasarkhai",    lat: 47.36, lon: 103.67, dx: 0, dy: -12, anchor: "middle" },
-    kharkhorin:{ name: "Kharkhorin",         lat: 47.20, lon: 102.82, dx: -10, dy: 4, anchor: "end" },
-    orkhon:    { name: "Orkhon Waterfall",   lat: 46.78, lon: 101.96, dx: -10, dy: 14, anchor: "end" },
-    tsagaan:   { name: "Tsagaan Suvarga",    lat: 44.59, lon: 105.77, dx: 10, dy: 4 },
-    yolyn:     { name: "Yolyn Am",           lat: 43.49, lon: 104.07, dx: 10, dy: 14 },
-    khongor:   { name: "Khongoryn Els",      lat: 43.78, lon: 102.30, dx: -10, dy: 16, anchor: "end" },
-    bayanzag:  { name: "Bayanzag",           lat: 44.14, lon: 103.72, dx: 0, dy: -12, anchor: "middle" },
-    amar:      { name: "Amarbayasgalant",    lat: 49.48, lon: 105.08, dx: 10, dy: 4 },
-    murun:     { name: "Mörön",              lat: 49.64, lon: 100.16, dx: 10, dy: 14 },
-    khuvsgul:  { name: "Lake Khövsgöl",      lat: 50.70, lon: 100.40, dx: 12, dy: 4 },
-    tsaatan:   { name: "Darkhad (reindeer)", lat: 51.30, lon: 99.40, dx: -10, dy: -6, anchor: "end" },
-    olgii:     { name: "Ölgii",              lat: 48.97, lon: 89.97, dx: 10, dy: 16 },
-    tavanbogd: { name: "Tavan Bogd",         lat: 49.15, lon: 87.85, dx: 4, dy: -12 }
+    ub:         { name: "Ulaanbaatar",      lat: 47.92, lon: 106.92, cap: true },
+    terelj:     { name: "Terelj",           lat: 47.98, lon: 107.45 },
+    khustai:    { name: "Khustai",          lat: 47.72, lon: 105.88 },
+    elsen:      { name: "Elsen Tasarkhai",  lat: 47.36, lon: 103.67 },
+    kharkhorin: { name: "Kharkhorin",       lat: 47.20, lon: 102.82 },
+    orkhon:     { name: "Orkhon Waterfall", lat: 46.78, lon: 101.96 },
+    tsagaan:    { name: "Tsagaan Suvarga",  lat: 44.59, lon: 105.77 },
+    yolyn:      { name: "Yolyn Am",         lat: 43.49, lon: 104.07 },
+    khongor:    { name: "Khongoryn Els",    lat: 43.78, lon: 102.30 },
+    bayanzag:   { name: "Bayanzag",         lat: 44.14, lon: 103.72 },
+    amar:       { name: "Amarbayasgalant",  lat: 49.48, lon: 105.08 },
+    murun:      { name: "Mörön",            lat: 49.64, lon: 100.16 },
+    khuvsgul:   { name: "Lake Khövsgöl",    lat: 50.70, lon: 100.40 },
+    tsaatan:    { name: "Darkhad",          lat: 51.30, lon: 99.40 },
+    olgii:      { name: "Ölgii",            lat: 48.97, lon: 89.97 },
+    tavanbogd:  { name: "Tavan Bogd",       lat: 49.15, lon: 87.85 }
   };
 
-  // Overland legs are drawn solid, legs marked with "~" are flights.
+  // Route legs prefixed with "~" are domestic flights.
   const TRIPS = [
     { id: "gobi", name: "Gobi Crossing", days: 8, season: "May–Sep", level: "Moderate", price: 1890, img: "img/dunes2.jpg", tag: "Desert", cats: ["gobi", "adventure"],
-      text: "Climb the singing dunes of Khongoryn Els, walk the ice gorge of Yolyn Am and hunt for dinosaur fossils at the Flaming Cliffs.",
-      route: ["ub", "tsagaan", "yolyn", "khongor", "bayanzag", "ub"] },
+      text: "Climb the singing dunes of Khongoryn Els, walk the ice gorge of Yolyn Am and look for dinosaur fossils at the Flaming Cliffs.",
+      route: ["ub", "tsagaan", "yolyn", "khongor", "bayanzag", "ub"],
+      plan: [["1", "Drive south from Ulaanbaatar to the striped cliffs of Tsagaan Suvarga."], ["2–3", "Walk the narrow ice gorge of Yolyn Am in Gurvan Saikhan National Park."], ["4–5", "Climb the Khongoryn Els dunes at sunset and ride Bactrian camels with a herding family."], ["6", "Explore Bayanzag, where the first dinosaur eggs were found in 1923."], ["7–8", "Head north across the steppe with a night in a family ger, then back to Ulaanbaatar."]] },
     { id: "khuvsgul", name: "Khövsgöl & the Reindeer Herders", days: 10, season: "Jun–Aug", level: "Moderate", price: 2290, img: "img/lake.jpg", tag: "Taiga", cats: ["north", "adventure", "culture"],
-      text: "Kayak Mongolia's deepest lake, then ride into the taiga to spend two nights with Dukha reindeer-herding families.",
-      route: ["ub", "amar", "murun", "khuvsgul", "tsaatan", "khuvsgul", "murun", "~ub"] },
+      text: "Kayak Mongolia's deepest lake, then ride into the taiga to spend nights with Dukha reindeer-herding families.",
+      route: ["ub", "amar", "murun", "khuvsgul", "tsaatan", "khuvsgul", "murun", "~ub"],
+      plan: [["1–2", "Drive north to Amarbayasgalant, one of Mongolia's finest surviving monasteries."], ["3", "Continue to Mörön and on to the lakeshore village of Khatgal."], ["4–5", "Kayak and hike along Lake Khövsgöl, which holds about 70% of Mongolia's fresh water."], ["6–8", "Ride into the taiga to camp with Dukha reindeer herders in the Darkhad region."], ["9–10", "Return to Mörön and fly back to Ulaanbaatar."]] },
     { id: "naadam", name: "Naadam Festival", days: 7, season: "9–15 Jul 2027", level: "Easy", price: 2390, img: "img/naadam.jpg", tag: "Festival", cats: ["central", "festival", "culture"],
       text: "Front-row seats for wrestling, archery and the horse race with child jockeys, then a countryside Naadam with a herding family.",
-      route: ["ub", "terelj", "ub", "khustai", "elsen", "kharkhorin", "ub"] },
+      route: ["ub", "terelj", "ub", "khustai", "elsen", "kharkhorin", "ub"],
+      plan: [["1", "Arrive in Ulaanbaatar for a welcome dinner."], ["2", "Hike among the granite outcrops of Gorkhi-Terelj National Park."], ["3", "Opening ceremony and wrestling at the National Sports Stadium on 11 July."], ["4", "Horse racing on the open steppe, then the archery contest."], ["5", "Watch wild takhi horses at Khustai National Park."], ["6–7", "A countryside Naadam near Elsen Tasarkhai, then Kharkhorin and back to the city."]] },
     { id: "eagle", name: "Golden Eagle Festival", days: 8, season: "Early Oct 2027", level: "Moderate", price: 2690, img: "img/eagle.jpg", tag: "Festival", cats: ["west", "festival", "culture"],
-      text: "Fly to the far west to meet Kazakh eagle hunters, stay in their winter homes and watch the competition in the Altai foothills.",
-      route: ["ub", "~olgii"] },
+      text: "Fly to the far west to meet Kazakh eagle hunters, stay in their homes and watch the competition in the Altai foothills.",
+      route: ["ub", "~olgii"],
+      plan: [["1", "Arrive in Ulaanbaatar."], ["2", "Fly west to Ölgii, capital of Bayan-Ölgii province."], ["3", "Drive into the mountains to stay with a Kazakh eagle-hunting family."], ["4–5", "Two days at the Golden Eagle Festival: parades, calling contests and horseback games."], ["6", "Explore the Altai valleys around Ölgii."], ["7–8", "Fly back to Ulaanbaatar for a farewell dinner."]] },
     { id: "orkhon", name: "Orkhon Valley & Karakorum", days: 6, season: "May–Sep", level: "Easy", price: 1390, img: "img/orkhon.jpg", tag: "Heritage", cats: ["central", "culture", "short"],
-      text: "See wild Przewalski's horses at Khustai, ride in the mini-Gobi dunes and visit Erdene Zuu, the monastery built from Chinggis Khaan's old capital.",
-      route: ["ub", "khustai", "elsen", "kharkhorin", "orkhon", "ub"] },
+      text: "See wild Przewalski's horses, ride in the mini-Gobi dunes and visit Erdene Zuu, built from the stones of Chinggis Khaan's old capital.",
+      route: ["ub", "khustai", "elsen", "kharkhorin", "orkhon", "ub"],
+      plan: [["1", "Watch wild takhi horses at dusk in Khustai National Park."], ["2", "Ride camels in Elsen Tasarkhai, the 'mini-Gobi' dunes."], ["3", "Visit Erdene Zuu monastery and the site of ancient Karakorum."], ["4–5", "Stay near the Orkhon Waterfall and ride through the UNESCO-listed valley."], ["6", "Drive back to Ulaanbaatar."]] },
     { id: "altai", name: "Altai Tavan Bogd Trek", days: 12, season: "Jul–Aug", level: "Challenging", price: 3150, img: "img/altai.jpg", tag: "Expedition", cats: ["west", "adventure"],
       text: "Trek with Bactrian camels to base camp below Mongolia's highest peak, Khüiten (4,374 m), and the Potanin Glacier.",
-      route: ["ub", "~olgii", "tavanbogd", "olgii", "~ub"] },
+      route: ["ub", "~olgii", "tavanbogd", "olgii", "~ub"],
+      plan: [["1–2", "Fly to Ölgii and meet your Kazakh trek crew."], ["3–4", "Drive to Tavan Bogd National Park, camping by alpine lakes."], ["5–9", "Trek with camels to base camp beneath Khüiten Peak and the Potanin Glacier."], ["10", "Return through valleys of Kazakh summer camps."], ["11–12", "Fly back to Ulaanbaatar."]] },
     { id: "terelj", name: "Terelj Ger Escape", days: 3, season: "All year", level: "Easy", price: 520, img: "img/terelj.jpg", tag: "Short break", cats: ["central", "short", "culture"],
-      text: "Granite valleys an hour and a half from the capital. Ride horses, hike to Aryapala meditation temple and sleep in a heated ger.",
-      route: ["ub", "terelj", "ub"] },
+      text: "Granite valleys a short drive from the capital. Ride horses, hike to Aryapala meditation temple and sleep in a heated ger.",
+      route: ["ub", "terelj", "ub"],
+      plan: [["1", "Drive to Gorkhi-Terelj National Park, stopping at Turtle Rock."], ["2", "Ride horses through the valley and hike up to Aryapala meditation temple."], ["3", "Return to Ulaanbaatar."]] },
     { id: "winter", name: "Frozen Khövsgöl Ice Festival", days: 7, season: "Late Feb–Mar", level: "Moderate", price: 1790, img: "img/winter.jpg", tag: "Winter", cats: ["north", "winter", "festival"],
       text: "Ride horse sleds across a frozen lake 1.6 metres thick, watch ice sculpting and stay warm in a stove-heated ger at −25 °C.",
-      route: ["ub", "~murun", "khuvsgul", "murun", "~ub"] }
+      route: ["ub", "~murun", "khuvsgul", "murun", "~ub"],
+      plan: [["1", "Arrive in Ulaanbaatar and gear up with a traditional deel."], ["2", "Fly to Mörön and drive to Khatgal on the frozen lakeshore."], ["3–4", "Ice Festival: horse-sled races, ice sculpting and tug of war on the ice."], ["5", "Visit a herding family's winter camp."], ["6–7", "Fly back to Ulaanbaatar."]] }
   ];
 
   const REGIONS = [
-    { id: "gobi", name: "Gobi Desert", img: "img/dunes2.jpg" },
-    { id: "north", name: "Khövsgöl & north", img: "img/lake.jpg" },
-    { id: "central", name: "Central steppe", img: "img/orkhon.jpg" },
-    { id: "west", name: "Altai & far west", img: "img/altai.jpg" },
-    { id: "winter", name: "Winter", img: "img/winter.jpg" }
+    { id: "gobi", name: "Gobi Desert", img: "img/dunes2.jpg", desc: "Singing dunes, ice canyons and dinosaur cliffs in the far south." },
+    { id: "north", name: "Khövsgöl & north", img: "img/lake.jpg", desc: "A 136 km alpine lake, taiga forest and reindeer herders." },
+    { id: "central", name: "Central steppe", img: "img/orkhon.jpg", desc: "Wild horses, the old capital Karakorum and the Orkhon Valley." },
+    { id: "west", name: "Altai & far west", img: "img/altai.jpg", desc: "Glaciers, Kazakh eagle hunters and Mongolia's highest peak." },
+    { id: "winter", name: "Winter", img: "img/winter.jpg", desc: "Frozen lakes, ice festivals and bright −25 °C mornings." }
+  ];
+
+  const MONTHS = [
+    { m: "Jan", full: "January",   hi: -16, lo: -27, note: "The coldest month. Clear, still days, frozen rivers and almost no other travellers.", event: null, trips: ["terelj"] },
+    { m: "Feb", full: "February",  hi: -11, lo: -24, note: "Families gather for the lunar new year with steamed buuz dumplings and visits to elders.", event: "Tsagaan Sar, the lunar new year, usually falls in February.", trips: ["winter", "terelj"] },
+    { m: "Mar", full: "March",     hi: -1,  lo: -15, note: "Sunny and dry with long days returning. Lakes stay frozen solid.", event: "Ice Festival on frozen Lake Khövsgöl and the Thousand Camel Festival in the Gobi.", trips: ["winter", "terelj"] },
+    { m: "Apr", full: "April",     hi: 8,   lo: -6,  note: "A windy thaw. Herders move to spring camps and newborn lambs and camel calves arrive.", event: null, trips: ["terelj"] },
+    { m: "May", full: "May",       hi: 16,  lo: 2,   note: "Ger camps reopen in mid-May and green returns to the steppe. Great value before the summer peak.", event: null, trips: ["orkhon", "gobi", "terelj"] },
+    { m: "Jun", full: "June",      hi: 21,  lo: 8,   note: "Long days and wildflowers. The ideal time for the Gobi before midsummer heat.", event: null, trips: ["gobi", "khuvsgul", "orkhon", "terelj"] },
+    { m: "Jul", full: "July",      hi: 23,  lo: 12,  note: "The warmest and busiest month, with short afternoon rain showers on the steppe.", event: "Naadam, the national festival of wrestling, archery and horse racing, 11–13 July.", trips: ["naadam", "khuvsgul", "altai", "terelj"] },
+    { m: "Aug", full: "August",    hi: 21,  lo: 9,   note: "The greenest month. The best window for the Altai and the northern lakes.", event: null, trips: ["altai", "khuvsgul", "gobi", "orkhon"] },
+    { m: "Sep", full: "September", hi: 14,  lo: 2,   note: "Golden larch forests, crisp nights and quiet roads. A favourite with our guides.", event: null, trips: ["gobi", "orkhon", "terelj"] },
+    { m: "Oct", full: "October",   hi: 6,   lo: -6,  note: "Cold mornings, blue skies and the first snow in the west.", event: "Golden Eagle Festival in Bayan-Ölgii, on the first weekend of October.", trips: ["eagle", "terelj"] },
+    { m: "Nov", full: "November",  hi: -5,  lo: -16, note: "Ger camps close. A quiet season for the capital, its monasteries and museums.", event: null, trips: ["terelj"] },
+    { m: "Dec", full: "December",  hi: -13, lo: -24, note: "Deep winter with bright, dry skies and snow-dusted steppe.", event: null, trips: ["terelj"] }
   ];
 
   const FAQ_CATS = [
@@ -771,7 +934,7 @@ footer a:hover { color: var(--ink); }
     { c: "entry", q: "How do I get to Mongolia?", a: "Fly into Chinggis Khaan International Airport (UBN), about 50 km south of Ulaanbaatar. There are direct flights from Seoul, Beijing, Tokyo, Istanbul and Frankfurt, among others. The Trans-Mongolian railway is a slower, scenic option." },
     { c: "entry", q: "Will someone meet me at the airport?", a: "Yes. Your guide meets every guest in the arrivals hall with a name sign, whatever time your flight lands, and drives you to your hotel." },
     { c: "trip", q: "What is a ger camp like?", a: "A ger is a round felt tent heated by a wood stove. Tourist ger camps have proper beds, hot showers and a dining hall. Family stays are simpler, with shared facilities, and are the highlight of most trips." },
-    { c: "trip", q: "What should I pack?", a: "Layers. Even in July, nights on the steppe can drop close to freezing, and the Gobi is windy. Bring a warm fleece, a windproof jacket, sun protection, and comfortable walking shoes. We send a full packing list after booking." },
+    { c: "trip", q: "What should I pack?", a: "Layers. Even in July, nights on the steppe can drop close to freezing, and the Gobi is windy. Bring a warm fleece, a windproof jacket, sun protection and comfortable walking shoes. We send a full packing list after booking." },
     { c: "trip", q: "Can I use cards and my phone?", a: "The currency is the tögrög (MNT). Cards work in Ulaanbaatar; carry cash for the countryside. Mobile coverage reaches most soums (district centres), but not open steppe or mountains." },
     { c: "trip", q: "What about dietary needs?", a: "Traditional food is meat and dairy heavy. Our cooks prepare vegetarian, vegan and gluten-free meals when you tell us in advance." },
     { c: "trip", q: "Are there baggage limits on domestic flights?", a: "Domestic flights to Ölgii and Mörön have tighter limits than international ones. We confirm the exact allowance for your flight and can store extra luggage in Ulaanbaatar." },
@@ -782,230 +945,272 @@ footer a:hover { color: var(--ink); }
     { c: "winter", q: "Do I need special clothing for a winter trip?", a: "Bring thermal base layers, a down jacket, insulated boots and good gloves. We lend each guest a traditional deel (felt-lined robe) for the countryside." }
   ];
 
-  const MONTHS = [
-    { m: "Jan", full: "January",   hi: -16, lo: -27, note: "The coldest month. Clear, still days, frozen rivers and almost no other travellers.", event: null, trips: ["terelj"] },
-    { m: "Feb", full: "February",  hi: -11, lo: -24, note: "Families gather for the lunar new year with steamed buuz dumplings and visits to elders.", event: "Tsagaan Sar, the lunar new year, usually falls in February.", trips: ["winter", "terelj"] },
-    { m: "Mar", full: "March",     hi: -1,  lo: -15, note: "Sunny and dry with long days returning. Lakes stay frozen solid.", event: "Ice Festival on frozen Lake Khövsgöl and the Thousand Camel Festival in the Gobi.", trips: ["winter", "terelj"] },
-    { m: "Apr", full: "April",     hi: 8,   lo: -6,  note: "A windy thaw. Herders move to spring camps and newborn lambs and camel calves arrive.", event: null, trips: ["terelj"] },
-    { m: "May", full: "May",       hi: 16,  lo: 2,   note: "Ger camps reopen in mid-May and green returns to the steppe. Great value before the summer peak.", event: null, trips: ["orkhon", "gobi", "terelj"] },
-    { m: "Jun", full: "June",      hi: 21,  lo: 8,   note: "Long days and wildflowers. The ideal time for the Gobi before midsummer heat.", event: null, trips: ["gobi", "khuvsgul", "orkhon", "terelj"] },
-    { m: "Jul", full: "July",      hi: 23,  lo: 12,  note: "The warmest and busiest month, with short afternoon rain showers on the steppe.", event: "Naadam, the national festival of wrestling, archery and horse racing, 11–13 July.", trips: ["naadam", "khuvsgul", "altai", "terelj"] },
-    { m: "Aug", full: "August",    hi: 21,  lo: 9,   note: "The greenest month. The best window for the Altai and the northern lakes.", event: null, trips: ["altai", "khuvsgul", "gobi", "orkhon"] },
-    { m: "Sep", full: "September", hi: 14,  lo: 2,   note: "Golden larch forests, crisp nights and quiet roads. A favourite with our guides.", event: null, trips: ["gobi", "orkhon", "terelj"] },
-    { m: "Oct", full: "October",   hi: 6,   lo: -6,  note: "Cold mornings, blue skies and the first snow in the west.", event: "Golden Eagle Festival in Bayan-Ölgii, on the first weekend of October.", trips: ["eagle", "terelj"] },
-    { m: "Nov", full: "November",  hi: -5,  lo: -16, note: "Ger camps close. A quiet season for the capital, its monasteries and museums.", event: null, trips: ["terelj"] },
-    { m: "Dec", full: "December",  hi: -13, lo: -24, note: "Deep winter with bright, dry skies and snow-dusted steppe.", event: null, trips: ["terelj"] }
-  ];
-
   const byId = Object.fromEntries(TRIPS.map(t => [t.id, t]));
-  const $ = s => document.querySelector(s);
-  const usd = n => "$" + n.toLocaleString("en-US");
-  const stops = t => [...new Set(t.route.map(k => PLACES[k.replace("~", "")].name))].filter(n => n !== "Ulaanbaatar").join(" · ");
 
-  /* Journey cards */
-  const list = $("#journey-list");
-  list.innerHTML = TRIPS.map(t => `
-    <article class="trip" data-cats="${t.cats.join(" ")}" data-days="${t.days}">
-      <div class="trip-media"><img src="${t.img}" alt="" loading="lazy"><span class="trip-tag">${t.tag}</span></div>
-      <div class="trip-body">
-        <h3>${t.name}</h3>
-        <p>${t.text}</p>
-        <dl class="trip-meta">
-          <div><dt>Length</dt><dd>${t.days} days</dd></div>
-          <div><dt>When</dt><dd>${t.season}</dd></div>
-          <div><dt>Level</dt><dd>${t.level}</dd></div>
-        </dl>
-        <div class="trip-foot">
-          <span class="price">from ${usd(t.price)} <small>pp</small></span>
-          <button class="link-btn" type="button" data-route="${t.id}">See the route</button>
-        </div>
-      </div>
-    </article>`).join("");
+  /* ---------- Router: one view at a time ---------- */
+  const VIEWS = ["home", "journeys", "seasons", "experience", "help", "plan"];
+  const ALIAS = { top: "home", map: "journeys", faq: "help" };
+  const nav = $("#nav"), burger = $("#burger"), menu = $("#menu");
+  let view = null;
 
-  function applyFilter(f) {
-    document.querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", c.dataset.filter === f));
-    list.classList.toggle("all", f === "all");
-    list.querySelectorAll(".trip").forEach(card => {
-      card.hidden = !(f === "all" || card.dataset.cats.split(" ").includes(f));
-    });
+  function setHeader() { nav.classList.toggle("solid", view !== "home" || scrollY > 40); }
+  function openMenu() { menu.hidden = false; burger.setAttribute("aria-expanded", "true"); burger.setAttribute("aria-label", "Close menu"); nav.classList.add("menu-open"); document.body.classList.add("lock"); }
+  function closeMenu() {
+    if (menu.hidden) return;
+    menu.hidden = true; burger.setAttribute("aria-expanded", "false"); burger.setAttribute("aria-label", "Open menu");
+    nav.classList.remove("menu-open"); document.body.classList.remove("lock");
   }
-  document.querySelectorAll(".chip").forEach(chip => chip.addEventListener("click", () => applyFilter(chip.dataset.filter)));
+  burger.addEventListener("click", () => menu.hidden ? openMenu() : closeMenu());
+  addEventListener("keydown", e => { if (e.key === "Escape") closeMenu(); });
 
-  /* Destination tiles */
-  const regionsEl = $("#regions");
-  regionsEl.innerHTML = REGIONS.map(r => {
-    const n = TRIPS.filter(t => t.cats.includes(r.id)).length;
-    return `<button class="region" type="button" data-region="${r.id}"><img src="${r.img}" alt="" loading="lazy"><strong>${r.name}</strong><span>${n} ${n === 1 ? "journey" : "journeys"}</span></button>`;
-  }).join("");
-  regionsEl.addEventListener("click", e => {
-    const b = e.target.closest("[data-region]"); if (!b) return;
-    applyFilter(b.dataset.region);
-    $("#journeys").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+  function route() {
+    let h = location.hash.slice(1);
+    h = ALIAS[h] || h;
+    if (!VIEWS.includes(h)) h = "home";
+    closeMenu();
+    if (h === view) return;
+    view = h;
+    $$("[data-view]").forEach(s => { s.hidden = s.dataset.view !== h; });
+    $$("[data-nav]").forEach(a => a.dataset.nav === h ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current"));
+    document.body.dataset.view = h;
+    scrollTo(0, 0);
+    setHeader();
+  }
+  addEventListener("hashchange", route);
+  addEventListener("scroll", setHeader, { passive: true });
+  document.addEventListener("click", e => {
+    const a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    const h = a.getAttribute("href").slice(1);
+    if ((ALIAS[h] || h) === view) { e.preventDefault(); closeMenu(); scrollTo({ top: 0, behavior: smooth }); }
   });
 
-  /* Map */
-  const svg = $("#map-svg");
+  /* ---------- Journey cards ---------- */
+  const tagClass = t => t.cats.includes("winter") ? "ice" : t.cats.includes("festival") ? "red" : "";
+  const card = t => `<button class="tcard" type="button" data-trip="${t.id}" data-cats="${t.cats.join(" ")}">
+      <img src="${t.img}" alt="" loading="lazy"><span class="tag ${tagClass(t)}">${t.tag}</span>
+      <span class="tcard-body"><span class="tcard-meta">${t.days} days · ${t.season}</span><strong>${t.name}</strong>
+      <span class="tcard-foot"><span>from <b>${usd(t.price)}</b></span><span class="arrow" aria-hidden="true">→</span></span></span></button>`;
+
+  const rail = $("#rail");
+  rail.innerHTML = TRIPS.map(card).join("");
+  $("#rail-prev").addEventListener("click", () => rail.scrollBy({ left: -rail.clientWidth * .75, behavior: smooth }));
+  $("#rail-next").addEventListener("click", () => rail.scrollBy({ left: rail.clientWidth * .75, behavior: smooth }));
+
+  const grid = $("#tgrid");
+  grid.innerHTML = TRIPS.map(card).join("");
+  function applyFilter(f) {
+    $$(".chip").forEach(c => c.setAttribute("aria-pressed", c.dataset.filter === f));
+    $$(".tcard", grid).forEach(c => { c.hidden = !(f === "all" || c.dataset.cats.split(" ").includes(f)); });
+  }
+  $$(".chip").forEach(chip => chip.addEventListener("click", () => applyFilter(chip.dataset.filter)));
+
+  /* ---------- Destinations accordion ---------- */
+  const dest = $("#dest");
+  dest.innerHTML = REGIONS.map((r, i) => {
+    const n = TRIPS.filter(t => t.cats.includes(r.id)).length;
+    return `<button class="dest-tile${i === 0 ? " on" : ""}" type="button" data-region="${r.id}">
+      <img src="${r.img}" alt="" loading="lazy"><span class="dest-label" aria-hidden="true">${r.name}</span>
+      <span class="dest-body"><span class="dest-count">${n} ${n === 1 ? "journey" : "journeys"}</span><strong>${r.name}</strong><span class="dest-desc">${r.desc}</span><span class="dest-go">See journeys →</span></span></button>`;
+  }).join("");
+  const activate = tile => $$(".dest-tile", dest).forEach(x => x.classList.toggle("on", x === tile));
+  dest.addEventListener("mouseover", e => { const t = e.target.closest(".dest-tile"); if (t) activate(t); });
+  dest.addEventListener("focusin", e => { const t = e.target.closest(".dest-tile"); if (t) activate(t); });
+  dest.addEventListener("click", e => {
+    const t = e.target.closest(".dest-tile"); if (!t) return;
+    applyFilter(t.dataset.region);
+    location.hash = "journeys";
+  });
+
+  /* ---------- Map ---------- */
   const NS = "http://www.w3.org/2000/svg";
   const LON0 = 87.0, LAT0 = 52.6, K = 0.682, S = 34.5;
-  const proj = (lon, lat) => [((lon - LON0) * K * S) + 20, ((LAT0 - lat) * S) + 20];
-  // Simplified national border, lon/lat
+  const proj = (lon, lat) => [(lon - LON0) * K * S + 20, (LAT0 - lat) * S + 20];
+  // Simplified national border, [lon, lat]
   const BORDER = [[87.8,49.2],[88.9,49.5],[90.0,50.1],[91.5,50.5],[92.6,50.8],[94.3,50.5],[95.8,50.0],[97.3,49.7],[98.3,50.4],[97.8,51.0],[98.2,51.5],[99.8,51.9],[101.5,51.5],[102.3,51.0],[102.1,50.4],[103.7,50.1],[105.5,50.4],[107.0,50.0],[108.5,49.3],[110.7,49.1],[112.0,49.5],[114.5,50.2],[115.6,49.9],[116.7,49.85],[116.0,48.6],[115.5,48.1],[117.4,47.7],[118.5,47.9],[119.7,47.2],[119.9,46.7],[118.5,46.7],[117.4,46.5],[116.5,46.3],[115.3,45.4],[113.6,44.8],[111.9,45.1],[111.4,44.4],[111.8,43.7],[110.4,42.8],[108.8,42.4],[106.8,42.3],[105.0,41.6],[103.0,41.9],[101.0,42.6],[99.5,42.6],[97.2,42.8],[96.3,43.0],[95.3,44.3],[93.5,45.0],[91.0,45.2],[90.7,46.0],[91.0,46.6],[90.3,47.6],[88.8,48.1]];
-  const el = (tag, attrs, parent = svg) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); parent.appendChild(n); return n; };
+  const el = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); parent.appendChild(n); return n; };
+  const haversine = (a, b) => { const r = Math.PI / 180, dLat = (b.lat - a.lat) * r, dLon = (b.lon - a.lon) * r; const h = Math.sin(dLat / 2) ** 2 + Math.cos(a.lat * r) * Math.cos(b.lat * r) * Math.sin(dLon / 2) ** 2; return 2 * 6371 * Math.asin(Math.sqrt(h)); };
+  const key = k => k.replace("~", "");
 
-  for (const lat of [44, 46, 48, 50, 52]) { const [x1, y] = proj(87, lat), [x2] = proj(120, lat); el("line", { x1, y1: y, x2, y2: y, class: "map-grat" }); el("text", { x: 872, y: y - 4, class: "map-grat-label", "text-anchor": "end" }).textContent = lat + "°N"; }
-  for (const lon of [90, 95, 100, 105, 110, 115]) { const [x, y1] = proj(lon, 52.6), [, y2] = proj(lon, 41.2); el("line", { x1: x, y1, x2: x, y2, class: "map-grat" }); el("text", { x: x + 4, y: 436, class: "map-grat-label" }).textContent = lon + "°E"; }
-  el("path", { d: "M" + BORDER.map(p => proj(...p).map(v => v.toFixed(1)).join(",")).join("L") + "Z", class: "map-land" });
-  const routeLayer = el("g", {});
-  const dotLayer = el("g", {});
-  const dots = {};
-  for (const [k, p] of Object.entries(PLACES)) {
-    const [x, y] = proj(p.lon, p.lat);
-    const c = el("circle", { cx: x, cy: y, r: p.cap ? 6 : 4.5, class: p.cap ? "map-dot cap" : "map-dot" }, dotLayer);
-    const t = el("text", { x: x + p.dx, y: y + p.dy, class: "map-label", "text-anchor": p.anchor || "start" }, dotLayer);
-    t.textContent = p.name;
-    t.dataset.k = k;
-    dots[k] = { c, t, cap: p.cap };
-  }
-
-  const haversine = (a, b) => { const R = 6371, r = Math.PI / 180, dLat = (b.lat - a.lat) * r, dLon = (b.lon - a.lon) * r; const h = Math.sin(dLat / 2) ** 2 + Math.cos(a.lat * r) * Math.cos(b.lat * r) * Math.sin(dLon / 2) ** 2; return 2 * R * Math.asin(Math.sqrt(h)); };
-
-  function showRoute(id) {
-    const t = byId[id];
-    routeLayer.replaceChildren();
-    Object.values(dots).forEach(d => { d.c.classList.toggle("on", false); d.t.classList.remove("on"); });
-    let overland = 0;
+  function drawMap(svg, t) {
+    svg.replaceChildren();
+    for (const lat of [44, 46, 48, 50, 52]) { const [x1, y] = proj(87, lat), [x2] = proj(120, lat); el("line", { x1, y1: y, x2, y2: y, class: "map-grat" }, svg); }
+    for (const lon of [90, 95, 100, 105, 110, 115]) { const [x, y1] = proj(lon, 52.6), [, y2] = proj(lon, 41.2); el("line", { x1: x, y1, x2: x, y2, class: "map-grat" }, svg); }
+    el("path", { d: "M" + BORDER.map(p => proj(...p).map(v => v.toFixed(1)).join(",")).join("L") + "Z", class: "map-land" }, svg);
+    let km = 0;
     for (let i = 1; i < t.route.length; i++) {
-      const flight = t.route[i].startsWith("~");
-      const a = PLACES[t.route[i - 1].replace("~", "")], b = PLACES[t.route[i].replace("~", "")];
+      const a = PLACES[key(t.route[i - 1])], b = PLACES[key(t.route[i])];
       const [x1, y1] = proj(a.lon, a.lat), [x2, y2] = proj(b.lon, b.lat);
-      if (flight) {
-        const mx = (x1 + x2) / 2, my = Math.min(y1, y2) - Math.abs(x2 - x1) * 0.15;
-        el("path", { d: `M${x1},${y1} Q${mx},${my} ${x2},${y2}`, class: "map-route flight" }, routeLayer);
+      if (t.route[i].startsWith("~")) {
+        const mx = (x1 + x2) / 2, my = Math.min(y1, y2) - Math.abs(x2 - x1) * .18 - 20;
+        el("path", { d: `M${x1},${y1} Q${mx},${my} ${x2},${y2}`, class: "map-route flight" }, svg);
       } else {
-        overland += haversine(a, b) * 1.3; // roads wind; straight line × 1.3
-        el("path", { d: `M${x1},${y1} L${x2},${y2}`, class: "map-route", style: `animation-delay:${(i - 1) * .18}s` }, routeLayer);
+        km += haversine(a, b) * 1.3; // roads wind: straight line × 1.3
+        el("path", { d: `M${x1},${y1} L${x2},${y2}`, class: "map-route", style: `animation-delay:${(i - 1) * .15}s` }, svg);
       }
     }
-    t.route.forEach(k => { const d = dots[k.replace("~", "")]; if (!d.cap) d.c.classList.add("on"); d.t.classList.add("on"); });
-    $("#map-km").textContent = overland > 0 ? `≈ ${Math.round(overland / 10) * 10} km overland · ${t.days} days` : `Flight + local transfers · ${t.days} days`;
-    document.querySelectorAll("#route-list button").forEach(b => b.setAttribute("aria-pressed", b.dataset.id === id));
+    const stops = [...new Set(t.route.map(key))];
+    const boxes = [];
+    stops.forEach(k => {
+      const p = PLACES[k], [x, y] = proj(p.lon, p.lat);
+      el("circle", { cx: x, cy: y, r: p.cap ? 8 : 6.5, class: p.cap ? "map-dot cap" : "map-dot on" }, svg);
+      boxes.push({ x0: x - 8, y0: y - 8, x1: x + 8, y1: y + 8 });
+    });
+    // Greedy label placement: the first candidate position that collides with nothing already placed.
+    const FS = 20, hit = (a, b) => a.x0 < b.x1 + 4 && a.x1 + 4 > b.x0 && a.y0 < b.y1 + 2 && a.y1 + 2 > b.y0;
+    stops.forEach(k => {
+      const p = PLACES[k], [x, y] = proj(p.lon, p.lat), w = p.name.length * FS * .56;
+      const cands = [[x + 13, y + 7, "start"], [x - 13, y + 7, "end"], [x, y - 15, "middle"], [x, y + 30, "middle"], [x + 12, y - 12, "start"], [x - 12, y - 12, "end"], [x + 12, y + 26, "start"], [x - 12, y + 26, "end"]];
+      const boxOf = ([tx, ty, an]) => { const x0 = an === "start" ? tx : an === "end" ? tx - w : tx - w / 2; return { x0, y0: ty - FS * .8, x1: x0 + w, y1: ty + FS * .25 }; };
+      const pick = cands.find(c => { const b = boxOf(c); return b.x0 > 0 && b.x1 < 900 && b.y0 > 0 && b.y1 < 450 && !boxes.some(o => hit(o, b)); }) || cands[0];
+      boxes.push(boxOf(pick));
+      el("text", { x: pick[0], y: pick[1], "text-anchor": pick[2], class: "map-label" }, svg).textContent = p.name;
+    });
+    return km;
   }
 
-  $("#route-list").innerHTML = TRIPS.map(t => `<li><button type="button" data-id="${t.id}" aria-pressed="false"><span class="r-name">${t.name}</span><span class="r-days">${t.days} days</span><span class="r-stops">${stops(t)}</span></button></li>`).join("");
-  $("#route-list").addEventListener("click", e => { const b = e.target.closest("button"); if (b) showRoute(b.dataset.id); });
-  list.addEventListener("click", e => { const b = e.target.closest("[data-route]"); if (!b) return; showRoute(b.dataset.route); $("#map").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" }); });
-  showRoute("gobi");
+  /* ---------- Trip dialog ---------- */
+  const dlg = $("#trip-modal");
+  let current = null;
+  function openTrip(id) {
+    const t = byId[id]; if (!t) return;
+    current = id;
+    $("#m-img").src = t.img;
+    $("#m-img").alt = t.name;
+    const flights = t.route.some(r => r.startsWith("~"));
+    const incl = ["Mongolian guide", "Driver & 4×4", "All nights' stays", "Meals outside the city", "Airport transfers", ...(flights ? ["Domestic flights"] : [])];
+    $("#m-body").innerHTML = `
+      <span class="tag ${tagClass(t) || "plain"}">${t.tag}</span>
+      <h2 id="m-title">${t.name}</h2>
+      <p class="lede" style="font-size:1.05rem">${t.text}</p>
+      <div class="m-facts">
+        <div><small>Length</small><b>${t.days} days</b></div><div><small>When</small><b>${t.season}</b></div>
+        <div><small>Level</small><b>${t.level}</b></div><div><small>From</small><b>${usd(t.price)}</b></div>
+      </div>
+      <p class="m-label">Day by day</p>
+      <ol class="plan">${t.plan.map(([d, txt]) => `<li><span class="d">D${d}</span><p>${txt}</p></li>`).join("")}</ol>
+      <p class="m-label">Included</p>
+      <ul class="incl">${incl.map(i => `<li>${i}</li>`).join("")}</ul>
+      <div class="m-actions"><button class="btn btn-blue" type="button" id="m-request">Request this journey <span class="arr">→</span></button><span class="mono">per person, twin share</span></div>`;
+    const km = drawMap($("#m-map"), t);
+    $("#m-km").textContent = km > 0 ? `≈ ${Math.round(km / 10) * 10} km overland` : "Flight + local transfers";
+    $("#m-request").addEventListener("click", () => { $("#f-trip").value = current; dlg.close(); location.hash = "plan"; });
+    if (!dlg.open) dlg.showModal();
+    dlg.scrollTop = 0;
+    document.body.classList.add("lock");
+  }
+  dlg.addEventListener("close", () => document.body.classList.remove("lock"));
+  dlg.addEventListener("click", e => { if (e.target === dlg) dlg.close(); });
+  $("#m-close").addEventListener("click", () => dlg.close());
+  document.addEventListener("click", e => { const b = e.target.closest("[data-trip]"); if (b) openTrip(b.dataset.trip); });
 
-  /* Seasons chart */
+  /* ---------- When to go ---------- */
   const chart = $("#temp-chart");
-  const W = 640, H = 340, L = 40, R = 10, T = 14, B = 34, TMIN = -30, TMAX = 30;
-  const y = v => T + (TMAX - v) / (TMAX - TMIN) * (H - T - B);
+  const W = 640, H = 340, L = 40, R = 10, T = 22, B = 34, TMIN = -30, TMAX = 30;
+  const yv = v => T + (TMAX - v) / (TMAX - TMIN) * (H - T - B);
   const cw = (W - L - R) / 12;
-  const cel = (tag, attrs, parent = chart) => el(tag, attrs, parent);
   for (let v = TMIN; v <= TMAX; v += 10) {
-    cel("line", { x1: L, x2: W - R, y1: y(v), y2: y(v), class: v === 0 ? "zero" : "grid" });
-    cel("text", { x: L - 8, y: y(v) + 4, "text-anchor": "end", class: "axis" }).textContent = (v > 0 ? "+" : "") + v + "°";
+    el("line", { x1: L, x2: W - R, y1: yv(v), y2: yv(v), class: v === 0 ? "zero" : "grid" }, chart);
+    el("text", { x: L - 8, y: yv(v) + 4, "text-anchor": "end", class: "axis" }, chart).textContent = (v > 0 ? "+" : "") + v + "°";
   }
+  const fmt = v => (v > 0 ? "+" : v < 0 ? "−" : "") + Math.abs(v) + "°";
   const cols = MONTHS.map((mo, i) => {
-    const g = cel("g", { class: "col", tabindex: "0", role: "button", "aria-label": `${mo.full}: ${mo.lo} to ${mo.hi} °C` });
+    const g = el("g", { class: "col", tabindex: "0", role: "button", "aria-label": `${mo.full}: ${mo.lo} to ${mo.hi} °C` }, chart);
     const x = L + i * cw;
-    cel("rect", { x: x + 2, y: T, width: cw - 4, height: H - T - B + 26, class: "hit", rx: 6 }, g);
-    cel("rect", { x: x + cw * .22, y: y(mo.hi), width: cw * .56, height: y(mo.lo) - y(mo.hi), rx: Math.min(8, cw * .28), class: "bar" }, g);
-    cel("text", { x: x + cw / 2, y: H - 10, "text-anchor": "middle", class: "m" }, g).textContent = mo.m;
-    g.addEventListener("click", () => pick(i));
+    el("rect", { x: x + 2, y: 4, width: cw - 4, height: H - 4, class: "hit", rx: 8 }, g);
+    el("rect", { x: x + cw * .2, y: yv(mo.hi), width: cw * .6, height: yv(mo.lo) - yv(mo.hi), rx: Math.min(9, cw * .3), class: "bar" }, g);
+    el("text", { x: x + cw / 2, y: yv(mo.hi) - 6, "text-anchor": "middle", class: "val" }, g).textContent = fmt(mo.hi);
+    el("text", { x: x + cw / 2, y: H - 10, "text-anchor": "middle", class: "m" }, g).textContent = mo.m;
+    g.addEventListener("click", () => pickMonth(i));
     g.addEventListener("keydown", e => {
-      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pick(i); }
-      if (e.key === "ArrowRight") { e.preventDefault(); pick((i + 1) % 12, true); }
-      if (e.key === "ArrowLeft") { e.preventDefault(); pick((i + 11) % 12, true); }
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pickMonth(i); }
+      if (e.key === "ArrowRight") { e.preventDefault(); pickMonth((i + 1) % 12, true); }
+      if (e.key === "ArrowLeft") { e.preventDefault(); pickMonth((i + 11) % 12, true); }
     });
     return g;
   });
-  const fmt = v => (v > 0 ? "+" : v < 0 ? "−" : "") + Math.abs(v) + "°";
-  function pick(i, focus) {
+  function pickMonth(i, focus) {
     const mo = MONTHS[i];
     cols.forEach((c, j) => c.classList.toggle("on", j === i));
     if (focus) cols[i].focus();
     $("#month-card").innerHTML = `
-      <span class="coord">Month ${String(i + 1).padStart(2, "0")} of 12</span>
+      <div class="khee gold" aria-hidden="true"></div>
+      <span class="mono">Month ${String(i + 1).padStart(2, "0")} of 12</span>
       <h3>${mo.full}</h3>
       <div class="temps"><div><strong>${fmt(mo.hi)}</strong><span>Avg high</span></div><div><strong>${fmt(mo.lo)}</strong><span>Avg low</span></div></div>
       <p>${mo.note}</p>
       ${mo.event ? `<div class="event"><b>On the calendar:</b> ${mo.event}</div>` : ""}
-      <div><span class="coord">Good journeys this month</span><div class="pill-row" style="margin-top:8px">${mo.trips.map(id => `<span class="pill">${byId[id].name}</span>`).join("")}</div></div>`;
+      <div style="display:grid;gap:8px"><span class="mono">Good journeys this month</span><div class="pill-row">${mo.trips.map(id => `<button class="pill" type="button" data-trip="${id}">${byId[id].name}</button>`).join("")}</div></div>`;
   }
-  pick(6);
+  pickMonth(6);
 
-  /* Reels: play only while visible; respect reduced motion and manual pause */
+  /* ---------- Videos: play only while visible; respect reduced motion and manual pause ---------- */
   const PLAY = '<svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 2.5v11l9-5.5z"/></svg>';
   const PAUSE = '<svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M3.5 2.5h3v11h-3zM9.5 2.5h3v11h-3z"/></svg>';
-  const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const reels = [...document.querySelectorAll(".reel-frame")].map(frame => {
-    const v = frame.querySelector("video"), btn = frame.querySelector(".reel-toggle");
-    const r = { v, btn, user: calm ? "paused" : "auto", visible: false };
-    const sync = () => {
-      const play = r.user !== "paused" && r.visible;
-      if (play) v.play().catch(() => {}); else v.pause();
-      btn.innerHTML = r.user === "paused" ? PLAY : PAUSE;
-      btn.setAttribute("aria-label", r.user === "paused" ? "Play video" : "Pause video");
+  const reels = $$(".reel-frame").map(frame => {
+    const v = frame.querySelector("video"), btn = frame.querySelector(".vt");
+    const r = { frame, v, btn, paused: calm, visible: false };
+    r.sync = () => {
+      if (!r.paused && r.visible) v.play().catch(() => {}); else v.pause();
+      btn.innerHTML = r.paused ? PLAY : PAUSE;
+      btn.setAttribute("aria-label", r.paused ? "Play video" : "Pause video");
     };
-    r.sync = sync;
-    btn.addEventListener("click", () => { r.user = r.user === "paused" ? "auto" : "paused"; sync(); });
-    sync();
+    btn.addEventListener("click", e => { e.stopPropagation(); r.paused = !r.paused; r.sync(); });
+    r.sync();
     return r;
   });
   if ("IntersectionObserver" in window) {
     const io = new IntersectionObserver(entries => entries.forEach(e => {
-      const r = reels.find(x => x.v === e.target.querySelector("video"));
+      const r = reels.find(x => x.frame === e.target);
       r.visible = e.isIntersecting; r.sync();
-    }), { threshold: 0.35 });
-    document.querySelectorAll(".reel-frame").forEach(f => io.observe(f));
+    }), { threshold: .3 });
+    reels.forEach(r => io.observe(r.frame));
   } else reels.forEach(r => { r.visible = true; r.sync(); });
 
-  /* Help centre */
-  const esc = t => t.replace(/[&<>"]/g, ch => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[ch]));
+  /* ---------- Help centre ---------- */
   const catName = Object.fromEntries(FAQ_CATS.map(c => [c.id, c.name]));
   let faqCat = "all";
-  $("#faq-count").textContent = `${FAQ.length} answers · ${FAQ_CATS.length} topics`;
+  $("#faq-count").textContent = `${FAQ.length} answers across ${FAQ_CATS.length} topics. If your question isn't here, a planner will answer it personally.`;
   $("#faq-cats").innerHTML = [{ id: "all", name: "All questions" }, ...FAQ_CATS].map(c =>
     `<li><button type="button" data-cat="${c.id}" aria-pressed="${c.id === "all"}">${c.name}<span class="n">${c.id === "all" ? FAQ.length : FAQ.filter(f => f.c === c.id).length}</span></button></li>`).join("");
   function renderFaq() {
-    const q = $("#faq-q").value.trim().toLowerCase();
+    const raw = $("#faq-q").value.trim(), q = raw.toLowerCase();
     const items = FAQ.filter(f => (faqCat === "all" || f.c === faqCat) && (!q || (f.q + " " + f.a).toLowerCase().includes(q)));
     $("#faq-list").innerHTML = items.length
-      ? items.map((f, i) => `<details${i === 0 && !q ? " open" : ""}><summary>${faqCat === "all" ? `<span class="faq-cat-label">${catName[f.c]}</span>` : ""}${f.q}</summary><p>${f.a}</p></details>`).join("")
-      : `<p class="faq-empty">No questions match “${esc($("#faq-q").value.trim())}”. <a href="#plan">Ask a planner directly</a> and we'll answer within one working day.</p>`;
+      ? items.map((f, i) => `<details class="qa"${i === 0 && !q ? " open" : ""}><summary>${faqCat === "all" ? `<span class="qa-cat">${catName[f.c]}</span>` : ""}${f.q}</summary><p>${f.a}</p></details>`).join("")
+      : `<p class="faq-empty">No questions match “${esc(raw)}”. <a href="#plan">Ask a planner directly</a> and we'll answer within one working day.</p>`;
   }
   $("#faq-cats").addEventListener("click", e => {
     const b = e.target.closest("[data-cat]"); if (!b) return;
     faqCat = b.dataset.cat;
-    document.querySelectorAll("#faq-cats button").forEach(x => x.setAttribute("aria-pressed", x === b));
+    $$("#faq-cats button").forEach(x => x.setAttribute("aria-pressed", x === b));
     renderFaq();
   });
   $("#faq-q").addEventListener("input", renderFaq);
   renderFaq();
 
-  /* Inquiry form */
+  /* ---------- Inquiry form ---------- */
   $("#f-trip").insertAdjacentHTML("beforeend", TRIPS.map(t => `<option value="${t.id}">${t.name}</option>`).join(""));
   $("#f-month").innerHTML = `<option value="">Flexible</option>` + MONTHS.map(mo => `<option>${mo.full}</option>`).join("");
-  $("#foot-trips").innerHTML = TRIPS.slice(0, 5).map(t => `<li><a href="#journeys">${t.name}</a></li>`).join("");
-
   const form = $("#inq-form");
+  const okEmail = s => /^\S+@\S+\.\S+$/.test(s);
   form.addEventListener("submit", e => {
     e.preventDefault();
     const name = $("#f-name").value.trim(), email = $("#f-email").value.trim();
     $("#e-name").textContent = name ? "" : "Please enter your name.";
-    $("#e-email").textContent = /^\S+@\S+\.\S+$/.test(email) ? "" : "Please enter an email address like name@example.com.";
-    if (!name || !/^\S+@\S+\.\S+$/.test(email)) return;
+    $("#e-email").textContent = okEmail(email) ? "" : "Please enter an email address like name@example.com.";
+    if (!name || !okEmail(email)) return;
     const trip = byId[$("#f-trip").value];
-    form.innerHTML = `<div class="done"><h3>Thank you, ${name.split(" ")[0].replace(/[<>&"]/g, "")}.</h3><p>This is a preview of the site, so your inquiry was not sent. Once the site is live, a planner will reply to ${email.replace(/[<>&"]/g, "")} within one working day${trip ? ` about the ${trip.name}` : ""}.</p></div>`;
+    form.innerHTML = `<div class="done"><h3>Thank you, ${esc(name.split(" ")[0])}.</h3><p>This is a preview of the site, so your inquiry was not sent. Once the site is live, a planner will reply to ${esc(email)} within one working day${trip ? ` about the ${trip.name}` : ""}.</p></div>`;
+  });
+  $("#copy-email").addEventListener("click", async ev => {
+    const btn = ev.currentTarget, span = $("#email-text");
+    try { await navigator.clipboard.writeText(span.textContent); btn.textContent = "Copied"; }
+    catch { const r = document.createRange(); r.selectNodeContents(span); const s = getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = "Selected"; }
+    setTimeout(() => { btn.textContent = "Copy"; }, 1800);
   });
 
-  $("#copy-email").addEventListener("click", async ev => {
-    const btn = ev.currentTarget, text = $("#email-text").textContent;
-    try { await navigator.clipboard.writeText(text); btn.textContent = "Copied"; }
-    catch { const r = document.createRange(); r.selectNodeContents($("#email-text")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = "Selected"; }
-    setTimeout(() => btn.textContent = "Copy", 1800);
-  });
+  route();
 })();
 </script>
 </body>
