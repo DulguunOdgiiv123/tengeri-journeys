@@ -1,0 +1,758 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Tengeri Journeys</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Small-group and private journeys across Mongolia: the Gobi, Khövsgöl, Naadam, the Golden Eagle Festival and the Altai.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;700&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+Mongolian&display=swap">
+<style>
+/* Layout: "horizon line" — full-bleed photo bands alternate with calm text bands; every section is anchored by its real coordinates, like a waypoint on a route. */
+:root {
+  --bg: #f3f5f6;          /* felt white, cool */
+  --surface: #ffffff;
+  --ink: #101b29;         /* night steppe */
+  --muted: #566476;
+  --line: #d6dee6;
+  --sky: #1c56a3;         /* khadag blue */
+  --sky-soft: #e3ecf8;
+  --sand: #b9803a;        /* Gobi sand */
+  --sand-soft: #f3e8d8;
+  --on-photo: #ffffff;
+  --shade: rgba(8, 15, 26, .62);
+
+  --f-display: "Unbounded", "Arial Black", system-ui, sans-serif;
+  --f-body: "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --f-script: "Noto Sans Mongolian", serif;
+
+  --step--1: .8125rem;
+  --step-0: 1.0625rem;
+  --step-1: 1.25rem;
+  --step-2: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
+  --step-3: clamp(2rem, 1.4rem + 2.6vw, 3.25rem);
+  --step-4: clamp(2.4rem, 1.4rem + 4.6vw, 5.2rem);
+
+  --wrap: 1200px;
+  --radius: 14px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0b131e; --surface: #121d2b; --ink: #e8edf3; --muted: #9aa8b9; --line: #23324a;
+    --sky: #79a9f0; --sky-soft: #172a45; --sand: #e2b06e; --sand-soft: #2a2218;
+    --on-photo: #ffffff; --shade: rgba(4, 8, 14, .7);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0b131e; --surface: #121d2b; --ink: #e8edf3; --muted: #9aa8b9; --line: #23324a;
+  --sky: #79a9f0; --sky-soft: #172a45; --sand: #e2b06e; --sand-soft: #2a2218;
+  --on-photo: #ffffff; --shade: rgba(4, 8, 14, .7);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--f-body); font-size: var(--step-0); line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 60; background: var(--bg); }
+h1, h2, h3 { font-family: var(--f-display); font-weight: 500; line-height: 1.08; letter-spacing: -.02em; margin: 0; text-wrap: balance; }
+p { margin: 0; }
+a { color: inherit; }
+img { max-width: 100%; display: block; }
+:focus-visible { outline: 3px solid var(--sky); outline-offset: 3px; border-radius: 4px; }
+
+.wrap {
+  width: 100%; max-width: calc(var(--wrap) + 64px); margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+@media (min-width: 720px) { .wrap { padding-left: max(32px, env(safe-area-inset-left, 0px)); padding-right: max(32px, env(safe-area-inset-right, 0px)); } }
+
+.coord { font-family: var(--f-mono); font-size: var(--step--1); letter-spacing: .04em; color: var(--muted); font-variant-numeric: tabular-nums; }
+.eyebrow { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.eyebrow b { font-family: var(--f-body); font-weight: 600; text-transform: uppercase; letter-spacing: .14em; font-size: var(--step--1); color: var(--sand); }
+.eyebrow::after { content: ""; flex: 1 1 60px; height: 1px; background: var(--line); }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 10px; justify-content: center;
+  font: 600 1rem/1 var(--f-body); padding: 15px 22px; border-radius: 999px;
+  text-decoration: none; border: 1.5px solid transparent; cursor: pointer;
+  transition: transform .2s ease, background-color .2s ease, color .2s ease;
+}
+.btn:hover { transform: translateY(-1px); }
+.btn-primary { background: var(--sky); color: var(--bg); }
+.btn-ghost { border-color: currentColor; color: inherit; background: transparent; }
+.btn-photo { background: var(--on-photo); color: #101b29; }
+.btn-photo-ghost { border-color: rgba(255,255,255,.7); color: var(--on-photo); background: rgba(255,255,255,.06); backdrop-filter: blur(6px); }
+
+/* Header */
+.site-header {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: saturate(1.4) blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+.nav { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-block: 14px; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-family: var(--f-display); font-weight: 500; font-size: 1.05rem; letter-spacing: -.01em; }
+.brand svg { width: 30px; height: 30px; flex: none; }
+.nav-links { display: flex; gap: 28px; list-style: none; margin: 0; padding: 0; font-weight: 500; font-size: .97rem; }
+.nav-links a { text-decoration: none; color: var(--muted); transition: color .2s; }
+.nav-links a:hover { color: var(--ink); }
+.nav .btn { padding: 11px 18px; font-size: .95rem; }
+@media (max-width: 880px) { .nav-links { display: none; } }
+
+/* Hero */
+.hero { position: relative; color: var(--on-photo); isolation: isolate; overflow: hidden; }
+.hero-img { position: absolute; inset: 0; z-index: -2; }
+.hero-img img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 62%; transform: scale(1.06); animation: drift 22s ease-out forwards; }
+@keyframes drift { to { transform: scale(1); } }
+.hero::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(8,15,26,.15) 0%, rgba(8,15,26,.05) 35%, rgba(8,15,26,.72) 100%); }
+.hero-inner { position: relative; display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: end; padding-block: clamp(140px, 22vw, 260px) 40px; }
+.hero h1 { font-size: var(--step-4); font-weight: 500; max-width: 13ch; text-shadow: 0 2px 30px rgba(0,0,0,.25); }
+.hero h1 em { font-style: normal; color: #bcd5ff; }
+.hero-lede { margin-top: 22px; max-width: 46ch; font-size: var(--step-1); line-height: 1.5; color: rgba(255,255,255,.92); }
+.hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+.script { font-family: var(--f-script); writing-mode: vertical-lr; font-size: clamp(2rem, 3vw, 2.8rem); line-height: 1; color: rgba(255,255,255,.85); user-select: none; }
+.script-cap { writing-mode: vertical-rl; font-family: var(--f-mono); font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.7); }
+.hero-script { display: flex; gap: 12px; align-items: flex-end; }
+@media (max-width: 640px) { .hero-script { display: none; } .hero-inner { grid-template-columns: 1fr; } }
+.facts { position: relative; border-top: 1px solid rgba(255,255,255,.25); background: rgba(8,15,26,.35); backdrop-filter: blur(8px); }
+.facts ul { list-style: none; margin: 0; display: grid; grid-template-columns: repeat(4, 1fr); padding-block: 18px; gap: 16px; }
+.facts li { display: grid; gap: 2px; min-width: 0; }
+.facts strong { font-family: var(--f-display); font-weight: 500; font-size: clamp(1.1rem, 2vw, 1.5rem); font-variant-numeric: tabular-nums; }
+.facts span { font-size: .85rem; color: rgba(255,255,255,.78); }
+@media (max-width: 720px) { .facts ul { grid-template-columns: repeat(2, 1fr); } }
+
+/* Sections */
+section { scroll-margin-top: 72px; }
+.band { padding-block: clamp(72px, 9vw, 128px); }
+.section-head { display: grid; gap: 18px; margin-bottom: clamp(32px, 4vw, 56px); }
+.section-head h2 { font-size: var(--step-3); max-width: 20ch; }
+.section-head p { color: var(--muted); max-width: 60ch; font-size: var(--step-1); line-height: 1.5; }
+
+/* Journeys */
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+.chip {
+  font: 500 .95rem/1 var(--f-body); padding: 10px 16px; border-radius: 999px; cursor: pointer;
+  background: transparent; color: var(--ink); border: 1px solid var(--line); transition: all .2s;
+}
+.chip:hover { border-color: var(--sky); }
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.journeys { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 28px; }
+@media (min-width: 1100px) {
+  .journeys.all { grid-template-columns: repeat(3, 1fr); }
+  .journeys.all .trip:first-child, .journeys.all .trip:last-child { grid-column: span 2; }
+  .journeys.all .trip:first-child .trip-media, .journeys.all .trip:last-child .trip-media { aspect-ratio: 16 / 7; }
+}
+.trip { display: flex; flex-direction: column; background: var(--surface); border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); transition: transform .3s ease, box-shadow .3s ease; }
+.trip:hover { transform: translateY(-4px); box-shadow: 0 24px 50px -28px rgba(16,27,41,.45); }
+.trip-media { position: relative; aspect-ratio: 4 / 3; max-width: 100%; overflow: hidden; }
+.trip-media img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s ease; }
+.trip:hover .trip-media img { transform: scale(1.05); }
+.trip-tag { position: absolute; left: 14px; top: 14px; background: rgba(8,15,26,.6); color: #fff; backdrop-filter: blur(6px); font: 500 .75rem/1 var(--f-mono); letter-spacing: .06em; padding: 7px 10px; border-radius: 999px; text-transform: uppercase; }
+.trip-body { display: flex; flex-direction: column; gap: 12px; padding: 22px 22px 24px; flex: 1; }
+.trip h3 { font-size: 1.3rem; font-weight: 500; }
+.trip p { color: var(--muted); font-size: .98rem; }
+.trip-meta { display: grid; grid-template-columns: repeat(3, auto); justify-content: start; gap: 6px 20px; font-size: .88rem; margin-top: auto; padding-top: 14px; border-top: 1px dashed var(--line); }
+.trip-meta dt { font-family: var(--f-mono); font-size: .7rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+.trip-meta dd { margin: 0; font-weight: 600; font-variant-numeric: tabular-nums; }
+.trip-meta div { display: grid; gap: 2px; }
+.trip-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.price { font-family: var(--f-display); font-size: 1.15rem; font-weight: 500; }
+.price small { font-family: var(--f-body); font-size: .8rem; color: var(--muted); font-weight: 400; }
+.link-btn { background: none; border: 0; padding: 6px 0; font: 600 .95rem var(--f-body); color: var(--sky); cursor: pointer; text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+.note { margin-top: 22px; font-size: .88rem; color: var(--muted); }
+
+/* Map */
+.map-band { background: var(--surface); border-block: 1px solid var(--line); }
+.map-grid { display: grid; grid-template-columns: 300px 1fr; gap: clamp(24px, 4vw, 56px); align-items: start; }
+@media (max-width: 900px) { .map-grid { grid-template-columns: 1fr; } }
+.route-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.route-list button {
+  width: 100%; text-align: left; display: grid; grid-template-columns: 1fr auto; gap: 2px 12px; align-items: baseline;
+  background: transparent; border: 1px solid transparent; color: var(--ink); padding: 12px 14px; border-radius: 10px; cursor: pointer; font: inherit; transition: background .2s, border-color .2s;
+}
+.route-list button:hover { background: var(--sky-soft); }
+.route-list button[aria-pressed="true"] { background: var(--sky-soft); border-color: var(--sky); }
+.route-list .r-name { font-weight: 600; }
+.route-list .r-days { font-family: var(--f-mono); font-size: .78rem; color: var(--muted); }
+.route-list .r-stops { grid-column: 1 / -1; font-size: .85rem; color: var(--muted); }
+.map-wrap { min-width: 0; }
+.map-svg { width: 100%; height: auto; display: block; overflow: visible; }
+.map-land { fill: var(--sky-soft); stroke: var(--sky); stroke-width: 1.5; stroke-linejoin: round; }
+.map-grat { stroke: var(--line); stroke-width: 1; stroke-dasharray: 2 6; fill: none; }
+.map-grat-label { fill: var(--muted); font: 11px var(--f-mono); }
+.map-route { fill: none; stroke: var(--sand); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1000; stroke-dashoffset: 1000; animation: draw 1.6s ease forwards; }
+.map-route.flight { stroke-dasharray: 6 8; stroke-dashoffset: 0; animation: none; stroke-width: 2.2; }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+.map-dot { fill: var(--surface); stroke: var(--muted); stroke-width: 1.5; }
+.map-dot.on { fill: var(--sand); stroke: var(--surface); stroke-width: 2.5; }
+.map-dot.cap { fill: var(--ink); stroke: var(--surface); stroke-width: 2; }
+.map-label { fill: var(--muted); font: 500 12.5px var(--f-body); paint-order: stroke; stroke: var(--surface); stroke-width: 4px; stroke-linejoin: round; }
+.map-label.on { fill: var(--ink); font-weight: 600; }
+.map-caption { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-top: 14px; }
+.legend { display: flex; gap: 18px; flex-wrap: wrap; font-size: .85rem; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 8px; }
+.legend i { display: inline-block; width: 24px; height: 0; border-top: 3px solid var(--sand); }
+.legend i.f { border-top: 2px dashed var(--sand); }
+
+/* Seasons */
+.season-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: clamp(28px, 4vw, 64px); align-items: start; }
+@media (max-width: 900px) { .season-grid { grid-template-columns: 1fr; } }
+.chart-box { min-width: 0; }
+.temp-chart { width: 100%; height: auto; display: block; }
+.temp-chart .grid { stroke: var(--line); stroke-width: 1; }
+.temp-chart .zero { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 4; }
+.temp-chart .axis { fill: var(--muted); font: 11px var(--f-mono); }
+.temp-chart .bar { fill: var(--sky); opacity: .28; transition: opacity .2s; }
+.temp-chart .col { cursor: pointer; }
+.temp-chart .col:hover .bar { opacity: .5; }
+.temp-chart .col.on .bar { opacity: 1; fill: var(--sand); }
+.temp-chart .m { fill: var(--muted); font: 600 12px var(--f-body); }
+.temp-chart .col.on .m { fill: var(--ink); }
+.temp-chart .hit { fill: transparent; }
+.temp-chart .col:focus-visible { outline: none; }
+.temp-chart .col:focus-visible .hit { stroke: var(--sky); stroke-width: 2; }
+.month-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(22px, 3vw, 32px); display: grid; gap: 16px; }
+.month-card h3 { font-size: var(--step-2); }
+.temps { display: flex; gap: 28px; font-variant-numeric: tabular-nums; }
+.temps div { display: grid; }
+.temps strong { font-family: var(--f-display); font-weight: 500; font-size: 2rem; line-height: 1.1; }
+.temps span { font-family: var(--f-mono); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.event { background: var(--sand-soft); border-radius: 10px; padding: 12px 14px; font-size: .95rem; }
+.event b { color: var(--sand); }
+.pill-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.pill { font-size: .85rem; font-weight: 500; padding: 6px 12px; border-radius: 999px; background: var(--sky-soft); color: var(--ink); }
+.chart-note { margin-top: 10px; font-size: .82rem; color: var(--muted); }
+
+/* Ger band */
+.ger { position: relative; color: var(--on-photo); isolation: isolate; overflow: hidden; }
+.ger > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
+.ger::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(8,15,26,.82) 0%, rgba(8,15,26,.55) 50%, rgba(8,15,26,.1) 100%); }
+.ger-inner { padding-block: clamp(90px, 12vw, 170px); display: grid; gap: 22px; max-width: 640px; }
+.ger h2 { font-size: var(--step-3); }
+.ger p { font-size: var(--step-1); line-height: 1.55; color: rgba(255,255,255,.9); }
+.ger .eyebrow b { color: #f0c68a; }
+.ger .eyebrow::after { background: rgba(255,255,255,.3); }
+.ger .coord { color: rgba(255,255,255,.75); }
+
+/* Promise */
+.promise { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-top: 1px solid var(--line); }
+.promise > div { padding: 28px 24px 8px 0; display: grid; gap: 10px; align-content: start; }
+.promise > div + div { padding-left: 24px; border-left: 1px solid var(--line); }
+.promise strong { font-family: var(--f-display); font-weight: 500; font-size: 2.4rem; color: var(--sky); line-height: 1; font-variant-numeric: tabular-nums; }
+.promise h3 { font-family: var(--f-body); font-weight: 600; font-size: 1.1rem; letter-spacing: 0; }
+.promise p { color: var(--muted); font-size: .97rem; }
+@media (max-width: 900px) { .promise { grid-template-columns: 1fr 1fr; } .promise > div:nth-child(3) { padding-left: 0; border-left: 0; } .promise > div:nth-child(n+3) { border-top: 1px solid var(--line); } }
+@media (max-width: 520px) { .promise { grid-template-columns: 1fr; } .promise > div + div { padding-left: 0; border-left: 0; border-top: 1px solid var(--line); } }
+
+/* Steps */
+.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; counter-reset: s; }
+.steps li { counter-increment: s; display: grid; gap: 10px; align-content: start; position: relative; padding-top: 52px; }
+.steps li::before { content: counter(s); position: absolute; top: 0; left: 0; width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; font: 500 .95rem var(--f-display); background: var(--ink); color: var(--bg); }
+.steps li:not(:last-child)::after { content: ""; position: absolute; top: 19px; left: 50px; right: -16px; border-top: 1.5px dashed var(--line); }
+.steps h3 { font-family: var(--f-body); font-weight: 600; font-size: 1.15rem; letter-spacing: 0; }
+.steps p { color: var(--muted); font-size: .98rem; }
+@media (max-width: 900px) { .steps { grid-template-columns: 1fr 1fr; } .steps li::after { display: none; } }
+@media (max-width: 520px) { .steps { grid-template-columns: 1fr; } }
+
+/* Gallery strip */
+.strip { display: grid; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: 240px 240px; gap: 12px; }
+.strip figure { margin: 0; position: relative; overflow: hidden; border-radius: 10px; min-width: 0; }
+.strip figure:first-child { grid-row: span 2; }
+.strip img { width: 100%; height: 100%; object-fit: cover; }
+.strip figcaption { position: absolute; left: 12px; bottom: 12px; color: #fff; font: 500 .75rem var(--f-mono); letter-spacing: .05em; background: rgba(8,15,26,.55); padding: 6px 9px; border-radius: 6px; backdrop-filter: blur(4px); }
+@media (max-width: 720px) { .strip { grid-template-columns: 1fr 1fr; grid-template-rows: 260px 160px 160px; } .strip figure:first-child { grid-column: span 2; grid-row: auto; } }
+
+/* FAQ */
+.faq-grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: clamp(28px, 5vw, 80px); }
+@media (max-width: 900px) { .faq-grid { grid-template-columns: 1fr; } }
+details { border-bottom: 1px solid var(--line); }
+details:first-of-type { border-top: 1px solid var(--line); }
+summary { cursor: pointer; list-style: none; padding: 20px 40px 20px 0; font-weight: 600; font-size: 1.08rem; position: relative; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; position: absolute; right: 4px; top: 50%; transform: translateY(-50%); font: 400 1.6rem/1 var(--f-display); color: var(--sky); transition: transform .25s; }
+details[open] summary::after { transform: translateY(-50%) rotate(45deg); }
+details p { padding: 0 0 22px; color: var(--muted); max-width: 62ch; }
+
+/* Inquiry */
+.inquiry { background: var(--ink); color: var(--bg); }
+.inquiry .eyebrow::after { background: color-mix(in srgb, var(--bg) 25%, transparent); }
+.inquiry .coord { color: color-mix(in srgb, var(--bg) 65%, transparent); }
+.inq-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: clamp(32px, 5vw, 80px); }
+@media (max-width: 900px) { .inq-grid { grid-template-columns: 1fr; } }
+.inq-copy { display: grid; gap: 22px; align-content: start; }
+.inq-copy h2 { font-size: var(--step-3); }
+.inq-copy p { color: color-mix(in srgb, var(--bg) 75%, transparent); font-size: var(--step-1); line-height: 1.5; max-width: 44ch; }
+.contact-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font-family: var(--f-mono); font-size: .95rem; }
+.contact-row .copy { font: 600 .8rem var(--f-body); padding: 7px 12px; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--bg) 40%, transparent); background: transparent; color: var(--bg); cursor: pointer; }
+form.inq { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; background: color-mix(in srgb, var(--bg) 6%, transparent); border: 1px solid color-mix(in srgb, var(--bg) 16%, transparent); padding: clamp(20px, 3vw, 32px); border-radius: var(--radius); }
+form.inq .full { grid-column: 1 / -1; }
+@media (max-width: 560px) { form.inq { grid-template-columns: 1fr; } }
+.field { display: grid; gap: 6px; min-width: 0; }
+.field label { font-size: .82rem; font-weight: 500; color: color-mix(in srgb, var(--bg) 75%, transparent); }
+.field input, .field select, .field textarea {
+  width: 100%; font: 400 1rem var(--f-body); color: var(--bg); background: color-mix(in srgb, var(--bg) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--bg) 22%, transparent); border-radius: 10px; padding: 12px 14px;
+}
+.field select option { color: #101b29; background: #fff; }
+.field textarea { min-height: 110px; resize: vertical; }
+.field input::placeholder, .field textarea::placeholder { color: color-mix(in srgb, var(--bg) 45%, transparent); }
+.field input:focus, .field select:focus, .field textarea:focus { outline: 2px solid var(--sky); outline-offset: 1px; }
+.field .err { font-size: .8rem; color: #ffb4a8; min-height: 1em; }
+.form-actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.form-actions .btn-primary { background: var(--bg); color: var(--ink); }
+.form-actions small { color: color-mix(in srgb, var(--bg) 60%, transparent); font-size: .82rem; }
+.done { grid-column: 1 / -1; display: grid; gap: 10px; padding: 20px; border-radius: 10px; background: color-mix(in srgb, var(--sky) 22%, transparent); }
+.done h3 { font-size: 1.3rem; }
+
+/* Footer */
+footer { padding-block: 56px 40px; font-size: .9rem; color: var(--muted); }
+.foot-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 32px; }
+@media (max-width: 760px) { .foot-grid { grid-template-columns: 1fr; } }
+footer h4 { margin: 0 0 12px; font-family: var(--f-mono); font-weight: 500; font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink); }
+footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+footer a { color: var(--muted); }
+footer a:hover { color: var(--ink); }
+.credits { margin-top: 40px; padding-top: 22px; border-top: 1px solid var(--line); font-size: .78rem; line-height: 1.7; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="wrap nav" aria-label="Main">
+    <a class="brand" href="#top" aria-label="Tengeri Journeys home">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="15" fill="var(--sky)"/><path d="M5 21c3-4 6-6 11-6s8 2 11 6" fill="none" stroke="var(--bg)" stroke-width="2"/><circle cx="16" cy="10" r="3" fill="var(--sand)"/></svg>
+      Tengeri Journeys
+    </a>
+    <ul class="nav-links">
+      <li><a href="#journeys">Journeys</a></li>
+      <li><a href="#map">Map</a></li>
+      <li><a href="#seasons">When to go</a></li>
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#faq">Travel info</a></li>
+    </ul>
+    <a class="btn btn-primary" href="#plan">Plan my trip</a>
+  </nav>
+</header>
+
+<main id="top">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-img"><img src="img/dunes.jpg" alt="A camel caravan crossing the plain below the Khongoryn Els sand dunes in the Gobi Desert" fetchpriority="high"></div>
+    <div class="wrap hero-inner">
+      <div>
+        <p class="coord" style="color:rgba(255,255,255,.8)">43.78° N · 102.30° E · Khongoryn Els, Gobi</p>
+        <h1 id="hero-title" style="margin-top:18px">Under the <em>eternal blue sky</em></h1>
+        <p class="hero-lede">Small-group and private journeys across Mongolia, led by Mongolian guides who grew up on the steppe. Sleep in family gers, ride with herders, and cross the Gobi by camel.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-photo" href="#journeys">Explore journeys</a>
+          <a class="btn btn-photo-ghost" href="#plan">Talk to a local planner</a>
+        </div>
+      </div>
+      <div class="hero-script" aria-hidden="true">
+        <span class="script-cap">Mongol Uls</span>
+        <span class="script">ᠮᠣᠩᠭᠣᠯ ᠤᠯᠤᠰ</span>
+      </div>
+    </div>
+    <div class="facts">
+      <ul class="wrap">
+        <li><strong>1,564,116 km²</strong><span>of open country</span></li>
+        <li><strong>~2 people</strong><span>per square kilometre</span></li>
+        <li><strong>~250 days</strong><span>of sunshine a year</span></li>
+        <li><strong>8 guests</strong><span>maximum per group</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="journeys" class="band">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow"><b>Journeys</b><span class="coord">7 itineraries · 3 to 12 days</span></div>
+        <h2>Routes we know by heart</h2>
+        <p>Every itinerary runs as a small-group departure or as a private trip on your dates. All include a Mongolian guide, a driver, meals outside the city and every night's stay.</p>
+      </div>
+      <div class="filters" role="group" aria-label="Filter journeys">
+        <button class="chip" type="button" data-filter="all" aria-pressed="true">All journeys</button>
+        <button class="chip" type="button" data-filter="festival" aria-pressed="false">Festivals</button>
+        <button class="chip" type="button" data-filter="adventure" aria-pressed="false">Adventure</button>
+        <button class="chip" type="button" data-filter="culture" aria-pressed="false">Nomadic culture</button>
+        <button class="chip" type="button" data-filter="short" aria-pressed="false">Under a week</button>
+      </div>
+      <div class="journeys all" id="journey-list"></div>
+      <p class="note">Prices are per person, twin share, in US dollars, excluding international flights. Private departures are quoted on request.</p>
+    </div>
+  </section>
+
+  <section id="map" class="band map-band">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow"><b>The map</b><span class="coord">41.6°–52.1° N · 87.7°–119.9° E</span></div>
+        <h2>From the Altai glaciers to the Gobi dunes</h2>
+        <p>Mongolia is roughly three times the size of France, with only a few thousand kilometres of paved road. Pick a journey to see where it goes.</p>
+      </div>
+      <div class="map-grid">
+        <ul class="route-list" id="route-list"></ul>
+        <div class="map-wrap">
+          <svg class="map-svg" id="map-svg" viewBox="0 0 900 450" role="img" aria-label="Map of Mongolia showing the selected journey route"></svg>
+          <div class="map-caption">
+            <div class="legend"><span><i></i>Overland</span><span><i class="f"></i>Domestic flight</span></div>
+            <span class="coord" id="map-km"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="seasons" class="band">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow"><b>When to go</b><span class="coord">Ulaanbaatar · 1,350 m above sea level</span></div>
+        <h2>Twelve months, four very different countries</h2>
+        <p>Ulaanbaatar is the coldest capital in the world, yet summer days on the steppe are warm and long. Choose a month to see the weather and what's happening.</p>
+      </div>
+      <div class="season-grid">
+        <div class="chart-box">
+          <svg class="temp-chart" id="temp-chart" viewBox="0 0 640 340" role="group" aria-label="Average monthly temperature range in Ulaanbaatar. Select a month."></svg>
+          <p class="chart-note">Bars show the average daily low to high in Ulaanbaatar, °C. The Gobi runs warmer in summer; the north and the Altai run colder.</p>
+        </div>
+        <article class="month-card" id="month-card" aria-live="polite"></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="ger" aria-labelledby="ger-title">
+    <img src="img/yurt.jpg" alt="Inside a family ger: painted orange furniture, a stove and a table set with bread and milk tea" loading="lazy">
+    <div class="wrap">
+      <div class="ger-inner">
+        <div class="eyebrow"><b>Stay with herders</b><span class="coord">Orkhon Valley · UNESCO World Heritage</span></div>
+        <h2 id="ger-title">The door of a ger always faces south</h2>
+        <p>Guests sit on the west side, the stove burns at the centre, and there is always milk tea. On our journeys you spend nights with families we have known for years. You help with the milking, learn to saddle a horse, and pay your hosts directly and fairly.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow"><b>Why travel with us</b><span class="coord">Ulaanbaatar office · 47.92° N, 106.92° E</span></div>
+        <h2>Local from the first email to the last airport transfer</h2>
+      </div>
+      <div class="promise">
+        <div><strong>8</strong><h3>Guests at most</h3><p>One vehicle, one guide, one table at dinner. Small groups leave less of a footprint on fragile grassland.</p></div>
+        <div><strong>100%</strong><h3>Mongolian guides</h3><p>English-speaking guides from Ulaanbaatar, the Gobi and Bayan-Ölgii, trained in wilderness first aid.</p></div>
+        <div><strong>4×4</strong><h3>Proper vehicles</h3><p>Land Cruisers and the legendary Russian UAZ van, driven by mechanics who can fix anything on the road.</p></div>
+        <div><strong>24/7</strong><h3>Support on the ground</h3><p>Satellite phones on remote routes and an Ulaanbaatar team on call for the whole trip.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how" class="band" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow"><b>How it works</b><span class="coord">From first message to departure</span></div>
+        <h2>Four steps to the steppe</h2>
+      </div>
+      <ol class="steps">
+        <li><h3>Tell us your dates</h3><p>Send a short note with when you can travel, who is coming and what you hope to see.</p></li>
+        <li><h3>Get a draft itinerary</h3><p>A planner in Ulaanbaatar replies within one working day with a route, a price and honest advice.</p></li>
+        <li><h3>Shape it together</h3><p>Add a horse trek, swap a camp, slow the pace. A 20% deposit confirms your place.</p></li>
+        <li><h3>Land in Ulaanbaatar</h3><p>Your guide meets you at Chinggis Khaan International Airport and the journey begins.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="band" style="padding-top:0" aria-label="Photo gallery">
+    <div class="wrap">
+      <div class="strip">
+        <figure><img src="img/naadam.jpg" alt="A young jockey on a grey horse at the Naadam horse race" loading="lazy"><figcaption>Naadam horse race · July</figcaption></figure>
+        <figure><img src="img/yak.jpg" alt="A long-haired yak grazing in Yolyn Am" loading="lazy"><figcaption>Yolyn Am · 2,200 m</figcaption></figure>
+        <figure><img src="img/bayanzag.jpg" alt="Red sandstone cliffs of Bayanzag" loading="lazy"><figcaption>Flaming Cliffs</figcaption></figure>
+        <figure><img src="img/terelj.jpg" alt="Green valleys and forested ridges of Gorkhi-Terelj National Park" loading="lazy"><figcaption>Gorkhi-Terelj</figcaption></figure>
+        <figure><img src="img/yolyn.jpg" alt="Horse riders in a wide valley below rocky hills at Yolyn Am" loading="lazy"><figcaption>Gurvan Saikhan</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="band map-band">
+    <div class="wrap faq-grid">
+      <div class="section-head" style="margin:0;align-content:start">
+        <div class="eyebrow"><b>Travel info</b></div>
+        <h2>Good to know before you fly</h2>
+        <p>Still unsure? Our planners answer every question personally.</p>
+      </div>
+      <div>
+        <details open><summary>Do I need a visa for Mongolia?</summary><p>Citizens of many countries, including the United States, Canada, Japan, South Korea and several European countries, can enter visa-free for a set number of days. Rules change, so check with your nearest Mongolian embassy. If you need a visa, we provide the invitation letter.</p></details>
+        <details><summary>How do I get there?</summary><p>Fly into Chinggis Khaan International Airport (UBN), about 50 km south of Ulaanbaatar. There are direct flights from Seoul, Beijing, Tokyo, Istanbul and Frankfurt, among others. We meet every guest on arrival.</p></details>
+        <details><summary>What is a ger camp like?</summary><p>A ger is a round felt tent heated by a wood stove. Tourist ger camps have proper beds, hot showers and a dining hall. Family stays are simpler, with shared facilities, and are the highlight of most trips.</p></details>
+        <details><summary>How fit do I need to be?</summary><p>Most journeys suit anyone who can walk a few hours a day and sit in a vehicle on rough roads. The Altai Tavan Bogd trek needs good fitness. Horse riding is optional and beginners are welcome.</p></details>
+        <details><summary>Can I use cards and my phone?</summary><p>The currency is the tögrög (MNT). Cards work in Ulaanbaatar; carry cash for the countryside. Mobile coverage reaches most soums (district centres), but not open steppe or mountains.</p></details>
+        <details><summary>What about dietary needs?</summary><p>Traditional food is meat and dairy heavy. Our cooks prepare vegetarian, vegan and gluten-free meals when you tell us in advance.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section id="plan" class="band inquiry">
+    <div class="wrap inq-grid">
+      <div class="inq-copy">
+        <div class="eyebrow"><b>Plan your journey</b><span class="coord">Reply within 1 working day</span></div>
+        <h2>Tell us about your trip</h2>
+        <p>Share your dates and interests and a planner in Ulaanbaatar will send a tailored itinerary and price. No payment needed to ask.</p>
+        <div class="contact-row"><span id="email-text">hello@tengeri-journeys.mn</span><button class="copy" type="button" id="copy-email">Copy</button></div>
+        <div class="contact-row"><span>+976 7011 0000 · WhatsApp</span></div>
+      </div>
+      <form class="inq" id="inq-form" novalidate>
+        <div class="field"><label for="f-name">Full name</label><input id="f-name" name="name" autocomplete="name" placeholder="Anna Schmidt" required><span class="err" id="e-name"></span></div>
+        <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" placeholder="anna@example.com" required><span class="err" id="e-email"></span></div>
+        <div class="field"><label for="f-trip">Journey</label><select id="f-trip" name="trip"><option value="">Not sure yet</option></select></div>
+        <div class="field"><label for="f-month">Preferred month</label><select id="f-month" name="month"></select></div>
+        <div class="field"><label for="f-size">Travellers</label><input id="f-size" name="size" type="number" min="1" max="20" value="2"></div>
+        <div class="field"><label for="f-style">Trip style</label><select id="f-style" name="style"><option>Small group</option><option>Private</option></select></div>
+        <div class="field full"><label for="f-msg">Anything else?</label><textarea id="f-msg" name="msg" placeholder="We'd love to ride horses and stay with a family for a night."></textarea></div>
+        <div class="form-actions full"><button class="btn btn-primary" type="submit">Send inquiry</button><small>We never share your details.</small></div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="#top" style="color:var(--ink)">Tengeri Journeys</a>
+        <p style="margin-top:12px;max-width:40ch">A Mongolian travel company based in Ulaanbaatar. Licensed tour operator. Member of the Mongolian Tourism Association.</p>
+      </div>
+      <div><h4>Journeys</h4><ul id="foot-trips"></ul></div>
+      <div><h4>Company</h4><ul><li><a href="#how">How it works</a></li><li><a href="#faq">Travel info</a></li><li><a href="#plan">Contact</a></li><li><span>Seoul Street 21, Ulaanbaatar</span></li></ul></div>
+    </div>
+    <p class="credits">Photos via Wikimedia Commons:
+      <a href="https://commons.wikimedia.org/wiki/File:Camels_at_Khongoryn_Els_01.jpg" target="_blank" rel="noopener">Khongoryn Els</a>, <a href="https://commons.wikimedia.org/wiki/File:Khongoryn_Els_05.jpg" target="_blank" rel="noopener">dunes</a>, <a href="https://commons.wikimedia.org/wiki/File:Naadam_2023_-_Horse_racing_09.jpg" target="_blank" rel="noopener">Naadam</a>, <a href="https://commons.wikimedia.org/wiki/File:Yurt_in_Orkhon_Valley.jpg" target="_blank" rel="noopener">ger interior</a>, <a href="https://commons.wikimedia.org/wiki/File:Yolyn_Am_02.jpg" target="_blank" rel="noopener">Yolyn Am</a>, <a href="https://commons.wikimedia.org/wiki/File:Yak_at_Yolyn_Am_03.jpg" target="_blank" rel="noopener">yak</a>, <a href="https://commons.wikimedia.org/wiki/File:Bayanzag_09.jpg" target="_blank" rel="noopener">Bayanzag</a> by Bernard Gagnon (CC0);
+      <a href="https://commons.wikimedia.org/wiki/File:On_Lake_Hovsgol_(3756943119).jpg" target="_blank" rel="noopener">Lake Khövsgöl</a> by lamoix (CC BY 2.0);
+      <a href="https://commons.wikimedia.org/wiki/File:Kazakh_Eagle_Hunter_with_Golden_Eagle_in_Bayan_Olgii_region,_Mongolia.jpg" target="_blank" rel="noopener">eagle hunter</a> by Ceyhun Kavakci (CC BY-SA 2.0);
+      <a href="https://commons.wikimedia.org/wiki/File:202408_Orkhon_Valley_03.jpg" target="_blank" rel="noopener">Orkhon Valley</a> by Jonashtand (CC BY-SA 4.0);
+      <a href="https://commons.wikimedia.org/wiki/File:Altai_Tavan_Bogd_-_Potanin_glacier_-_panoramio.jpg" target="_blank" rel="noopener">Potanin Glacier</a> (CC BY 3.0);
+      <a href="https://commons.wikimedia.org/wiki/File:Gorkhi-Terelj_National_Park.jpg" target="_blank" rel="noopener">Gorkhi-Terelj</a> (CC BY-SA 4.0).
+      <br>© 2026 Tengeri Journeys.</p>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const PLACES = {
+    ub:        { name: "Ulaanbaatar",        lat: 47.92, lon: 106.92, cap: true, dx: 10, dy: 16 },
+    terelj:    { name: "Terelj",             lat: 47.98, lon: 107.45, dx: 10, dy: -8 },
+    khustai:   { name: "Khustai",            lat: 47.72, lon: 105.88, dx: -10, dy: 18, anchor: "end" },
+    elsen:     { name: "Elsen Tasarkhai",    lat: 47.36, lon: 103.67, dx: 0, dy: -12, anchor: "middle" },
+    kharkhorin:{ name: "Kharkhorin",         lat: 47.20, lon: 102.82, dx: -10, dy: 4, anchor: "end" },
+    orkhon:    { name: "Orkhon Waterfall",   lat: 46.78, lon: 101.96, dx: -10, dy: 14, anchor: "end" },
+    tsagaan:   { name: "Tsagaan Suvarga",    lat: 44.59, lon: 105.77, dx: 10, dy: 4 },
+    yolyn:     { name: "Yolyn Am",           lat: 43.49, lon: 104.07, dx: 10, dy: 14 },
+    khongor:   { name: "Khongoryn Els",      lat: 43.78, lon: 102.30, dx: -10, dy: 16, anchor: "end" },
+    bayanzag:  { name: "Bayanzag",           lat: 44.14, lon: 103.72, dx: 0, dy: -12, anchor: "middle" },
+    amar:      { name: "Amarbayasgalant",    lat: 49.48, lon: 105.08, dx: 10, dy: 4 },
+    murun:     { name: "Mörön",              lat: 49.64, lon: 100.16, dx: 10, dy: 14 },
+    khuvsgul:  { name: "Lake Khövsgöl",      lat: 50.70, lon: 100.40, dx: 12, dy: 4 },
+    tsaatan:   { name: "Darkhad (reindeer)", lat: 51.30, lon: 99.40, dx: -10, dy: -6, anchor: "end" },
+    olgii:     { name: "Ölgii",              lat: 48.97, lon: 89.97, dx: 10, dy: 16 },
+    tavanbogd: { name: "Tavan Bogd",         lat: 49.15, lon: 87.85, dx: 4, dy: -12 }
+  };
+
+  // Overland legs are drawn solid, legs marked with "~" are flights.
+  const TRIPS = [
+    { id: "gobi", name: "Gobi Crossing", days: 8, season: "May–Sep", level: "Moderate", price: 1890, img: "img/dunes2.jpg", tag: "Desert", cats: ["adventure"],
+      text: "Climb the singing dunes of Khongoryn Els, walk the ice gorge of Yolyn Am and hunt for dinosaur fossils at the Flaming Cliffs.",
+      route: ["ub", "tsagaan", "yolyn", "khongor", "bayanzag", "ub"] },
+    { id: "khuvsgul", name: "Khövsgöl & the Reindeer Herders", days: 10, season: "Jun–Aug", level: "Moderate", price: 2290, img: "img/lake.jpg", tag: "Taiga", cats: ["adventure", "culture"],
+      text: "Kayak Mongolia's deepest lake, then ride into the taiga to spend two nights with Dukha reindeer-herding families.",
+      route: ["ub", "amar", "murun", "khuvsgul", "tsaatan", "khuvsgul", "murun", "~ub"] },
+    { id: "naadam", name: "Naadam Festival", days: 7, season: "9–15 Jul 2027", level: "Easy", price: 2390, img: "img/naadam.jpg", tag: "Festival", cats: ["festival", "culture"],
+      text: "Front-row seats for wrestling, archery and the horse race with child jockeys, then a countryside Naadam with a herding family.",
+      route: ["ub", "terelj", "ub", "khustai", "elsen", "kharkhorin", "ub"] },
+    { id: "eagle", name: "Golden Eagle Festival", days: 8, season: "Early Oct 2027", level: "Moderate", price: 2690, img: "img/eagle.jpg", tag: "Festival", cats: ["festival", "culture"],
+      text: "Fly to the far west to meet Kazakh eagle hunters, stay in their winter homes and watch the competition in the Altai foothills.",
+      route: ["ub", "~olgii"] },
+    { id: "orkhon", name: "Orkhon Valley & Karakorum", days: 6, season: "May–Sep", level: "Easy", price: 1390, img: "img/orkhon.jpg", tag: "Heritage", cats: ["culture", "short"],
+      text: "See wild Przewalski's horses at Khustai, ride in the mini-Gobi dunes and visit Erdene Zuu, the monastery built from Chinggis Khaan's old capital.",
+      route: ["ub", "khustai", "elsen", "kharkhorin", "orkhon", "ub"] },
+    { id: "altai", name: "Altai Tavan Bogd Trek", days: 12, season: "Jul–Aug", level: "Challenging", price: 3150, img: "img/altai.jpg", tag: "Expedition", cats: ["adventure"],
+      text: "Trek with Bactrian camels to base camp below Mongolia's highest peak, Khüiten (4,374 m), and the Potanin Glacier.",
+      route: ["ub", "~olgii", "tavanbogd", "olgii", "~ub"] },
+    { id: "terelj", name: "Terelj Ger Escape", days: 3, season: "All year", level: "Easy", price: 520, img: "img/terelj.jpg", tag: "Short break", cats: ["short", "culture"],
+      text: "Granite valleys an hour and a half from the capital. Ride horses, hike to Aryapala meditation temple and sleep in a heated ger.",
+      route: ["ub", "terelj", "ub"] }
+  ];
+
+  const MONTHS = [
+    { m: "Jan", full: "January",   hi: -16, lo: -27, note: "The coldest month. Clear, still days, frozen rivers and almost no other travellers.", event: null, trips: ["terelj"] },
+    { m: "Feb", full: "February",  hi: -11, lo: -24, note: "Families gather for the lunar new year with steamed buuz dumplings and visits to elders.", event: "Tsagaan Sar, the lunar new year, usually falls in February.", trips: ["terelj"] },
+    { m: "Mar", full: "March",     hi: -1,  lo: -15, note: "Sunny and dry with long days returning. Lakes stay frozen solid.", event: "Ice Festival on frozen Lake Khövsgöl and the Thousand Camel Festival in the Gobi.", trips: ["terelj"] },
+    { m: "Apr", full: "April",     hi: 8,   lo: -6,  note: "A windy thaw. Herders move to spring camps and newborn lambs and camel calves arrive.", event: null, trips: ["terelj"] },
+    { m: "May", full: "May",       hi: 16,  lo: 2,   note: "Ger camps reopen in mid-May and green returns to the steppe. Great value before the summer peak.", event: null, trips: ["orkhon", "gobi", "terelj"] },
+    { m: "Jun", full: "June",      hi: 21,  lo: 8,   note: "Long days and wildflowers. The ideal time for the Gobi before midsummer heat.", event: null, trips: ["gobi", "khuvsgul", "orkhon", "terelj"] },
+    { m: "Jul", full: "July",      hi: 23,  lo: 12,  note: "The warmest and busiest month, with short afternoon rain showers on the steppe.", event: "Naadam, the national festival of wrestling, archery and horse racing, 11–13 July.", trips: ["naadam", "khuvsgul", "altai", "terelj"] },
+    { m: "Aug", full: "August",    hi: 21,  lo: 9,   note: "The greenest month. The best window for the Altai and the northern lakes.", event: null, trips: ["altai", "khuvsgul", "gobi", "orkhon"] },
+    { m: "Sep", full: "September", hi: 14,  lo: 2,   note: "Golden larch forests, crisp nights and quiet roads. A favourite with our guides.", event: null, trips: ["gobi", "orkhon", "terelj"] },
+    { m: "Oct", full: "October",   hi: 6,   lo: -6,  note: "Cold mornings, blue skies and the first snow in the west.", event: "Golden Eagle Festival in Bayan-Ölgii, on the first weekend of October.", trips: ["eagle", "terelj"] },
+    { m: "Nov", full: "November",  hi: -5,  lo: -16, note: "Ger camps close. A quiet season for the capital, its monasteries and museums.", event: null, trips: ["terelj"] },
+    { m: "Dec", full: "December",  hi: -13, lo: -24, note: "Deep winter with bright, dry skies and snow-dusted steppe.", event: null, trips: ["terelj"] }
+  ];
+
+  const byId = Object.fromEntries(TRIPS.map(t => [t.id, t]));
+  const $ = s => document.querySelector(s);
+  const usd = n => "$" + n.toLocaleString("en-US");
+  const stops = t => [...new Set(t.route.map(k => PLACES[k.replace("~", "")].name))].filter(n => n !== "Ulaanbaatar").join(" · ");
+
+  /* Journey cards */
+  const list = $("#journey-list");
+  list.innerHTML = TRIPS.map(t => `
+    <article class="trip" data-cats="${t.cats.join(" ")}" data-days="${t.days}">
+      <div class="trip-media"><img src="${t.img}" alt="" loading="lazy"><span class="trip-tag">${t.tag}</span></div>
+      <div class="trip-body">
+        <h3>${t.name}</h3>
+        <p>${t.text}</p>
+        <dl class="trip-meta">
+          <div><dt>Length</dt><dd>${t.days} days</dd></div>
+          <div><dt>When</dt><dd>${t.season}</dd></div>
+          <div><dt>Level</dt><dd>${t.level}</dd></div>
+        </dl>
+        <div class="trip-foot">
+          <span class="price">from ${usd(t.price)} <small>pp</small></span>
+          <button class="link-btn" type="button" data-route="${t.id}">See the route</button>
+        </div>
+      </div>
+    </article>`).join("");
+
+  document.querySelectorAll(".chip").forEach(chip => chip.addEventListener("click", () => {
+    document.querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", c === chip));
+    const f = chip.dataset.filter;
+    list.classList.toggle("all", f === "all");
+    list.querySelectorAll(".trip").forEach(card => {
+      card.hidden = !(f === "all" || card.dataset.cats.split(" ").includes(f));
+    });
+  }));
+
+  /* Map */
+  const svg = $("#map-svg");
+  const NS = "http://www.w3.org/2000/svg";
+  const LON0 = 87.0, LAT0 = 52.6, K = 0.682, S = 34.5;
+  const proj = (lon, lat) => [((lon - LON0) * K * S) + 20, ((LAT0 - lat) * S) + 20];
+  // Simplified national border, lon/lat
+  const BORDER = [[87.8,49.2],[88.9,49.5],[90.0,50.1],[91.5,50.5],[92.6,50.8],[94.3,50.5],[95.8,50.0],[97.3,49.7],[98.3,50.4],[97.8,51.0],[98.2,51.5],[99.8,51.9],[101.5,51.5],[102.3,51.0],[102.1,50.4],[103.7,50.1],[105.5,50.4],[107.0,50.0],[108.5,49.3],[110.7,49.1],[112.0,49.5],[114.5,50.2],[115.6,49.9],[116.7,49.85],[116.0,48.6],[115.5,48.1],[117.4,47.7],[118.5,47.9],[119.7,47.2],[119.9,46.7],[118.5,46.7],[117.4,46.5],[116.5,46.3],[115.3,45.4],[113.6,44.8],[111.9,45.1],[111.4,44.4],[111.8,43.7],[110.4,42.8],[108.8,42.4],[106.8,42.3],[105.0,41.6],[103.0,41.9],[101.0,42.6],[99.5,42.6],[97.2,42.8],[96.3,43.0],[95.3,44.3],[93.5,45.0],[91.0,45.2],[90.7,46.0],[91.0,46.6],[90.3,47.6],[88.8,48.1]];
+  const el = (tag, attrs, parent = svg) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); parent.appendChild(n); return n; };
+
+  for (const lat of [44, 46, 48, 50, 52]) { const [x1, y] = proj(87, lat), [x2] = proj(120, lat); el("line", { x1, y1: y, x2, y2: y, class: "map-grat" }); el("text", { x: 872, y: y - 4, class: "map-grat-label", "text-anchor": "end" }).textContent = lat + "°N"; }
+  for (const lon of [90, 95, 100, 105, 110, 115]) { const [x, y1] = proj(lon, 52.6), [, y2] = proj(lon, 41.2); el("line", { x1: x, y1, x2: x, y2, class: "map-grat" }); el("text", { x: x + 4, y: 436, class: "map-grat-label" }).textContent = lon + "°E"; }
+  el("path", { d: "M" + BORDER.map(p => proj(...p).map(v => v.toFixed(1)).join(",")).join("L") + "Z", class: "map-land" });
+  const routeLayer = el("g", {});
+  const dotLayer = el("g", {});
+  const dots = {};
+  for (const [k, p] of Object.entries(PLACES)) {
+    const [x, y] = proj(p.lon, p.lat);
+    const c = el("circle", { cx: x, cy: y, r: p.cap ? 6 : 4.5, class: p.cap ? "map-dot cap" : "map-dot" }, dotLayer);
+    const t = el("text", { x: x + p.dx, y: y + p.dy, class: "map-label", "text-anchor": p.anchor || "start" }, dotLayer);
+    t.textContent = p.name;
+    dots[k] = { c, t, cap: p.cap };
+  }
+
+  const haversine = (a, b) => { const R = 6371, r = Math.PI / 180, dLat = (b.lat - a.lat) * r, dLon = (b.lon - a.lon) * r; const h = Math.sin(dLat / 2) ** 2 + Math.cos(a.lat * r) * Math.cos(b.lat * r) * Math.sin(dLon / 2) ** 2; return 2 * R * Math.asin(Math.sqrt(h)); };
+
+  function showRoute(id) {
+    const t = byId[id];
+    routeLayer.replaceChildren();
+    Object.values(dots).forEach(d => { d.c.classList.toggle("on", false); d.t.classList.remove("on"); });
+    let overland = 0;
+    for (let i = 1; i < t.route.length; i++) {
+      const flight = t.route[i].startsWith("~");
+      const a = PLACES[t.route[i - 1].replace("~", "")], b = PLACES[t.route[i].replace("~", "")];
+      const [x1, y1] = proj(a.lon, a.lat), [x2, y2] = proj(b.lon, b.lat);
+      if (flight) {
+        const mx = (x1 + x2) / 2, my = Math.min(y1, y2) - Math.abs(x2 - x1) * 0.15;
+        el("path", { d: `M${x1},${y1} Q${mx},${my} ${x2},${y2}`, class: "map-route flight" }, routeLayer);
+      } else {
+        overland += haversine(a, b) * 1.3; // roads wind; straight line × 1.3
+        el("path", { d: `M${x1},${y1} L${x2},${y2}`, class: "map-route", style: `animation-delay:${(i - 1) * .18}s` }, routeLayer);
+      }
+    }
+    t.route.forEach(k => { const d = dots[k.replace("~", "")]; if (!d.cap) d.c.classList.add("on"); d.t.classList.add("on"); });
+    $("#map-km").textContent = overland > 0 ? `≈ ${Math.round(overland / 10) * 10} km overland · ${t.days} days` : `Flight + local transfers · ${t.days} days`;
+    document.querySelectorAll("#route-list button").forEach(b => b.setAttribute("aria-pressed", b.dataset.id === id));
+  }
+
+  $("#route-list").innerHTML = TRIPS.map(t => `<li><button type="button" data-id="${t.id}" aria-pressed="false"><span class="r-name">${t.name}</span><span class="r-days">${t.days} days</span><span class="r-stops">${stops(t)}</span></button></li>`).join("");
+  $("#route-list").addEventListener("click", e => { const b = e.target.closest("button"); if (b) showRoute(b.dataset.id); });
+  list.addEventListener("click", e => { const b = e.target.closest("[data-route]"); if (!b) return; showRoute(b.dataset.route); $("#map").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" }); });
+  showRoute("gobi");
+
+  /* Seasons chart */
+  const chart = $("#temp-chart");
+  const W = 640, H = 340, L = 40, R = 10, T = 14, B = 34, TMIN = -30, TMAX = 30;
+  const y = v => T + (TMAX - v) / (TMAX - TMIN) * (H - T - B);
+  const cw = (W - L - R) / 12;
+  const cel = (tag, attrs, parent = chart) => el(tag, attrs, parent);
+  for (let v = TMIN; v <= TMAX; v += 10) {
+    cel("line", { x1: L, x2: W - R, y1: y(v), y2: y(v), class: v === 0 ? "zero" : "grid" });
+    cel("text", { x: L - 8, y: y(v) + 4, "text-anchor": "end", class: "axis" }).textContent = (v > 0 ? "+" : "") + v + "°";
+  }
+  const cols = MONTHS.map((mo, i) => {
+    const g = cel("g", { class: "col", tabindex: "0", role: "button", "aria-label": `${mo.full}: ${mo.lo} to ${mo.hi} °C` });
+    const x = L + i * cw;
+    cel("rect", { x: x + 2, y: T, width: cw - 4, height: H - T - B + 26, class: "hit", rx: 6 }, g);
+    cel("rect", { x: x + cw * .22, y: y(mo.hi), width: cw * .56, height: y(mo.lo) - y(mo.hi), rx: Math.min(8, cw * .28), class: "bar" }, g);
+    cel("text", { x: x + cw / 2, y: H - 10, "text-anchor": "middle", class: "m" }, g).textContent = mo.m;
+    g.addEventListener("click", () => pick(i));
+    g.addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pick(i); }
+      if (e.key === "ArrowRight") { e.preventDefault(); pick((i + 1) % 12, true); }
+      if (e.key === "ArrowLeft") { e.preventDefault(); pick((i + 11) % 12, true); }
+    });
+    return g;
+  });
+  const fmt = v => (v > 0 ? "+" : v < 0 ? "−" : "") + Math.abs(v) + "°";
+  function pick(i, focus) {
+    const mo = MONTHS[i];
+    cols.forEach((c, j) => c.classList.toggle("on", j === i));
+    if (focus) cols[i].focus();
+    $("#month-card").innerHTML = `
+      <span class="coord">Month ${String(i + 1).padStart(2, "0")} of 12</span>
+      <h3>${mo.full}</h3>
+      <div class="temps"><div><strong>${fmt(mo.hi)}</strong><span>Avg high</span></div><div><strong>${fmt(mo.lo)}</strong><span>Avg low</span></div></div>
+      <p>${mo.note}</p>
+      ${mo.event ? `<div class="event"><b>On the calendar:</b> ${mo.event}</div>` : ""}
+      <div><span class="coord">Good journeys this month</span><div class="pill-row" style="margin-top:8px">${mo.trips.map(id => `<span class="pill">${byId[id].name}</span>`).join("")}</div></div>`;
+  }
+  pick(6);
+
+  /* Inquiry form */
+  $("#f-trip").insertAdjacentHTML("beforeend", TRIPS.map(t => `<option value="${t.id}">${t.name}</option>`).join(""));
+  $("#f-month").innerHTML = `<option value="">Flexible</option>` + MONTHS.map(mo => `<option>${mo.full}</option>`).join("");
+  $("#foot-trips").innerHTML = TRIPS.slice(0, 5).map(t => `<li><a href="#journeys">${t.name}</a></li>`).join("");
+
+  const form = $("#inq-form");
+  form.addEventListener("submit", e => {
+    e.preventDefault();
+    const name = $("#f-name").value.trim(), email = $("#f-email").value.trim();
+    $("#e-name").textContent = name ? "" : "Please enter your name.";
+    $("#e-email").textContent = /^\S+@\S+\.\S+$/.test(email) ? "" : "Please enter an email address like name@example.com.";
+    if (!name || !/^\S+@\S+\.\S+$/.test(email)) return;
+    const trip = byId[$("#f-trip").value];
+    form.innerHTML = `<div class="done"><h3>Thank you, ${name.split(" ")[0].replace(/[<>&"]/g, "")}.</h3><p>This is a preview of the site, so your inquiry was not sent. Once the site is live, a planner will reply to ${email.replace(/[<>&"]/g, "")} within one working day${trip ? ` about the ${trip.name}` : ""}.</p></div>`;
+  });
+
+  $("#copy-email").addEventListener("click", async ev => {
+    const btn = ev.currentTarget, text = $("#email-text").textContent;
+    try { await navigator.clipboard.writeText(text); btn.textContent = "Copied"; }
+    catch { const r = document.createRange(); r.selectNodeContents($("#email-text")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = "Selected"; }
+    setTimeout(() => btn.textContent = "Copy", 1800);
+  });
+})();
+</script>
+</body>
+</html>
