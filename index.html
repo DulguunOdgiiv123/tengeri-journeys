@@ -176,6 +176,32 @@ section { scroll-margin-top: 72px; }
   .region { flex: 0 0 min(44%, 200px); scroll-snap-align: start; }
 }
 
+/* Steppe in motion */
+.motion { background: var(--ink); color: var(--bg); overflow: hidden; }
+.motion .section-head p { color: color-mix(in srgb, var(--bg) 72%, transparent); }
+.motion .eyebrow::after { background: color-mix(in srgb, var(--bg) 22%, transparent); }
+.motion .coord { color: color-mix(in srgb, var(--bg) 62%, transparent); }
+.reels { display: grid; grid-template-columns: repeat(3, minmax(0, 330px)); justify-content: center; gap: clamp(14px, 2.4vw, 32px); align-items: start; }
+.reel { margin: 0; display: grid; gap: 14px; min-width: 0; }
+.reel:nth-child(2) { margin-top: clamp(0px, 5vw, 64px); }
+.reel-frame { position: relative; aspect-ratio: 9 / 16; max-width: 100%; border-radius: 22px; overflow: hidden; background: #0a1019; box-shadow: 0 30px 60px -30px rgba(0,0,0,.7); }
+.reel-frame video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.reel-frame::after { content: ""; position: absolute; inset: auto 0 0; height: 30%; background: linear-gradient(180deg, transparent, rgba(8,15,26,.55)); pointer-events: none; }
+.reel-toggle {
+  position: absolute; right: 12px; bottom: 12px; z-index: 1; width: 40px; height: 40px; border-radius: 50%; border: 0; cursor: pointer;
+  display: grid; place-items: center; background: rgba(255,255,255,.18); color: #fff; backdrop-filter: blur(8px);
+}
+.reel-toggle:hover { background: rgba(255,255,255,.3); }
+.reel-toggle svg { width: 16px; height: 16px; }
+.reel figcaption { display: grid; gap: 2px; padding-inline: 4px; }
+.reel figcaption strong { font-weight: 600; font-size: 1.02rem; }
+.reel figcaption span { font-size: .88rem; color: color-mix(in srgb, var(--bg) 65%, transparent); }
+@media (max-width: 760px) {
+  .reels { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; justify-content: flex-start; padding-bottom: 8px; }
+  .reel { flex: 0 0 min(68%, 280px); scroll-snap-align: center; }
+  .reel:nth-child(2) { margin-top: 0; }
+}
+
 /* Floating chat */
 .chat-fab {
   position: fixed; z-index: 40;
@@ -480,6 +506,30 @@ footer a:hover { color: var(--ink); }
       </div>
       <div class="journeys all" id="journey-list"></div>
       <p class="note">Prices are per person, twin share, in US dollars, excluding international flights. Private departures are quoted on request.</p>
+    </div>
+  </section>
+
+  <section class="band motion" aria-labelledby="motion-title">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow"><b>The steppe in motion</b><span class="coord">Summer on the steppe</span></div>
+        <h2 id="motion-title">Herds, horses and hunters</h2>
+        <p>Herders here still count their wealth in the five kinds of livestock: horses, camels, cattle, sheep and goats. This is the Mongolia you will travel through.</p>
+      </div>
+      <div class="reels">
+        <figure class="reel">
+          <div class="reel-frame"><video src="video/horses.mp4" poster="video/horses.jpg" muted loop playsinline preload="metadata" aria-label="A herd of dark horses galloping across green steppe below a rocky hill"></video><button class="reel-toggle" type="button" aria-label="Pause video"></button></div>
+          <figcaption><strong>A herd at full gallop</strong><span>Summer pasture</span></figcaption>
+        </figure>
+        <figure class="reel">
+          <div class="reel-frame"><video src="video/eagle.mp4" poster="video/eagle.jpg" muted loop playsinline preload="metadata" aria-label="An eagle hunter riding a chestnut horse with a golden eagle raised on his arm"></video><button class="reel-toggle" type="button" aria-label="Pause video"></button></div>
+          <figcaption><strong>Eagle hunter on horseback</strong><span>A Kazakh tradition of the far west</span></figcaption>
+        </figure>
+        <figure class="reel">
+          <div class="reel-frame"><video src="video/herd.mp4" poster="video/herd.jpg" muted loop playsinline preload="metadata" aria-label="Hundreds of sheep and goats grazing on a wide green plain below misty mountains"></video><button class="reel-toggle" type="button" aria-label="Pause video"></button></div>
+          <figcaption><strong>Sheep and goats before the rain</strong><span>A mixed herd on open steppe</span></figcaption>
+        </figure>
+      </div>
     </div>
   </section>
 
@@ -884,6 +934,32 @@ footer a:hover { color: var(--ink); }
       <div><span class="coord">Good journeys this month</span><div class="pill-row" style="margin-top:8px">${mo.trips.map(id => `<span class="pill">${byId[id].name}</span>`).join("")}</div></div>`;
   }
   pick(6);
+
+  /* Reels: play only while visible; respect reduced motion and manual pause */
+  const PLAY = '<svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 2.5v11l9-5.5z"/></svg>';
+  const PAUSE = '<svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M3.5 2.5h3v11h-3zM9.5 2.5h3v11h-3z"/></svg>';
+  const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const reels = [...document.querySelectorAll(".reel-frame")].map(frame => {
+    const v = frame.querySelector("video"), btn = frame.querySelector(".reel-toggle");
+    const r = { v, btn, user: calm ? "paused" : "auto", visible: false };
+    const sync = () => {
+      const play = r.user !== "paused" && r.visible;
+      if (play) v.play().catch(() => {}); else v.pause();
+      btn.innerHTML = r.user === "paused" ? PLAY : PAUSE;
+      btn.setAttribute("aria-label", r.user === "paused" ? "Play video" : "Pause video");
+    };
+    r.sync = sync;
+    btn.addEventListener("click", () => { r.user = r.user === "paused" ? "auto" : "paused"; sync(); });
+    sync();
+    return r;
+  });
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver(entries => entries.forEach(e => {
+      const r = reels.find(x => x.v === e.target.querySelector("video"));
+      r.visible = e.isIntersecting; r.sync();
+    }), { threshold: 0.35 });
+    document.querySelectorAll(".reel-frame").forEach(f => io.observe(f));
+  } else reels.forEach(r => { r.visible = true; r.sync(); });
 
   /* Help centre */
   const esc = t => t.replace(/[&<>"]/g, ch => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[ch]));
