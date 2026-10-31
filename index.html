@@ -877,7 +877,7 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
     whatsapp: "",     // WhatsApp number with country code, digits only, e.g. "97699112233"
     naverBlog: "",    // company Naver blog, e.g. "https://blog.naver.com/goldenjigutour"
     instagram: "",    // e.g. "https://instagram.com/goldenjigutour"
-    toolsUrl: "https://goldenjigu.life/",   // travel-style test, route builder, packing checklist
+    toolsUrl: "",     // e.g. "https://goldenjigu.life/" (not linked for now, by the owner's choice)
     email: "goldenjigutour@naver.com",   // the address used on the Naver cafe; switch to hello@goldenjigutour.com once Email Routing is on
     siteUrl: "https://goldenjigutour.com/",
     // Shown in the footer once filled (Korean customers look for these to trust a company)
@@ -1030,8 +1030,8 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
       ko: { q: "공항으로 마중 나오나요?", a: "네. 가이드가 입국장에서 맞이하여 숙소까지 모셔다 드립니다." } },
     { c: "trip", q: "What is a ger camp like?", a: "A ger is a round felt tent heated by a stove. The camps on our tours have beds, electricity and hot showers every night.",
       ko: { q: "게르 캠프는 어떤가요?", a: "게르는 난로로 데우는 둥근 펠트 천막입니다. 저희 투어의 캠프는 매일 밤 침대, 전기, 온수 샤워를 이용할 수 있습니다." } },
-    { c: "trip", q: "What should I pack?", a: "Layers. Even in July, nights on the steppe can drop close to freezing, and the Gobi is windy. Bring a warm fleece, a windproof jacket, sun protection and comfortable walking shoes. The packing checklist on <a href='https://goldenjigu.life/' target='_blank' rel='noopener'>goldenjigu.life</a> helps.",
-      ko: { q: "무엇을 챙겨야 하나요?", a: "겹쳐 입을 옷이 핵심입니다. 7월에도 초원의 밤은 영하 가까이 떨어질 수 있고 고비는 바람이 강합니다. 따뜻한 플리스, 방풍 재킷, 자외선 차단제, 편한 신발을 챙기세요. <a href='https://goldenjigu.life/' target='_blank' rel='noopener'>goldenjigu.life</a>의 준비물 체크리스트도 참고하세요." } },
+    { c: "trip", q: "What should I pack?", a: "Layers. Even in July, nights on the steppe can drop close to freezing, and the Gobi is windy. Bring a warm fleece, a windproof jacket, sun protection and comfortable walking shoes.",
+      ko: { q: "무엇을 챙겨야 하나요?", a: "겹쳐 입을 옷이 핵심입니다. 7월에도 초원의 밤은 영하 가까이 떨어질 수 있고 고비는 바람이 강합니다. 따뜻한 플리스, 방풍 재킷, 자외선 차단제, 편한 신발을 챙기세요." } },
     { c: "trip", q: "Can I use cards and my phone?", a: "The currency is the tögrög (MNT). Cards work in Ulaanbaatar; carry cash for the countryside. Mobile coverage reaches most soums (district centres), but not open steppe or mountains.",
       ko: { q: "카드와 휴대폰을 쓸 수 있나요?", a: "화폐는 투그릭(MNT)입니다. 울란바토르에서는 카드를 쓸 수 있지만 시골에서는 현금이 필요합니다. 휴대폰은 대부분의 솜(군 소재지)에서 터지지만 초원 한가운데나 산에서는 안 됩니다." } },
     { c: "trip", q: "What about dietary needs?", a: "Traditional food is meat and dairy heavy. Tell us about dietary needs when you book so we can plan meals around them.",
@@ -1113,7 +1113,7 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
     bar.style.transform = `scaleX(${max > 0 ? Math.min(1, scrollY / max) : 0})`;
     const line = innerHeight * .45;
     let id = "";
-    for (const s of spySections) { if (s.getBoundingClientRect().top <= line) id = s.dataset.spyFor; else break; }
+    for (const s of spySections) { if (s.hidden) continue; if (s.getBoundingClientRect().top <= line) id = s.dataset.spyFor; else break; }
     setActive(id);
   }
   addEventListener("scroll", onScroll, { passive: true });
@@ -1406,11 +1406,11 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
             <details class="m-more"><summary>${T("Good to know", "여행 유의사항")}</summary><ul>${NOTES[lang].map(n => `<li>${n}</li>`).join("")}</ul></details>
             <details class="m-more"><summary>${T("Cancellation and refunds", "취소·환불 규정")}</summary><p>${L(FAQ[3]).a}</p></details>
           </div>
-          <section class="m-sec"><h3>${T("Reviews", "이용자 후기")} <span class="c">(${revs.length})</span></h3>
+          ${REVIEWS.length ? `<section class="m-sec"><h3>${T("Reviews", "이용자 후기")} <span class="c">(${revs.length})</span></h3>
             ${revs.length
               ? `<div class="m-reviews">${revs.slice(0, 3).map(miniReview).join("")}</div><a class="txt-btn" href="#reviews">${T("All reviews →", "전체 후기 보기 →")}</a>`
               : `<p class="m-route">${T("No reviews for this tour yet.", "아직 이 상품의 후기가 없습니다.")} <button class="txt-btn" type="button" data-write-review="${id}">${T("Write the first one", "첫 후기 남기기")}</button></p>`}
-          </section>
+          </section>` : ""}
         </div>
         <aside class="m-aside">
           <div class="pricebox">
@@ -1505,6 +1505,9 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
   };
   function renderReviews() {
     const n = REVIEWS.length;
+    // Owner's choice: the whole reviews area stays hidden until the first real review is added.
+    $("#reviews").hidden = !n;
+    $$('a[href="#reviews"]').forEach(a => { (a.closest("li") || a).hidden = !n; });
     if (!n) {
       $("#rev-summary").innerHTML = `<p class="lede" style="max-width:40ch">${T("Only real reviews from real travellers, each linked to its original post.", "실제 여행자의 진짜 후기만, 원문 링크와 함께 보여 드립니다.")}</p>`;
       $("#rev-body").innerHTML = `<div class="rev-empty">
