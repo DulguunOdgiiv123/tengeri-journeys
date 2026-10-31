@@ -6,10 +6,22 @@
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>Golden Jigu Tour</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="Small-group and private journeys across Mongolia: the Gobi, Khövsgöl, Naadam, the Golden Eagle Festival and the Altai.">
+<meta name="description" content="Small-group and private journeys across Mongolia: the Gobi, Khövsgöl, Naadam, the Golden Eagle Festival and the Altai. 몽골 현지 여행사와 함께하는 소규모 몽골 여행.">
+<link rel="canonical" href="https://goldenjigutour.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Golden Jigu Tour">
+<meta property="og:url" content="https://goldenjigutour.com/">
+<meta property="og:title" content="Golden Jigu Tour · 몽골 소규모 여행">
+<meta property="og:description" content="고비 사막, 홉스골, 나담 축제, 알타이까지. 몽골 현지 여행사와 함께하는 소규모 여행 · Small-group journeys across Mongolia.">
+<meta property="og:image" content="https://goldenjigutour.com/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0a1a33">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 34'%3E%3Ccircle cx='17' cy='17' r='16' fill='%231150b0'/%3E%3Ccircle cx='17' cy='12' r='4' fill='%23f4b93a'/%3E%3Cpath d='M4 23c4-4 8-6 13-6s9 2 13 6' fill='none' stroke='%23fff' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+Mongolian&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+Mongolian&family=Noto+Sans+KR:wght@400;500;700&family=Gowun+Batang:wght@400;700&display=swap">
 <style>
 /* Layout: one long page under a locked header; nav clicks glide to each section. Bands alternate white, pale sky,
    and a starry night blue, punctuated by a gold ticker and a full-bleed proverb band.
@@ -29,10 +41,10 @@
   --night-deep: #061226;
   --on-dark-soft: rgba(255,255,255,.74);
 
-  --f-display: "Unbounded", "Arial Black", system-ui, sans-serif;
-  --f-accent: "Instrument Serif", Georgia, "Times New Roman", serif;
-  --f-body: "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
-  --f-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  --f-display: "Unbounded", "Noto Sans KR", "Arial Black", system-ui, sans-serif;
+  --f-accent: "Instrument Serif", "Gowun Batang", Georgia, "Times New Roman", serif;
+  --f-body: "Hanken Grotesk", "Noto Sans KR", "Helvetica Neue", Arial, sans-serif;
+  --f-mono: "JetBrains Mono", "Noto Sans KR", ui-monospace, Menlo, monospace;
   --f-script: "Noto Sans Mongolian", serif;
 
   --nav-h: 72px;
@@ -141,7 +153,7 @@ section[id] { scroll-margin-top: calc(var(--nav-h) + env(safe-area-inset-top, 0p
 .menu .wrap { display: flex; flex-direction: column; flex: 1; }
 .menu ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
 .menu li a { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,.12); text-decoration: none; font: 500 clamp(1.5rem, 6.5vw, 2.3rem)/1.1 var(--f-display); letter-spacing: -.02em; }
-.menu li a span { font: 400 .8rem var(--f-mono); color: var(--gold); }
+.menu li a .ct { font: 400 .8rem var(--f-mono); color: var(--gold); }
 .menu li a[aria-current="true"] { color: var(--gold); }
 .menu-foot { margin-top: auto; padding-top: 32px; display: grid; gap: 14px; color: var(--on-dark-soft); }
 
@@ -517,25 +529,88 @@ footer a:hover { color: #fff; }
 .chat-fab svg { width: 22px; height: 22px; flex: none; }
 body[data-at="plan"] .chat-fab { opacity: 0; pointer-events: none; transform: translateY(12px); }
 @media (max-width: 520px) { .chat-fab span { display: none; } .chat-fab { padding: 14px; } }
+
+/* ---------- Bilingual EN / KO ---------- */
+:root:not([lang="ko"]) [data-ko], :root[lang="ko"] [data-en] { display: none !important; }
+:root[lang="ko"] body { word-break: keep-all; overflow-wrap: break-word; }
+:root[lang="ko"] h1, :root[lang="ko"] h2, :root[lang="ko"] h3 { letter-spacing: -.035em; line-height: 1.2; }
+:root[lang="ko"] h1 em, :root[lang="ko"] h2 em { font-family: "Gowun Batang", var(--f-accent); font-style: normal; font-weight: 700; letter-spacing: -.04em; }
+:root[lang="ko"] .hero h1 { font-size: clamp(2.4rem, 1rem + 4.4vw, 4.9rem); line-height: 1.14; }
+:root[lang="ko"] .hero h1 em { font-size: 1em; line-height: 1.14; }
+:root[lang="ko"] .lede, :root[lang="ko"] .hero-lede { line-height: 1.75; }
+:root[lang="ko"] .proverb blockquote { font-family: "Gowun Batang", var(--f-accent); font-style: normal; font-size: clamp(1.8rem, 1rem + 3vw, 3.4rem); line-height: 1.35; }
+
+.lang { display: inline-flex; padding: 3px; border-radius: 999px; border: 1.5px solid color-mix(in srgb, currentColor 30%, transparent); flex: none; }
+.lang button { font: 600 .82rem/1 var(--f-body); color: inherit; background: transparent; border: 0; padding: 8px 11px; border-radius: 999px; cursor: pointer; opacity: .78; transition: background-color .2s, color .2s, opacity .2s; }
+.lang button:hover { opacity: 1; }
+.lang button[aria-pressed="true"] { background: var(--gold); color: var(--night); opacity: 1; }
+.nav-links a { padding: 9px 12px; }
+@media (max-width: 1180px) { .nav-links, .nav-cta { display: none; } .burger { display: block; margin-left: 0; } .lang { margin-left: auto; } }
+/* Phones: the switch becomes one button showing the other language */
+@media (max-width: 560px) {
+  .nav-inner { gap: 12px; }
+  .lang button[aria-pressed="true"] { display: none; }
+  .lang button { opacity: 1; padding: 8px 12px; }
+}
+/* Korean stacks upright in the collapsed destination tiles */
+:root[lang="ko"] .dest-label { transform: none; top: 22px; bottom: auto; letter-spacing: .12em; }
+.dest-label { text-shadow: 0 1px 14px rgba(6,16,34,.65); }
+
+/* Contact dock (KakaoTalk, WhatsApp, email, form) */
+.dock { position: fixed; z-index: 40; right: calc(18px + env(safe-area-inset-right, 0px)); bottom: calc(18px + env(safe-area-inset-bottom, 0px)); display: grid; justify-items: end; gap: 10px; transition: opacity .3s, transform .3s var(--ease); }
+.dock .chat-fab { position: static; }
+body[data-at="plan"] .dock { opacity: 0; pointer-events: none; transform: translateY(12px); }
+.dock-menu { display: grid; gap: 8px; justify-items: end; }
+.dock-item { display: inline-flex; align-items: center; gap: 10px; padding: 8px 16px 8px 8px; border-radius: 999px; background: var(--paper); color: var(--ink); text-decoration: none; font: 600 .92rem/1.2 var(--f-body); box-shadow: 0 12px 28px -14px rgba(10,26,51,.55), 0 0 0 1px var(--line); animation: pop .3s var(--ease) both; transition: transform .2s var(--ease); }
+.dock-item:hover { transform: translateY(-2px); }
+.dock-item small { display: block; font: 400 .72rem var(--f-mono); color: var(--muted); }
+.ic { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; flex: none; }
+.ic svg { width: 19px; height: 19px; }
+.ic.kakao { background: #fee500; color: #191919; }
+.ic.wa { background: #25d366; color: #fff; }
+.ic.mail { background: var(--mist); color: var(--blue); }
+.ic.form { background: var(--gold); color: var(--night); }
+.contact-btns { display: flex; flex-wrap: wrap; gap: 10px; }
+.kakao-btn, .wa-btn { display: inline-flex; align-items: center; gap: 10px; padding: 13px 18px; border-radius: 12px; font: 700 .98rem var(--f-body); text-decoration: none; transition: transform .2s var(--ease); }
+.kakao-btn:hover, .wa-btn:hover { transform: translateY(-2px); }
+.kakao-btn { background: #fee500; color: #191919; }
+.wa-btn { background: #25d366; color: #fff; }
+.kakao-btn svg, .wa-btn svg { width: 20px; height: 20px; }
+.form-status { grid-column: 1 / -1; font-size: .92rem; color: var(--red); min-height: 1.2em; }
+.form-status.ok { color: var(--blue); }
 </style>
 </head>
 <body>
 
+<script>
+/* Pick the language before the page paints: ?lang= link > saved choice > browser language. */
+(function () {
+  var l = (location.search.match(/[?&]lang=(ko|en)/) || [])[1] || (location.hash === "#ko" ? "ko" : "");
+  if (!l) { try { l = localStorage.getItem("gj-lang") || ""; } catch (e) { l = ""; } }
+  if (!l) l = (navigator.language || "").toLowerCase().indexOf("ko") === 0 ? "ko" : "en";
+  document.documentElement.lang = l;
+})();
+</script>
+
 <header class="nav-bar" id="nav">
   <div class="wrap nav-inner">
-    <a class="brand" href="#top" aria-label="Golden Jigu Tour, back to top">
+    <a class="brand tr" href="#top" aria-label="Golden Jigu Tour, back to top" data-ko-aria-label="골든지구투어, 맨 위로">
       <svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="16" fill="#1150b0"/><circle cx="17" cy="12" r="4" fill="#f4b93a"/><path d="M4 23c4-4 8-6 13-6s9 2 13 6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></svg>
       Golden Jigu Tour
     </a>
     <ul class="nav-links">
-      <li><a href="#destinations" data-spy="destinations">Destinations</a></li>
-      <li><a href="#journeys" data-spy="journeys">Journeys</a></li>
-      <li><a href="#map" data-spy="map">Map</a></li>
-      <li><a href="#seasons" data-spy="seasons">When to go</a></li>
-      <li><a href="#experience" data-spy="experience">Experience</a></li>
-      <li><a href="#help" data-spy="help">Help</a></li>
+      <li><a href="#destinations" data-spy="destinations"><span data-en>Destinations</span><span data-ko>여행지</span></a></li>
+      <li><a href="#journeys" data-spy="journeys"><span data-en>Journeys</span><span data-ko>여행 상품</span></a></li>
+      <li><a href="#map" data-spy="map"><span data-en>Map</span><span data-ko>지도</span></a></li>
+      <li><a href="#seasons" data-spy="seasons"><span data-en>When to go</span><span data-ko>여행 시기</span></a></li>
+      <li><a href="#experience" data-spy="experience"><span data-en>Experience</span><span data-ko>체험</span></a></li>
+      <li><a href="#help" data-spy="help"><span data-en>Help</span><span data-ko>고객센터</span></a></li>
     </ul>
-    <a class="btn btn-gold nav-cta" href="#plan">Plan my trip</a>
+    <div class="lang tr" role="group" aria-label="Language" data-ko-aria-label="언어">
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      <button type="button" data-lang="ko" aria-pressed="false">한국어</button>
+    </div>
+    <a class="btn btn-gold nav-cta" href="#plan"><span data-en>Plan my trip</span><span data-ko>여행 문의</span></a>
     <button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
   </div>
   <div class="progress" id="progress" aria-hidden="true"></div>
@@ -544,18 +619,21 @@ body[data-at="plan"] .chat-fab { opacity: 0; pointer-events: none; transform: tr
 <div class="menu" id="menu" hidden>
   <div class="wrap">
     <ul>
-      <li><a href="#destinations" data-spy="destinations">Destinations <span>5 regions</span></a></li>
-      <li><a href="#journeys" data-spy="journeys">Journeys <span>8 trips</span></a></li>
-      <li><a href="#map" data-spy="map">Route map <span>interactive</span></a></li>
-      <li><a href="#seasons" data-spy="seasons">When to go <span>12 months</span></a></li>
-      <li><a href="#experience" data-spy="experience">Experience <span>video</span></a></li>
-      <li><a href="#help" data-spy="help">Help centre <span>18 answers</span></a></li>
-      <li><a href="#plan" data-spy="plan">Plan my trip <span>→</span></a></li>
+      <li><a href="#destinations" data-spy="destinations"><span data-en>Destinations</span><span data-ko>여행지</span> <span class="ct"><span data-en>5 regions</span><span data-ko>5개 지역</span></span></a></li>
+      <li><a href="#journeys" data-spy="journeys"><span data-en>Journeys</span><span data-ko>여행 상품</span> <span class="ct"><span data-en>8 trips</span><span data-ko>8개 코스</span></span></a></li>
+      <li><a href="#map" data-spy="map"><span data-en>Route map</span><span data-ko>경로 지도</span> <span class="ct"><span data-en>interactive</span><span data-ko>인터랙티브</span></span></a></li>
+      <li><a href="#seasons" data-spy="seasons"><span data-en>When to go</span><span data-ko>여행 시기</span> <span class="ct"><span data-en>12 months</span><span data-ko>12개월</span></span></a></li>
+      <li><a href="#experience" data-spy="experience"><span data-en>Experience</span><span data-ko>체험</span> <span class="ct"><span data-en>video</span><span data-ko>영상</span></span></a></li>
+      <li><a href="#help" data-spy="help"><span data-en>Help centre</span><span data-ko>고객센터</span> <span class="ct"><span data-en>18 answers</span><span data-ko>18개 답변</span></span></a></li>
+      <li><a href="#plan" data-spy="plan"><span data-en>Plan my trip</span><span data-ko>여행 문의</span> <span class="ct">→</span></a></li>
     </ul>
     <div class="menu-foot">
       <div class="khee gold" aria-hidden="true"></div>
-      <span class="mono">hello@goldenjigutour.com</span>
-      <span class="mono">+976 7011 0000 · WhatsApp</span>
+      <div class="contact-btns">
+        <a class="kakao-btn" data-kakao href="#" target="_blank" rel="noopener" hidden><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.8 1.9 5.3 4.7 6.7l-.9 3.8 4.3-2.8c.6.1 1.2.1 1.9.1 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg><span data-en>KakaoTalk chat</span><span data-ko>카카오톡 상담</span></a>
+        <a class="wa-btn" data-wa href="#" target="_blank" rel="noopener" hidden><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg>WhatsApp</a>
+      </div>
+      <span class="mono" data-email-text>hello@goldenjigutour.com</span>
     </div>
   </div>
 </div>
@@ -563,25 +641,28 @@ body[data-at="plan"] .chat-fab { opacity: 0; pointer-events: none; transform: tr
 <main id="top">
   <!-- Hero -->
   <section class="hero" aria-labelledby="hero-title" data-spy-for="">
-    <div class="hero-bg"><img src="img/dunes.jpg" alt="A camel caravan crossing the plain below the Khongoryn Els sand dunes in the Gobi Desert" fetchpriority="high"></div>
+    <div class="hero-bg"><img class="tr" src="img/dunes.jpg" alt="A camel caravan crossing the plain below the Khongoryn Els sand dunes in the Gobi Desert" data-ko-alt="고비 사막 홍고린 엘스 모래언덕 아래 평원을 지나는 낙타 행렬" fetchpriority="high"></div>
     <div class="wrap hero-grid">
       <div class="hero-copy">
-        <span class="eyebrow">Small-group journeys · Mongolia</span>
-        <h1 id="hero-title"><span class="l">Mongolia,</span><span class="l"><em>under the eternal blue sky</em></span></h1>
-        <p class="hero-lede">Ride with herders, sleep in family gers and cross the Gobi by camel, guided by Mongolians who grew up on the steppe.</p>
+        <span class="eyebrow"><span data-en>Small-group journeys · Mongolia</span><span data-ko>소규모 맞춤 여행 · 몽골</span></span>
+        <h1 id="hero-title">
+          <span data-en><span class="l">Mongolia,</span><span class="l"><em>under the eternal blue sky</em></span></span>
+          <span data-ko><span class="l">몽골,</span><span class="l"><em>영원한 푸른 하늘 아래</em></span></span>
+        </h1>
+        <p class="hero-lede"><span data-en>Ride with herders, sleep in family gers and cross the Gobi by camel, guided by Mongolians who grew up on the steppe.</span><span data-ko>유목민과 함께 말을 타고, 유목민 가족의 게르에서 잠들고, 낙타를 타고 고비 사막을 건너 보세요. 초원에서 나고 자란 몽골 현지 가이드가 함께합니다.</span></p>
         <div class="hero-ctas">
-          <a class="btn btn-gold" href="#journeys">Explore journeys <span class="arr">→</span></a>
-          <a class="btn btn-glass" href="#plan">Talk to a local planner</a>
+          <a class="btn btn-gold" href="#journeys"><span data-en>Explore journeys</span><span data-ko>여행 상품 보기</span> <span class="arr">→</span></a>
+          <a class="btn btn-glass" href="#plan"><span data-en>Talk to a local planner</span><span data-ko>현지 플래너와 상담하기</span></a>
         </div>
         <ul class="trust">
-          <li>Locally owned in Ulaanbaatar</li>
-          <li>8 guests at most</li>
-          <li>English-speaking guides</li>
+          <li><span data-en>Locally owned in Ulaanbaatar</span><span data-ko>울란바토르 현지 여행사</span></li>
+          <li><span data-en>8 guests at most</span><span data-ko>최대 8명 소그룹</span></li>
+          <li><span data-en>English-speaking guides</span><span data-ko>영어 가이드 동행</span></li>
         </ul>
       </div>
-      <div class="reel-stack" aria-label="Video clips from the steppe">
-        <figure class="reel-card b"><div class="reel-frame"><video src="video/horses.mp4" poster="video/horses.jpg" muted loop playsinline preload="metadata" aria-label="A herd of dark horses galloping across the steppe"></video><button class="vt" type="button" aria-label="Pause video"></button></div><span class="reel-chip">Summer pasture</span></figure>
-        <figure class="reel-card a"><div class="reel-frame"><video src="video/eagle.mp4" poster="video/eagle.jpg" muted loop playsinline preload="metadata" aria-label="An eagle hunter on horseback with a golden eagle raised on his arm"></video><button class="vt" type="button" aria-label="Pause video"></button></div><span class="reel-chip">Eagle hunter</span></figure>
+      <div class="reel-stack tr" aria-label="Video clips from the steppe" data-ko-aria-label="초원 영상">
+        <figure class="reel-card b"><div class="reel-frame"><video class="tr" src="video/horses.mp4" poster="video/horses.jpg" muted loop playsinline preload="metadata" aria-label="A herd of dark horses galloping across the steppe" data-ko-aria-label="초원을 달리는 말 떼"></video><button class="vt" type="button"></button></div><span class="reel-chip"><span data-en>Summer pasture</span><span data-ko>여름 초원</span></span></figure>
+        <figure class="reel-card a"><div class="reel-frame"><video class="tr" src="video/eagle.mp4" poster="video/eagle.jpg" muted loop playsinline preload="metadata" aria-label="An eagle hunter on horseback with a golden eagle raised on his arm" data-ko-aria-label="팔에 검독수리를 올리고 말을 탄 독수리 사냥꾼"></video><button class="vt" type="button"></button></div><span class="reel-chip"><span data-en>Eagle hunter</span><span data-ko>독수리 사냥꾼</span></span></figure>
         <span class="script" aria-hidden="true">ᠮᠣᠩᠭᠣᠯ</span>
       </div>
     </div>
@@ -589,14 +670,14 @@ body[data-at="plan"] .chat-fab { opacity: 0; pointer-events: none; transform: tr
 
   <div class="wrap ticket-wrap">
     <div class="ticket">
-      <div class="ticket-stub"><small>Next departure</small><strong>9 Jul</strong><span>2027 · Ulaanbaatar</span></div>
+      <div class="ticket-stub"><small><span data-en>Next departure</span><span data-ko>다음 출발</span></small><strong><span data-en>9 Jul</span><span data-ko>7월 9일</span></strong><span><span data-en>2027 · Ulaanbaatar</span><span data-ko>2027 · 울란바토르</span></span></div>
       <div class="ticket-fields">
-        <div class="tf"><small>Journey</small><b>Naadam Festival</b></div>
-        <div class="tf"><small>Dates</small><b>9–15 Jul</b></div>
-        <div class="tf"><small>Length</small><b>7 days</b></div>
-        <div class="tf"><small>From</small><b>$2,390</b></div>
+        <div class="tf"><small><span data-en>Journey</span><span data-ko>상품</span></small><b><span data-en>Naadam Festival</span><span data-ko>나담 축제</span></b></div>
+        <div class="tf"><small><span data-en>Dates</span><span data-ko>일정</span></small><b><span data-en>9–15 Jul</span><span data-ko>7월 9–15일</span></b></div>
+        <div class="tf"><small><span data-en>Length</span><span data-ko>기간</span></small><b><span data-en>7 days</span><span data-ko>7일</span></b></div>
+        <div class="tf"><small><span data-en>From</span><span data-ko>가격</span></small><b><span data-en>$2,390</span><span data-ko>$2,390~</span></b></div>
       </div>
-      <div class="ticket-go"><button class="btn btn-blue" type="button" data-trip="naadam">View journey <span class="arr">→</span></button></div>
+      <div class="ticket-go"><button class="btn btn-blue" type="button" data-trip="naadam"><span data-en>View journey</span><span data-ko>상품 보기</span> <span class="arr">→</span></button></div>
     </div>
   </div>
 
@@ -604,8 +685,9 @@ body[data-at="plan"] .chat-fab { opacity: 0; pointer-events: none; transform: tr
   <section class="section" id="destinations" aria-labelledby="dest-title" data-spy-for="destinations">
     <div class="wrap">
       <div class="sec-head" data-reveal>
-        <div class="sh"><span class="eyebrow">Destinations</span><h2 id="dest-title">Five landscapes, <em>one country</em></h2></div>
-        <p class="lede" style="max-width:40ch">From Siberian taiga to the Gobi Desert, in a country three times the size of France.</p>
+        <div class="sh"><span class="eyebrow"><span data-en>Destinations</span><span data-ko>여행지</span></span>
+          <h2 id="dest-title"><span data-en>Five landscapes, <em>one country</em></span><span data-ko>다섯 가지 풍경, <em>하나의 나라</em></span></h2></div>
+        <p class="lede" style="max-width:40ch"><span data-en>From Siberian taiga to the Gobi Desert, in a country three times the size of France.</span><span data-ko>시베리아 타이가부터 고비 사막까지, 한반도의 약 7배에 이르는 넓은 땅입니다.</span></p>
       </div>
       <div class="dest" id="dest" data-reveal></div>
     </div>
@@ -616,21 +698,22 @@ body[data-at="plan"] .chat-fab { opacity: 0; pointer-events: none; transform: tr
     <div class="khee edge-top" aria-hidden="true"></div>
     <div class="wrap">
       <div class="sec-head" data-reveal>
-        <div class="sh"><span class="eyebrow">Journeys</span><h2 id="j-title">Eight ways to <em>cross Mongolia</em></h2></div>
-        <p class="lede" style="max-width:44ch">Small-group departures or private trips on your dates. Open a journey for its route and day-by-day plan.</p>
+        <div class="sh"><span class="eyebrow"><span data-en>Journeys</span><span data-ko>여행 상품</span></span>
+          <h2 id="j-title"><span data-en>Eight ways to <em>cross Mongolia</em></span><span data-ko>몽골을 여행하는 <em>여덟 가지 방법</em></span></h2></div>
+        <p class="lede" style="max-width:44ch"><span data-en>Small-group departures or private trips on your dates. Open a journey for its route and day-by-day plan.</span><span data-ko>소규모 그룹 출발 또는 원하는 날짜의 단독 여행으로 진행합니다. 상품을 누르면 경로와 일정을 볼 수 있어요.</span></p>
       </div>
-      <div class="filters" role="group" aria-label="Filter journeys">
-        <button class="chip" type="button" data-filter="all" aria-pressed="true">All</button>
-        <button class="chip" type="button" data-filter="gobi" aria-pressed="false">Gobi</button>
-        <button class="chip" type="button" data-filter="north" aria-pressed="false">Khövsgöl &amp; north</button>
-        <button class="chip" type="button" data-filter="central" aria-pressed="false">Central</button>
-        <button class="chip" type="button" data-filter="west" aria-pressed="false">Altai &amp; far west</button>
-        <button class="chip" type="button" data-filter="winter" aria-pressed="false">Winter</button>
-        <button class="chip" type="button" data-filter="festival" aria-pressed="false">Festivals</button>
-        <button class="chip" type="button" data-filter="short" aria-pressed="false">Under a week</button>
+      <div class="filters tr" role="group" aria-label="Filter journeys" data-ko-aria-label="상품 필터">
+        <button class="chip" type="button" data-filter="all" aria-pressed="true"><span data-en>All</span><span data-ko>전체</span></button>
+        <button class="chip" type="button" data-filter="gobi" aria-pressed="false"><span data-en>Gobi</span><span data-ko>고비</span></button>
+        <button class="chip" type="button" data-filter="north" aria-pressed="false"><span data-en>Khövsgöl &amp; north</span><span data-ko>홉스골·북부</span></button>
+        <button class="chip" type="button" data-filter="central" aria-pressed="false"><span data-en>Central</span><span data-ko>중부</span></button>
+        <button class="chip" type="button" data-filter="west" aria-pressed="false"><span data-en>Altai &amp; far west</span><span data-ko>알타이·서부</span></button>
+        <button class="chip" type="button" data-filter="winter" aria-pressed="false"><span data-en>Winter</span><span data-ko>겨울</span></button>
+        <button class="chip" type="button" data-filter="festival" aria-pressed="false"><span data-en>Festivals</span><span data-ko>축제</span></button>
+        <button class="chip" type="button" data-filter="short" aria-pressed="false"><span data-en>Under a week</span><span data-ko>일주일 이내</span></button>
       </div>
       <div class="tgrid" id="tgrid"></div>
-      <p class="note">Prices are per person, twin share, in US dollars, excluding international flights.</p>
+      <p class="note"><span data-en>Prices are per person, twin share, in US dollars, excluding international flights.</span><span data-ko>가격은 2인 1실 기준 1인 요금(미국 달러)이며, 국제선 항공권은 포함되지 않습니다.</span></p>
     </div>
   </section>
 
@@ -638,14 +721,15 @@ body[data-at="plan"] .chat-fab { opacity: 0; pointer-events: none; transform: tr
   <section class="section bg-night" id="map" aria-labelledby="map-title" data-spy-for="map">
     <div class="wrap">
       <div class="sec-head" data-reveal>
-        <div class="sh"><span class="eyebrow">Route map</span><h2 id="map-title">From Altai glaciers <em>to Gobi dunes</em></h2></div>
-        <p class="lede" style="max-width:42ch">Mongolia has only a few thousand kilometres of paved road. Pick a journey to see where it goes.</p>
+        <div class="sh"><span class="eyebrow"><span data-en>Route map</span><span data-ko>경로 지도</span></span>
+          <h2 id="map-title"><span data-en>From Altai glaciers <em>to Gobi dunes</em></span><span data-ko>알타이 빙하에서 <em>고비 사막까지</em></span></h2></div>
+        <p class="lede" style="max-width:42ch"><span data-en>Mongolia has only a few thousand kilometres of paved road. Pick a journey to see where it goes.</span><span data-ko>몽골의 포장도로는 수천 km에 불과합니다. 상품을 선택하면 이동 경로를 볼 수 있어요.</span></p>
       </div>
       <div class="map-grid">
         <ul class="route-list" id="route-list"></ul>
         <div class="map-stage" data-reveal>
-          <svg class="map-dark" id="big-map" viewBox="0 0 900 450" role="img" aria-label="Map of Mongolia showing the selected journey route"></svg>
-          <div class="legend"><span><i></i>Overland</span><span><i class="f"></i>Domestic flight</span></div>
+          <svg class="map-dark tr" id="big-map" viewBox="0 0 900 450" role="img" aria-label="Map of Mongolia showing the selected journey route" data-ko-aria-label="선택한 상품의 경로를 보여 주는 몽골 지도"></svg>
+          <div class="legend"><span><i></i><span data-en>Overland</span><span data-ko>육로</span></span><span><i class="f"></i><span data-en>Domestic flight</span><span data-ko>국내선</span></span></div>
           <div class="route-sum" id="route-sum" aria-live="polite"></div>
         </div>
       </div>
@@ -658,13 +742,14 @@ body[data-at="plan"] .chat-fab { opacity: 0; pointer-events: none; transform: tr
   <section class="section" id="seasons" aria-labelledby="s-title" data-spy-for="seasons">
     <div class="wrap">
       <div class="sec-head" data-reveal>
-        <div class="sh"><span class="eyebrow">When to go</span><h2 id="s-title">Twelve months, <em>four different countries</em></h2></div>
-        <p class="lede" style="max-width:44ch">The coldest capital in the world has warm, long summers. Pick a month to see the weather and the festivals.</p>
+        <div class="sh"><span class="eyebrow"><span data-en>When to go</span><span data-ko>여행 시기</span></span>
+          <h2 id="s-title"><span data-en>Twelve months, <em>four different countries</em></span><span data-ko>열두 달, <em>네 개의 다른 나라</em></span></h2></div>
+        <p class="lede" style="max-width:44ch"><span data-en>The coldest capital in the world has warm, long summers. Pick a month to see the weather and the festivals.</span><span data-ko>세계에서 가장 추운 수도지만 여름은 따뜻하고 깁니다. 월을 선택하면 날씨와 축제를 볼 수 있어요.</span></p>
       </div>
       <div class="season-grid">
         <div class="chart-card" data-reveal>
-          <svg class="temp-chart" id="temp-chart" viewBox="0 0 640 340" role="group" aria-label="Average monthly temperature range in Ulaanbaatar. Select a month."></svg>
-          <p class="chart-note">Average daily low to high in Ulaanbaatar (1,350 m), °C. The Gobi runs warmer in summer; the north and the Altai run colder.</p>
+          <svg class="temp-chart tr" id="temp-chart" viewBox="0 0 640 340" role="group" aria-label="Average monthly temperature range in Ulaanbaatar. Select a month." data-ko-aria-label="울란바토르 월평균 기온. 월을 선택하세요."></svg>
+          <p class="chart-note"><span data-en>Average daily low to high in Ulaanbaatar (1,350 m), °C. The Gobi runs warmer in summer; the north and the Altai run colder.</span><span data-ko>울란바토르(해발 1,350m)의 월평균 최저·최고 기온(°C)입니다. 여름의 고비는 더 덥고, 북부와 알타이는 더 춥습니다.</span></p>
         </div>
         <article class="month-card" id="month-card" aria-live="polite" data-reveal></article>
       </div>
@@ -676,24 +761,24 @@ body[data-at="plan"] .chat-fab { opacity: 0; pointer-events: none; transform: tr
     <div class="khee edge-top" aria-hidden="true"></div>
     <div class="wrap">
       <div class="story">
-        <div class="story-img" data-reveal><div class="frame"><img class="plx" src="img/yurt.jpg" alt="Inside a family ger: painted orange furniture, a stove and a table set with bread and milk tea" loading="lazy"></div><span class="badge">Family stays on every journey</span></div>
+        <div class="story-img" data-reveal><div class="frame"><img class="plx tr" src="img/yurt.jpg" alt="Inside a family ger: painted orange furniture, a stove and a table set with bread and milk tea" data-ko-alt="유목민 가족의 게르 내부: 주황색으로 칠한 가구, 난로, 빵과 수테차가 차려진 식탁" loading="lazy"></div><span class="badge"><span data-en>Family stays on every journey</span><span data-ko>모든 여행에 유목민 가정 숙박</span></span></div>
         <div class="story-copy" data-reveal>
-          <span class="eyebrow">Stay with herders</span>
-          <h2 id="e-title">The door of a ger <em>always faces south</em></h2>
-          <p class="lede">Guests sit on the west side, the stove burns at the centre and there is always milk tea. You help with the milking, learn to saddle a horse and pay your hosts directly.</p>
+          <span class="eyebrow"><span data-en>Stay with herders</span><span data-ko>유목민과 함께</span></span>
+          <h2 id="e-title"><span data-en>The door of a ger <em>always faces south</em></span><span data-ko>게르의 문은 <em>언제나 남쪽을 향합니다</em></span></h2>
+          <p class="lede"><span data-en>Guests sit on the west side, the stove burns at the centre and there is always milk tea. You help with the milking, learn to saddle a horse and pay your hosts directly.</span><span data-ko>손님은 서쪽에 앉고, 가운데에는 난로가 타오르며, 언제나 수테차(몽골식 우유차)가 있습니다. 젖 짜기를 돕고, 말안장 얹는 법을 배우고, 숙박비는 가족에게 직접 전달됩니다.</span></p>
           <ul class="customs">
-            <li><span>1</span><p>Step over the threshold, never on it.</p></li>
-            <li><span>2</span><p>Accept a bowl with your right hand, the left lightly supporting the elbow.</p></li>
-            <li><span>3</span><p>Move clockwise inside the ger, following the sun.</p></li>
+            <li><span>1</span><p><span data-en>Step over the threshold, never on it.</span><span data-ko>문지방은 밟지 말고 넘어가세요.</span></p></li>
+            <li><span>2</span><p><span data-en>Accept a bowl with your right hand, the left lightly supporting the elbow.</span><span data-ko>그릇은 오른손으로 받고, 왼손으로 오른쪽 팔꿈치를 가볍게 받쳐 주세요.</span></p></li>
+            <li><span>3</span><p><span data-en>Move clockwise inside the ger, following the sun.</span><span data-ko>게르 안에서는 해가 도는 방향인 시계 방향으로 움직이세요.</span></p></li>
           </ul>
         </div>
       </div>
       <div class="mosaic" data-reveal>
-        <figure><img src="img/naadam.jpg" alt="A young jockey on a grey horse at the Naadam horse race" loading="lazy"><figcaption>Naadam horse race · July</figcaption></figure>
-        <figure><img src="img/yak.jpg" alt="A long-haired yak grazing in Yolyn Am" loading="lazy"><figcaption>Yolyn Am</figcaption></figure>
-        <figure><img src="img/bayanzag.jpg" alt="Red sandstone cliffs of Bayanzag" loading="lazy"><figcaption>Flaming Cliffs</figcaption></figure>
-        <figure><img src="img/terelj.jpg" alt="Green valleys and forested ridges of Gorkhi-Terelj National Park" loading="lazy"><figcaption>Gorkhi-Terelj</figcaption></figure>
-        <figure><img src="img/yolyn.jpg" alt="Horse riders in a wide valley below rocky hills" loading="lazy"><figcaption>Gurvan Saikhan</figcaption></figure>
+        <figure><img class="tr" src="img/naadam.jpg" alt="A young jockey on a grey horse at the Naadam horse race" data-ko-alt="나담 말 경주에서 회색 말을 탄 어린 기수" loading="lazy"><figcaption><span data-en>Naadam horse race · July</span><span data-ko>나담 말 경주 · 7월</span></figcaption></figure>
+        <figure><img class="tr" src="img/yak.jpg" alt="A long-haired yak grazing in Yolyn Am" data-ko-alt="욜링암에서 풀을 뜯는 털이 긴 야크" loading="lazy"><figcaption><span data-en>Yolyn Am</span><span data-ko>욜링암</span></figcaption></figure>
+        <figure><img class="tr" src="img/bayanzag.jpg" alt="Red sandstone cliffs of Bayanzag" data-ko-alt="바양작의 붉은 사암 절벽" loading="lazy"><figcaption><span data-en>Flaming Cliffs</span><span data-ko>불타는 절벽</span></figcaption></figure>
+        <figure><img class="tr" src="img/terelj.jpg" alt="Green valleys and forested ridges of Gorkhi-Terelj National Park" data-ko-alt="고르히-테를지 국립공원의 푸른 계곡과 숲" loading="lazy"><figcaption><span data-en>Gorkhi-Terelj</span><span data-ko>테를지</span></figcaption></figure>
+        <figure><img class="tr" src="img/yolyn.jpg" alt="Horse riders in a wide valley below rocky hills" data-ko-alt="바위 언덕 아래 넓은 계곡의 말 탄 사람들" loading="lazy"><figcaption><span data-en>Gurvan Saikhan</span><span data-ko>고르왕사이항</span></figcaption></figure>
       </div>
     </div>
   </section>
@@ -702,24 +787,25 @@ body[data-at="plan"] .chat-fab { opacity: 0; pointer-events: none; transform: tr
     <div class="khee gold edge-top" aria-hidden="true"></div>
     <div class="wrap">
       <div class="sec-head" data-reveal>
-        <div class="sh"><span class="eyebrow">The steppe in motion</span><h2 id="r-title">Herds, horses <em>and hunters</em></h2></div>
-        <p class="lede" style="max-width:44ch">Herders still count their wealth in the five kinds of livestock: horses, camels, cattle, sheep and goats.</p>
+        <div class="sh"><span class="eyebrow"><span data-en>The steppe in motion</span><span data-ko>움직이는 초원</span></span>
+          <h2 id="r-title"><span data-en>Herds, horses <em>and hunters</em></span><span data-ko>가축, 말, <em>그리고 사냥꾼</em></span></h2></div>
+        <p class="lede" style="max-width:44ch"><span data-en>Herders still count their wealth in the five kinds of livestock: horses, camels, cattle, sheep and goats.</span><span data-ko>유목민들은 지금도 말, 낙타, 소, 양, 염소 다섯 가지 가축으로 재산을 셉니다.</span></p>
       </div>
       <div class="reels">
-        <figure class="reel" data-reveal><div class="reel-frame"><video src="video/horses.mp4" poster="video/horses.jpg" muted loop playsinline preload="metadata" aria-label="A herd of dark horses galloping across green steppe below a rocky hill"></video><button class="vt" type="button" aria-label="Pause video"></button></div><figcaption><strong>A herd at full gallop</strong><span>Summer pasture</span></figcaption></figure>
-        <figure class="reel" data-reveal><div class="reel-frame"><video src="video/eagle.mp4" poster="video/eagle.jpg" muted loop playsinline preload="metadata" aria-label="An eagle hunter riding a chestnut horse with a golden eagle raised on his arm"></video><button class="vt" type="button" aria-label="Pause video"></button></div><figcaption><strong>Eagle hunter on horseback</strong><span>A Kazakh tradition of the far west</span></figcaption></figure>
-        <figure class="reel" data-reveal><div class="reel-frame"><video src="video/herd.mp4" poster="video/herd.jpg" muted loop playsinline preload="metadata" aria-label="Hundreds of sheep and goats grazing on a wide green plain below misty mountains"></video><button class="vt" type="button" aria-label="Pause video"></button></div><figcaption><strong>Sheep and goats before the rain</strong><span>A mixed herd on open steppe</span></figcaption></figure>
+        <figure class="reel" data-reveal><div class="reel-frame"><video class="tr" src="video/horses.mp4" poster="video/horses.jpg" muted loop playsinline preload="metadata" aria-label="A herd of dark horses galloping across green steppe below a rocky hill" data-ko-aria-label="바위 언덕 아래 초원을 달리는 말 떼"></video><button class="vt" type="button"></button></div><figcaption><strong><span data-en>A herd at full gallop</span><span data-ko>전속력으로 달리는 말 떼</span></strong><span><span data-en>Summer pasture</span><span data-ko>여름 초원</span></span></figcaption></figure>
+        <figure class="reel" data-reveal><div class="reel-frame"><video class="tr" src="video/eagle.mp4" poster="video/eagle.jpg" muted loop playsinline preload="metadata" aria-label="An eagle hunter riding a chestnut horse with a golden eagle raised on his arm" data-ko-aria-label="팔에 검독수리를 올리고 밤색 말을 탄 독수리 사냥꾼"></video><button class="vt" type="button"></button></div><figcaption><strong><span data-en>Eagle hunter on horseback</span><span data-ko>말 위의 독수리 사냥꾼</span></strong><span><span data-en>A Kazakh tradition of the far west</span><span data-ko>서부 카자흐족의 전통</span></span></figcaption></figure>
+        <figure class="reel" data-reveal><div class="reel-frame"><video class="tr" src="video/herd.mp4" poster="video/herd.jpg" muted loop playsinline preload="metadata" aria-label="Hundreds of sheep and goats grazing on a wide green plain below misty mountains" data-ko-aria-label="안개 낀 산 아래 넓은 초원에서 풀을 뜯는 수백 마리의 양과 염소"></video><button class="vt" type="button"></button></div><figcaption><strong><span data-en>Sheep and goats before the rain</span><span data-ko>비 오기 전의 양과 염소</span></strong><span><span data-en>A mixed herd on open steppe</span><span data-ko>탁 트인 초원의 가축 떼</span></span></figcaption></figure>
       </div>
     </div>
   </section>
 
   <!-- Proverb -->
-  <section class="proverb" aria-label="Mongolian proverb" data-spy-for="experience">
+  <section class="proverb tr" aria-label="Mongolian proverb" data-ko-aria-label="몽골 속담" data-spy-for="experience">
     <img class="plx" src="img/naadam.jpg" alt="" loading="lazy">
     <div class="wrap" data-reveal>
-      <span class="mono">Mongolian proverb</span>
+      <span class="mono"><span data-en>Mongolian proverb</span><span data-ko>몽골 속담</span></span>
       <p class="mn" lang="mn">Хүн болох багаасаа, хүлэг болох унаганаасаа</p>
-      <blockquote>You can tell the person from the child, and the great horse from the foal.</blockquote>
+      <blockquote><span data-en>You can tell the person from the child, and the great horse from the foal.</span><span data-ko>사람은 어릴 때부터, 준마는 망아지 때부터 알아본다.</span></blockquote>
     </div>
   </section>
 
@@ -727,16 +813,16 @@ body[data-at="plan"] .chat-fab { opacity: 0; pointer-events: none; transform: tr
   <section class="section" aria-labelledby="why-title" data-spy-for="">
     <div class="wrap why-grid">
       <div class="why-copy" data-reveal>
-        <span class="eyebrow">Why Golden Jigu</span>
-        <h2 id="why-title">Travel with people who <em>call the steppe home</em></h2>
-        <p class="lede">We are a Mongolian team in Ulaanbaatar. We plan every route ourselves, work with herding families we have known for years and pay them fairly.</p>
-        <div class="facts mono"><span><b>1,564,116</b> km²</span><span><b>~2</b> people per km²</span><span>More horses than people</span></div>
+        <span class="eyebrow"><span data-en>Why Golden Jigu</span><span data-ko>골든지구투어를 선택하는 이유</span></span>
+        <h2 id="why-title"><span data-en>Travel with people who <em>call the steppe home</em></span><span data-ko>초원을 <em>고향으로 둔 사람들</em>과 함께 떠나세요</span></h2>
+        <p class="lede"><span data-en>We are a Mongolian team in Ulaanbaatar. We plan every route ourselves, work with herding families we have known for years and pay them fairly.</span><span data-ko>저희는 울란바토르의 몽골인 팀입니다. 모든 경로를 직접 기획하고, 오랜 인연의 유목민 가족들과 함께하며 정당한 대가를 지불합니다.</span></p>
+        <div class="facts mono"><span><b>1,564,116</b> km²</span><span data-en><b>~2</b> people per km²</span><span data-ko>km²당 약 <b>2</b>명</span><span data-en>More horses than people</span><span data-ko>사람보다 말이 더 많은 나라</span></div>
       </div>
       <div class="promise" data-reveal>
-        <div><strong>8</strong><h3>Guests at most</h3><p>One vehicle, one guide, one table at dinner.</p></div>
-        <div><strong>100%</strong><h3>Mongolian guides</h3><p>Trained in wilderness first aid.</p></div>
-        <div><strong>4×4</strong><h3>Proper vehicles</h3><p>Land Cruisers and the classic UAZ van.</p></div>
-        <div><strong>24/7</strong><h3>Support on the ground</h3><p>Satellite phones on remote routes.</p></div>
+        <div><strong>8</strong><h3><span data-en>Guests at most</span><span data-ko>최대 인원</span></h3><p><span data-en>One vehicle, one guide, one table at dinner.</span><span data-ko>차량 한 대, 가이드 한 명, 저녁은 한 식탁에서.</span></p></div>
+        <div><strong>100%</strong><h3><span data-en>Mongolian guides</span><span data-ko>몽골인 가이드</span></h3><p><span data-en>Trained in wilderness first aid.</span><span data-ko>야외 응급처치 교육 이수.</span></p></div>
+        <div><strong>4×4</strong><h3><span data-en>Proper vehicles</span><span data-ko>든든한 차량</span></h3><p><span data-en>Land Cruisers and the classic UAZ van.</span><span data-ko>랜드크루저와 몽골의 명물 푸르공.</span></p></div>
+        <div><strong>24/7</strong><h3><span data-en>Support on the ground</span><span data-ko>현지 지원</span></h3><p><span data-en>Satellite phones on remote routes.</span><span data-ko>오지 구간에서는 위성전화 지참.</span></p></div>
       </div>
     </div>
   </section>
@@ -746,19 +832,20 @@ body[data-at="plan"] .chat-fab { opacity: 0; pointer-events: none; transform: tr
     <div class="khee edge-top" aria-hidden="true"></div>
     <div class="wrap">
       <div class="sec-head" data-reveal>
-        <div class="sh"><span class="eyebrow">Help centre</span><h2 id="h-title">Questions travellers <em>ask us</em></h2></div>
+        <div class="sh"><span class="eyebrow"><span data-en>Help centre</span><span data-ko>고객센터</span></span>
+          <h2 id="h-title"><span data-en>Questions travellers <em>ask us</em></span><span data-ko>자주 묻는 <em>질문</em></span></h2></div>
         <p class="lede" id="faq-count" style="max-width:40ch"></p>
       </div>
       <div class="faq-grid">
         <aside class="faq-side">
-          <ul class="faq-cats" id="faq-cats" aria-label="Question topics"></ul>
-          <div class="side-card"><strong>Still need help?</strong><p>Planners reply within one working day, Monday to Saturday, Ulaanbaatar time (UTC+8).</p><a href="#plan">Ask a question →</a></div>
+          <ul class="faq-cats tr" id="faq-cats" aria-label="Question topics" data-ko-aria-label="질문 주제"></ul>
+          <div class="side-card"><strong><span data-en>Still need help?</span><span data-ko>더 궁금한 점이 있나요?</span></strong><p><span data-en>Planners reply within one working day, Monday to Saturday, Ulaanbaatar time (UTC+8).</span><span data-ko>플래너가 영업일 기준 하루 안에 답변드립니다. 월–토, 울란바토르 시간(UTC+8, 한국보다 1시간 느림).</span></p><a href="#plan"><span data-en>Ask a question →</span><span data-ko>문의하기 →</span></a></div>
         </aside>
         <div>
           <div class="faq-search">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-            <label for="faq-q" class="sr-only">Search questions</label>
-            <input id="faq-q" type="search" placeholder="Search, e.g. visa, cancellation, cold" autocomplete="off">
+            <label for="faq-q" class="sr-only"><span data-en>Search questions</span><span data-ko>질문 검색</span></label>
+            <input id="faq-q" class="tr" type="search" placeholder="Search, e.g. visa, cancellation, cold" data-ko-placeholder="검색 (예: 비자, 취소, 추위)" autocomplete="off">
           </div>
           <div id="faq-list"></div>
         </div>
@@ -771,53 +858,66 @@ body[data-at="plan"] .chat-fab { opacity: 0; pointer-events: none; transform: tr
     <div class="khee gold edge-top" aria-hidden="true"></div>
     <div class="wrap plan-grid">
       <div class="plan-copy" data-reveal>
-        <span class="eyebrow">Plan your journey</span>
-        <h2 id="p-title">Your Mongolia starts with <em>one message</em></h2>
-        <p class="lede">No payment needed to ask. A planner in Ulaanbaatar replies within one working day with a route and a price.</p>
+        <span class="eyebrow"><span data-en>Plan your journey</span><span data-ko>여행 문의</span></span>
+        <h2 id="p-title"><span data-en>Your Mongolia starts with <em>one message</em></span><span data-ko>당신의 몽골 여행은 <em>메시지 하나</em>로 시작됩니다</span></h2>
+        <p class="lede"><span data-en>No payment needed to ask. A planner in Ulaanbaatar replies within one working day with a route and a price.</span><span data-ko>문의는 무료입니다. 울란바토르의 플래너가 영업일 하루 안에 경로와 견적을 보내 드립니다.</span></p>
         <ol class="steps">
-          <li><div><h3>Tell us your dates</h3><p>When you can travel, who is coming and what you hope to see.</p></div></li>
-          <li><div><h3>Get a draft itinerary</h3><p>A route, a price and honest advice within one working day.</p></div></li>
-          <li><div><h3>Shape it together</h3><p>Add a horse trek or slow the pace. A 20% deposit confirms your place.</p></div></li>
-          <li><div><h3>Land in Ulaanbaatar</h3><p>Your guide meets you at Chinggis Khaan International Airport.</p></div></li>
+          <li><div><h3><span data-en>Tell us your dates</span><span data-ko>날짜를 알려 주세요</span></h3><p><span data-en>When you can travel, who is coming and what you hope to see.</span><span data-ko>여행 가능한 날짜, 인원, 보고 싶은 것을 알려 주세요.</span></p></div></li>
+          <li><div><h3><span data-en>Get a draft itinerary</span><span data-ko>일정 초안 받기</span></h3><p><span data-en>A route, a price and honest advice within one working day.</span><span data-ko>영업일 하루 안에 경로, 견적, 솔직한 조언을 보내 드립니다.</span></p></div></li>
+          <li><div><h3><span data-en>Shape it together</span><span data-ko>함께 다듬기</span></h3><p><span data-en>Add a horse trek or slow the pace. A 20% deposit confirms your place.</span><span data-ko>승마를 추가하거나 일정을 여유롭게 바꿀 수 있어요. 20% 예약금으로 확정됩니다.</span></p></div></li>
+          <li><div><h3><span data-en>Land in Ulaanbaatar</span><span data-ko>울란바토르 도착</span></h3><p><span data-en>Your guide meets you at Chinggis Khaan International Airport.</span><span data-ko>칭기스칸 국제공항에서 가이드가 마중합니다.</span></p></div></li>
         </ol>
         <div class="contact">
-          <div class="contact-row"><span id="email-text">hello@goldenjigutour.com</span><button class="copy" type="button" id="copy-email">Copy</button></div>
-          <div class="contact-row"><span>+976 7011 0000 · WhatsApp</span></div>
+          <div class="contact-btns">
+            <a class="kakao-btn" data-kakao href="#" target="_blank" rel="noopener" hidden><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.8 1.9 5.3 4.7 6.7l-.9 3.8 4.3-2.8c.6.1 1.2.1 1.9.1 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg><span data-en>Chat on KakaoTalk</span><span data-ko>카카오톡으로 상담하기</span></a>
+            <a class="wa-btn" data-wa href="#" target="_blank" rel="noopener" hidden><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg>WhatsApp</a>
+          </div>
+          <div class="contact-row"><span id="email-text" data-email-text>hello@goldenjigutour.com</span><button class="copy" type="button" id="copy-email"></button></div>
         </div>
       </div>
       <form class="inq" id="inq-form" novalidate data-reveal>
-        <h3 class="full">Send an inquiry</h3>
-        <div class="field"><label for="f-name">Full name</label><input id="f-name" name="name" autocomplete="name" placeholder="Anna Schmidt" required><span class="err" id="e-name"></span></div>
-        <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" placeholder="anna@example.com" required><span class="err" id="e-email"></span></div>
-        <div class="field"><label for="f-trip">Journey</label><select id="f-trip" name="trip"><option value="">Not sure yet</option></select></div>
-        <div class="field"><label for="f-month">Preferred month</label><select id="f-month" name="month"></select></div>
-        <div class="field"><label for="f-size">Travellers</label><input id="f-size" name="size" type="number" min="1" max="20" value="2"></div>
-        <div class="field"><label for="f-style">Trip style</label><select id="f-style" name="style"><option>Small group</option><option>Private</option></select></div>
-        <div class="field full"><label for="f-msg">Anything else?</label><textarea id="f-msg" name="msg" placeholder="We'd love to ride horses and stay with a family for a night."></textarea></div>
-        <div class="form-actions full"><button class="btn btn-blue" type="submit">Send inquiry <span class="arr">→</span></button><small>We never share your details.</small></div>
+        <h3 class="full"><span data-en>Send an inquiry</span><span data-ko>문의 보내기</span></h3>
+        <div class="field"><label for="f-name"><span data-en>Full name</span><span data-ko>이름</span></label><input id="f-name" class="tr" name="name" autocomplete="name" placeholder="Anna Schmidt" data-ko-placeholder="홍길동" required><span class="err" id="e-name"></span></div>
+        <div class="field"><label for="f-email"><span data-en>Email</span><span data-ko>이메일</span></label><input id="f-email" name="email" type="email" autocomplete="email" placeholder="name@example.com" required><span class="err" id="e-email"></span></div>
+        <div class="field"><label for="f-trip"><span data-en>Journey</span><span data-ko>상품</span></label><select id="f-trip" name="trip"></select></div>
+        <div class="field"><label for="f-month"><span data-en>Preferred month</span><span data-ko>희망 월</span></label><select id="f-month" name="month"></select></div>
+        <div class="field"><label for="f-size"><span data-en>Travellers</span><span data-ko>인원</span></label><input id="f-size" name="size" type="number" min="1" max="20" value="2"></div>
+        <div class="field"><label for="f-style"><span data-en>Trip style</span><span data-ko>여행 형태</span></label><select id="f-style" name="style"></select></div>
+        <div class="field full"><label for="f-msg"><span data-en>Anything else?</span><span data-ko>요청 사항</span></label><textarea id="f-msg" class="tr" name="msg" placeholder="We'd love to ride horses and stay with a family for a night." data-ko-placeholder="승마를 하고 유목민 가족과 하룻밤 지내고 싶어요."></textarea></div>
+        <input type="checkbox" id="f-bot" name="botcheck" class="sr-only" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <p class="form-status" id="f-status" role="status"></p>
+        <div class="form-actions full"><button class="btn btn-blue" type="submit"><span data-en>Send inquiry</span><span data-ko>문의 보내기</span> <span class="arr">→</span></button><small><span data-en>We only use your details to answer you.</span><span data-ko>개인정보는 문의 답변에만 사용합니다.</span></small></div>
       </form>
     </div>
   </section>
 </main>
 
 <dialog class="modal" id="trip-modal" aria-labelledby="m-title">
-  <button class="m-close" type="button" id="m-close" aria-label="Close">×</button>
+  <button class="m-close tr" type="button" id="m-close" aria-label="Close" data-ko-aria-label="닫기">×</button>
   <div class="m-grid">
     <div class="m-media">
       <img id="m-img" src="img/dunes2.jpg" alt="">
       <div class="m-map">
-        <svg id="m-map" viewBox="0 0 900 450" role="img" aria-label="Route map"></svg>
-        <div class="legend"><span><i></i>Overland</span><span><i class="f"></i>Domestic flight</span><span class="mono" id="m-km"></span></div>
+        <svg class="tr" id="m-map" viewBox="0 0 900 450" role="img" aria-label="Route map" data-ko-aria-label="경로 지도"></svg>
+        <div class="legend"><span><i></i><span data-en>Overland</span><span data-ko>육로</span></span><span><i class="f"></i><span data-en>Domestic flight</span><span data-ko>국내선</span></span><span class="mono" id="m-km"></span></div>
       </div>
     </div>
     <div class="m-body" id="m-body"></div>
   </div>
 </dialog>
 
-<a class="chat-fab" href="#plan" aria-label="Chat with a planner">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 10h8M8 13h5"/></svg>
-  <span>Chat with a planner</span>
-</a>
+<div class="dock" id="dock">
+  <div class="dock-menu" id="dock-menu" hidden>
+    <a class="dock-item" data-kakao href="#" target="_blank" rel="noopener" hidden><span class="ic kakao"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.8 1.9 5.3 4.7 6.7l-.9 3.8 4.3-2.8c.6.1 1.2.1 1.9.1 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg></span><span><span data-en>KakaoTalk</span><span data-ko>카카오톡 상담</span></span></a>
+    <a class="dock-item" data-wa href="#" target="_blank" rel="noopener" hidden><span class="ic wa"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg></span><span>WhatsApp</span></a>
+    <a class="dock-item" data-email href="mailto:hello@goldenjigutour.com"><span class="ic mail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span><span><span data-en>Email</span><span data-ko>이메일</span><small data-email-text>hello@goldenjigutour.com</small></span></a>
+    <a class="dock-item" href="#plan"><span class="ic form"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h8M4 6h.01M4 12h.01M4 18h.01"/></svg></span><span><span data-en>Inquiry form</span><span data-ko>문의 양식</span></span></a>
+  </div>
+  <button class="chat-fab" id="dock-btn" type="button" aria-expanded="false" aria-controls="dock-menu">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 10h8M8 13h5"/></svg>
+    <span><span data-en>Chat with us</span><span data-ko>상담하기</span></span>
+  </button>
+</div>
 
 <footer>
   <span class="foot-script" aria-hidden="true">ᠮᠣᠩᠭᠣᠯ</span>
@@ -827,15 +927,24 @@ body[data-at="plan"] .chat-fab { opacity: 0; pointer-events: none; transform: tr
         <svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="16" fill="#1150b0"/><circle cx="17" cy="12" r="4" fill="#f4b93a"/><path d="M4 23c4-4 8-6 13-6s9 2 13 6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></svg>
         Golden Jigu Tour
       </a>
-      <p style="max-width:40ch">A Mongolian travel company based in Ulaanbaatar, running small-group and private journeys across the country.</p>
+      <p style="max-width:40ch"><span data-en>A Mongolian travel company based in Ulaanbaatar, running small-group and private journeys across the country.</span><span data-ko>울란바토르에 기반을 둔 몽골 여행사로, 몽골 전역에서 소규모 그룹 여행과 단독 여행을 운영합니다.</span></p>
     </div>
-    <div><h4>Explore</h4><ul><li><a href="#destinations">Destinations</a></li><li><a href="#journeys">Journeys</a></li><li><a href="#map">Route map</a></li><li><a href="#seasons">When to go</a></li><li><a href="#help">Help centre</a></li></ul></div>
-    <div><h4>Contact</h4><ul><li class="mono">hello@goldenjigutour.com</li><li class="mono">+976 7011 0000</li><li>Seoul Street 21, Ulaanbaatar</li><li><a href="#plan">Send an inquiry →</a></li></ul></div>
+    <div><h4><span data-en>Explore</span><span data-ko>둘러보기</span></h4><ul>
+      <li><a href="#destinations"><span data-en>Destinations</span><span data-ko>여행지</span></a></li>
+      <li><a href="#journeys"><span data-en>Journeys</span><span data-ko>여행 상품</span></a></li>
+      <li><a href="#map"><span data-en>Route map</span><span data-ko>경로 지도</span></a></li>
+      <li><a href="#seasons"><span data-en>When to go</span><span data-ko>여행 시기</span></a></li>
+      <li><a href="#help"><span data-en>Help centre</span><span data-ko>고객센터</span></a></li></ul></div>
+    <div><h4><span data-en>Contact</span><span data-ko>연락처</span></h4><ul>
+      <li class="mono" data-email-text>hello@goldenjigutour.com</li>
+      <li><a data-kakao href="#" target="_blank" rel="noopener" hidden><span data-en>KakaoTalk channel</span><span data-ko>카카오톡 채널</span></a></li>
+      <li><span data-en>Ulaanbaatar, Mongolia</span><span data-ko>몽골 울란바토르</span></li>
+      <li><a href="#plan"><span data-en>Send an inquiry →</span><span data-ko>문의 보내기 →</span></a></li></ul></div>
   </div>
   <div class="wrap foot-base">
     <span>© 2026 Golden Jigu Tour</span>
     <details>
-      <summary>Photo credits</summary>
+      <summary><span data-en>Photo credits</span><span data-ko>사진 출처</span></summary>
       <p class="credits">Videos © Golden Jigu Tour. Photos via Wikimedia Commons:
         <a href="https://commons.wikimedia.org/wiki/File:Camels_at_Khongoryn_Els_01.jpg" target="_blank" rel="noopener">Khongoryn Els</a>, <a href="https://commons.wikimedia.org/wiki/File:Khongoryn_Els_05.jpg" target="_blank" rel="noopener">dunes</a>, <a href="https://commons.wikimedia.org/wiki/File:Naadam_2023_-_Horse_racing_09.jpg" target="_blank" rel="noopener">Naadam</a>, <a href="https://commons.wikimedia.org/wiki/File:Yurt_in_Orkhon_Valley.jpg" target="_blank" rel="noopener">ger interior</a>, <a href="https://commons.wikimedia.org/wiki/File:Yolyn_Am_02.jpg" target="_blank" rel="noopener">Yolyn Am</a>, <a href="https://commons.wikimedia.org/wiki/File:Yak_at_Yolyn_Am_03.jpg" target="_blank" rel="noopener">yak</a>, <a href="https://commons.wikimedia.org/wiki/File:Bayanzag_09.jpg" target="_blank" rel="noopener">Bayanzag</a> by Bernard Gagnon (CC0);
         <a href="https://commons.wikimedia.org/wiki/File:On_Lake_Hovsgol_(3756943119).jpg" target="_blank" rel="noopener">Lake Khövsgöl</a> by lamoix (CC BY 2.0);
@@ -853,128 +962,197 @@ body[data-at="plan"] .chat-fab { opacity: 0; pointer-events: none; transform: tr
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const root = document.documentElement;
+  let lang = root.lang === "ko" ? "ko" : "en";
+  const T = (en, ko) => lang === "ko" ? ko : en;
   const usd = n => "$" + n.toLocaleString("en-US");
-  const esc = t => t.replace(/[&<>"]/g, ch => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[ch]));
+  const esc = t => String(t).replace(/[&<>"]/g, ch => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[ch]));
+
+  /* ---------- Settings: fill these in ---------- */
+  const CONFIG = {
+    formKey: "",   // Web3Forms access key: inquiries are emailed to the address the key was created with
+    kakao: "",     // KakaoTalk Channel chat link, e.g. "https://pf.kakao.com/_xxxxxx/chat"
+    whatsapp: "",  // WhatsApp number with country code, digits only, e.g. "97699112233"
+    email: "hello@goldenjigutour.com"
+  };
 
   /* ---------- Data ---------- */
   const PLACES = {
-    ub:         { name: "Ulaanbaatar",      lat: 47.92, lon: 106.92, cap: true },
-    terelj:     { name: "Terelj",           lat: 47.98, lon: 107.45 },
-    khustai:    { name: "Khustai",          lat: 47.72, lon: 105.88 },
-    elsen:      { name: "Elsen Tasarkhai",  lat: 47.36, lon: 103.67 },
-    kharkhorin: { name: "Kharkhorin",       lat: 47.20, lon: 102.82 },
-    orkhon:     { name: "Orkhon Waterfall", lat: 46.78, lon: 101.96 },
-    tsagaan:    { name: "Tsagaan Suvarga",  lat: 44.59, lon: 105.77 },
-    yolyn:      { name: "Yolyn Am",         lat: 43.49, lon: 104.07 },
-    khongor:    { name: "Khongoryn Els",    lat: 43.78, lon: 102.30 },
-    bayanzag:   { name: "Bayanzag",         lat: 44.14, lon: 103.72 },
-    amar:       { name: "Amarbayasgalant",  lat: 49.48, lon: 105.08 },
-    murun:      { name: "Mörön",            lat: 49.64, lon: 100.16 },
-    khuvsgul:   { name: "Lake Khövsgöl",    lat: 50.70, lon: 100.40 },
-    tsaatan:    { name: "Darkhad",          lat: 51.30, lon: 99.40 },
-    olgii:      { name: "Ölgii",            lat: 48.97, lon: 89.97 },
-    tavanbogd:  { name: "Tavan Bogd",       lat: 49.15, lon: 87.85 }
+    ub:         { name: "Ulaanbaatar",      ko: "울란바토르",       lat: 47.92, lon: 106.92, cap: true },
+    terelj:     { name: "Terelj",           ko: "테를지",           lat: 47.98, lon: 107.45 },
+    khustai:    { name: "Khustai",          ko: "후스타이",         lat: 47.72, lon: 105.88 },
+    elsen:      { name: "Elsen Tasarkhai",  ko: "엘승타사르해",     lat: 47.36, lon: 103.67 },
+    kharkhorin: { name: "Kharkhorin",       ko: "하라호름",         lat: 47.20, lon: 102.82 },
+    orkhon:     { name: "Orkhon Waterfall", ko: "오르홍 폭포",      lat: 46.78, lon: 101.96 },
+    tsagaan:    { name: "Tsagaan Suvarga",  ko: "차강소브라가",     lat: 44.59, lon: 105.77 },
+    yolyn:      { name: "Yolyn Am",         ko: "욜링암",           lat: 43.49, lon: 104.07 },
+    khongor:    { name: "Khongoryn Els",    ko: "홍고린 엘스",      lat: 43.78, lon: 102.30 },
+    bayanzag:   { name: "Bayanzag",         ko: "바양작",           lat: 44.14, lon: 103.72 },
+    amar:       { name: "Amarbayasgalant",  ko: "아마르바야스갈랑트", lat: 49.48, lon: 105.08 },
+    murun:      { name: "Mörön",            ko: "무릉",             lat: 49.64, lon: 100.16 },
+    khuvsgul:   { name: "Lake Khövsgöl",    ko: "홉스골 호수",      lat: 50.70, lon: 100.40 },
+    tsaatan:    { name: "Darkhad",          ko: "다르하드",         lat: 51.30, lon: 99.40 },
+    olgii:      { name: "Ölgii",            ko: "울기",             lat: 48.97, lon: 89.97 },
+    tavanbogd:  { name: "Tavan Bogd",       ko: "타반복드",         lat: 49.15, lon: 87.85 }
   };
 
-  // Route legs prefixed with "~" are domestic flights.
+  // Route legs prefixed with "~" are domestic flights. Each trip carries its Korean text in `ko`.
   const TRIPS = [
     { id: "gobi", name: "Gobi Crossing", days: 8, season: "May–Sep", level: "Moderate", price: 1890, img: "img/dunes2.jpg", tag: "Desert", cats: ["gobi", "adventure"],
       text: "Climb the singing dunes of Khongoryn Els, walk the ice gorge of Yolyn Am and look for dinosaur fossils at the Flaming Cliffs.",
       route: ["ub", "tsagaan", "yolyn", "khongor", "bayanzag", "ub"],
-      plan: [["1", "Drive south from Ulaanbaatar to the striped cliffs of Tsagaan Suvarga."], ["2–3", "Walk the narrow ice gorge of Yolyn Am in Gurvan Saikhan National Park."], ["4–5", "Climb the Khongoryn Els dunes at sunset and ride Bactrian camels with a herding family."], ["6", "Explore Bayanzag, where the first dinosaur eggs were found in 1923."], ["7–8", "Head north across the steppe with a night in a family ger, then back to Ulaanbaatar."]] },
+      plan: [["1", "Drive south from Ulaanbaatar to the striped cliffs of Tsagaan Suvarga."], ["2–3", "Walk the narrow ice gorge of Yolyn Am in Gurvan Saikhan National Park."], ["4–5", "Climb the Khongoryn Els dunes at sunset and ride Bactrian camels with a herding family."], ["6", "Explore Bayanzag, where the first dinosaur eggs were found in 1923."], ["7–8", "Head north across the steppe with a night in a family ger, then back to Ulaanbaatar."]],
+      ko: { name: "고비 사막 횡단", season: "5–9월", level: "보통", tag: "사막",
+        text: "홍고린 엘스의 노래하는 모래언덕을 오르고, 욜링암 얼음 협곡을 걷고, 불타는 절벽에서 공룡 화석의 흔적을 찾아보세요.",
+        plan: [["1", "울란바토르에서 남쪽으로 이동해 줄무늬 절벽 차강소브라가에 도착합니다."], ["2–3", "고르왕사이항 국립공원의 좁은 얼음 협곡 욜링암을 걷습니다."], ["4–5", "해 질 녘 홍고린 엘스 모래언덕에 오르고, 유목민 가족과 쌍봉낙타를 탑니다."], ["6", "1923년 세계 최초로 공룡알 화석이 발견된 바양작을 탐험합니다."], ["7–8", "초원을 가로질러 북쪽으로 돌아오며 유목민 게르에서 하룻밤을 보내고 울란바토르로 돌아옵니다."]] } },
     { id: "khuvsgul", name: "Khövsgöl & the Reindeer Herders", days: 10, season: "Jun–Aug", level: "Moderate", price: 2290, img: "img/lake.jpg", tag: "Taiga", cats: ["north", "adventure", "culture"],
       text: "Kayak Mongolia's deepest lake, then ride into the taiga to spend nights with Dukha reindeer-herding families.",
       route: ["ub", "amar", "murun", "khuvsgul", "tsaatan", "khuvsgul", "murun", "~ub"],
-      plan: [["1–2", "Drive north to Amarbayasgalant, one of Mongolia's finest surviving monasteries."], ["3", "Continue to Mörön and on to the lakeshore village of Khatgal."], ["4–5", "Kayak and hike along Lake Khövsgöl, which holds about 70% of Mongolia's fresh water."], ["6–8", "Ride into the taiga to camp with Dukha reindeer herders in the Darkhad region."], ["9–10", "Return to Mörön and fly back to Ulaanbaatar."]] },
+      plan: [["1–2", "Drive north to Amarbayasgalant, one of Mongolia's finest surviving monasteries."], ["3", "Continue to Mörön and on to the lakeshore village of Khatgal."], ["4–5", "Kayak and hike along Lake Khövsgöl, which holds about 70% of Mongolia's fresh water."], ["6–8", "Ride into the taiga to camp with Dukha reindeer herders in the Darkhad region."], ["9–10", "Return to Mörön and fly back to Ulaanbaatar."]],
+      ko: { name: "홉스골과 순록 유목민", season: "6–8월", level: "보통", tag: "타이가",
+        text: "몽골에서 가장 깊은 호수에서 카약을 타고, 말을 타고 타이가 숲으로 들어가 차탕족 순록 유목민 가족과 밤을 보내세요.",
+        plan: [["1–2", "북쪽으로 이동해 몽골에서 가장 아름다운 사원 중 하나인 아마르바야스갈랑트를 방문합니다."], ["3", "무릉을 거쳐 호숫가 마을 하트갈로 이동합니다."], ["4–5", "몽골 담수의 약 70%를 품은 홉스골 호수에서 카약과 트레킹을 즐깁니다."], ["6–8", "말을 타고 다르하드 지역의 타이가로 들어가 차탕족 순록 유목민과 캠핑합니다."], ["9–10", "무릉으로 돌아와 국내선으로 울란바토르에 도착합니다."]] } },
     { id: "naadam", name: "Naadam Festival", days: 7, season: "9–15 Jul 2027", level: "Easy", price: 2390, img: "img/naadam.jpg", tag: "Festival", cats: ["central", "festival", "culture"],
       text: "Front-row seats for wrestling, archery and the horse race with child jockeys, then a countryside Naadam with a herding family.",
       route: ["ub", "terelj", "ub", "khustai", "elsen", "kharkhorin", "ub"],
-      plan: [["1", "Arrive in Ulaanbaatar for a welcome dinner."], ["2", "Hike among the granite outcrops of Gorkhi-Terelj National Park."], ["3", "Opening ceremony and wrestling at the National Sports Stadium on 11 July."], ["4", "Horse racing on the open steppe, then the archery contest."], ["5", "Watch wild takhi horses at Khustai National Park."], ["6–7", "A countryside Naadam near Elsen Tasarkhai, then Kharkhorin and back to the city."]] },
+      plan: [["1", "Arrive in Ulaanbaatar for a welcome dinner."], ["2", "Hike among the granite outcrops of Gorkhi-Terelj National Park."], ["3", "Opening ceremony and wrestling at the National Sports Stadium on 11 July."], ["4", "Horse racing on the open steppe, then the archery contest."], ["5", "Watch wild takhi horses at Khustai National Park."], ["6–7", "A countryside Naadam near Elsen Tasarkhai, then Kharkhorin and back to the city."]],
+      ko: { name: "나담 축제", season: "2027년 7월 9–15일", level: "쉬움", tag: "축제",
+        text: "씨름, 활쏘기, 어린이 기수들의 말 경주를 가까이에서 보고, 유목민 가족과 함께하는 시골 나담도 경험하세요.",
+        plan: [["1", "울란바토르에 도착해 환영 만찬을 즐깁니다."], ["2", "테를지 국립공원의 화강암 바위 사이를 하이킹합니다."], ["3", "7월 11일 국립경기장에서 개막식과 씨름 경기를 관람합니다."], ["4", "초원에서 펼쳐지는 말 경주와 활쏘기 대회를 관람합니다."], ["5", "후스타이 국립공원에서 야생마 타히를 만납니다."], ["6–7", "엘승타사르해 근처에서 시골 나담을 즐긴 뒤 하라호름을 거쳐 울란바토르로 돌아옵니다."]] } },
     { id: "eagle", name: "Golden Eagle Festival", days: 8, season: "Early Oct 2027", level: "Moderate", price: 2690, img: "img/eagle.jpg", tag: "Festival", cats: ["west", "festival", "culture"],
       text: "Fly to the far west to meet Kazakh eagle hunters, stay in their homes and watch the competition in the Altai foothills.",
       route: ["ub", "~olgii"],
-      plan: [["1", "Arrive in Ulaanbaatar."], ["2", "Fly west to Ölgii, capital of Bayan-Ölgii province."], ["3", "Drive into the mountains to stay with a Kazakh eagle-hunting family."], ["4–5", "Two days at the Golden Eagle Festival: parades, calling contests and horseback games."], ["6", "Explore the Altai valleys around Ölgii."], ["7–8", "Fly back to Ulaanbaatar for a farewell dinner."]] },
+      plan: [["1", "Arrive in Ulaanbaatar."], ["2", "Fly west to Ölgii, capital of Bayan-Ölgii province."], ["3", "Drive into the mountains to stay with a Kazakh eagle-hunting family."], ["4–5", "Two days at the Golden Eagle Festival: parades, calling contests and horseback games."], ["6", "Explore the Altai valleys around Ölgii."], ["7–8", "Fly back to Ulaanbaatar for a farewell dinner."]],
+      ko: { name: "골든 이글 페스티벌", season: "2027년 10월 초", level: "보통", tag: "축제",
+        text: "몽골 서쪽 끝으로 날아가 카자흐족 독수리 사냥꾼을 만나고, 그들의 집에 머물며 알타이 산자락에서 열리는 대회를 관람하세요.",
+        plan: [["1", "울란바토르에 도착합니다."], ["2", "국내선을 타고 바양울기 주의 중심지 울기로 이동합니다."], ["3", "산속으로 들어가 카자흐 독수리 사냥꾼 가족의 집에 머뭅니다."], ["4–5", "이틀간 골든 이글 페스티벌을 관람합니다: 퍼레이드, 독수리 부르기 대회, 마상 경기."], ["6", "울기 주변의 알타이 계곡을 둘러봅니다."], ["7–8", "울란바토르로 돌아와 송별 만찬을 즐깁니다."]] } },
     { id: "orkhon", name: "Orkhon Valley & Karakorum", days: 6, season: "May–Sep", level: "Easy", price: 1390, img: "img/orkhon.jpg", tag: "Heritage", cats: ["central", "culture", "short"],
       text: "See wild Przewalski's horses, ride in the mini-Gobi dunes and visit Erdene Zuu, built from the stones of Chinggis Khaan's old capital.",
       route: ["ub", "khustai", "elsen", "kharkhorin", "orkhon", "ub"],
-      plan: [["1", "Watch wild takhi horses at dusk in Khustai National Park."], ["2", "Ride camels in Elsen Tasarkhai, the 'mini-Gobi' dunes."], ["3", "Visit Erdene Zuu monastery and the site of ancient Karakorum."], ["4–5", "Stay near the Orkhon Waterfall and ride through the UNESCO-listed valley."], ["6", "Drive back to Ulaanbaatar."]] },
+      plan: [["1", "Watch wild takhi horses at dusk in Khustai National Park."], ["2", "Ride camels in Elsen Tasarkhai, the 'mini-Gobi' dunes."], ["3", "Visit Erdene Zuu monastery and the site of ancient Karakorum."], ["4–5", "Stay near the Orkhon Waterfall and ride through the UNESCO-listed valley."], ["6", "Drive back to Ulaanbaatar."]],
+      ko: { name: "오르홍 계곡과 하라호름", season: "5–9월", level: "쉬움", tag: "역사",
+        text: "야생 프르제발스키 말을 만나고, 미니 사막에서 낙타를 타고, 칭기즈칸 시대 옛 수도의 돌로 지은 에르덴조 사원을 방문하세요.",
+        plan: [["1", "해 질 녘 후스타이 국립공원에서 야생마 타히를 관찰합니다."], ["2", "'미니 고비'라 불리는 엘승타사르해 모래언덕에서 낙타를 탑니다."], ["3", "에르덴조 사원과 옛 수도 하라호름 유적을 방문합니다."], ["4–5", "오르홍 폭포 근처에 머물며 유네스코 세계유산 계곡에서 승마를 즐깁니다."], ["6", "울란바토르로 돌아옵니다."]] } },
     { id: "altai", name: "Altai Tavan Bogd Trek", days: 12, season: "Jul–Aug", level: "Challenging", price: 3150, img: "img/altai.jpg", tag: "Expedition", cats: ["west", "adventure"],
       text: "Trek with Bactrian camels to base camp below Mongolia's highest peak, Khüiten (4,374 m), and the Potanin Glacier.",
       route: ["ub", "~olgii", "tavanbogd", "olgii", "~ub"],
-      plan: [["1–2", "Fly to Ölgii and meet your Kazakh trek crew."], ["3–4", "Drive to Tavan Bogd National Park, camping by alpine lakes."], ["5–9", "Trek with camels to base camp beneath Khüiten Peak and the Potanin Glacier."], ["10", "Return through valleys of Kazakh summer camps."], ["11–12", "Fly back to Ulaanbaatar."]] },
+      plan: [["1–2", "Fly to Ölgii and meet your Kazakh trek crew."], ["3–4", "Drive to Tavan Bogd National Park, camping by alpine lakes."], ["5–9", "Trek with camels to base camp beneath Khüiten Peak and the Potanin Glacier."], ["10", "Return through valleys of Kazakh summer camps."], ["11–12", "Fly back to Ulaanbaatar."]],
+      ko: { name: "알타이 타반복드 트레킹", season: "7–8월", level: "어려움", tag: "원정",
+        text: "쌍봉낙타와 함께 몽골 최고봉 후이텐봉(4,374m)과 포타닌 빙하 아래 베이스캠프까지 트레킹합니다.",
+        plan: [["1–2", "울기로 날아가 카자흐 트레킹 팀을 만납니다."], ["3–4", "타반복드 국립공원으로 이동하며 고산 호숫가에서 캠핑합니다."], ["5–9", "낙타와 함께 후이텐봉과 포타닌 빙하 아래 베이스캠프까지 트레킹합니다."], ["10", "카자흐 여름 캠프가 있는 계곡을 지나 돌아옵니다."], ["11–12", "울란바토르로 돌아옵니다."]] } },
     { id: "terelj", name: "Terelj Ger Escape", days: 3, season: "All year", level: "Easy", price: 520, img: "img/terelj.jpg", tag: "Short break", cats: ["central", "short", "culture"],
       text: "Granite valleys a short drive from the capital. Ride horses, hike to Aryapala meditation temple and sleep in a heated ger.",
       route: ["ub", "terelj", "ub"],
-      plan: [["1", "Drive to Gorkhi-Terelj National Park, stopping at Turtle Rock."], ["2", "Ride horses through the valley and hike up to Aryapala meditation temple."], ["3", "Return to Ulaanbaatar."]] },
+      plan: [["1", "Drive to Gorkhi-Terelj National Park, stopping at Turtle Rock."], ["2", "Ride horses through the valley and hike up to Aryapala meditation temple."], ["3", "Return to Ulaanbaatar."]],
+      ko: { name: "테를지 게르 힐링", season: "연중", level: "쉬움", tag: "단기",
+        text: "수도에서 가까운 화강암 계곡. 말을 타고, 아리야발 사원까지 하이킹하고, 따뜻한 게르에서 잠드세요.",
+        plan: [["1", "거북바위에 들러 테를지 국립공원으로 이동합니다."], ["2", "계곡에서 승마를 즐기고 아리야발 명상 사원까지 하이킹합니다."], ["3", "울란바토르로 돌아옵니다."]] } },
     { id: "winter", name: "Frozen Khövsgöl Ice Festival", days: 7, season: "Late Feb–Mar", level: "Moderate", price: 1790, img: "img/winter.jpg", tag: "Winter", cats: ["north", "winter", "festival"],
       text: "Ride horse sleds across a frozen lake 1.6 metres thick, watch ice sculpting and stay warm in a stove-heated ger at −25 °C.",
       route: ["ub", "~murun", "khuvsgul", "murun", "~ub"],
-      plan: [["1", "Arrive in Ulaanbaatar and gear up with a traditional deel."], ["2", "Fly to Mörön and drive to Khatgal on the frozen lakeshore."], ["3–4", "Ice Festival: horse-sled races, ice sculpting and tug of war on the ice."], ["5", "Visit a herding family's winter camp."], ["6–7", "Fly back to Ulaanbaatar."]] }
+      plan: [["1", "Arrive in Ulaanbaatar and gear up with a traditional deel."], ["2", "Fly to Mörön and drive to Khatgal on the frozen lakeshore."], ["3–4", "Ice Festival: horse-sled races, ice sculpting and tug of war on the ice."], ["5", "Visit a herding family's winter camp."], ["6–7", "Fly back to Ulaanbaatar."]],
+      ko: { name: "홉스골 얼음 축제", season: "2월 말–3월", level: "보통", tag: "겨울",
+        text: "두께 1.6m로 얼어붙은 호수 위에서 말 썰매를 타고, 얼음 조각을 구경하고, 영하 25도에도 난로로 따뜻한 게르에 머무세요.",
+        plan: [["1", "울란바토르에 도착해 몽골 전통 의상 델을 준비합니다."], ["2", "무릉으로 날아가 얼어붙은 호숫가 마을 하트갈로 이동합니다."], ["3–4", "얼음 축제: 말 썰매 경주, 얼음 조각, 얼음 위 줄다리기."], ["5", "유목민 가족의 겨울 캠프를 방문합니다."], ["6–7", "울란바토르로 돌아옵니다."]] } }
   ];
 
   const REGIONS = [
-    { id: "gobi", name: "Gobi Desert", img: "img/dunes2.jpg", desc: "Singing dunes, ice canyons and dinosaur cliffs in the far south." },
-    { id: "north", name: "Khövsgöl & north", img: "img/lake.jpg", desc: "A 136 km alpine lake, taiga forest and reindeer herders." },
-    { id: "central", name: "Central steppe", img: "img/orkhon.jpg", desc: "Wild horses, the old capital Karakorum and the Orkhon Valley." },
-    { id: "west", name: "Altai & far west", img: "img/altai.jpg", desc: "Glaciers, Kazakh eagle hunters and Mongolia's highest peak." },
-    { id: "winter", name: "Winter", img: "img/winter.jpg", desc: "Frozen lakes, ice festivals and bright −25 °C mornings." }
+    { id: "gobi", name: "Gobi Desert", img: "img/dunes2.jpg", desc: "Singing dunes, ice canyons and dinosaur cliffs in the far south.", ko: { name: "고비 사막", desc: "남쪽 끝의 노래하는 모래언덕, 얼음 협곡, 공룡 화석 절벽." } },
+    { id: "north", name: "Khövsgöl & north", img: "img/lake.jpg", desc: "A 136 km alpine lake, taiga forest and reindeer herders.", ko: { name: "홉스골과 북부", desc: "길이 136km의 고산 호수, 타이가 숲, 순록 유목민." } },
+    { id: "central", name: "Central steppe", img: "img/orkhon.jpg", desc: "Wild horses, the old capital Karakorum and the Orkhon Valley.", ko: { name: "중부 초원", desc: "야생마, 옛 수도 하라호름, 오르홍 계곡." } },
+    { id: "west", name: "Altai & far west", img: "img/altai.jpg", desc: "Glaciers, Kazakh eagle hunters and Mongolia's highest peak.", ko: { name: "알타이와 서부", desc: "빙하, 카자흐 독수리 사냥꾼, 몽골 최고봉." } },
+    { id: "winter", name: "Winter", img: "img/winter.jpg", desc: "Frozen lakes, ice festivals and bright −25 °C mornings.", ko: { name: "겨울 몽골", desc: "얼어붙은 호수, 얼음 축제, 영하 25도의 맑은 아침." } }
   ];
 
   const MONTHS = [
-    { m: "Jan", full: "January",   hi: -16, lo: -27, note: "The coldest month. Clear, still days, frozen rivers and almost no other travellers.", event: null, trips: ["terelj"] },
-    { m: "Feb", full: "February",  hi: -11, lo: -24, note: "Families gather for the lunar new year with steamed buuz dumplings and visits to elders.", event: "Tsagaan Sar, the lunar new year, usually falls in February.", trips: ["winter", "terelj"] },
-    { m: "Mar", full: "March",     hi: -1,  lo: -15, note: "Sunny and dry with long days returning. Lakes stay frozen solid.", event: "Ice Festival on frozen Lake Khövsgöl and the Thousand Camel Festival in the Gobi.", trips: ["winter", "terelj"] },
-    { m: "Apr", full: "April",     hi: 8,   lo: -6,  note: "A windy thaw. Herders move to spring camps and newborn lambs and camel calves arrive.", event: null, trips: ["terelj"] },
-    { m: "May", full: "May",       hi: 16,  lo: 2,   note: "Ger camps reopen in mid-May and green returns to the steppe. Great value before the summer peak.", event: null, trips: ["orkhon", "gobi", "terelj"] },
-    { m: "Jun", full: "June",      hi: 21,  lo: 8,   note: "Long days and wildflowers. The ideal time for the Gobi before midsummer heat.", event: null, trips: ["gobi", "khuvsgul", "orkhon", "terelj"] },
-    { m: "Jul", full: "July",      hi: 23,  lo: 12,  note: "The warmest and busiest month, with short afternoon rain showers on the steppe.", event: "Naadam, the national festival of wrestling, archery and horse racing, 11–13 July.", trips: ["naadam", "khuvsgul", "altai", "terelj"] },
-    { m: "Aug", full: "August",    hi: 21,  lo: 9,   note: "The greenest month. The best window for the Altai and the northern lakes.", event: null, trips: ["altai", "khuvsgul", "gobi", "orkhon"] },
-    { m: "Sep", full: "September", hi: 14,  lo: 2,   note: "Golden larch forests, crisp nights and quiet roads. A favourite with our guides.", event: null, trips: ["gobi", "orkhon", "terelj"] },
-    { m: "Oct", full: "October",   hi: 6,   lo: -6,  note: "Cold mornings, blue skies and the first snow in the west.", event: "Golden Eagle Festival in Bayan-Ölgii, on the first weekend of October.", trips: ["eagle", "terelj"] },
-    { m: "Nov", full: "November",  hi: -5,  lo: -16, note: "Ger camps close. A quiet season for the capital, its monasteries and museums.", event: null, trips: ["terelj"] },
-    { m: "Dec", full: "December",  hi: -13, lo: -24, note: "Deep winter with bright, dry skies and snow-dusted steppe.", event: null, trips: ["terelj"] }
+    { m: "Jan", full: "January",   hi: -16, lo: -27, note: "The coldest month. Clear, still days, frozen rivers and almost no other travellers.", event: null, trips: ["terelj"],
+      ko: { m: "1월", full: "1월", note: "가장 추운 달. 맑고 바람 없는 날, 얼어붙은 강, 여행객이 거의 없는 시기입니다." } },
+    { m: "Feb", full: "February",  hi: -11, lo: -24, note: "Families gather for the lunar new year with steamed buuz dumplings and visits to elders.", event: "Tsagaan Sar, the lunar new year, usually falls in February.", trips: ["winter", "terelj"],
+      ko: { m: "2월", full: "2월", note: "가족들이 모여 보즈(몽골식 만두)를 빚고 어른들을 찾아뵙는 설 명절 기간입니다.", event: "몽골 설날 차강사르는 보통 2월에 있습니다." } },
+    { m: "Mar", full: "March",     hi: -1,  lo: -15, note: "Sunny and dry with long days returning. Lakes stay frozen solid.", event: "Ice Festival on frozen Lake Khövsgöl and the Thousand Camel Festival in the Gobi.", trips: ["winter", "terelj"],
+      ko: { m: "3월", full: "3월", note: "맑고 건조하며 낮이 길어집니다. 호수는 여전히 꽁꽁 얼어 있어요.", event: "홉스골 호수 얼음 축제와 고비 사막의 천 마리 낙타 축제." } },
+    { m: "Apr", full: "April",     hi: 8,   lo: -6,  note: "A windy thaw. Herders move to spring camps and newborn lambs and camel calves arrive.", event: null, trips: ["terelj"],
+      ko: { m: "4월", full: "4월", note: "바람 부는 해빙기. 유목민들이 봄 캠프로 옮기고 새끼 양과 낙타가 태어납니다." } },
+    { m: "May", full: "May",       hi: 16,  lo: 2,   note: "Ger camps reopen in mid-May and green returns to the steppe. Great value before the summer peak.", event: null, trips: ["orkhon", "gobi", "terelj"],
+      ko: { m: "5월", full: "5월", note: "5월 중순 게르 캠프가 문을 열고 초원이 다시 푸르러집니다. 성수기 전이라 가성비가 좋아요." } },
+    { m: "Jun", full: "June",      hi: 21,  lo: 8,   note: "Long days and wildflowers. The ideal time for the Gobi before midsummer heat.", event: null, trips: ["gobi", "khuvsgul", "orkhon", "terelj"],
+      ko: { m: "6월", full: "6월", note: "낮이 길고 야생화가 핍니다. 한여름 더위 전, 고비 여행에 가장 좋은 때입니다." } },
+    { m: "Jul", full: "July",      hi: 23,  lo: 12,  note: "The warmest and busiest month, with short afternoon rain showers on the steppe.", event: "Naadam, the national festival of wrestling, archery and horse racing, 11–13 July.", trips: ["naadam", "khuvsgul", "altai", "terelj"],
+      ko: { m: "7월", full: "7월", note: "가장 따뜻하고 붐비는 달. 초원에는 오후에 짧은 소나기가 내리기도 합니다.", event: "씨름·활쏘기·말 경주가 열리는 국가 축제 나담, 7월 11–13일." } },
+    { m: "Aug", full: "August",    hi: 21,  lo: 9,   note: "The greenest month. The best window for the Altai and the northern lakes.", event: null, trips: ["altai", "khuvsgul", "gobi", "orkhon"],
+      ko: { m: "8월", full: "8월", note: "가장 푸른 달. 알타이와 북부 호수 여행에 가장 좋은 시기입니다." } },
+    { m: "Sep", full: "September", hi: 14,  lo: 2,   note: "Golden larch forests, crisp nights and quiet roads. A favourite with our guides.", event: null, trips: ["gobi", "orkhon", "terelj"],
+      ko: { m: "9월", full: "9월", note: "황금빛 낙엽송 숲, 서늘한 밤, 한적한 길. 가이드들이 가장 좋아하는 계절이에요." } },
+    { m: "Oct", full: "October",   hi: 6,   lo: -6,  note: "Cold mornings, blue skies and the first snow in the west.", event: "Golden Eagle Festival in Bayan-Ölgii, on the first weekend of October.", trips: ["eagle", "terelj"],
+      ko: { m: "10월", full: "10월", note: "쌀쌀한 아침과 파란 하늘, 서부에는 첫눈이 내립니다.", event: "10월 첫째 주말, 바양울기 골든 이글 페스티벌." } },
+    { m: "Nov", full: "November",  hi: -5,  lo: -16, note: "Ger camps close. A quiet season for the capital, its monasteries and museums.", event: null, trips: ["terelj"],
+      ko: { m: "11월", full: "11월", note: "게르 캠프가 문을 닫습니다. 수도의 사원과 박물관을 여유롭게 둘러보기 좋은 때입니다." } },
+    { m: "Dec", full: "December",  hi: -13, lo: -24, note: "Deep winter with bright, dry skies and snow-dusted steppe.", event: null, trips: ["terelj"],
+      ko: { m: "12월", full: "12월", note: "깊은 겨울. 맑고 건조한 하늘과 눈 덮인 초원." } }
   ];
 
   const FAQ_CATS = [
-    { id: "booking", name: "Booking & payment" },
-    { id: "entry", name: "Visa & arrival" },
-    { id: "trip", name: "On the trip" },
-    { id: "safety", name: "Health & safety" },
-    { id: "winter", name: "Winter travel" }
+    { id: "booking", name: "Booking & payment", ko: { name: "예약·결제" } },
+    { id: "entry", name: "Visa & arrival", ko: { name: "비자·입국" } },
+    { id: "trip", name: "On the trip", ko: { name: "여행 중" } },
+    { id: "safety", name: "Health & safety", ko: { name: "건강·안전" } },
+    { id: "winter", name: "Winter travel", ko: { name: "겨울 여행" } }
   ];
   const FAQ = [
-    { c: "booking", q: "How do I book a journey?", a: "Send us an inquiry with your dates and interests. A planner replies with an itinerary and price within one working day. When you are happy with it, a 20% deposit confirms your place." },
-    { c: "booking", q: "When is the balance due?", a: "The remaining balance is due 60 days before departure. For bookings made less than 60 days ahead, we ask for full payment at booking." },
-    { c: "booking", q: "Do small-group departures run with only a few people?", a: "Yes. Group departures are guaranteed from two guests, so you will never be cancelled for low numbers once you hold a confirmed booking." },
-    { c: "booking", q: "What is your cancellation policy?", a: "Cancel more than 60 days before departure and we refund your deposit minus a small administration fee. Closer to departure, part of the cost is non-refundable because camps and flights are paid in advance. Full terms come with your booking confirmation." },
-    { c: "booking", q: "Do I need travel insurance?", a: "Yes. Your policy must cover medical treatment and emergency evacuation from remote areas. We ask for the policy number before departure." },
-    { c: "entry", q: "Do I need a visa for Mongolia?", a: "Citizens of many countries, including the United States, Canada, Japan, South Korea and several European countries, can enter visa-free for a set number of days. Rules change, so check with your nearest Mongolian embassy. If you need a visa, we provide the invitation letter." },
-    { c: "entry", q: "How do I get to Mongolia?", a: "Fly into Chinggis Khaan International Airport (UBN), about 50 km south of Ulaanbaatar. There are direct flights from Seoul, Beijing, Tokyo, Istanbul and Frankfurt, among others. The Trans-Mongolian railway is a slower, scenic option." },
-    { c: "entry", q: "Will someone meet me at the airport?", a: "Yes. Your guide meets every guest in the arrivals hall with a name sign, whatever time your flight lands, and drives you to your hotel." },
-    { c: "trip", q: "What is a ger camp like?", a: "A ger is a round felt tent heated by a wood stove. Tourist ger camps have proper beds, hot showers and a dining hall. Family stays are simpler, with shared facilities, and are the highlight of most trips." },
-    { c: "trip", q: "What should I pack?", a: "Layers. Even in July, nights on the steppe can drop close to freezing, and the Gobi is windy. Bring a warm fleece, a windproof jacket, sun protection and comfortable walking shoes. We send a full packing list after booking." },
-    { c: "trip", q: "Can I use cards and my phone?", a: "The currency is the tögrög (MNT). Cards work in Ulaanbaatar; carry cash for the countryside. Mobile coverage reaches most soums (district centres), but not open steppe or mountains." },
-    { c: "trip", q: "What about dietary needs?", a: "Traditional food is meat and dairy heavy. Our cooks prepare vegetarian, vegan and gluten-free meals when you tell us in advance." },
-    { c: "trip", q: "Are there baggage limits on domestic flights?", a: "Domestic flights to Ölgii and Mörön have tighter limits than international ones. We confirm the exact allowance for your flight and can store extra luggage in Ulaanbaatar." },
-    { c: "safety", q: "How fit do I need to be?", a: "Most journeys suit anyone who can walk a few hours a day and sit in a vehicle on rough roads. The Altai Tavan Bogd trek needs good fitness. Horse riding is optional and beginners are welcome." },
-    { c: "safety", q: "Is Mongolia safe for travellers?", a: "Mongolia is generally a safe and welcoming country. In Ulaanbaatar, watch for pickpockets in crowded markets and on buses, as in any big city. In the countryside, the main risks are road travel and weather, which our drivers know well." },
-    { c: "safety", q: "What happens if someone gets sick or injured?", a: "Guides carry a first-aid kit and are trained in wilderness first aid. Remote routes carry a satellite phone, and our Ulaanbaatar team arranges transfer to a clinic or hospital when needed." },
-    { c: "winter", q: "How cold is it in winter?", a: "Daytime temperatures from December to February are typically −15 to −30 °C, with dry air and bright sunshine. Gers and hotels are kept warm, and you spend most of your outdoor time in short, active spells." },
-    { c: "winter", q: "Do I need special clothing for a winter trip?", a: "Bring thermal base layers, a down jacket, insulated boots and good gloves. We lend each guest a traditional deel (felt-lined robe) for the countryside." }
+    { c: "booking", q: "How do I book a journey?", a: "Send us an inquiry with your dates and interests. A planner replies with an itinerary and price within one working day. When you are happy with it, a 20% deposit confirms your place.",
+      ko: { q: "여행 예약은 어떻게 하나요?", a: "원하는 날짜와 관심사를 담아 문의를 남겨 주세요. 플래너가 영업일 하루 안에 일정과 견적을 보내 드립니다. 마음에 드시면 20% 예약금으로 자리가 확정됩니다." } },
+    { c: "booking", q: "When is the balance due?", a: "The remaining balance is due 60 days before departure. For bookings made less than 60 days ahead, we ask for full payment at booking.",
+      ko: { q: "잔금은 언제 내나요?", a: "잔금은 출발 60일 전까지 결제합니다. 출발 60일 이내에 예약하시면 예약 시 전액을 결제합니다." } },
+    { c: "booking", q: "Do small-group departures run with only a few people?", a: "Yes. Group departures are guaranteed from two guests, so you will never be cancelled for low numbers once you hold a confirmed booking.",
+      ko: { q: "인원이 적어도 그룹 여행이 출발하나요?", a: "네. 그룹 출발은 2명부터 확정되므로, 예약이 확정되면 인원 부족으로 취소되는 일은 없습니다." } },
+    { c: "booking", q: "What is your cancellation policy?", a: "Cancel more than 60 days before departure and we refund your deposit minus a small administration fee. Closer to departure, part of the cost is non-refundable because camps and flights are paid in advance. Full terms come with your booking confirmation.",
+      ko: { q: "취소 규정은 어떻게 되나요?", a: "출발 60일 전까지 취소하시면 소정의 수수료를 제외한 예약금을 환불해 드립니다. 그 이후에는 캠프와 항공권을 미리 결제하기 때문에 일부 금액은 환불되지 않습니다. 자세한 약관은 예약 확정 시 함께 보내 드립니다." } },
+    { c: "booking", q: "Do I need travel insurance?", a: "Yes. Your policy must cover medical treatment and emergency evacuation from remote areas. We ask for the policy number before departure.",
+      ko: { q: "여행자 보험이 필요한가요?", a: "네. 오지에서의 치료와 긴급 후송을 보장하는 보험이 필요합니다. 출발 전에 보험 증권 번호를 받고 있습니다." } },
+    { c: "entry", q: "Do I need a visa for Mongolia?", a: "Citizens of many countries, including the United States, Canada, Japan, South Korea and several European countries, can enter visa-free for a set number of days. Rules change, so check with your nearest Mongolian embassy. If you need a visa, we provide the invitation letter.",
+      ko: { q: "몽골 여행에 비자가 필요한가요?", a: "대한민국 국민은 2026년 말까지 단기 방문 시 무비자로 입국할 수 있습니다. 규정은 바뀔 수 있으니 출발 전 주한 몽골 대사관에서 확인해 주세요. 비자가 필요한 경우 초청장을 발급해 드립니다." } },
+    { c: "entry", q: "How do I get to Mongolia?", a: "Fly into Chinggis Khaan International Airport (UBN), about 50 km south of Ulaanbaatar. There are direct flights from Seoul, Beijing, Tokyo, Istanbul and Frankfurt, among others. The Trans-Mongolian railway is a slower, scenic option.",
+      ko: { q: "몽골까지 어떻게 가나요?", a: "울란바토르 남쪽 약 50km에 있는 칭기스칸 국제공항(UBN)으로 들어옵니다. 인천과 부산에서 직항편이 있으며, 인천에서 약 3시간 30분 걸립니다." } },
+    { c: "entry", q: "Will someone meet me at the airport?", a: "Yes. Your guide meets every guest in the arrivals hall with a name sign, whatever time your flight lands, and drives you to your hotel.",
+      ko: { q: "공항으로 마중 나오나요?", a: "네. 비행기가 몇 시에 도착하든 가이드가 이름표를 들고 입국장에서 기다렸다가 호텔까지 모셔다 드립니다." } },
+    { c: "trip", q: "What is a ger camp like?", a: "A ger is a round felt tent heated by a wood stove. Tourist ger camps have proper beds, hot showers and a dining hall. Family stays are simpler, with shared facilities, and are the highlight of most trips.",
+      ko: { q: "게르 캠프는 어떤가요?", a: "게르는 나무 난로로 데우는 둥근 펠트 천막입니다. 여행자 게르 캠프에는 침대, 온수 샤워, 식당이 있습니다. 유목민 가정 숙박은 더 소박하고 시설을 함께 쓰지만, 대부분의 여행자가 최고의 순간으로 꼽습니다." } },
+    { c: "trip", q: "What should I pack?", a: "Layers. Even in July, nights on the steppe can drop close to freezing, and the Gobi is windy. Bring a warm fleece, a windproof jacket, sun protection and comfortable walking shoes. We send a full packing list after booking.",
+      ko: { q: "무엇을 챙겨야 하나요?", a: "겹쳐 입을 옷이 핵심입니다. 7월에도 초원의 밤은 영하 가까이 떨어질 수 있고 고비는 바람이 강합니다. 따뜻한 플리스, 방풍 재킷, 자외선 차단제, 편한 신발을 챙기세요. 예약 후 자세한 준비물 목록을 보내 드립니다." } },
+    { c: "trip", q: "Can I use cards and my phone?", a: "The currency is the tögrög (MNT). Cards work in Ulaanbaatar; carry cash for the countryside. Mobile coverage reaches most soums (district centres), but not open steppe or mountains.",
+      ko: { q: "카드와 휴대폰을 쓸 수 있나요?", a: "화폐는 투그릭(MNT)입니다. 울란바토르에서는 카드를 쓸 수 있지만 시골에서는 현금이 필요합니다. 휴대폰은 대부분의 솜(군 소재지)에서 터지지만 초원 한가운데나 산에서는 안 됩니다." } },
+    { c: "trip", q: "What about dietary needs?", a: "Traditional food is meat and dairy heavy. Our cooks prepare vegetarian, vegan and gluten-free meals when you tell us in advance.",
+      ko: { q: "식단 제한이 있으면요?", a: "몽골 전통 음식은 고기와 유제품 위주입니다. 미리 말씀해 주시면 채식, 비건, 글루텐 프리 식사를 준비해 드립니다." } },
+    { c: "trip", q: "Are there baggage limits on domestic flights?", a: "Domestic flights to Ölgii and Mörön have tighter limits than international ones. We confirm the exact allowance for your flight and can store extra luggage in Ulaanbaatar.",
+      ko: { q: "국내선 수하물 제한이 있나요?", a: "울기, 무릉행 국내선은 국제선보다 수하물 제한이 엄격합니다. 항공편별 허용량을 안내해 드리며, 남는 짐은 울란바토르에 보관해 드립니다." } },
+    { c: "safety", q: "How fit do I need to be?", a: "Most journeys suit anyone who can walk a few hours a day and sit in a vehicle on rough roads. The Altai Tavan Bogd trek needs good fitness. Horse riding is optional and beginners are welcome.",
+      ko: { q: "체력이 얼마나 필요한가요?", a: "하루 몇 시간 걷고 비포장도로 차량 이동이 가능하면 대부분의 상품에 참여할 수 있습니다. 알타이 타반복드 트레킹은 좋은 체력이 필요합니다. 승마는 선택이며 초보자도 환영합니다." } },
+    { c: "safety", q: "Is Mongolia safe for travellers?", a: "Mongolia is generally a safe and welcoming country. In Ulaanbaatar, watch for pickpockets in crowded markets and on buses, as in any big city. In the countryside, the main risks are road travel and weather, which our drivers know well.",
+      ko: { q: "몽골은 안전한가요?", a: "몽골은 대체로 안전하고 친절한 나라입니다. 울란바토르의 붐비는 시장이나 버스에서는 다른 대도시처럼 소매치기를 조심하세요. 시골에서는 도로와 날씨가 주된 위험 요소인데, 저희 기사들이 잘 알고 있습니다." } },
+    { c: "safety", q: "What happens if someone gets sick or injured?", a: "Guides carry a first-aid kit and are trained in wilderness first aid. Remote routes carry a satellite phone, and our Ulaanbaatar team arranges transfer to a clinic or hospital when needed.",
+      ko: { q: "아프거나 다치면 어떻게 하나요?", a: "가이드는 구급상자를 지참하고 야외 응급처치 교육을 받았습니다. 오지 구간에서는 위성전화를 가지고 다니며, 필요하면 울란바토르 팀이 병원 이송을 준비합니다." } },
+    { c: "winter", q: "How cold is it in winter?", a: "Daytime temperatures from December to February are typically −15 to −30 °C, with dry air and bright sunshine. Gers and hotels are kept warm, and you spend most of your outdoor time in short, active spells.",
+      ko: { q: "겨울에는 얼마나 추운가요?", a: "12월부터 2월까지 낮 기온은 보통 영하 15도에서 영하 30도이고, 공기는 건조하고 햇살은 밝습니다. 게르와 호텔은 따뜻하게 유지되며, 야외 활동은 짧고 활동적으로 진행됩니다." } },
+    { c: "winter", q: "Do I need special clothing for a winter trip?", a: "Bring thermal base layers, a down jacket, insulated boots and good gloves. We lend each guest a traditional deel (felt-lined robe) for the countryside.",
+      ko: { q: "겨울 여행에 특별한 옷이 필요한가요?", a: "기능성 내의, 다운 재킷, 방한화, 좋은 장갑을 챙기세요. 시골에서는 몽골 전통 의상 델(펠트 안감 외투)을 빌려 드립니다." } }
   ];
 
   const byId = Object.fromEntries(TRIPS.map(t => [t.id, t]));
+  const L = o => lang === "ko" && o.ko ? { ...o, ...o.ko } : o;      // localized view of a data record
+  const pname = k => T(PLACES[k].name, PLACES[k].ko);
+  const daysText = n => T(`${n} days`, `${n}일`);
+  const fromPrice = p => T(`from <b>${usd(p)}</b>`, `<b>${usd(p)}</b>~`);
 
   /* ---------- Header, menu, smooth scroll ---------- */
   const nav = $("#nav"), burger = $("#burger"), menu = $("#menu"), bar = $("#progress");
-  function openMenu() { menu.hidden = false; burger.setAttribute("aria-expanded", "true"); burger.setAttribute("aria-label", "Close menu"); nav.classList.add("menu-open"); document.body.classList.add("lock"); }
+  const burgerLabel = () => burger.setAttribute("aria-label", menu.hidden ? T("Open menu", "메뉴 열기") : T("Close menu", "메뉴 닫기"));
+  function openMenu() { menu.hidden = false; burger.setAttribute("aria-expanded", "true"); nav.classList.add("menu-open"); document.body.classList.add("lock"); burgerLabel(); }
   function closeMenu() {
     if (menu.hidden) return;
-    menu.hidden = true; burger.setAttribute("aria-expanded", "false"); burger.setAttribute("aria-label", "Open menu");
-    nav.classList.remove("menu-open"); document.body.classList.remove("lock");
+    menu.hidden = true; burger.setAttribute("aria-expanded", "false");
+    nav.classList.remove("menu-open"); document.body.classList.remove("lock"); burgerLabel();
   }
   burger.addEventListener("click", () => menu.hidden ? openMenu() : closeMenu());
-  addEventListener("keydown", e => { if (e.key === "Escape") closeMenu(); });
 
   // Scroll spy: the section crossing 45% of the viewport height owns the nav highlight.
   const spyLinks = $$("[data-spy]"), spySections = $$("[data-spy-for]");
@@ -984,6 +1162,7 @@ body[data-at="plan"] .chat-fab { opacity: 0; pointer-events: none; transform: tr
     at = id;
     document.body.dataset.at = id;
     spyLinks.forEach(a => a.dataset.spy === id ? a.setAttribute("aria-current", "true") : a.removeAttribute("aria-current"));
+    if (id === "plan") setDock(false);
   }
   function onScroll() {
     nav.classList.toggle("solid", scrollY > 40);
@@ -996,7 +1175,6 @@ body[data-at="plan"] .chat-fab { opacity: 0; pointer-events: none; transform: tr
   }
   addEventListener("scroll", onScroll, { passive: true });
   addEventListener("resize", onScroll);
-  onScroll();
 
   // Eased glide to a section, offset by the locked header. Any user scroll input cancels it.
   let glide = 0, glideSafety = 0;
@@ -1022,35 +1200,52 @@ body[data-at="plan"] .chat-fab { opacity: 0; pointer-events: none; transform: tr
     if (!a) return;
     const id = a.getAttribute("href").slice(1);
     const target = id === "top" ? "top" : document.getElementById(id);
-    if (!target) return;
+    if (!target) { if (id === "" || a.hasAttribute("data-kakao") || a.hasAttribute("data-wa")) e.preventDefault(); return; }
     e.preventDefault();
     closeMenu();
     glideTo(target);
   });
 
+  /* ---------- Contact dock and contact links ---------- */
+  const dockBtn = $("#dock-btn"), dockMenu = $("#dock-menu");
+  function setDock(open) { dockMenu.hidden = !open; dockBtn.setAttribute("aria-expanded", String(open)); }
+  dockBtn.addEventListener("click", e => { e.stopPropagation(); setDock(dockMenu.hidden); });
+  dockMenu.addEventListener("click", () => setDock(false));
+  document.addEventListener("click", e => { if (!e.target.closest("#dock")) setDock(false); });
+  addEventListener("keydown", e => { if (e.key === "Escape") { closeMenu(); setDock(false); } });
+  $$("[data-kakao]").forEach(a => { a.hidden = !CONFIG.kakao; if (CONFIG.kakao) a.href = CONFIG.kakao; });
+  $$("[data-wa]").forEach(a => { a.hidden = !CONFIG.whatsapp; if (CONFIG.whatsapp) a.href = `https://wa.me/${CONFIG.whatsapp}`; });
+  $$("[data-email]").forEach(a => { a.href = `mailto:${CONFIG.email}`; });
+  $$("[data-email-text]").forEach(el => { el.textContent = CONFIG.email; });
+
   /* ---------- Journey cards ---------- */
   const tagClass = t => t.cats.includes("winter") ? "ice" : t.cats.includes("festival") ? "red" : "";
-  const card = t => `<button class="tcard" type="button" data-trip="${t.id}" data-cats="${t.cats.join(" ")}">
-      <img src="${t.img}" alt="" loading="lazy"><span class="tag ${tagClass(t)}">${t.tag}</span>
-      <span class="tcard-body"><span class="tcard-meta">${t.days} days · ${t.season}</span><strong>${t.name}</strong>
-      <span class="tcard-foot"><span>from <b>${usd(t.price)}</b></span><span class="arrow" aria-hidden="true">→</span></span></span></button>`;
+  const card = t => { const l = L(t); return `<button class="tcard" type="button" data-trip="${t.id}" data-cats="${t.cats.join(" ")}">
+      <img src="${t.img}" alt="" loading="lazy"><span class="tag ${tagClass(t)}">${l.tag}</span>
+      <span class="tcard-body"><span class="tcard-meta">${daysText(t.days)} · ${l.season}</span><strong>${l.name}</strong>
+      <span class="tcard-foot"><span>${fromPrice(t.price)}</span><span class="arrow" aria-hidden="true">→</span></span></span></button>`; };
   const grid = $("#tgrid");
-  grid.innerHTML = TRIPS.map(card).join("");
+  let curFilter = "all";
   function applyFilter(f) {
+    curFilter = f;
     $$(".chip").forEach(c => c.setAttribute("aria-pressed", c.dataset.filter === f));
     $$(".tcard", grid).forEach(c => { c.hidden = !(f === "all" || c.dataset.cats.split(" ").includes(f)); });
   }
+  function renderCards() { grid.innerHTML = TRIPS.map(card).join(""); applyFilter(curFilter); }
   $$(".chip").forEach(chip => chip.addEventListener("click", () => applyFilter(chip.dataset.filter)));
 
   /* ---------- Destinations accordion ---------- */
   const dest = $("#dest");
-  dest.innerHTML = REGIONS.map((r, i) => {
-    const n = TRIPS.filter(t => t.cats.includes(r.id)).length;
-    return `<button class="dest-tile${i === 0 ? " on" : ""}" type="button" data-region="${r.id}">
-      <img src="${r.img}" alt="" loading="lazy"><span class="dest-label" aria-hidden="true">${r.name}</span>
-      <span class="dest-body"><span class="dest-count">${n} ${n === 1 ? "journey" : "journeys"}</span><strong>${r.name}</strong><span class="dest-desc">${r.desc}</span><span class="dest-go">See journeys →</span></span></button>`;
-  }).join("");
-  const activate = tile => $$(".dest-tile", dest).forEach(x => x.classList.toggle("on", x === tile));
+  let curRegion = 0;
+  function renderDest() {
+    dest.innerHTML = REGIONS.map((r, i) => {
+      const l = L(r), n = TRIPS.filter(t => t.cats.includes(r.id)).length;
+      return `<button class="dest-tile${i === curRegion ? " on" : ""}" type="button" data-region="${r.id}" data-i="${i}">
+        <img src="${r.img}" alt="" loading="lazy"><span class="dest-label" aria-hidden="true">${l.name}</span>
+        <span class="dest-body"><span class="dest-count">${T(`${n} ${n === 1 ? "journey" : "journeys"}`, `${n}개 상품`)}</span><strong>${l.name}</strong><span class="dest-desc">${l.desc}</span><span class="dest-go">${T("See journeys →", "상품 보기 →")}</span></span></button>`;
+    }).join("");
+  }
+  const activate = tile => { curRegion = +tile.dataset.i; $$(".dest-tile", dest).forEach(x => x.classList.toggle("on", x === tile)); };
   dest.addEventListener("mouseover", e => { const t = e.target.closest(".dest-tile"); if (t) activate(t); });
   dest.addEventListener("focusin", e => { const t = e.target.closest(".dest-tile"); if (t) activate(t); });
   dest.addEventListener("click", e => {
@@ -1069,6 +1264,7 @@ body[data-at="plan"] .chat-fab { opacity: 0; pointer-events: none; transform: tr
   const haversine = (a, b) => { const r = Math.PI / 180, dLat = (b.lat - a.lat) * r, dLon = (b.lon - a.lon) * r; const h = Math.sin(dLat / 2) ** 2 + Math.cos(a.lat * r) * Math.cos(b.lat * r) * Math.sin(dLon / 2) ** 2; return 2 * 6371 * Math.asin(Math.sqrt(h)); };
   const key = k => k.replace("~", "");
   const stopsOf = t => [...new Set(t.route.map(key))];
+  const textW = (s, fs) => [...s].reduce((w, ch) => w + (/[ᄀ-ᇿ㄰-㆏가-힯]/.test(ch) ? .98 : .56), 0) * fs;
 
   function drawMap(svg, t) {
     svg.replaceChildren();
@@ -1096,31 +1292,38 @@ body[data-at="plan"] .chat-fab { opacity: 0; pointer-events: none; transform: tr
     // Greedy label placement: the first candidate position that collides with nothing already placed.
     const FS = 20, hit = (a, b) => a.x0 < b.x1 + 4 && a.x1 + 4 > b.x0 && a.y0 < b.y1 + 2 && a.y1 + 2 > b.y0;
     stops.forEach(k => {
-      const p = PLACES[k], [x, y] = proj(p.lon, p.lat), w = p.name.length * FS * .56;
+      const p = PLACES[k], [x, y] = proj(p.lon, p.lat), label = pname(k), w = textW(label, FS);
       const cands = [[x + 13, y + 7, "start"], [x - 13, y + 7, "end"], [x, y - 15, "middle"], [x, y + 30, "middle"], [x + 12, y - 12, "start"], [x - 12, y - 12, "end"], [x + 12, y + 26, "start"], [x - 12, y + 26, "end"]];
       const boxOf = ([tx, ty, an]) => { const x0 = an === "start" ? tx : an === "end" ? tx - w : tx - w / 2; return { x0, y0: ty - FS * .8, x1: x0 + w, y1: ty + FS * .25 }; };
       const pick = cands.find(c => { const b = boxOf(c); return b.x0 > 0 && b.x1 < 900 && b.y0 > 0 && b.y1 < 450 && !boxes.some(o => hit(o, b)); }) || cands[0];
       boxes.push(boxOf(pick));
-      el("text", { x: pick[0], y: pick[1], "text-anchor": pick[2], class: "map-label" }, svg).textContent = p.name;
+      el("text", { x: pick[0], y: pick[1], "text-anchor": pick[2], class: "map-label" }, svg).textContent = label;
     });
     return km;
   }
-  const kmText = km => km > 0 ? `≈ ${Math.round(km / 10) * 10} km overland` : "Flight + local transfers";
+  const kmText = km => {
+    if (km <= 0) return T("Flight + local transfers", "항공 + 현지 이동");
+    const n = (Math.round(km / 10) * 10).toLocaleString("en-US");
+    return T(`≈ ${n} km overland`, `육로 약 ${n}km`);
+  };
 
   /* ---------- Route map section ---------- */
-  $("#route-list").innerHTML = TRIPS.map(t => `<li><button type="button" data-id="${t.id}" aria-pressed="false"><span class="r-name">${t.name}</span><span class="r-days">${t.days} days</span><span class="r-stops">${stopsOf(t).filter(k => k !== "ub").map(k => PLACES[k].name).join(" · ")}</span></button></li>`).join("");
+  let curRoute = "gobi";
+  function renderRoutes() {
+    $("#route-list").innerHTML = TRIPS.map(t => `<li><button type="button" data-id="${t.id}" aria-pressed="${t.id === curRoute}"><span class="r-name">${L(t).name}</span><span class="r-days">${daysText(t.days)}</span><span class="r-stops">${stopsOf(t).filter(k => k !== "ub").map(pname).join(" · ")}</span></button></li>`).join("");
+    showRoute(curRoute);
+  }
   function showRoute(id) {
-    const t = byId[id], km = drawMap($("#big-map"), t);
+    curRoute = id;
+    const t = byId[id], l = L(t), km = drawMap($("#big-map"), t);
     $$("#route-list button").forEach(b => b.setAttribute("aria-pressed", b.dataset.id === id));
-    $("#route-sum").innerHTML = `<div><strong>${t.name}</strong><span class="mono">${t.days} days · ${kmText(km)} · from ${usd(t.price)}</span></div><button class="btn btn-gold" type="button" data-trip="${t.id}">View journey <span class="arr">→</span></button>`;
+    $("#route-sum").innerHTML = `<div><strong>${l.name}</strong><span class="mono">${daysText(t.days)} · ${kmText(km)} · ${T("from " + usd(t.price), usd(t.price) + "~")}</span></div><button class="btn btn-gold" type="button" data-trip="${t.id}">${T("View journey", "상품 보기")} <span class="arr">→</span></button>`;
   }
   $("#route-list").addEventListener("click", e => { const b = e.target.closest("button"); if (b) showRoute(b.dataset.id); });
-  showRoute("gobi");
 
   /* ---------- Gold ticker ---------- */
-  const names = ["Gobi Desert", "Lake Khövsgöl", "Orkhon Valley", "Altai Tavan Bogd", "Naadam", "Golden Eagle Festival", "Gorkhi-Terelj", "Khongoryn Els", "Ice Festival", "Kharkhorin"];
-  const run = names.map(n => `<span>${n}<i>✦</i></span>`).join("");
-  $("#ticker").innerHTML = run + run;
+  const TICKER = [["Gobi Desert", "고비 사막"], ["Lake Khövsgöl", "홉스골 호수"], ["Orkhon Valley", "오르홍 계곡"], ["Altai Tavan Bogd", "알타이 타반복드"], ["Naadam", "나담 축제"], ["Golden Eagle Festival", "골든 이글 페스티벌"], ["Gorkhi-Terelj", "테를지"], ["Khongoryn Els", "홍고린 엘스"], ["Ice Festival", "얼음 축제"], ["Kharkhorin", "하라호름"]];
+  function renderTicker() { const run = TICKER.map(([en, ko]) => `<span>${T(en, ko)}<i>✦</i></span>`).join(""); $("#ticker").innerHTML = run + run; }
 
   /* ---------- Trip dialog ---------- */
   const dlg = $("#trip-modal");
@@ -1128,27 +1331,27 @@ body[data-at="plan"] .chat-fab { opacity: 0; pointer-events: none; transform: tr
   function openTrip(id) {
     const t = byId[id]; if (!t) return;
     current = id;
+    const l = L(t);
     $("#m-img").src = t.img;
-    $("#m-img").alt = t.name;
+    $("#m-img").alt = l.name;
     const flights = t.route.some(r => r.startsWith("~"));
-    const incl = ["Mongolian guide", "Driver & 4×4", "All nights' stays", "Meals outside the city", "Airport transfers", ...(flights ? ["Domestic flights"] : [])];
+    const incl = [T("Mongolian guide", "몽골인 가이드"), T("Driver & 4×4", "기사 및 4×4 차량"), T("All nights' stays", "전 일정 숙박"), T("Meals outside the city", "시내 외 식사"), T("Airport transfers", "공항 픽업·샌딩"), ...(flights ? [T("Domestic flights", "국내선 항공")] : [])];
     $("#m-body").innerHTML = `
-      <span class="tag ${tagClass(t) || "plain"}">${t.tag}</span>
-      <h2 id="m-title">${t.name}</h2>
-      <p class="lede" style="font-size:1.05rem">${t.text}</p>
+      <span class="tag ${tagClass(t) || "plain"}">${l.tag}</span>
+      <h2 id="m-title">${l.name}</h2>
+      <p class="lede" style="font-size:1.05rem">${l.text}</p>
       <div class="m-facts">
-        <div><small>Length</small><b>${t.days} days</b></div><div><small>When</small><b>${t.season}</b></div>
-        <div><small>Level</small><b>${t.level}</b></div><div><small>From</small><b>${usd(t.price)}</b></div>
+        <div><small>${T("Length", "기간")}</small><b>${daysText(t.days)}</b></div><div><small>${T("When", "시기")}</small><b>${l.season}</b></div>
+        <div><small>${T("Level", "난이도")}</small><b>${l.level}</b></div><div><small>${T("From", "가격")}</small><b>${T(usd(t.price), usd(t.price) + "~")}</b></div>
       </div>
-      <p class="m-label">Day by day</p>
-      <ol class="plan">${t.plan.map(([d, txt]) => `<li><span class="d">D${d}</span><p>${txt}</p></li>`).join("")}</ol>
-      <p class="m-label">Included</p>
+      <p class="m-label">${T("Day by day", "일정")}</p>
+      <ol class="plan">${l.plan.map(([d, txt]) => `<li><span class="d">${T("D" + d, d + "일차")}</span><p>${txt}</p></li>`).join("")}</ol>
+      <p class="m-label">${T("Included", "포함 사항")}</p>
       <ul class="incl">${incl.map(i => `<li>${i}</li>`).join("")}</ul>
-      <div class="m-actions"><button class="btn btn-blue" type="button" id="m-request">Request this journey <span class="arr">→</span></button><span class="mono">per person, twin share</span></div>`;
+      <div class="m-actions"><button class="btn btn-blue" type="button" id="m-request">${T("Request this journey", "이 상품 문의하기")} <span class="arr">→</span></button><span class="mono">${T("per person, twin share", "2인 1실 기준 1인 요금")}</span></div>`;
     $("#m-km").textContent = kmText(drawMap($("#m-map"), t));
     $("#m-request").addEventListener("click", () => { $("#f-trip").value = current; dlg.close(); glideTo($("#plan")); });
-    if (!dlg.open) dlg.showModal();
-    dlg.scrollTop = 0;
+    if (!dlg.open) { dlg.showModal(); dlg.scrollTop = 0; }
     document.body.classList.add("lock");
   }
   dlg.addEventListener("close", () => document.body.classList.remove("lock"));
@@ -1158,21 +1361,22 @@ body[data-at="plan"] .chat-fab { opacity: 0; pointer-events: none; transform: tr
 
   /* ---------- When to go ---------- */
   const chart = $("#temp-chart");
-  const W = 640, H = 340, L = 40, R = 10, T = 22, B = 34, TMIN = -30, TMAX = 30;
-  const yv = v => T + (TMAX - v) / (TMAX - TMIN) * (H - T - B);
-  const cw = (W - L - R) / 12;
+  const W = 640, H = 340, Lft = 40, R = 10, Tp = 22, B = 34, TMIN = -30, TMAX = 30;
+  const yv = v => Tp + (TMAX - v) / (TMAX - TMIN) * (H - Tp - B);
+  const cw = (W - Lft - R) / 12;
   for (let v = TMIN; v <= TMAX; v += 10) {
-    el("line", { x1: L, x2: W - R, y1: yv(v), y2: yv(v), class: v === 0 ? "zero" : "grid" }, chart);
-    el("text", { x: L - 8, y: yv(v) + 4, "text-anchor": "end", class: "axis" }, chart).textContent = (v > 0 ? "+" : "") + v + "°";
+    el("line", { x1: Lft, x2: W - R, y1: yv(v), y2: yv(v), class: v === 0 ? "zero" : "grid" }, chart);
+    el("text", { x: Lft - 8, y: yv(v) + 4, "text-anchor": "end", class: "axis" }, chart).textContent = (v > 0 ? "+" : "") + v + "°";
   }
   const fmt = v => (v > 0 ? "+" : v < 0 ? "−" : "") + Math.abs(v) + "°";
+  let curMonth = 6;
   const cols = MONTHS.map((mo, i) => {
-    const g = el("g", { class: "col", tabindex: "0", role: "button", "aria-label": `${mo.full}: ${mo.lo} to ${mo.hi} °C` }, chart);
-    const x = L + i * cw;
+    const g = el("g", { class: "col", tabindex: "0", role: "button" }, chart);
+    const x = Lft + i * cw;
     el("rect", { x: x + 2, y: 4, width: cw - 4, height: H - 4, class: "hit", rx: 8 }, g);
     el("rect", { x: x + cw * .2, y: yv(mo.hi), width: cw * .6, height: yv(mo.lo) - yv(mo.hi), rx: Math.min(9, cw * .3), class: "bar" }, g);
     el("text", { x: x + cw / 2, y: yv(mo.hi) - 6, "text-anchor": "middle", class: "val" }, g).textContent = fmt(mo.hi);
-    el("text", { x: x + cw / 2, y: H - 10, "text-anchor": "middle", class: "m" }, g).textContent = mo.m;
+    el("text", { x: x + cw / 2, y: H - 10, "text-anchor": "middle", class: "m" }, g);
     g.addEventListener("click", () => pickMonth(i));
     g.addEventListener("keydown", e => {
       if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pickMonth(i); }
@@ -1181,20 +1385,27 @@ body[data-at="plan"] .chat-fab { opacity: 0; pointer-events: none; transform: tr
     });
     return g;
   });
+  function renderChartLabels() {
+    cols.forEach((g, i) => {
+      const l = L(MONTHS[i]);
+      g.querySelector(".m").textContent = l.m;
+      g.setAttribute("aria-label", T(`${l.full}: ${MONTHS[i].lo} to ${MONTHS[i].hi} °C`, `${l.full}: ${MONTHS[i].lo}~${MONTHS[i].hi}°C`));
+    });
+  }
   function pickMonth(i, focus) {
-    const mo = MONTHS[i];
+    curMonth = i;
+    const mo = MONTHS[i], l = L(mo);
     cols.forEach((c, j) => c.classList.toggle("on", j === i));
     if (focus) cols[i].focus();
     $("#month-card").innerHTML = `
       <div class="khee gold edge-top" aria-hidden="true"></div>
-      <span class="mono">Month ${String(i + 1).padStart(2, "0")} of 12</span>
-      <h3>${mo.full}</h3>
-      <div class="temps"><div><strong>${fmt(mo.hi)}</strong><span>Avg high</span></div><div><strong>${fmt(mo.lo)}</strong><span>Avg low</span></div></div>
-      <p>${mo.note}</p>
-      ${mo.event ? `<div class="event"><b>On the calendar:</b> ${mo.event}</div>` : ""}
-      <div style="display:grid;gap:8px"><span class="mono">Good journeys this month</span><div class="pill-row">${mo.trips.map(id => `<button class="pill" type="button" data-trip="${id}">${byId[id].name}</button>`).join("")}</div></div>`;
+      <span class="mono">${String(i + 1).padStart(2, "0")} / 12</span>
+      <h3>${l.full}</h3>
+      <div class="temps"><div><strong>${fmt(mo.hi)}</strong><span>${T("Avg high", "평균 최고")}</span></div><div><strong>${fmt(mo.lo)}</strong><span>${T("Avg low", "평균 최저")}</span></div></div>
+      <p>${l.note}</p>
+      ${l.event ? `<div class="event"><b>${T("On the calendar:", "주요 행사:")}</b> ${l.event}</div>` : ""}
+      <div style="display:grid;gap:8px"><span class="mono">${T("Good journeys this month", "이 달의 추천 상품")}</span><div class="pill-row">${mo.trips.map(id => `<button class="pill" type="button" data-trip="${id}">${L(byId[id]).name}</button>`).join("")}</div></div>`;
   }
-  pickMonth(6);
 
   /* ---------- Videos: play only while visible; respect reduced motion and manual pause ---------- */
   const PLAY = '<svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 2.5v11l9-5.5z"/></svg>';
@@ -1205,10 +1416,9 @@ body[data-at="plan"] .chat-fab { opacity: 0; pointer-events: none; transform: tr
     r.sync = () => {
       if (!r.paused && r.visible) v.play().catch(() => {}); else v.pause();
       btn.innerHTML = r.paused ? PLAY : PAUSE;
-      btn.setAttribute("aria-label", r.paused ? "Play video" : "Pause video");
+      btn.setAttribute("aria-label", r.paused ? T("Play video", "영상 재생") : T("Pause video", "영상 일시정지"));
     };
     btn.addEventListener("click", e => { e.stopPropagation(); r.paused = !r.paused; r.sync(); });
-    r.sync();
     return r;
   });
   if ("IntersectionObserver" in window) {
@@ -1217,20 +1427,23 @@ body[data-at="plan"] .chat-fab { opacity: 0; pointer-events: none; transform: tr
       r.visible = e.isIntersecting; r.sync();
     }), { threshold: .3 });
     reels.forEach(r => io.observe(r.frame));
-  } else reels.forEach(r => { r.visible = true; r.sync(); });
+  } else reels.forEach(r => { r.visible = true; });
 
   /* ---------- Help centre ---------- */
-  const catName = Object.fromEntries(FAQ_CATS.map(c => [c.id, c.name]));
   let faqCat = "all";
-  $("#faq-count").textContent = `${FAQ.length} answers across ${FAQ_CATS.length} topics. If yours isn't here, a planner will answer it personally.`;
-  $("#faq-cats").innerHTML = [{ id: "all", name: "All questions" }, ...FAQ_CATS].map(c =>
-    `<li><button type="button" data-cat="${c.id}" aria-pressed="${c.id === "all"}">${c.name}<span class="n">${c.id === "all" ? FAQ.length : FAQ.filter(f => f.c === c.id).length}</span></button></li>`).join("");
+  function renderFaqCats() {
+    $("#faq-count").textContent = T(`${FAQ.length} answers across ${FAQ_CATS.length} topics. If yours isn't here, a planner will answer it personally.`, `${FAQ_CATS.length}개 주제, ${FAQ.length}개 답변. 찾는 질문이 없으면 플래너가 직접 답해 드립니다.`);
+    $("#faq-cats").innerHTML = [{ id: "all", name: "All questions", ko: { name: "전체 질문" } }, ...FAQ_CATS].map(c =>
+      `<li><button type="button" data-cat="${c.id}" aria-pressed="${c.id === faqCat}">${L(c).name}<span class="n">${c.id === "all" ? FAQ.length : FAQ.filter(f => f.c === c.id).length}</span></button></li>`).join("");
+  }
   function renderFaq() {
     const raw = $("#faq-q").value.trim(), q = raw.toLowerCase();
-    const items = FAQ.filter(f => (faqCat === "all" || f.c === faqCat) && (!q || (f.q + " " + f.a).toLowerCase().includes(q)));
+    const catName = Object.fromEntries(FAQ_CATS.map(c => [c.id, L(c).name]));
+    const items = FAQ.map(L).filter(f => (faqCat === "all" || f.c === faqCat) && (!q || (f.q + " " + f.a).toLowerCase().includes(q)));
     $("#faq-list").innerHTML = items.length
       ? items.map((f, i) => `<details class="qa"${i === 0 && !q ? " open" : ""}><summary>${faqCat === "all" ? `<span class="qa-cat">${catName[f.c]}</span>` : ""}${f.q}</summary><p>${f.a}</p></details>`).join("")
-      : `<p class="faq-empty">No questions match “${esc(raw)}”. <a href="#plan">Ask a planner directly</a> and we'll answer within one working day.</p>`;
+      : T(`<p class="faq-empty">No questions match “${esc(raw)}”. <a href="#plan">Ask a planner directly</a> and we'll answer within one working day.</p>`,
+          `<p class="faq-empty">“${esc(raw)}”에 해당하는 질문이 없습니다. <a href="#plan">플래너에게 직접 문의</a>하시면 영업일 하루 안에 답변드려요.</p>`);
   }
   $("#faq-cats").addEventListener("click", e => {
     const b = e.target.closest("[data-cat]"); if (!b) return;
@@ -1239,28 +1452,105 @@ body[data-at="plan"] .chat-fab { opacity: 0; pointer-events: none; transform: tr
     renderFaq();
   });
   $("#faq-q").addEventListener("input", renderFaq);
-  renderFaq();
 
   /* ---------- Inquiry form ---------- */
-  $("#f-trip").insertAdjacentHTML("beforeend", TRIPS.map(t => `<option value="${t.id}">${t.name}</option>`).join(""));
-  $("#f-month").innerHTML = `<option value="">Flexible</option>` + MONTHS.map(mo => `<option>${mo.full}</option>`).join("");
-  const form = $("#inq-form");
+  const form = $("#inq-form"), status = $("#f-status");
+  function renderFormOptions() {
+    const keep = id => $(id).value;
+    const trip = keep("#f-trip"), month = keep("#f-month"), style = keep("#f-style");
+    $("#f-trip").innerHTML = `<option value="">${T("Not sure yet", "아직 모르겠어요")}</option>` + TRIPS.map(t => `<option value="${t.id}">${L(t).name}</option>`).join("");
+    $("#f-month").innerHTML = `<option value="">${T("Flexible", "미정")}</option>` + MONTHS.map((mo, i) => `<option value="${mo.full}">${L(mo).full}</option>`).join("");
+    $("#f-style").innerHTML = `<option value="Small group">${T("Small group", "소규모 그룹")}</option><option value="Private">${T("Private", "단독 여행")}</option>`;
+    $("#f-trip").value = trip; $("#f-month").value = month; if (style) $("#f-style").value = style;
+  }
   const okEmail = s => /^\S+@\S+\.\S+$/.test(s);
-  form.addEventListener("submit", e => {
+  function showDone(name, email, trip, sent) {
+    const first = esc(name.split(" ")[0]), mail = esc(email), tname = trip ? L(trip).name : "";
+    const body = sent
+      ? T(`Your inquiry was sent. A planner will reply to ${mail} within one working day${trip ? ` about the ${tname}` : ""}.`, `문의가 접수되었습니다. 영업일 하루 안에 ${mail}(으)로 답변드릴게요${trip ? ` (${tname})` : ""}.`)
+      : T(`This preview isn't connected to email yet, so your inquiry was not sent. Please write to ${esc(CONFIG.email)}.`, `이 미리보기는 아직 이메일과 연결되지 않아 문의가 전송되지 않았습니다. ${esc(CONFIG.email)}(으)로 연락해 주세요.`);
+    form.innerHTML = `<div class="done"><h3>${T(`Thank you, ${first}.`, `${first}님, 감사합니다.`)}</h3><p>${body}</p></div>`;
+  }
+  form.addEventListener("submit", async e => {
     e.preventDefault();
     const name = $("#f-name").value.trim(), email = $("#f-email").value.trim();
-    $("#e-name").textContent = name ? "" : "Please enter your name.";
-    $("#e-email").textContent = okEmail(email) ? "" : "Please enter an email address like name@example.com.";
+    $("#e-name").textContent = name ? "" : T("Please enter your name.", "이름을 입력해 주세요.");
+    $("#e-email").textContent = okEmail(email) ? "" : T("Please enter an email address like name@example.com.", "name@example.com 형식의 이메일을 입력해 주세요.");
     if (!name || !okEmail(email)) return;
     const trip = byId[$("#f-trip").value];
-    form.innerHTML = `<div class="done"><h3>Thank you, ${esc(name.split(" ")[0])}.</h3><p>This is a preview of the site, so your inquiry was not sent. Once the site is live, a planner will reply to ${esc(email)} within one working day${trip ? ` about the ${trip.name}` : ""}.</p></div>`;
+    if ($("#f-bot").checked) { showDone(name, email, trip, true); return; }   // bot trap
+    if (!CONFIG.formKey) { showDone(name, email, trip, false); return; }
+    const btn = form.querySelector('[type="submit"]');
+    btn.disabled = true; status.className = "form-status ok"; status.textContent = T("Sending…", "보내는 중…");
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          access_key: CONFIG.formKey,
+          subject: `New inquiry: ${trip ? trip.name : "General"} (${name})`,
+          from_name: "Golden Jigu Tour website",
+          name, email,
+          journey: trip ? trip.name : "Not sure yet",
+          month: $("#f-month").value || "Flexible",
+          travellers: $("#f-size").value,
+          style: $("#f-style").value,
+          message: $("#f-msg").value.trim(),
+          language: lang === "ko" ? "Korean" : "English"
+        })
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || data.success === false) throw new Error(data.message || String(res.status));
+      showDone(name, email, trip, true);
+    } catch {
+      btn.disabled = false;
+      status.className = "form-status";
+      status.textContent = T(`Your inquiry could not be sent. Please email ${CONFIG.email}${CONFIG.kakao ? " or message us on KakaoTalk" : ""}.`, `문의를 보내지 못했습니다. ${CONFIG.email}(으)로 이메일을 보내${CONFIG.kakao ? "시거나 카카오톡으로 연락해" : ""} 주세요.`);
+    }
   });
-  $("#copy-email").addEventListener("click", async ev => {
-    const btn = ev.currentTarget, span = $("#email-text");
-    try { await navigator.clipboard.writeText(span.textContent); btn.textContent = "Copied"; }
-    catch { const r = document.createRange(); r.selectNodeContents(span); const s = getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = "Selected"; }
-    setTimeout(() => { btn.textContent = "Copy"; }, 1800);
+  const copyBtn = $("#copy-email");
+  copyBtn.addEventListener("click", async () => {
+    const span = $("#email-text");
+    try { await navigator.clipboard.writeText(span.textContent); copyBtn.textContent = T("Copied", "복사됨"); }
+    catch { const r = document.createRange(); r.selectNodeContents(span); const s = getSelection(); s.removeAllRanges(); s.addRange(r); copyBtn.textContent = T("Selected", "선택됨"); }
+    setTimeout(() => { copyBtn.textContent = T("Copy", "복사"); }, 1800);
   });
+
+  /* ---------- Language ---------- */
+  // Static text carries both languages in the markup; attributes and generated content are swapped here.
+  function applyAttrs() {
+    $$(".tr").forEach(node => {
+      for (const a of [...node.attributes]) {
+        if (!a.name.startsWith("data-ko-")) continue;
+        const name = a.name.slice(8), enKey = "data-en-" + name;
+        if (!node.hasAttribute(enKey)) node.setAttribute(enKey, node.getAttribute(name) || "");
+        node.setAttribute(name, lang === "ko" ? a.value : node.getAttribute(enKey));
+      }
+    });
+  }
+  function renderAll() {
+    applyAttrs();
+    $$(".lang button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.lang === lang)));
+    burgerLabel();
+    copyBtn.textContent = T("Copy", "복사");
+    renderCards(); renderDest(); renderRoutes(); renderTicker();
+    renderChartLabels(); pickMonth(curMonth);
+    renderFaqCats(); renderFaq(); renderFormOptions();
+    reels.forEach(r => r.sync());
+    if (dlg.open && current) openTrip(current);
+  }
+  function setLang(l) {
+    if (l === lang) return;
+    lang = l;
+    root.lang = l;
+    try { localStorage.setItem("gj-lang", l); } catch { /* storage unavailable: choice lasts this visit */ }
+    renderAll();
+    onScroll();
+  }
+  $$(".lang button").forEach(b => b.addEventListener("click", () => setLang(b.dataset.lang)));
+
+  renderAll();
+  onScroll();
 })();
 </script>
 </body>
