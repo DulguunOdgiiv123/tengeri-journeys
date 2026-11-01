@@ -962,7 +962,10 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
     // switch "map" to a keyed provider (e.g. MapTiler) whose key can be restricted to goldenjigutour.com.
     tiles: {
       map: { url: "https://tile.openstreetmap.org/{z}/{x}/{y}.png", attr: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors', max: 18 },
-      sat: { url: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", attr: "Imagery &copy; Esri, Maxar, Earthstar Geographics", max: 17 }
+      // Satellite button: off until there's a licensed key (Esri requires an ArcGIS account + API key for commercial use;
+      // free ArcGIS Location Platform tier). Then set, e.g.:
+      // sat: { url: "https://ibasemaps-api.arcgis.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}?token=YOUR_KEY", attr: "Imagery &copy; Esri, Maxar, Earthstar Geographics", max: 17 }
+      sat: null
     },
     // Shown in the footer once filled (Korean customers look for these to trust a company)
     company: { name: "", ceo: "", address: "", regNo: "", licenseNo: "", phone: "+976-8605-9966" }
@@ -1672,7 +1675,7 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
     // No wheel zoom, and on phones no dragging until tapped, so scrolling the dialog never gets stuck in the map.
     const map = L.map(box, { scrollWheelZoom: false, dragging: !touch, touchZoom: !touch, zoomSnap: .5 });
     map.attributionControl.setPrefix(false);
-    const base = Object.fromEntries(Object.entries(CONFIG.tiles).map(([id, c]) => [id, L.tileLayer(c.url, { attribution: c.attr, maxZoom: c.max || 18 })]));
+    const base = Object.fromEntries(Object.entries(CONFIG.tiles).filter(([, c]) => c && c.url).map(([id, c]) => [id, L.tileLayer(c.url, { attribution: c.attr, maxZoom: c.max || 18 })]));
     let tiles = 0;
     base.map.on("tileload", () => tiles++).addTo(map);
     const accent = getComputedStyle(document.documentElement).getPropertyValue("--accent").trim() || "#2f6b4f";
@@ -1698,7 +1701,7 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
       });
       return d;
     } });
-    new Switch({ position: "bottomleft" }).addTo(map);   // top-right sits under the dialog's close button on phones
+    if (base.sat) new Switch({ position: "bottomleft" }).addTo(map);   // top-right sits under the dialog's close button on phones
     if (touch) {
       const tap = Object.assign(document.createElement("button"), { type: "button", className: "map-tap", innerHTML: `<span>${T("Tap to move the map", "탭하여 지도 움직이기")}</span>` });
       tap.addEventListener("click", () => { map.dragging.enable(); map.touchZoom.enable(); tap.remove(); });
