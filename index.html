@@ -49,7 +49,7 @@
   --f-body: "Hanken Grotesk", "Noto Sans KR", "Helvetica Neue", Arial, sans-serif;
   --f-mono: "JetBrains Mono", "Noto Sans KR", ui-monospace, Menlo, monospace;
 
-  --nav-h: 68px;
+  --nav-h: 112px;   /* two header rows */
   --wrap: 1200px;
   --r: 14px;
   --r-lg: 20px;
@@ -76,6 +76,7 @@ section[id] { scroll-margin-top: calc(var(--nav-h) + env(safe-area-inset-top, 0p
 :root[lang="ko"] body { word-break: keep-all; overflow-wrap: break-word; }
 :root[lang="ko"] h1, :root[lang="ko"] h2, :root[lang="ko"] h3 { letter-spacing: -.035em; }
 
+[hidden] { display: none !important; }   /* components set display, which would otherwise beat the hidden attribute */
 .wrap {
   width: 100%; max-width: calc(var(--wrap) + 64px); margin-inline: auto;
   padding-left: max(16px, env(safe-area-inset-left, 0px));
@@ -109,60 +110,74 @@ section[id] { scroll-margin-top: calc(var(--nav-h) + env(safe-area-inset-top, 0p
 .txt-btn { background: none; border: 0; padding: 0; font: 700 .9rem var(--f-body); color: var(--accent); cursor: pointer; text-decoration: none; }
 .txt-btn:hover { text-decoration: underline; text-underline-offset: 3px; }
 
-/* ---------- Header ---------- */
-.nav-bar { position: fixed; inset: 0 0 auto; z-index: 60; padding-top: env(safe-area-inset-top, 0px); background: rgba(255,255,255,.94); backdrop-filter: saturate(1.4) blur(14px); border-bottom: 1px solid var(--line); }
-.nav-inner { height: var(--nav-h); display: flex; align-items: center; gap: 18px; }
-.brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); font: 600 1rem/1 var(--f-display); letter-spacing: -.02em; white-space: nowrap; }
+/* ---------- Header: two rows, like noratour.com ---------- */
+.nav-bar { position: fixed; inset: 0 0 auto; z-index: 60; padding-top: env(safe-area-inset-top, 0px); background: rgba(255,255,255,.97); backdrop-filter: saturate(1.4) blur(14px); border-bottom: 1px solid var(--line); }
+.nav-top { height: 64px; display: grid; grid-template-columns: 1fr minmax(0, 440px) 1fr; align-items: center; gap: 20px; }
+.brand { justify-self: start; display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); font: 600 1rem/1 var(--f-display); letter-spacing: -.02em; white-space: nowrap; }
 .brand svg { width: 32px; height: 32px; flex: none; }
-.nav-links { display: flex; gap: 2px; list-style: none; margin: 0 0 0 auto; padding: 0; }
-.nav-links a { position: relative; display: block; padding: 10px 14px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: .95rem; color: var(--muted); transition: color .2s, background-color .2s; }
-.nav-links a:hover { color: var(--ink); background: var(--mist); }
-.nav-links a[aria-current="true"] { color: var(--ink); }
-.nav-links a[aria-current="true"]::after { content: ""; position: absolute; left: 14px; right: 14px; bottom: 3px; height: 2px; border-radius: 2px; background: var(--accent); }
+.nav-search, .m-search { position: relative; }
+.nav-search input, .m-search input { width: 100%; height: 44px; border-radius: 999px; border: 1.5px solid var(--line); background: var(--mist); padding: 0 18px 0 44px; font-size: .95rem; color: var(--ink); }
+.nav-search input:focus, .m-search input:focus { outline: none; border-color: var(--ink); background: var(--paper); }
+.nav-search svg, .m-search svg { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); width: 18px; height: 18px; color: var(--muted); pointer-events: none; }
+.nav-right { justify-self: end; display: flex; align-items: center; gap: 10px; }
+.nav-kakao { padding: 10px 14px; font-size: .9rem; }
+.nav-menu { border-top: 1px solid var(--line); }
+.nav-menu ul { list-style: none; margin: 0; padding: 0; height: 46px; display: flex; align-items: center; gap: 2px; overflow-x: auto; scrollbar-width: none; }
+.nav-menu ul::-webkit-scrollbar { display: none; }
+.nav-menu li { flex: none; }
+.nav-menu li:first-child { margin-left: auto; }
+.nav-menu li:last-child { margin-right: auto; }
+.nav-menu a { position: relative; display: block; padding: 10px 18px; white-space: nowrap; text-decoration: none; font-weight: 700; font-size: .97rem; color: var(--ink); border-radius: 10px; transition: background-color .2s, color .2s; }
+.nav-menu a:hover { background: var(--mist); }
+.nav-menu a[aria-current="true"] { color: var(--accent); }
+.nav-menu a[aria-current="true"]::after { content: ""; position: absolute; left: 18px; right: 18px; bottom: 2px; height: 2px; border-radius: 2px; background: var(--accent); }
+.nav-menu .sep { display: block; width: 1px; height: 18px; background: var(--line); margin: 0 8px; }
 .progress { position: absolute; left: 0; bottom: -1px; height: 2px; width: 100%; background: var(--accent); transform-origin: 0 50%; transform: scaleX(0); }
 .lang { display: inline-flex; padding: 3px; border-radius: 999px; border: 1.5px solid var(--line); flex: none; }
 .lang button { background: transparent; border: 0; padding: 7px 11px; border-radius: 999px; font-weight: 700; font-size: .8rem; line-height: 1; color: var(--muted); cursor: pointer; }
 .lang button[aria-pressed="true"] { background: var(--ink); color: #fff; }
-.nav-cta { padding: 11px 18px; font-size: .92rem; }
 .burger { display: none; width: 44px; height: 44px; border-radius: 12px; border: 1.5px solid var(--line); background: var(--paper); color: var(--ink); cursor: pointer; position: relative; flex: none; }
 .burger span { position: absolute; left: 12px; right: 12px; height: 2px; background: currentColor; border-radius: 2px; transition: transform .3s var(--ease), opacity .2s; }
 .burger span:nth-child(1) { top: 15px; } .burger span:nth-child(2) { top: 21px; } .burger span:nth-child(3) { top: 27px; }
 .burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
 .burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
 .burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
-@media (max-width: 1000px) { .nav-links, .nav-cta { display: none; } .burger { display: block; } .lang { margin-left: auto; } }
-@media (max-width: 560px) { .nav-inner { gap: 10px; } .lang button[aria-pressed="true"] { display: none; } .lang button { color: var(--ink); padding: 7px 12px; } }
+@media (max-width: 900px) { .nav-top { grid-template-columns: 1fr auto; } .nav-search { display: none; } .burger { display: block; } }
+@media (max-width: 760px) { :root { --nav-h: 105px; } .nav-top { height: 58px; gap: 10px; } .nav-menu ul { height: 45px; } .nav-menu a { padding: 9px 13px; font-size: .93rem; } .nav-menu a[aria-current="true"]::after { left: 13px; right: 13px; } }
+@media (max-width: 560px) { .lang button[aria-pressed="true"] { display: none; } .lang button { color: var(--ink); padding: 7px 12px; } .nav-kakao .lbl { display: none; } .nav-kakao { padding: 10px; } }
+@media (max-width: 380px) { .nav-kakao { display: none; } }
 
 .menu { position: fixed; left: 0; right: 0; bottom: 0; top: calc(var(--nav-h) + env(safe-area-inset-top, 0px)); z-index: 55; background: var(--paper); overflow-y: auto; padding-bottom: calc(28px + env(safe-area-inset-bottom, 0px)); }
-.menu ul { list-style: none; margin: 0; padding: 12px 0 0; display: grid; }
-.menu li a { display: flex; justify-content: space-between; align-items: center; padding: 18px 0; border-bottom: 1px solid var(--line); text-decoration: none; font-weight: 700; font-size: 1.25rem; }
+.menu .m-search { margin-top: 16px; }
+.menu ul { list-style: none; margin: 0; padding: 8px 0 0; display: grid; }
+.menu li a { display: flex; justify-content: space-between; align-items: center; padding: 17px 0; border-bottom: 1px solid var(--line); text-decoration: none; font-weight: 700; font-size: 1.2rem; }
 .menu li a::after { content: "→"; color: var(--muted); font-weight: 400; }
 .menu li a[aria-current="true"] { color: var(--accent); }
 .menu-foot { display: grid; gap: 12px; padding-top: 24px; color: var(--muted); }
 
-/* ---------- Hero ---------- */
+/* ---------- Hero: centered headline and search bar ---------- */
 .hero { position: relative; isolation: isolate; overflow: hidden; color: #fff; padding-top: calc(var(--nav-h) + env(safe-area-inset-top, 0px)); }
 .hero-bg { position: absolute; inset: 0; z-index: -2; }
 .hero-bg img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 62%; }
-.hero::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(0,0,0,.7) 0%, rgba(0,0,0,.44) 48%, rgba(0,0,0,.16) 100%), linear-gradient(0deg, rgba(0,0,0,.42), transparent 55%); }
-.hero-grid { display: grid; grid-template-columns: minmax(0, 1.12fr) minmax(0, .88fr); gap: clamp(28px, 4vw, 64px); align-items: center; padding-block: clamp(56px, 8vw, 108px) clamp(52px, 7vw, 92px); }
-.hero-copy { display: grid; gap: 20px; justify-items: start; }
+.hero::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(0,0,0,.42) 0%, rgba(0,0,0,.5) 55%, rgba(0,0,0,.62) 100%); }
+.hero-center { display: grid; justify-items: center; text-align: center; gap: 18px; padding-block: clamp(56px, 8vw, 100px) clamp(36px, 5vw, 60px); }
 .badge-line { display: inline-flex; align-items: center; gap: 8px; padding: 8px 13px; border-radius: 999px; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.28); backdrop-filter: blur(6px); font-weight: 700; font-size: .84rem; line-height: 1; }
 .badge-line i { width: 8px; height: 8px; border-radius: 50%; background: #fff; }
-.hero h1 { font: 600 clamp(2.3rem, 1.1rem + 4.2vw, 4.5rem)/1.06 var(--f-display); letter-spacing: -.035em; }
+.hero h1 { font: 600 clamp(2.2rem, 1.1rem + 3.8vw, 4.2rem)/1.08 var(--f-display); letter-spacing: -.035em; max-width: 20ch; }
 .hero h1 .hl { color: inherit; }
-:root[lang="ko"] .hero h1 { font-family: "Noto Sans KR", var(--f-body); font-weight: 800; line-height: 1.16; letter-spacing: -.045em; font-size: clamp(2.2rem, 1rem + 4vw, 4.1rem); }
-.hero-lede { font-size: clamp(1.04rem, 1rem + .3vw, 1.2rem); line-height: 1.65; color: rgba(255,255,255,.9); max-width: 44ch; }
-.hero-trust { display: flex; flex-wrap: wrap; gap: 10px 20px; list-style: none; margin: 4px 0 0; padding: 0; font-size: .93rem; font-weight: 600; color: rgba(255,255,255,.92); }
-.hero-trust li { display: inline-flex; align-items: center; gap: 7px; }
-.hero-trust svg { width: 17px; height: 17px; color: #fff; flex: none; }
-.finder { background: var(--paper); color: var(--ink); border-radius: var(--r-lg); padding: clamp(20px, 3vw, 30px); box-shadow: var(--shadow-lg); display: grid; gap: 16px; }
-.finder h2 { font-size: 1.3rem; font-weight: 800; }
-.finder .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.finder .btn { width: 100%; }
-.finder-foot { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; font-size: .88rem; color: var(--muted); padding-top: 4px; border-top: 1px solid var(--line); }
-@media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; } .hero::after { background: linear-gradient(180deg, rgba(0,0,0,.5), rgba(0,0,0,.72)); } }
-@media (max-width: 420px) { .finder .row { grid-template-columns: 1fr; } }
+:root[lang="ko"] .hero h1 { font-family: "Noto Sans KR", var(--f-body); font-weight: 800; line-height: 1.18; letter-spacing: -.045em; font-size: clamp(2.1rem, 1rem + 3.6vw, 3.9rem); }
+.hero-lede { font-size: clamp(1.02rem, 1rem + .3vw, 1.18rem); line-height: 1.65; color: rgba(255,255,255,.9); max-width: 46ch; }
+.finder-bar { width: min(780px, 100%); display: grid; grid-template-columns: 1fr 1fr auto; align-items: center; background: var(--paper); color: var(--ink); border-radius: 18px; padding: 8px; box-shadow: var(--shadow-lg); margin-top: 6px; }
+.fb-field { display: grid; gap: 2px; text-align: left; padding: 6px 18px; min-width: 0; }
+.fb-field + .fb-field { border-left: 1px solid var(--line); }
+.fb-field label { font-size: .76rem; font-weight: 700; color: var(--muted); }
+.fb-field select { width: 100%; appearance: none; border: 0; background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%236b6b6b' stroke-width='1.8'/%3E%3C/svg%3E") no-repeat right 2px center; font: 700 1rem var(--f-body); color: var(--ink); padding: 4px 24px 4px 0; cursor: pointer; }
+.fb-field select:focus { outline: none; }
+.fb-field:focus-within label { color: var(--accent); }
+.finder-bar .btn { border-radius: 12px; height: 100%; min-height: 54px; }
+.finder-note { font-size: .9rem; color: rgba(255,255,255,.85); }
+.finder-note .txt-btn { color: #fff; }
+@media (max-width: 640px) { .finder-bar { grid-template-columns: 1fr; padding: 10px; } .fb-field { padding: 8px 10px; } .fb-field + .fb-field { border-left: 0; border-top: 1px solid var(--line); } .finder-bar .btn { margin-top: 6px; } }
 
 /* ---------- Form fields (shared) ---------- */
 .field { display: grid; gap: 6px; min-width: 0; }
@@ -178,82 +193,98 @@ fieldset.field legend { padding: 0; margin-bottom: 6px; }
 /* ---------- Trust strip ---------- */
 .trust-strip { border-bottom: 1px solid var(--line); }
 .trust-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
-.trust-item { display: flex; gap: 14px; align-items: flex-start; padding: 24px 20px; }
+.trust-item { display: grid; justify-items: center; align-content: start; text-align: center; gap: 8px; padding: 26px 16px; }
 .trust-item + .trust-item { border-left: 1px solid var(--line); }
 .ti { width: 42px; height: 42px; border-radius: 12px; background: var(--accent-soft); color: var(--accent); display: grid; place-items: center; flex: none; }
 .ti svg { width: 22px; height: 22px; }
 .trust-item strong { display: block; font-weight: 800; font-size: .98rem; }
 .trust-item div > span { font-size: .86rem; color: var(--muted); }
 @media (max-width: 900px) { .trust-grid { grid-template-columns: 1fr 1fr; } .trust-item:nth-child(3) { border-left: 0; } .trust-item:nth-child(n+3) { border-top: 1px solid var(--line); } }
-@media (max-width: 520px) { .trust-grid { grid-template-columns: 1fr; } .trust-item + .trust-item { border-left: 0; border-top: 1px solid var(--line); } .trust-item { padding: 18px 4px; } }
+@media (max-width: 520px) { .trust-item { padding: 20px 8px; } .trust-item div > span { font-size: .8rem; } }
 
-/* ---------- Sections ---------- */
+/* ---------- Sections: centered heads, balanced content ---------- */
 .section { position: relative; padding-block: clamp(64px, 8vw, 104px); }
 .bg-mist { background: var(--mist); }
-.sec-head { display: flex; justify-content: space-between; align-items: end; gap: 20px 32px; flex-wrap: wrap; margin-bottom: clamp(24px, 3vw, 34px); }
-.sec-head .sh { display: grid; gap: 10px; }
-.sec-head h2 { font-size: clamp(1.75rem, 1.2rem + 1.8vw, 2.5rem); font-weight: 800; max-width: 22ch; }
+.sec-head { display: grid; justify-items: center; text-align: center; gap: 12px; max-width: 780px; margin: 0 auto clamp(26px, 3vw, 38px); }
+.sec-head .sh { display: grid; justify-items: center; gap: 10px; }
+.sec-head h2 { font-size: clamp(1.75rem, 1.2rem + 1.8vw, 2.5rem); font-weight: 800; }
+.sec-head .lede { margin-inline: auto; }
 
-/* ---------- Tours ---------- */
+/* ---------- Tours: one tour per row ---------- */
 .tabs { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding: 2px 2px 6px; }
 .tabs::-webkit-scrollbar { display: none; }
+.tabs > :first-child { margin-left: auto; }
+.tabs > :last-child { margin-right: auto; }
 .tab { display: inline-flex; align-items: center; gap: 8px; flex: none; padding: 6px 14px 6px 6px; border-radius: 999px; border: 1.5px solid var(--line); background: var(--paper); font-weight: 700; font-size: .92rem; color: var(--ink); cursor: pointer; transition: border-color .2s, background-color .2s, color .2s; }
 .tab img { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; }
 .tab.noimg { padding-left: 16px; }
-.tab:hover { border-color: var(--accent); }
+.tab:hover { border-color: var(--ink); }
 .tab[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: #fff; }
 .tab .n { font: 500 .74rem var(--f-mono); opacity: .65; }
-.filter-state { display: flex; align-items: center; gap: 10px 14px; flex-wrap: wrap; margin-top: 14px; font-size: .92rem; color: var(--muted); font-weight: 600; }
+.filter-state { display: flex; justify-content: center; align-items: center; gap: 10px 14px; flex-wrap: wrap; margin-top: 14px; font-size: .92rem; color: var(--muted); font-weight: 600; }
 .pill-x { display: inline-flex; align-items: center; gap: 6px; padding: 6px 11px; border-radius: 999px; background: var(--accent-soft); color: var(--accent-deep); font-weight: 700; font-size: .86rem; border: 0; cursor: pointer; }
-.cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; margin-top: 20px; }
-@media (max-width: 1020px) { .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 640px) { .cards { grid-template-columns: 1fr; } }
-.card { display: flex; flex-direction: column; background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; text-align: left; padding: 0; cursor: pointer; color: inherit; transition: transform .25s var(--ease), box-shadow .25s; }
-.card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
-.card-img { position: relative; display: block; aspect-ratio: 4 / 3; max-width: 100%; overflow: hidden; background: var(--mist); }
-.card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease); }
-.card:hover .card-img img { transform: scale(1.05); }
+.cards { display: grid; gap: 16px; max-width: 1160px; margin: 20px auto 0; }
+.lcard { display: grid; grid-template-columns: 300px minmax(0, 1fr) 210px; min-height: 220px; background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; cursor: pointer; transition: box-shadow .25s, transform .25s var(--ease); }
+.lcard:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+.lc-img { position: relative; overflow: hidden; background: var(--mist); }
+.lc-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease); }
+.lcard:hover .lc-img img { transform: scale(1.04); }
 .tags { position: absolute; left: 12px; top: 12px; display: flex; gap: 6px; flex-wrap: wrap; }
 .tag { display: inline-block; font: 700 .74rem/1 var(--f-body); padding: 6px 9px; border-radius: 8px; background: rgba(255,255,255,.95); color: var(--ink); }
 .tag.blue, .tag.red, .tag.gold { background: var(--ink); color: #fff; }
-.card-body { display: flex; flex-direction: column; gap: 8px; padding: 18px 18px 20px; flex: 1; }
-.card-meta { display: flex; gap: 8px; align-items: center; font-size: .84rem; font-weight: 700; color: var(--accent); }
-.card-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--muted); }
-.card-meta span:last-child { color: var(--muted); font-weight: 600; }
-.card-title { font-size: 1.14rem; font-weight: 800; line-height: 1.35; letter-spacing: -.02em; }
-.card-route { font-size: .88rem; color: var(--muted); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-.card-foot { display: flex; justify-content: space-between; align-items: flex-end; gap: 10px; margin-top: auto; padding-top: 14px; border-top: 1px solid var(--line); }
-.price { display: grid; gap: 1px; }
-.price b { font-size: 1.28rem; font-weight: 800; letter-spacing: -.02em; }
+.lc-body { display: grid; align-content: center; gap: 9px; padding: 20px 24px; min-width: 0; }
+.lc-name { font-size: .84rem; font-weight: 700; color: var(--muted); }
+.lc-title { font-size: 1.1rem; font-weight: 800; line-height: 1.45; letter-spacing: -.02em; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.lc-title .br { color: var(--accent); margin-right: 6px; }
+.lc-hl { display: flex; gap: 4px 16px; list-style: none; margin: 0; padding: 0; font-size: .9rem; font-weight: 600; overflow: hidden; white-space: nowrap; }
+.lc-hl li::before { content: "✓"; color: var(--accent); font-weight: 800; margin-right: 6px; }
+.lc-inc { display: flex; flex-wrap: wrap; gap: 5px; list-style: none; margin: 0; padding: 0; }
+.lc-inc li { display: inline-flex; align-items: center; gap: 4px; padding: 3px 8px; border-radius: 999px; background: var(--mist); font-size: .76rem; white-space: nowrap; font-weight: 600; color: var(--muted); }
+.lc-inc svg { width: 13px; height: 13px; color: var(--accent); flex: none; }
+.lc-foot { font-size: .84rem; color: var(--muted); }
+.lc-side { display: grid; align-content: center; gap: 10px; padding: 20px; border-left: 1px solid var(--line); text-align: center; }
+.lc-side .btn { width: 100%; padding: 11px 14px; font-size: .9rem; }
+.price { display: grid; gap: 2px; }
+.price b { font-size: 1.3rem; font-weight: 800; letter-spacing: -.02em; }
 .price small { font-size: .78rem; color: var(--muted); }
-.rating { display: inline-flex; align-items: center; gap: 4px; font-size: .9rem; font-weight: 800; }
+.rating { display: inline-flex; justify-content: center; align-items: center; gap: 4px; font-size: .9rem; font-weight: 800; }
 .rating .s { color: var(--star); }
 .rating .c { color: var(--muted); font-weight: 500; }
-.more { font-size: .88rem; font-weight: 800; color: var(--accent); white-space: nowrap; }
-.empty { grid-column: 1 / -1; padding: 44px 20px; text-align: center; border: 1.5px dashed #d9d9d5; border-radius: var(--r-lg); color: var(--muted); display: grid; gap: 14px; justify-items: center; background: var(--paper); }
-.note { margin-top: 18px; font-size: .86rem; color: var(--muted); }
+.more-wrap { display: flex; justify-content: center; margin-top: 22px; }
+.empty { padding: 44px 20px; text-align: center; border: 1.5px dashed #d9d9d5; border-radius: var(--r-lg); color: var(--muted); display: grid; gap: 14px; justify-items: center; background: var(--paper); }
+.note { max-width: 780px; margin: 18px auto 0; text-align: center; font-size: .86rem; color: var(--muted); }
+@media (max-width: 960px) {
+  .lcard { grid-template-columns: 240px minmax(0, 1fr); }
+  .lc-side { grid-column: 1 / -1; grid-template-columns: 1fr auto auto; align-items: center; text-align: left; border-left: 0; border-top: 1px solid var(--line); padding: 14px 20px; }
+  .lc-side .btn { width: auto; }
+}
+@media (max-width: 640px) {
+  .lcard { grid-template-columns: 1fr; }
+  .lc-img { aspect-ratio: 16 / 9; max-width: 100%; }
+  .lc-body { padding: 16px 16px 4px; }
+  .lc-hl { flex-wrap: wrap; white-space: normal; }
+  .lc-side { grid-template-columns: 1fr 1fr; padding: 14px 16px 16px; }
+  .lc-side .price { grid-column: 1 / -1; }
+  .lc-side .btn { width: 100%; }
+}
 
 /* ---------- Why ---------- */
-.why-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(32px, 5vw, 72px); align-items: center; }
-.why-copy { display: grid; gap: 18px; }
-.why-copy h2 { font-size: clamp(1.75rem, 1.2rem + 1.8vw, 2.5rem); font-weight: 800; }
-.why-list { list-style: none; margin: 6px 0 0; padding: 0; display: grid; gap: 16px; }
-.why-list li { display: grid; grid-template-columns: 42px 1fr; gap: 14px; align-items: start; }
-.why-list strong { display: block; font-weight: 800; }
-.why-list div > span { color: var(--muted); font-size: .95rem; }
-.facts { display: flex; flex-wrap: wrap; gap: 6px 22px; color: var(--muted); padding-top: 6px; }
-.facts b { color: var(--ink); }
-.reels { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; align-items: start; }
+.why-points { list-style: none; margin: 0 auto 36px; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; max-width: 1100px; }
+.why-points li { display: grid; justify-items: center; align-content: start; text-align: center; gap: 10px; padding: 24px 20px; border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--paper); }
+.why-points strong { font-weight: 800; font-size: 1.02rem; }
+.why-points .wp { color: var(--muted); font-size: .94rem; }
+.reels { display: grid; grid-template-columns: repeat(3, minmax(0, 260px)); justify-content: center; gap: 16px; align-items: start; }
 .reel { margin: 0; display: grid; gap: 8px; min-width: 0; }
-.reel:nth-child(2) { margin-top: 36px; }
 .reel-frame { position: relative; aspect-ratio: 9 / 16; max-width: 100%; border-radius: 16px; overflow: hidden; background: #050b14; box-shadow: var(--shadow); }
 .reel-frame video { width: 100%; height: 100%; object-fit: cover; }
-.reel figcaption { font-size: .84rem; font-weight: 700; color: var(--muted); padding-inline: 2px; }
+.reel figcaption { text-align: center; font-size: .84rem; font-weight: 700; color: var(--muted); }
 .vt { position: absolute; right: 10px; bottom: 10px; z-index: 2; width: 36px; height: 36px; border-radius: 50%; border: 0; cursor: pointer; display: grid; place-items: center; background: rgba(255,255,255,.24); color: #fff; backdrop-filter: blur(8px); }
 .vt:hover { background: rgba(255,255,255,.4); }
 .vt svg { width: 14px; height: 14px; }
-@media (max-width: 900px) { .why-grid { grid-template-columns: 1fr; } }
-@media (max-width: 560px) { .reels { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 6px; } .reel { flex: 0 0 62%; scroll-snap-align: center; } .reel:nth-child(2) { margin-top: 0; } }
+.facts { display: flex; justify-content: center; flex-wrap: wrap; gap: 6px 22px; color: var(--muted); margin-top: 26px; }
+.facts b { color: var(--ink); }
+@media (max-width: 900px) { .why-points { grid-template-columns: 1fr; } }
+@media (max-width: 560px) { .reels { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 6px; } .reel { flex: 0 0 62%; scroll-snap-align: center; } }
 
 /* ---------- Reviews ---------- */
 .rev-summary { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
@@ -307,20 +338,12 @@ fieldset.field legend { padding: 0; margin-bottom: 6px; }
 .chip-trip:hover { background: var(--accent); color: #fff; }
 
 /* ---------- FAQ ---------- */
-.faq-grid { display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: clamp(24px, 4vw, 56px); align-items: start; }
-@media (max-width: 900px) { .faq-grid { grid-template-columns: 1fr; } }
-.faq-side { display: grid; gap: 18px; position: sticky; top: calc(var(--nav-h) + env(safe-area-inset-top, 0px) + 20px); }
-@media (max-width: 900px) { .faq-side { position: static; } }
-.faq-cats { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
-.faq-cats button { width: 100%; display: flex; justify-content: space-between; gap: 12px; padding: 11px 14px; background: none; border: 0; border-radius: 10px; color: var(--muted); font-weight: 700; font-size: .95rem; cursor: pointer; text-align: left; }
-.faq-cats button:hover { color: var(--ink); background: var(--paper); }
-.faq-cats button[aria-pressed="true"] { color: #fff; background: var(--ink); }
-.faq-cats .n { font: 400 .76rem var(--f-mono); opacity: .75; }
-@media (max-width: 900px) {
-  .faq-cats { display: flex; overflow-x: auto; padding-bottom: 4px; }
-  .faq-cats button { width: auto; white-space: nowrap; border: 1.5px solid var(--line); border-radius: 999px; padding: 8px 14px; background: var(--paper); }
-  .faq-cats button[aria-pressed="true"] { border-color: var(--ink); background: var(--ink); }
-}
+.faq-wrap { max-width: 860px; margin: 0 auto; }
+.faq-cats { list-style: none; margin: 0 0 16px; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.faq-cats button { display: inline-flex; align-items: center; gap: 8px; padding: 9px 15px; border-radius: 999px; border: 1.5px solid var(--line); background: var(--paper); color: var(--ink); font-weight: 700; font-size: .92rem; cursor: pointer; }
+.faq-cats button:hover { border-color: var(--ink); }
+.faq-cats button[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: #fff; }
+.faq-cats .n { font: 400 .74rem var(--f-mono); opacity: .7; }
 .faq-search { position: relative; margin-bottom: 12px; }
 .faq-search input { width: 100%; font-size: 1rem; color: var(--ink); background: var(--paper); border: 1.5px solid var(--line); border-radius: 12px; padding: 14px 18px 14px 48px; }
 .faq-search input:focus { outline: none; border-color: var(--accent); }
@@ -330,26 +353,26 @@ details.qa summary { cursor: pointer; list-style: none; padding: 18px 48px 18px 
 details.qa summary::-webkit-details-marker { display: none; }
 details.qa summary::after { content: "+"; position: absolute; right: 0; top: 50%; transform: translateY(-50%); width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; background: var(--paper); border: 1px solid var(--line); color: var(--accent); font-size: 1.2rem; line-height: 1; transition: transform .3s var(--ease); }
 details.qa[open] summary::after { transform: translateY(-50%) rotate(45deg); }
-details.qa p { padding: 0 0 20px; color: var(--muted); max-width: 66ch; }
+details.qa p { padding: 0 0 20px; color: var(--muted); max-width: 70ch; }
 .qa-cat { display: block; font: 700 .72rem var(--f-body); letter-spacing: .06em; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
-.faq-empty { padding: 26px 0; color: var(--muted); }
-.side-card { border-radius: var(--r); padding: 18px; display: grid; gap: 8px; font-size: .93rem; background: var(--paper); border: 1px solid var(--line); }
-.side-card p { color: var(--muted); }
-@media (max-width: 900px) { .side-card { display: none; } }
+.faq-empty { padding: 26px 0; color: var(--muted); text-align: center; }
+.faq-more { text-align: center; margin-top: 26px; color: var(--muted); }
 
 /* ---------- Contact ---------- */
 .contact-sec { background: var(--paper); color: var(--ink); border-top: 1px solid var(--line); overflow: hidden; }
-.contact-grid { display: grid; grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr); gap: clamp(28px, 5vw, 64px); align-items: start; }
-@media (max-width: 960px) { .contact-grid { grid-template-columns: 1fr; } }
-.contact-copy { display: grid; gap: 22px; }
-.contact-copy h2 { font-size: clamp(1.75rem, 1.2rem + 1.8vw, 2.5rem); font-weight: 800; }
-.ccards { display: grid; gap: 10px; }
-.ccard { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: var(--r); background: var(--mist); border: 1px solid var(--line); color: var(--ink); text-decoration: none; transition: transform .2s var(--ease), background-color .2s; }
+.steps { list-style: none; margin: 0 auto 28px; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; counter-reset: s; max-width: 1100px; }
+.steps li { counter-increment: s; display: grid; justify-items: center; align-content: start; text-align: center; gap: 8px; padding: 22px 16px; border-radius: var(--r-lg); background: var(--mist); }
+.steps li::before { content: counter(s); width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: var(--ink); color: #fff; font-weight: 800; }
+.steps strong { display: block; font-weight: 800; }
+.steps li div > span { color: var(--muted); font-size: .9rem; }
+.ccards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; max-width: 1100px; margin: 0 auto 28px; }
+.ccard { display: flex; align-items: center; gap: 14px; padding: 16px 18px; border-radius: var(--r); background: var(--mist); border: 1px solid var(--line); color: var(--ink); text-decoration: none; transition: transform .2s var(--ease), background-color .2s; }
 .ccard:hover { transform: translateY(-2px); background: #ececea; }
 .ccard.kakao { background: var(--kakao); border-color: var(--kakao); color: #191919; }
 .ccard.soon { cursor: default; transform: none; opacity: .82; }
 .ccard strong { display: block; font-weight: 800; }
-.ccard small { font-size: .86rem; opacity: .8; }
+.ccard small { font-size: .86rem; opacity: .8; overflow-wrap: anywhere; }
+.ccard > span:not(.ic) { min-width: 0; }
 .ccard .copy { margin-left: auto; font: 700 .8rem var(--f-body); padding: 7px 12px; border-radius: 999px; border: 1.5px solid var(--line); background: var(--paper); color: var(--ink); cursor: pointer; }
 .ic { width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; flex: none; }
 .ic svg { width: 19px; height: 19px; }
@@ -357,21 +380,17 @@ details.qa p { padding: 0 0 20px; color: var(--muted); max-width: 66ch; }
 .ic.wa { background: #25d366; color: #fff; }
 .ic.mail { background: var(--paper); color: var(--accent); }
 .ic.form { background: var(--ink); color: #fff; }
-.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; counter-reset: s; }
-.steps li { counter-increment: s; display: grid; grid-template-columns: 34px 1fr; gap: 12px; align-items: start; }
-.steps li::before { content: counter(s); width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); font-weight: 800; }
-.steps strong { display: block; font-weight: 800; }
-.steps span { color: var(--muted); font-size: .93rem; }
-form.inq { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; background: var(--paper); color: var(--ink); border-radius: var(--r-lg); padding: clamp(22px, 3vw, 34px); border: 1px solid var(--line); box-shadow: var(--shadow); }
+form.inq { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; max-width: 820px; margin: 0 auto; background: var(--paper); color: var(--ink); border-radius: var(--r-lg); padding: clamp(22px, 3vw, 34px); border: 1px solid var(--line); box-shadow: var(--shadow); }
 form.inq .full { grid-column: 1 / -1; }
-form.inq h3 { font-size: 1.4rem; font-weight: 800; }
-@media (max-width: 560px) { form.inq { grid-template-columns: 1fr; } }
-.form-actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+form.inq h3 { font-size: 1.4rem; font-weight: 800; text-align: center; }
+.form-actions { display: flex; justify-content: center; align-items: center; gap: 16px; flex-wrap: wrap; }
 .form-actions small { color: var(--muted); }
-.form-status { grid-column: 1 / -1; font-size: .92rem; color: var(--red); min-height: 1.2em; }
+.form-status { grid-column: 1 / -1; font-size: .92rem; color: var(--red); min-height: 1.2em; text-align: center; }
 .form-status.ok { color: var(--accent); }
-.done { grid-column: 1 / -1; display: grid; gap: 10px; padding: 24px; border-radius: var(--r); background: var(--mist); }
+.done { grid-column: 1 / -1; display: grid; gap: 10px; padding: 24px; border-radius: var(--r); background: var(--mist); text-align: center; }
 .done h3 { font-size: 1.35rem; font-weight: 800; }
+@media (max-width: 900px) { .steps { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .steps { grid-template-columns: 1fr; } form.inq { grid-template-columns: 1fr; } }
 
 /* ---------- Footer ---------- */
 footer { background: var(--dark); color: rgba(255,255,255,.68); font-size: .9rem; }
@@ -400,7 +419,7 @@ body[data-at="contact"] .dock { opacity: 0; pointer-events: none; transform: tra
 .dock-item.soon:hover { transform: none; }
 .dock-item .ic.kakao { background: var(--kakao); color: #191919; }
 .dock-item .ic.mail { background: var(--accent-soft); color: var(--accent); }
-.dock-btn { display: inline-flex; align-items: center; gap: 10px; padding: 13px 18px 13px 14px; border-radius: 999px; border: 0; background: var(--kakao); color: #191919; font: 800 .95rem var(--f-body); cursor: pointer; box-shadow: 0 14px 30px -12px rgba(10,26,51,.6); transition: transform .25s var(--ease); }
+.dock-btn { text-decoration: none; display: inline-flex; align-items: center; gap: 10px; padding: 13px 18px 13px 14px; border-radius: 999px; border: 0; background: var(--kakao); color: #191919; font: 800 .95rem var(--f-body); cursor: pointer; box-shadow: 0 14px 30px -12px rgba(10,26,51,.6); transition: transform .25s var(--ease); }
 .dock-btn:hover { transform: translateY(-3px); }
 .dock-btn svg { width: 22px; height: 22px; flex: none; }
 @media (max-width: 520px) { .dock-btn span { display: none; } .dock-btn { padding: 14px; } }
@@ -504,12 +523,10 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
 .check input { margin-top: 3px; width: 18px; height: 18px; flex: none; accent-color: var(--accent); }
 
 /* ---------- KakaoTalk, front and centre ---------- */
-.nav-kakao { padding: 10px 14px; font-size: .9rem; }
-@media (max-width: 1180px) { .nav-cta { display: none; } }
-@media (max-width: 1000px) { .nav-kakao { padding: 10px; } .nav-kakao .lbl { display: none; } }
-@media (max-width: 480px) { .nav-kakao { display: none; } }
-.quickbar { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; margin-top: calc(-1 * clamp(18px, 4vw, 48px)); padding-bottom: clamp(22px, 3vw, 34px); }
+.quickbar { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; max-width: 100%; padding: 4px 2px; }
 .quickbar::-webkit-scrollbar { display: none; }
+.quickbar > :first-child { margin-left: auto; }
+.quickbar > :last-child { margin-right: auto; }
 .qk { display: inline-flex; align-items: center; gap: 9px; flex: none; padding: 6px 16px 6px 6px; border-radius: 999px; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.3); color: #fff; backdrop-filter: blur(8px); font-weight: 700; font-size: .92rem; text-decoration: none; cursor: pointer; transition: background-color .2s; }
 .qk:hover { background: rgba(255,255,255,.26); }
 .qk img { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; }
@@ -518,11 +535,11 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
 .qk.kakao { background: var(--kakao); border-color: var(--kakao); color: #191919; }
 .qk.kakao .qi { background: #191919; color: var(--kakao); }
 .qk.soon { opacity: .85; cursor: default; }
-.kakao-banner { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; margin-top: 28px; padding: clamp(18px, 3vw, 26px) clamp(18px, 3vw, 30px); border-radius: var(--r-lg); background: var(--kakao); color: #191919; }
-.kb-icon { width: 54px; height: 54px; border-radius: 16px; background: #191919; color: var(--kakao); display: grid; place-items: center; flex: none; }
+.kakao-banner { display: grid; justify-items: center; text-align: center; gap: 12px; max-width: 1160px; margin: 28px auto 0; padding: clamp(22px, 3vw, 32px); border-radius: var(--r-lg); background: var(--kakao); color: #191919; }
+.kb-icon { width: 54px; height: 54px; border-radius: 16px; background: #191919; color: var(--kakao); display: grid; place-items: center; }
 .kb-icon svg { width: 30px; height: 30px; }
-.kb-text { flex: 1 1 260px; display: grid; gap: 2px; }
-.kb-text strong { font-size: 1.15rem; font-weight: 800; }
+.kb-text { display: grid; justify-items: center; gap: 4px; }
+.kb-text strong { font-size: 1.2rem; font-weight: 800; }
 .kb-text > span { font-size: .94rem; opacity: .8; }
 .kb-btn { background: #191919; color: var(--kakao); }
 .kb-btn:hover { background: #000; }
@@ -567,34 +584,53 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
 </script>
 
 <header class="nav-bar" id="nav">
-  <div class="wrap nav-inner">
+  <div class="wrap nav-top">
     <a class="brand tr" href="#top" aria-label="Golden Jigu Tour, back to top" data-ko-aria-label="골든지구투어, 맨 위로">
       <svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="16" fill="#2f6b4f"/><circle cx="17" cy="12" r="4" fill="#ffffff"/><path d="M4 23c4-4 8-6 13-6s9 2 13 6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></svg>
       Golden Jigu Tour
     </a>
-    <ul class="nav-links">
-      <li><a href="#tours" data-spy="tours"><span data-en>Tours</span><span data-ko>투어 상품</span></a></li>
-      <li><a href="#reviews" data-spy="reviews"><span data-en>Reviews</span><span data-ko>여행 후기</span></a></li>
-      <li><a href="#seasons" data-spy="seasons"><span data-en>When to go</span><span data-ko>여행 시기</span></a></li>
-      <li><a href="#faq" data-spy="faq"><span data-en>FAQ</span><span data-ko>자주 묻는 질문</span></a></li>
-    </ul>
-    <div class="lang tr" role="group" aria-label="Language" data-ko-aria-label="언어">
-      <button type="button" data-lang="en" aria-pressed="false">EN</button>
-      <button type="button" data-lang="ko" aria-pressed="false">한국어</button>
+    <form class="nav-search" id="nav-search" role="search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <label for="q" class="sr-only"><span data-en>Search tours</span><span data-ko>투어 검색</span></label>
+      <input id="q" class="tr" type="search" autocomplete="off" placeholder="Search tours, e.g. Gobi, hot springs, 5 days" data-ko-placeholder="투어 검색 (예: 고비, 온천, 4박)">
+    </form>
+    <div class="nav-right">
+      <div class="lang tr" role="group" aria-label="Language" data-ko-aria-label="언어">
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+        <button type="button" data-lang="ko" aria-pressed="false">한국어</button>
+      </div>
+      <a class="btn btn-kakao nav-kakao tr" data-kakao href="#" target="_blank" rel="noopener" aria-label="Chat on KakaoTalk" data-ko-aria-label="카카오톡 문의" hidden><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.8 1.9 5.3 4.7 6.7l-.9 3.8 4.3-2.8c.6.1 1.2.1 1.9.1 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg><span class="lbl"><span data-en>KakaoTalk</span><span data-ko>카톡문의</span></span></a>
+      <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
     </div>
-    <a class="btn btn-kakao nav-kakao tr" data-kakao href="#" target="_blank" rel="noopener" aria-label="Chat on KakaoTalk" data-ko-aria-label="카카오톡 문의" hidden><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.8 1.9 5.3 4.7 6.7l-.9 3.8 4.3-2.8c.6.1 1.2.1 1.9.1 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg><span class="lbl"><span data-en>KakaoTalk</span><span data-ko>카톡문의</span></span></a>
-    <a class="btn btn-primary nav-cta" href="#contact"><span data-en>Plan my trip</span><span data-ko>여행 문의</span></a>
-    <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
   </div>
+  <nav class="nav-menu tr" aria-label="Main" data-ko-aria-label="주 메뉴">
+    <div class="wrap"><ul>
+      <li><a href="#tours" data-region-link="gobi"><span data-en>Gobi Desert</span><span data-ko>고비사막</span></a></li>
+      <li><a href="#tours" data-region-link="north"><span data-en>Khövsgöl</span><span data-ko>홉스골</span></a></li>
+      <li><a href="#tours" data-region-link="central"><span data-en>Central</span><span data-ko>중부</span></a></li>
+      <li><a href="#tours" data-region-link="winter"><span data-en>Winter</span><span data-ko>겨울</span></a></li>
+      <li aria-hidden="true"><span class="sep"></span></li>
+      <li><a href="#seasons" data-spy="seasons"><span data-en>When to go</span><span data-ko>여행시기</span></a></li>
+      <li><a href="#faq" data-spy="faq"><span data-en>FAQ</span><span data-ko>FAQ</span></a></li>
+    </ul></div>
+  </nav>
   <div class="progress" id="progress" aria-hidden="true"></div>
 </header>
 
 <div class="menu" id="menu" hidden>
   <div class="wrap">
+    <form class="m-search" id="m-search" role="search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <label for="q-m" class="sr-only"><span data-en>Search tours</span><span data-ko>투어 검색</span></label>
+      <input id="q-m" class="tr" type="search" autocomplete="off" placeholder="Search tours" data-ko-placeholder="투어 검색 (예: 고비, 온천, 4박)">
+    </form>
     <ul>
-      <li><a href="#tours" data-spy="tours"><span data-en>Tours</span><span data-ko>투어 상품</span></a></li>
-      <li><a href="#reviews" data-spy="reviews"><span data-en>Reviews</span><span data-ko>여행 후기</span></a></li>
-      <li><a href="#seasons" data-spy="seasons"><span data-en>When to go</span><span data-ko>여행 시기</span></a></li>
+      <li><a href="#tours" data-region-link="all"><span data-en>All tours</span><span data-ko>전체 투어</span></a></li>
+      <li><a href="#tours" data-region-link="gobi"><span data-en>Gobi Desert</span><span data-ko>고비사막</span></a></li>
+      <li><a href="#tours" data-region-link="north"><span data-en>Khövsgöl</span><span data-ko>홉스골</span></a></li>
+      <li><a href="#tours" data-region-link="central"><span data-en>Central</span><span data-ko>중부</span></a></li>
+      <li><a href="#tours" data-region-link="winter"><span data-en>Winter</span><span data-ko>겨울</span></a></li>
+      <li><a href="#seasons" data-spy="seasons"><span data-en>When to go</span><span data-ko>여행시기</span></a></li>
       <li><a href="#faq" data-spy="faq"><span data-en>FAQ</span><span data-ko>자주 묻는 질문</span></a></li>
       <li><a href="#contact" data-spy="contact"><span data-en>Plan my trip</span><span data-ko>여행 문의</span></a></li>
     </ul>
@@ -606,37 +642,24 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
 </div>
 
 <main id="top">
-  <!-- Hero with tour finder -->
+  <!-- Hero: centered headline and tour search -->
   <section class="hero" aria-labelledby="hero-title" data-spy-for="">
     <div class="hero-bg"><img class="tr" src="img/dunes.jpg" alt="A camel caravan crossing the plain below the Khongoryn Els sand dunes in the Gobi Desert" data-ko-alt="고비 사막 홍고린 엘스 모래언덕 아래를 지나는 낙타 행렬" fetchpriority="high"></div>
-    <div class="wrap hero-grid">
-      <div class="hero-copy">
-        <span class="badge-line"><i></i><span data-en>Local tour company in Ulaanbaatar</span><span data-ko>울란바토르 현지 여행사</span></span>
-        <h1 id="hero-title"><span data-en>Mongolia, under the <span class="hl">eternal blue sky</span></span><span data-ko>몽골, <span class="hl">영원한 푸른 하늘</span> 아래</span></h1>
-        <p class="hero-lede"><span data-en>Small-group tours run directly by a Mongolian team, with clear routes and honest quotes.</span><span data-ko>몽골 현지 팀이 직접 운영하는 소규모 투어. 명확한 일정과 투명한 견적으로 안내합니다.</span></p>
-        <ul class="hero-trust">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg><span data-en>Korean manager</span><span data-ko>한국인 매니저</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg><span data-en>Hot showers every night</span><span data-ko>매일 밤 온수 샤워 캠프</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg><span data-en>1:1 chat on KakaoTalk</span><span data-ko>카카오톡 1:1 상담</span></li>
-        </ul>
-      </div>
-      <form class="finder" id="finder">
-        <h2><span data-en>Find your tour</span><span data-ko>나에게 맞는 투어 찾기</span></h2>
-        <div class="row">
-          <div class="field"><label for="fd-region"><span data-en>Where to?</span><span data-ko>어디로 떠날까요?</span></label><select id="fd-region"></select></div>
-          <div class="field"><label for="fd-month"><span data-en>When?</span><span data-ko>언제 떠나세요?</span></label><select id="fd-month"></select></div>
-        </div>
+    <div class="wrap hero-center">
+      <span class="badge-line"><i></i><span data-en>Local tour company in Ulaanbaatar</span><span data-ko>울란바토르 현지 여행사</span></span>
+      <h1 id="hero-title"><span data-en>Mongolia, under the <span class="hl">eternal blue sky</span></span><span data-ko>몽골, <span class="hl">영원한 푸른 하늘</span> 아래</span></h1>
+      <p class="hero-lede"><span data-en>Private tours for your own team, run directly by a Mongolian agency with a Korean manager and Korean-speaking guides.</span><span data-ko>몽골 현지 여행사가 직접 운영하는 우리 팀 단독 투어. 한국인 매니저와 한국어 가이드가 함께합니다.</span></p>
+      <form class="finder-bar" id="finder">
+        <div class="fb-field"><label for="fd-region"><span data-en>Where to?</span><span data-ko>어디로 떠날까요?</span></label><select id="fd-region"></select></div>
+        <div class="fb-field"><label for="fd-month"><span data-en>When?</span><span data-ko>언제 떠나세요?</span></label><select id="fd-month"></select></div>
         <button class="btn btn-primary btn-lg" type="submit"><span data-en>Show tours</span><span data-ko>투어 보기</span> →</button>
-        <div class="finder-foot"><span id="fd-count"></span><a class="txt-btn" href="#contact"><span data-en>Custom trip? Ask us →</span><span data-ko>맞춤 여행 문의 →</span></a></div>
       </form>
-    </div>
-    <div class="wrap">
+      <p class="finder-note"><span id="fd-count"></span> · <a class="txt-btn" href="#contact"><span data-en>Custom trip? Ask us →</span><span data-ko>맞춤 여행 문의 →</span></a></p>
       <nav class="quickbar tr" aria-label="Quick links" data-ko-aria-label="바로가기">
         <button class="qk" type="button" data-quick="gobi"><img src="img/dunes2.jpg" alt=""><span data-en>Gobi Desert</span><span data-ko>고비사막</span></button>
         <button class="qk" type="button" data-quick="north"><img src="img/lake.jpg" alt=""><span data-en>Khövsgöl</span><span data-ko>홉스골</span></button>
         <button class="qk" type="button" data-quick="central"><img src="img/orkhon.jpg" alt=""><span data-en>Central</span><span data-ko>중부</span></button>
-        <button class="qk" type="button" data-quick="winter"><img src="img/winter.jpg" alt=""><span data-en>Winter</span><span data-ko>겨울 몽골</span></button>
-        <a class="qk" href="#reviews"><span class="qi">★</span><span data-en>Reviews</span><span data-ko>여행 후기</span></a>
+        <button class="qk" type="button" data-quick="winter"><img src="img/winter.jpg" alt=""><span data-en>Winter</span><span data-ko>겨울</span></button>
         <a class="qk kakao" data-kakao-soon><span class="qi"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.8 1.9 5.3 4.7 6.7l-.9 3.8 4.3-2.8c.6.1 1.2.1 1.9.1 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg></span><span data-en>Tour consultation</span><span data-ko>투어상담</span></a>
       </nav>
     </div>
@@ -647,7 +670,7 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
     <div class="wrap trust-grid">
       <div class="trust-item"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg></span><div><strong><span data-en>570+ consultations</span><span data-ko>상담 570건+</span></strong><span><span data-en>Trips we helped plan in the past year</span><span data-ko>지난 1년간 진행한 여행 상담</span></span></div></div>
       <div class="trust-item"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6l-8-3z"/><path d="m9 12 2 2 4-4"/></svg></span><div><strong><span data-en>Registered local agency</span><span data-ko>몽골 정식 등록 여행사</span></strong><span><span data-en>With a Korean manager</span><span data-ko>한국인 매니저가 함께합니다</span></span></div></div>
-      <div class="trust-item"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></svg></span><div><strong><span data-en>Electricity &amp; hot showers</span><span data-ko>전기·온수 샤워 캠프</span></strong><span><span data-en>At every night's camp</span><span data-ko>모든 숙박 캠프에서 이용 가능</span></span></div></div>
+      <div class="trust-item"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></svg></span><div><strong><span data-en>Electricity &amp; hot showers</span><span data-ko>전기·온수 샤워 캠프</span></strong><span><span data-en>At every summer camp</span><span data-ko>모든 여름 캠프에서 이용 가능</span></span></div></div>
       <div class="trust-item"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4h6l1 3h4v13H4V7h4l1-3z"/><path d="M8 12h8M8 16h5"/></svg></span><div><strong><span data-en>Daily guide reports</span><span data-ko>매일 가이드 리포트</span></strong><span><span data-en>Updates throughout your trip</span><span data-ko>여행 중 매일 진행 상황 공유</span></span></div></div>
     </div>
   </div>
@@ -656,17 +679,18 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
   <section class="section bg-mist" id="tours" aria-labelledby="t-title" data-spy-for="tours">
     <div class="wrap">
       <div class="sec-head">
-        <div class="sh"><span class="eyebrow"><span data-en>Tours</span><span data-ko>투어 상품</span></span>
-          <h2 id="t-title"><span data-en>Choose your <span class="hl">Mongolia</span></span><span data-ko>나만의 <span class="hl">몽골 여행</span>을 고르세요</span></h2></div>
-        <p class="lede" style="max-width:46ch"><span data-en>Every tour runs as a small group or privately on your dates. Tap a tour for the full plan and price.</span><span data-ko>모든 투어는 소규모 그룹 또는 원하는 날짜의 단독 여행으로 진행됩니다. 상품을 누르면 전체 일정과 가격을 볼 수 있어요.</span></p>
+        <span class="eyebrow"><span data-en>Tours</span><span data-ko>투어 상품</span></span>
+        <h2 id="t-title"><span data-en>Choose your <span class="hl">Mongolia</span></span><span data-ko>나만의 <span class="hl">몽골 여행</span>을 고르세요</span></h2>
+        <p class="lede"><span data-en>Every tour runs privately for your own team, with a Korean-speaking guide and a private vehicle. Open a tour for its full day-by-day timetable.</span><span data-ko>모든 투어는 한국어 가이드와 전용 차량으로 우리 팀만 단독 진행합니다. 상품을 누르면 시간대별 전체 일정을 볼 수 있어요.</span></p>
       </div>
       <div class="tabs tr" id="tabs" role="group" aria-label="Filter tours by region" data-ko-aria-label="지역별 투어 필터"></div>
       <div class="filter-state" id="filter-state" aria-live="polite"></div>
       <div class="cards" id="cards"></div>
-      <p class="note"><span data-en>Every tour is quoted for your group size and dates. Book with a ₩100,000 deposit per person; the balance is paid in Korean won cash on day 1. International flights are not included.</span><span data-ko>모든 투어는 인원과 일정에 맞춰 견적을 드립니다. 1인 10만원 예약금으로 예약하고, 잔금은 여행 첫날 현지에서 원화 현금으로 결제합니다. 국제선 항공권은 포함되지 않습니다.</span></p>
+      <div class="more-wrap"><button class="btn btn-outline btn-lg" type="button" id="more-btn" hidden></button></div>
+      <p class="note"><span data-en>Prices are per person in Korean won and depend on team size; tours without a price are quoted on request. Book with a ₩100,000 deposit per person; the balance is paid in Korean won cash on day 1. International flights are not included.</span><span data-ko>가격은 팀 인원에 따른 1인 요금(원)이며, 가격이 없는 상품은 견적 문의로 안내해 드립니다. 1인 10만원 예약금으로 예약하고, 잔금은 여행 첫날 현지에서 원화 현금으로 결제합니다. 국제선 항공권은 포함되지 않습니다.</span></p>
       <div class="kakao-banner" data-kakao-block hidden>
         <span class="kb-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.8 1.9 5.3 4.7 6.7l-.9 3.8 4.3-2.8c.6.1 1.2.1 1.9.1 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg></span>
-        <div class="kb-text"><strong><span data-en>Questions? Chat with us on KakaoTalk</span><span data-ko>궁금한 점은 카카오톡으로 1:1 상담하세요</span></strong><span><span data-en>Ask about routes, quotes or what to pack, one to one.</span><span data-ko>일정, 견적, 준비물까지 편하게 물어보세요.</span></span><span class="mono" data-kakao-id></span></div>
+        <div class="kb-text"><strong><span data-en>Questions? Chat with us on KakaoTalk</span><span data-ko>궁금한 점은 카카오톡으로 1:1 상담하세요</span></strong><span><span data-en>Ask about routes, prices or what to pack, one to one.</span><span data-ko>일정, 견적, 준비물까지 편하게 물어보세요.</span></span><span class="mono" data-kakao-id></span></div>
         <a class="btn btn-lg kb-btn" data-kakao href="#" target="_blank" rel="noopener" hidden><span data-en>Start a chat</span><span data-ko>카톡 상담 시작하기</span> →</a>
       </div>
     </div>
@@ -674,23 +698,23 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
 
   <!-- Why -->
   <section class="section" aria-labelledby="why-title" data-spy-for="">
-    <div class="wrap why-grid">
-      <div class="why-copy" data-reveal>
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
         <span class="eyebrow"><span data-en>Why Golden Jigu</span><span data-ko>골든지구투어를 선택하는 이유</span></span>
         <h2 id="why-title"><span data-en>Travel with people who <span class="hl">call the steppe home</span></span><span data-ko>초원을 <span class="hl">고향으로 둔 사람들</span>과 함께</span></h2>
         <p class="lede"><span data-en>We are a registered Mongolian travel agency in Ulaanbaatar with a Korean manager. We plan every route ourselves and keep you updated every day of your trip.</span><span data-ko>울란바토르의 몽골 정식 등록 여행사로, 한국인 매니저가 함께합니다. 모든 일정을 직접 기획하고 여행 중에는 매일 진행 상황을 전해 드립니다.</span></p>
-        <ul class="why-list">
-          <li><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4h6l1 3h4v13H4V7h4l1-3z"/><path d="M8 12h8M8 16h5"/></svg></span><div><strong><span data-en>Clear plans and quotes</span><span data-ko>투명한 일정과 견적</span></strong><span><span data-en>Every day of the route is written out, with a link to lodging photos for each option.</span><span data-ko>하루하루 일정과 함께, 옵션별 숙소 사진 링크를 미리 보내 드립니다.</span></span></div></li>
-          <li><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg></span><div><strong><span data-en>Plan in Korean</span><span data-ko>한국어로 편하게 상담</span></strong><span><span data-en>Talk every detail through with our Korean manager; our Mongolian team runs the trip on the ground.</span><span data-ko>한국인 매니저와 한국어로 상담하고, 현지에서는 몽골 팀이 직접 운영합니다.</span></span></div></li>
-          <li><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="m16 10 5-3v10l-5-3"/></svg></span><div><strong><span data-en>Our own footage</span><span data-ko>직접 촬영한 영상</span></strong><span><span data-en>These videos were filmed by our team, not taken from stock libraries.</span><span data-ko>이 영상들은 스톡 영상이 아닌, 저희가 직접 촬영했습니다.</span></span></div></li>
-        </ul>
-        <div class="facts mono"><span><b>1,564,116</b> km²</span><span data-en><b>~2</b> people per km²</span><span data-ko>km²당 약 <b>2</b>명</span><span data-en>More horses than people</span><span data-ko>사람보다 말이 많은 나라</span></div>
       </div>
+      <ul class="why-points">
+        <li><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4h6l1 3h4v13H4V7h4l1-3z"/><path d="M8 12h8M8 16h5"/></svg></span><strong><span data-en>Clear plans and quotes</span><span data-ko>투명한 일정과 견적</span></strong><span class="wp"><span data-en>A timed plan for every day, with lodging photos for each option.</span><span data-ko>시간대별 일정과 옵션별 숙소 사진을 미리 보내 드립니다.</span></span></li>
+        <li><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg></span><strong><span data-en>Korean all the way</span><span data-ko>처음부터 끝까지 한국어로</span></strong><span class="wp"><span data-en>Plan with our Korean manager, travel with a Korean-speaking guide.</span><span data-ko>한국인 매니저와 상담하고, 현지에서는 한국어 가이드가 함께합니다.</span></span></li>
+        <li><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="m16 10 5-3v10l-5-3"/></svg></span><strong><span data-en>Our own footage</span><span data-ko>직접 촬영한 영상</span></strong><span class="wp"><span data-en>These videos were filmed by our team, not taken from stock libraries.</span><span data-ko>아래 영상은 스톡 영상이 아닌, 저희가 직접 촬영했습니다.</span></span></li>
+      </ul>
       <div class="reels" data-reveal>
         <figure class="reel"><div class="reel-frame"><video class="tr" src="video/horses.mp4" poster="video/horses.jpg" muted loop playsinline preload="metadata" aria-label="A herd of dark horses galloping across the steppe" data-ko-aria-label="초원을 달리는 말 떼"></video><button class="vt" type="button"></button></div><figcaption><span data-en>Summer pasture</span><span data-ko>여름 초원</span></figcaption></figure>
         <figure class="reel"><div class="reel-frame"><video class="tr" src="video/eagle.mp4" poster="video/eagle.jpg" muted loop playsinline preload="metadata" aria-label="An eagle hunter on horseback with a golden eagle raised on his arm" data-ko-aria-label="팔에 검독수리를 올리고 말을 탄 독수리 사냥꾼"></video><button class="vt" type="button"></button></div><figcaption><span data-en>Eagle hunter</span><span data-ko>독수리 사냥꾼</span></figcaption></figure>
         <figure class="reel"><div class="reel-frame"><video class="tr" src="video/herd.mp4" poster="video/herd.jpg" muted loop playsinline preload="metadata" aria-label="Sheep and goats grazing on a wide plain below misty mountains" data-ko-aria-label="안개 낀 산 아래 초원에서 풀을 뜯는 양과 염소"></video><button class="vt" type="button"></button></div><figcaption><span data-en>Herds before rain</span><span data-ko>비 오기 전의 가축 떼</span></figcaption></figure>
       </div>
+      <div class="facts mono"><span><b>1,564,116</b> km²</span><span data-en><b>~2</b> people per km²</span><span data-ko>km²당 약 <b>2</b>명</span><span data-en>More horses than people</span><span data-ko>사람보다 말이 많은 나라</span></div>
     </div>
   </section>
 
@@ -725,50 +749,44 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
 
   <!-- FAQ -->
   <section class="section bg-mist" id="faq" aria-labelledby="f-title" data-spy-for="faq">
-    <div class="khee top" aria-hidden="true"></div>
     <div class="wrap">
       <div class="sec-head">
-        <div class="sh"><span class="eyebrow"><span data-en>FAQ</span><span data-ko>자주 묻는 질문</span></span>
-          <h2 id="f-title"><span data-en>Questions travellers <span class="hl">ask us</span></span><span data-ko>궁금한 점을 <span class="hl">모았습니다</span></span></h2></div>
-        <p class="lede" id="faq-count" style="max-width:42ch"></p>
+        <span class="eyebrow"><span data-en>FAQ</span><span data-ko>자주 묻는 질문</span></span>
+        <h2 id="f-title"><span data-en>Questions travellers <span class="hl">ask us</span></span><span data-ko>궁금한 점을 <span class="hl">모았습니다</span></span></h2>
+        <p class="lede" id="faq-count"></p>
       </div>
-      <div class="faq-grid">
-        <aside class="faq-side">
-          <ul class="faq-cats tr" id="faq-cats" aria-label="Question topics" data-ko-aria-label="질문 주제"></ul>
-          <div class="side-card"><strong><span data-en>Still have a question?</span><span data-ko>더 궁금한 점이 있나요?</span></strong><p><span data-en>Ask us on KakaoTalk or by email. Ulaanbaatar is on UTC+8, one hour behind Korea.</span><span data-ko>카카오톡이나 이메일로 문의해 주세요. 울란바토르는 한국보다 1시간 느립니다(UTC+8).</span></p><a class="txt-btn" href="#contact"><span data-en>Ask us →</span><span data-ko>문의하기 →</span></a></div>
-        </aside>
-        <div>
-          <div class="faq-search">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-            <label for="faq-q" class="sr-only"><span data-en>Search questions</span><span data-ko>질문 검색</span></label>
-            <input id="faq-q" class="tr" type="search" placeholder="Search, e.g. visa, cancellation, cold" data-ko-placeholder="검색 (예: 비자, 취소, 추위)" autocomplete="off">
-          </div>
-          <div id="faq-list"></div>
+      <div class="faq-wrap">
+        <ul class="faq-cats tr" id="faq-cats" aria-label="Question topics" data-ko-aria-label="질문 주제"></ul>
+        <div class="faq-search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <label for="faq-q" class="sr-only"><span data-en>Search questions</span><span data-ko>질문 검색</span></label>
+          <input id="faq-q" class="tr" type="search" placeholder="Search, e.g. visa, cancellation, cold" data-ko-placeholder="검색 (예: 비자, 취소, 추위)" autocomplete="off">
         </div>
+        <div id="faq-list"></div>
+        <p class="faq-more"><span data-en>Still have a question? Ask us on KakaoTalk or by email. Ulaanbaatar is one hour behind Korea (UTC+8).</span><span data-ko>더 궁금한 점은 카카오톡이나 이메일로 문의해 주세요. 울란바토르는 한국보다 1시간 느립니다(UTC+8).</span> <a class="txt-btn" href="#contact"><span data-en>Ask us →</span><span data-ko>문의하기 →</span></a></p>
       </div>
     </div>
   </section>
 
   <!-- Contact -->
   <section class="section contact-sec" id="contact" aria-labelledby="c-title" data-spy-for="contact">
-    <div class="khee gold top" aria-hidden="true"></div>
-    <div class="wrap contact-grid">
-      <div class="contact-copy">
+    <div class="wrap">
+      <div class="sec-head">
         <span class="eyebrow"><span data-en>Contact</span><span data-ko>여행 문의</span></span>
         <h2 id="c-title"><span data-en>Your Mongolia starts with <span class="hl">one message</span></span><span data-ko>몽골 여행, <span class="hl">메시지 하나</span>로 시작하세요</span></h2>
         <p class="lede"><span data-en>Asking is free. Tell us your dates and we'll send a route and a quote.</span><span data-ko>문의는 무료입니다. 날짜를 알려 주시면 일정과 견적을 보내 드립니다.</span></p>
-        <div class="ccards">
-          <a class="ccard kakao" data-kakao-soon><span class="ic kakao"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.8 1.9 5.3 4.7 6.7l-.9 3.8 4.3-2.8c.6.1 1.2.1 1.9.1 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg></span><span><strong><span data-en>KakaoTalk chat</span><span data-ko>카카오톡 상담</span></strong><small data-kakao-sub></small></span></a>
-          <a class="ccard" data-wa href="#" target="_blank" rel="noopener" hidden><span class="ic wa"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg></span><span><strong>WhatsApp</strong><small><span data-en>Message us any time</span><span data-ko>언제든 메시지</span></small></span></a>
-          <div class="ccard"><span class="ic mail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span><span><strong><span data-en>Email</span><span data-ko>이메일</span></strong><small id="email-text" data-email-text>goldenjigutour@naver.com</small></span><button class="copy" type="button" id="copy-email"></button></div>
-          <div class="ccard" data-phone-block hidden><span class="ic mail"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg></span><span><strong><span data-en>Phone (Mongolia)</span><span data-ko>전화 (몽골)</span></strong><small class="mono" data-phone-text></small></span></div>
-        </div>
-        <ol class="steps">
-          <li><div><strong><span data-en>Tell us your dates</span><span data-ko>날짜를 알려 주세요</span></strong><span><span data-en>When you can travel, who is coming and what you hope to see.</span><span data-ko>여행 가능한 날짜, 인원, 보고 싶은 것을 알려 주세요.</span></span></div></li>
-          <li><div><strong><span data-en>Get a draft plan</span><span data-ko>일정 초안 받기</span></strong><span><span data-en>A route, a quote and lodging photos for each option.</span><span data-ko>일정, 견적, 옵션별 숙소 사진을 보내 드립니다.</span></span></div></li>
-          <li><div><strong><span data-en>Book with a ₩100,000 deposit</span><span data-ko>1인 10만원 예약금으로 확정</span></strong><span><span data-en>The balance is paid in Korean won cash on the first day.</span><span data-ko>잔금은 여행 첫날 현지에서 원화 현금으로 결제합니다.</span></span></div></li>
-          <li><div><strong><span data-en>Land in Ulaanbaatar</span><span data-ko>울란바토르 도착</span></strong><span><span data-en>Your guide meets you at Chinggis Khaan International Airport.</span><span data-ko>칭기스칸 국제공항에서 가이드가 마중합니다.</span></span></div></li>
-        </ol>
+      </div>
+      <ol class="steps">
+        <li><div><strong><span data-en>Tell us your dates</span><span data-ko>날짜를 알려 주세요</span></strong><span><span data-en>When you can travel, who is coming and what you hope to see.</span><span data-ko>여행 가능한 날짜, 인원, 보고 싶은 것을 알려 주세요.</span></span></div></li>
+        <li><div><strong><span data-en>Get a draft plan</span><span data-ko>일정 초안 받기</span></strong><span><span data-en>A route, a quote and lodging photos for each option.</span><span data-ko>일정, 견적, 옵션별 숙소 사진을 보내 드립니다.</span></span></div></li>
+        <li><div><strong><span data-en>Book with a ₩100,000 deposit</span><span data-ko>1인 10만원 예약금으로 확정</span></strong><span><span data-en>The balance is paid in Korean won cash on the first day.</span><span data-ko>잔금은 여행 첫날 현지에서 원화 현금으로 결제합니다.</span></span></div></li>
+        <li><div><strong><span data-en>Land in Ulaanbaatar</span><span data-ko>울란바토르 도착</span></strong><span><span data-en>On tours of 4 days or more, your guide meets you at Chinggis Khaan International Airport.</span><span data-ko>3박4일 이상 일정은 칭기스칸 국제공항에서 가이드가 마중합니다.</span></span></div></li>
+      </ol>
+      <div class="ccards">
+        <a class="ccard kakao" data-kakao-soon><span class="ic kakao"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.8 1.9 5.3 4.7 6.7l-.9 3.8 4.3-2.8c.6.1 1.2.1 1.9.1 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg></span><span><strong><span data-en>KakaoTalk chat</span><span data-ko>카카오톡 상담</span></strong><small data-kakao-sub></small></span></a>
+        <a class="ccard" data-wa href="#" target="_blank" rel="noopener" hidden><span class="ic wa"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg></span><span><strong>WhatsApp</strong><small><span data-en>Message us any time</span><span data-ko>언제든 메시지</span></small></span></a>
+        <div class="ccard"><span class="ic mail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span><span><strong><span data-en>Email</span><span data-ko>이메일</span></strong><small id="email-text" data-email-text>goldenjigutour@naver.com</small></span><button class="copy" type="button" id="copy-email"></button></div>
+        <div class="ccard" data-phone-block hidden><span class="ic mail"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg></span><span><strong><span data-en>Phone (Mongolia)</span><span data-ko>전화 (몽골)</span></strong><small class="mono" data-phone-text></small></span></div>
       </div>
       <form class="inq" id="inq-form" novalidate>
         <h3 class="full"><span data-en>Send an inquiry</span><span data-ko>문의 보내기</span></h3>
@@ -984,6 +1002,11 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
   const LODGING = {"tsagaan":[[["Tsagaan Suwarga Camp (traditional Mongolian ger)","Tsagaan suwarga camp (전통 몽골 게르)"],["Goviin Hulan Camp (traditional Mongolian ger)","Goviin hulan camp (전통 몽골 게르"]],[["Gobi Caravanserai Camp – $120, rooms for 2–4","Gobi caravanserai camp 120$ 2-4인실"]],[["Bulgaa ger guesthouse","Bulgaa 게르 게하"]]],"yolyn":[[["Goviin Urguu Camp (traditional Mongolian ger)","Goviin urguu camp (전통 몽골 게르)"],["Dungenee Camp (traditional Mongolian ger)","Dungenee camp (전통 몽골 게르)"]],[["Gobi Mirage Camp (modern ger)","Gobi mirage camp 현대식 게르"]],[["Ochiroo ger guesthouse","Ochiroo게르 게하"]]],"khongor":[[["Goviin Tugul Camp (traditional Mongolian ger)","Goviin tugul camp (전통 몽골 게르)"],["Sand of Treasures Camp (traditional Mongolian ger)","Sand of treasures camp (전통 몽골 게르)"]],[["Gobi Discovery Camp (modern ger)","Gobi discovery camp 현대식 게르"]],[]],"bayanzag":[[["Goviin Urguu 2 (traditional Mongolian ger)","Goviin urguu 2(전통 몽골 게르)"]],[["Mongol Gobi Camp (modern ger)","Mongol gobi camp 현대식 게르"]],[["Sugar ger guesthouse","Sugar게르 게하"]]],"bagagazar":[[["Baynbulag Camp (traditional Mongolian ger)","Baynbulag camp (전통 몽골 게르)"]],[],[["Ger guesthouse","게르 게하"]]],"ongi":[[["Ongi Energy (traditional Mongolian ger)","Ongi energy (전통 몽골 게르)"]],[],[]],"orkhon":[[["Orkhon Waterfall camp (traditional Mongolian ger)","Orkhon Waterfall camp (전통 몽골 게르)"]],[],[]],"terelj":[[["Humug camp (modern ger)","Humug camp (현대식 게르)"]],[["Energy Hills (modern ger)","Energy hills현대식 게르"],["Terelj Lodge (modern ger)","Terelj lodge현대식 게르"],["Juulchin Terelj (modern ger)","Juulchin terelj현대식 게르"],["Glory Resort (modern ger)","Glory resort현대식 게르"]],[]],"elsen":[[["Bataa camp (traditional Mongolian ger)","Bataa camp (전통 몽골 게르)"]],[["Bichigt Khad camp (modern ger)","Bichigt khad camp 현대식 게르"],["Burd Star camp (modern ger)","Burd star camp 현대식 게르"]],[["Sundui (nomad family ger)","Sundui 유목민 게르"]]],"tsenkher":[[["Altannutag camp (traditional Mongolian ger)","Altannutag camp (전통 몽골 게르)"],["Khangai camp (traditional Mongolian ger)","Khangai camp (전통 몽골 게르)"]],[["Duut Resort (traditional Mongolian ger)","Duut resort (전통 몽골 게르)"]],[]],"ugii":[[["Ugii Dalai camp (traditional Mongolian ger)","Ugii dalai camp (전통 몽골 게르)"],["Ugii Khishig camp (traditional Mongolian ger)","Ugii khishig camp (전통 몽골 게르)"]],[],[]],"terkhiin":[[["Dalai Van Camp (traditional Mongolian ger)","Dalai van camp (전통 몽골 게르)"]],[],[]],"shineider":[[["Ulziit Khishig Camp (traditional Mongolian ger)","Ulziit khishig camp (전통 몽골 게르)"]],[],[["Camping option available","캠핑 선택 가능"]]],"khuvsgul":[[["Misheel Camp (traditional Mongolian ger)","Misheel camp (전통 몽골 게르)"],["Khuvsgul Sor Camp (traditional Mongolian ger)","Khuvsgul sor camp (전통 몽골 게르)"]],[["Toilogt Camp (traditional Mongolian ger)","Toilogt camp (전통 몽골 게르)"]],[]],"bulgan":[[["Bulgan Suit Hotel (twin/double room)","Bulgan suit hotel 2인실"]],[],[]],"erdenet":[[["Deedes Hotel (rooms for 2-3)","Deedes hotel 2-3인실"]],[],[]]};
   /* ==== END CAFE DATA ==== */
 
+  /* ==== PRICES: generated by tools/apply_prices.py from data/prices.csv. Edit the CSV and run ./build.sh; changes here are overwritten. ==== */
+  // KRW per person by team size, only prices the owner has confirmed. Tours missing here show "견적 문의".
+  const PRICES = {};
+  /* ==== END PRICES ==== */
+
   // Ulaanbaatar average daily high / low (°C).
   const MONTHS = [
     { m: "Jan", full: "January",   hi: -16, lo: -27, ko: { m: "1월",  full: "1월" } },
@@ -1096,9 +1119,22 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
   const regionName = id => T(REGIONS[id].en, REGIONS[id].ko);
   const routeStops = t => stopsOf(t).filter(k => k !== "ub").map(pname).join(T(" – ", " - "));
   const routeLine = t => (t.route || []).map((k, i) => (i ? (k.startsWith("~") ? " ✈ " : " → ") : "") + pname(key(k))).join("");
-  const hasPrice = t => typeof t.price === "number" || (lang === "ko" && typeof t.priceKRW === "number");
-  const priceText = t => lang === "ko" && typeof t.priceKRW === "number" ? `${t.priceKRW.toLocaleString("ko-KR")}원~`
-    : typeof t.price === "number" ? T(`From ${usd(t.price)}`, `${usd(t.price)}~`) : T("Ask for a quote", "견적 문의");
+  // Team-size prices (KRW per person). The PRICES block wins; build_data.py may also write t.team.
+  const teamPrices = t => {
+    const p = PRICES[t.id];
+    if (p) return Object.entries(p).map(([n, krw]) => ({ n: +n, krw: +krw })).filter(r => r.krw > 0).sort((x, y) => y.n - x.n);
+    return Array.isArray(t.team) && t.team.length ? t.team : null;
+  };
+  const fromKRW = t => {
+    const v = (teamPrices(t) || []).map(r => r.krw).filter(x => x > 0);
+    return v.length ? Math.min(...v) : typeof t.priceKRW === "number" ? t.priceKRW : null;
+  };
+  const hasPrice = t => fromKRW(t) !== null || typeof t.price === "number";
+  const priceText = t => {
+    const k = fromKRW(t);
+    if (k !== null) return T(`From ₩${k.toLocaleString("en-US")}`, `${k.toLocaleString("ko-KR")}원~`);
+    return typeof t.price === "number" ? T(`From ${usd(t.price)}`, `${usd(t.price)}~`) : T("Ask for a quote", "견적 문의");
+  };
   const DEPOSIT = () => T("Book with a ₩100,000 deposit per person; the balance is paid in Korean won cash on day 1.", "1인 10만원 예약금으로 예약하고, 잔금은 여행 첫날 현지에서 원화 현금으로 결제합니다.");
   const ratingOf = id => { const rs = REVIEWS.filter(r => r.trip === id); return rs.length ? { avg: rs.reduce((s, r) => s + r.rating, 0) / rs.length, n: rs.length } : null; };
   const tripUrl = id => `${CONFIG.siteUrl}#trip-${id}`;
@@ -1161,6 +1197,7 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
     const a = e.target.closest('a[href^="#"]');
     if (!a) return;
     const id = a.getAttribute("href").slice(1);
+    if (a.dataset.regionLink) setFilter({ region: a.dataset.regionLink, month: "", season: "" });
     const target = id === "top" ? "top" : document.getElementById(id);
     if (!target) { e.preventDefault(); return; }
     e.preventDefault();
@@ -1211,13 +1248,64 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
       : `<span>Golden Jigu Tour · ${T("Ulaanbaatar, Mongolia", "몽골 울란바토르")}</span>`;
   }
 
-  /* ---------- Tour finder and tour cards ---------- */
-  const filter = { region: "all", month: "", season: "" };
+  /* ---------- Tour search, finder and tour list ---------- */
+  const filter = { region: "all", month: "", season: "", q: "" };
+  const PAGE = 8;   // tours shown before "show more"
+  let shown = PAGE;
   const TABS = [["all", "All tours", "전체", ""], ["gobi"], ["north"], ["central"], ["west"], ["winter"], ["festival", "Festivals", "축제", "img/naadam.jpg"]];
   const runsIn = (t, months) => (t.months || []).some(m => months.includes(m));
+
+  // Distinctive activities found in each tour's own timetable, rarest first: [keyword in the Korean text, EN, KO]
+  const HL = [
+    ["순록", "Reindeer herders", "순록 유목민"], ["말썰매", "Horse sleigh", "말썰매"], ["화산", "Volcano crater", "화산 분화구"],
+    ["유목민", "Nomad family visit", "유목민 가정 방문"], ["보트", "Boat ride", "보트 타기"], ["온천", "Hot springs", "온천"],
+    ["모래 썰매", "Sand sledding", "모래 썰매"], ["낙타", "Camel ride", "낙타 체험"], ["기마상", "Chinggis Khaan statue", "칭기즈칸 기마상"],
+    ["거북바위", "Turtle Rock", "거북바위"], ["아리야발", "Aryapala temple", "아리야발 사원"], ["트레킹", "Hiking", "트레킹"],
+    ["승마", "Horse riding", "승마"], ["캠프파이어", "Campfire", "캠프파이어"]
+  ];
+  const hlCache = {};
+  const hlOf = t => hlCache[t.id] || (hlCache[t.id] = (() => {
+    // timed lines only: lines without a time are footnotes
+    const txt = (t.sched || []).flatMap(d => (d.t || []).filter(x => x[0]).map(x => x[2] || "")).join(" ");
+    const found = HL.filter(([kw]) => txt.includes(kw));
+    return found.filter(([kw]) => !(kw === "유목민" && found.some(f => f[0] === "순록"))).slice(0, 3);
+  })());
+  const highlightsOf = t => hlOf(t).map(([, en, ko]) => T(en, ko));
+
+  const ICONS = {
+    guide: '<path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/>',
+    van: '<path d="M3 7h11l4 4h3v6h-2M3 7v10h2"/><circle cx="7.5" cy="17.5" r="2"/><circle cx="16.5" cy="17.5" r="2"/><path d="M9.5 17.5h5"/>',
+    bed: '<path d="M3 18V8M21 18v-5a3 3 0 0 0-3-3h-8v6M3 14h18"/><circle cx="6.5" cy="11.5" r="1.5"/>',
+    plane: '<path d="M2 16l20-6-3-3-7 3-5-5-2 1 3 6-4 2-2-1-1 1z"/>',
+    shower: '<path d="M5 12a7 7 0 0 1 14 0zM8 16v1M12 16v2M16 16v1M10 19v1M14 19v1"/>'
+  };
+  const icon = k => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[k]}</svg>`;
+  // Hot shower only when every night of the tour has one (sched[].s = [type, camp, "shower power internet" flags])
+  const allShower = t => { const n = (t.sched || []).filter(d => d.s); return n.length > 0 && n.every(d => String(d.s[2] || "")[0] === "1"); };
+  const includedOf = t => [
+    ["guide", T("Korean-speaking guide", "한국어 가이드")],
+    ["van", T("Private car", "전용 차량")],
+    ["bed", T("Stay & meals", "숙소·식사")],
+    ...(t.days >= 4 ? [["plane", T("Airport pickup", "공항 픽업")]] : []),   // policy: 3박4일 and longer
+    ...(allShower(t) ? [["shower", T("Hot showers", "매일 온수 샤워")]] : [])
+  ];
+  const SHORT = { gobi: ["Gobi", "고비"], north: ["Khövsgöl", "홉스골"], central: ["Central", "중부"], west: ["Altai", "알타이"] };
+  const bracketOf = t => {
+    const l = L(t), r = SHORT[regionOf(t)] || ["", ""], w = t.cats.includes("winter");
+    const nights = `${t.days - 1}박${t.days}일`, tag = t.ko && t.ko.tag && nights.includes(t.ko.tag) ? "" : l.tag;
+    return T(`[${w ? "Winter " : ""}${r[0]} · ${t.days} days${tag ? " · " + tag : ""}]`, `[${w ? "겨울 " : ""}${r[1]}/${nights}${tag ? "/" + tag : ""}]`);
+  };
+  const hayCache = {};
+  const hay = t => hayCache[t.id] || (hayCache[t.id] = [
+    t.name, t.tag, t.text, t.ko && t.ko.name, t.ko && t.ko.tag, t.ko && t.ko.text, `${t.days - 1}박${t.days}일 ${t.days - 1}박 ${t.days} days`,
+    ...stopsOf(t).flatMap(k => [PLACES[k].name, PLACES[k].ko]), ...(t.sched || []).flatMap(d => d.p || []),
+    ...hlOf(t).flatMap(([, en, ko]) => [en, ko]), ...(t.cats || []).flatMap(c => REGIONS[c] ? [REGIONS[c].en, REGIONS[c].ko] : [])
+  ].filter(Boolean).join(" ").toLowerCase());
   const matches = (t, f) => (f.region === "all" || t.cats.includes(f.region))
     && (!f.month || runsIn(t, [+f.month]))
-    && (f.season === "" || runsIn(t, SEASONS[+f.season].months));
+    && (f.season === "" || runsIn(t, SEASONS[+f.season].months))
+    && (!f.q || f.q.toLowerCase().split(/\s+/).filter(Boolean).every(w => hay(t).includes(w)));
+
   function renderFinder() {
     $("#fd-region").innerHTML = `<option value="all">${T("All regions", "전체 지역")}</option>` + Object.entries(REGIONS).filter(([id]) => TRIPS.some(t => t.cats.includes(id))).map(([id, r]) => `<option value="${id}">${T(r.en, r.ko)}</option>`).join("");
     $("#fd-month").innerHTML = `<option value="">${T("Any month", "상관없음")}</option>` + MONTHS.map((mo, i) => `<option value="${i + 1}">${L(mo).full}</option>`).join("");
@@ -1226,57 +1314,79 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
     syncFinder();
   }
   function syncFinder() { $("#fd-region").value = REGIONS[filter.region] ? filter.region : "all"; $("#fd-month").value = filter.month; }
-  $("#finder").addEventListener("submit", e => {
-    e.preventDefault();
-    filter.region = $("#fd-region").value; filter.month = $("#fd-month").value; filter.season = "";
+  const searchInputs = $$("#q, #q-m");
+  const syncSearch = () => searchInputs.forEach(i => { if (i.value.trim() !== filter.q) i.value = filter.q; });
+  function setFilter(changes, scroll) {
+    Object.assign(filter, changes);
+    syncFinder(); syncSearch(); renderTours();
+    if (scroll) glideTo($("#tours"));
+  }
+  $("#finder").addEventListener("submit", e => { e.preventDefault(); setFilter({ region: $("#fd-region").value, month: $("#fd-month").value, season: "" }, true); });
+  searchInputs.forEach(inp => inp.addEventListener("input", () => {
+    filter.q = inp.value.trim();
+    searchInputs.forEach(o => { if (o !== inp) o.value = inp.value; });
     renderTours();
-    glideTo($("#tours"));
-  });
+  }));
+  $$("#nav-search, #m-search").forEach(f => f.addEventListener("submit", e => { e.preventDefault(); closeMenu(); glideTo($("#tours")); }));
 
   function tagsHTML(t) {
     const l = L(t), cls = t.cats.includes("winter") ? "blue" : t.cats.includes("festival") ? "red" : "gold";
     return `<span class="tag">${regionName(regionOf(t))}</span><span class="tag ${cls}">${l.tag}</span>`;
   }
   function card(t) {
-    const l = L(t), rt = ratingOf(t.id);
-    return `<button class="card" type="button" data-trip="${t.id}">
-      <span class="card-img"><img src="${t.img || "img/dunes.jpg"}" alt="" loading="lazy"><span class="tags">${tagsHTML(t)}</span></span>
-      <span class="card-body">
-        <span class="card-meta"><span>${daysText(t.days)}</span><i class="dot"></i><span>${l.season}</span></span>
-        <strong class="card-title">${l.name}</strong>
-        <span class="card-route">${routeStops(t) || pname("ub")}</span>
-        <span class="card-foot">
-          <span class="price"><b>${priceText(t)}</b><small>${hasPrice(t) ? T("per person · twin share", "1인 · 2인 1실 기준") : T("Priced for your group and dates", "인원·일정별 맞춤 견적")}</small></span>
-          ${rt ? `<span class="rating"><span class="s">★</span>${rt.avg.toFixed(1)}<span class="c">(${rt.n})</span></span>` : `<span class="more">${T("Details →", "자세히 →")}</span>`}
-        </span>
-      </span></button>`;
+    const l = L(t), rt = ratingOf(t.id), hl = highlightsOf(t);
+    const showName = lang === "en" || /\(.*박/.test(l.name);   // Korean names mostly repeat the bracket; keep ones like "(홍고린엘스 2박)"
+    return `<article class="lcard" data-card="${t.id}">
+      <div class="lc-img"><img src="${t.img || "img/dunes.jpg"}" alt="" loading="lazy"><span class="tags">${tagsHTML(t)}</span></div>
+      <div class="lc-body">
+        ${showName ? `<span class="lc-name">${l.name}</span>` : ""}
+        <h3 class="lc-title"><span class="br">${bracketOf(t)}</span>${routeStops(t) || pname("ub")}</h3>
+        ${hl.length ? `<ul class="lc-hl" aria-label="${T("Highlights", "주요 체험")}">${hl.map(h => `<li>${h}</li>`).join("")}</ul>` : ""}
+        <ul class="lc-inc" aria-label="${T("Included", "포함 사항")}">${includedOf(t).map(([k, label]) => `<li>${icon(k)}${label}</li>`).join("")}</ul>
+        <span class="lc-foot">${T(`Runs ${l.season}`, `${l.season} 출발`)} · ${T("Private tour, just your team", "우리 팀만 단독 진행")}</span>
+      </div>
+      <div class="lc-side">
+        <span class="price"><b>${priceText(t)}</b><small>${hasPrice(t) ? T("per person, by team size", "1인 · 팀 인원별 요금") : T("Priced for your team and dates", "인원·일정별 맞춤 견적")}</small></span>
+        ${rt ? `<span class="rating"><span class="s">★</span>${rt.avg.toFixed(1)}<span class="c">(${rt.n})</span></span>` : ""}
+        <button class="btn btn-primary" type="button" data-trip="${t.id}">${T("View details", "자세히 보기")}</button>
+        ${CONFIG.kakao ? `<a class="btn btn-kakao" href="${esc(CONFIG.kakao)}" target="_blank" rel="noopener">${ICON.kakao}${T("Ask on KakaoTalk", "카톡 상담")}</a>` : ""}
+      </div>
+    </article>`;
   }
-  function renderTours() {
+  function renderTours(keepShown) {
+    if (!keepShown) shown = PAGE;
     $("#tabs").innerHTML = TABS.filter(([id]) => id === "all" || TRIPS.some(t => t.cats.includes(id))).map(([id, en, ko, img]) => {
       const r = REGIONS[id], label = r ? T(r.en, r.ko) : T(en, ko), pic = r ? r.img : img;
       const n = TRIPS.filter(t => matches(t, { ...filter, region: id })).length;
       return `<button class="tab${pic ? "" : " noimg"}" type="button" data-region="${id}" aria-pressed="${filter.region === id}">${pic ? `<img src="${pic}" alt="">` : ""}${label}<span class="n">${n}</span></button>`;
     }).join("");
     const list = TRIPS.filter(t => matches(t, filter));
-    $("#cards").innerHTML = list.length ? list.map(card).join("")
+    $("#cards").innerHTML = list.length ? list.slice(0, shown).map(card).join("")
       : `<div class="empty"><p>${T("No tour matches this choice yet. We can plan one for you.", "조건에 맞는 투어가 아직 없어요. 맞춤 일정을 만들어 드릴게요.")}</p><a class="btn btn-outline" href="#contact">${T("Ask for a custom trip", "맞춤 여행 문의하기")}</a></div>`;
+    const rest = list.length - Math.min(shown, list.length), more = $("#more-btn");
+    more.hidden = rest <= 0;
+    more.textContent = T(`Show more (+${rest})`, `더 보기 (+${rest})`);
     $("#filter-state").innerHTML = `<span>${T(`${list.length} ${list.length === 1 ? "tour" : "tours"}`, `${list.length}개 투어`)}</span>`
+      + (filter.q ? `<button class="pill-x" type="button" data-clear-q>“${esc(filter.q)}” ✕</button>` : "")
       + (filter.month ? `<button class="pill-x" type="button" data-clear-month>${T(`Good in ${L(MONTHS[+filter.month - 1]).full}`, `${L(MONTHS[+filter.month - 1]).full} 추천`)} ✕</button>` : "")
       + (filter.season !== "" ? `<button class="pill-x" type="button" data-clear-season>${T(`Good in ${SEASONS[+filter.season].en.toLowerCase()}`, `${SEASONS[+filter.season].ko} 추천`)} ✕</button>` : "")
-      + (filter.region !== "all" || filter.month || filter.season !== "" ? `<button class="txt-btn" type="button" data-reset>${T("Show all", "전체 보기")}</button>` : "");
+      + (filter.region !== "all" || filter.month || filter.season !== "" || filter.q ? `<button class="txt-btn" type="button" data-reset>${T("Show all", "전체 보기")}</button>` : "");
+    $$("[data-region-link]").forEach(a => a.dataset.regionLink === filter.region && filter.region !== "all" ? a.setAttribute("aria-current", "true") : a.removeAttribute("aria-current"));
   }
-  $("#tabs").addEventListener("click", e => { const b = e.target.closest("[data-region]"); if (!b) return; filter.region = b.dataset.region; syncFinder(); renderTours(); });
+  $("#more-btn").addEventListener("click", () => { shown = Infinity; renderTours(true); });
+  $("#cards").addEventListener("click", e => {
+    if (e.target.closest("a, button")) return;
+    const c = e.target.closest("[data-card]"); if (c) openTrip(c.dataset.card);
+  });
+  $("#tabs").addEventListener("click", e => { const b = e.target.closest("[data-region]"); if (b) setFilter({ region: b.dataset.region }); });
   document.querySelector(".quickbar").addEventListener("click", e => {
-    const b = e.target.closest("[data-quick]"); if (!b) return;
-    filter.region = b.dataset.quick; filter.month = ""; filter.season = "";
-    syncFinder(); renderTours(); glideTo($("#tours"));
+    const b = e.target.closest("[data-quick]"); if (b) setFilter({ region: b.dataset.quick, month: "", season: "" }, true);
   });
   $("#filter-state").addEventListener("click", e => {
-    if (e.target.closest("[data-clear-month]")) filter.month = "";
-    else if (e.target.closest("[data-clear-season]")) filter.season = "";
-    else if (e.target.closest("[data-reset]")) { filter.region = "all"; filter.month = ""; filter.season = ""; }
-    else return;
-    syncFinder(); renderTours();
+    if (e.target.closest("[data-clear-q]")) setFilter({ q: "" });
+    else if (e.target.closest("[data-clear-month]")) setFilter({ month: "" });
+    else if (e.target.closest("[data-clear-season]")) setFilter({ season: "" });
+    else if (e.target.closest("[data-reset]")) setFilter({ region: "all", month: "", season: "", q: "" });
   });
 
   /* ---------- Map drawing (tour detail) ---------- */
@@ -1425,8 +1535,8 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
     const incl = l.incl || POLICY.incl.map(pair);
     const excl = l.excl || POLICY.excl.map(pair);
     const krTitle = `[${t.cats.includes("winter") ? "겨울 " : ""}${REGIONS[regionOf(t)].ko}/${t.days - 1}박${t.days}일/${l.tag}]`;
-    const team = Array.isArray(t.team) && t.team.length
-      ? `<table class="team"><caption class="sr-only">${T("Price per person by group size", "인원별 1인 요금")}</caption><tbody>${t.team.map(r => `<tr><th scope="row">${T(`${r.n} travellers`, `${r.n}인 팀`)}</th><td>${lang === "ko" && r.krw ? r.krw.toLocaleString("ko-KR") + "원" : usd(r.usd)}</td></tr>`).join("")}</tbody></table>` : "";
+    const rows = teamPrices(t);
+    const team = rows ? `<table class="team"><caption class="sr-only">${T("Price per person by team size", "팀 인원별 1인 요금")}</caption><tbody>${rows.map(r => `<tr><th scope="row">${T(`Team of ${r.n}`, `${r.n}인 팀`)}</th><td>${r.krw ? T("₩" + r.krw.toLocaleString("en-US"), r.krw.toLocaleString("ko-KR") + "원") : usd(r.usd)}</td></tr>`).join("")}</tbody></table>` : "";
     const ask = T("Ask about this tour", "이 상품 문의하기");
     $("#m-content").innerHTML = `
       <div class="m-hero"><img src="${t.img || "img/dunes.jpg"}" alt="${esc(l.name)}"><span class="tags">${tagsHTML(t)}</span></div>
@@ -1472,7 +1582,7 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
           <div class="pricebox">
             <small>${hasPrice(t) ? T("Price per person", "1인 요금") : T("Price", "가격")}</small>
             <span class="p">${priceText(t)}</span>
-            <small>${hasPrice(t) ? T("Twin share, excluding international flights", "2인 1실 기준, 국제선 항공 불포함") : T("We send a quote for your group size and dates.", "인원과 일정에 맞춰 견적을 보내 드립니다.")}</small>
+            <small>${hasPrice(t) ? T("Per person; depends on team size. International flights not included.", "1인 기준, 팀 인원에 따라 달라집니다. 국제선 항공 불포함.") : T("We send a quote for your group size and dates.", "인원과 일정에 맞춰 견적을 보내 드립니다.")}</small>
             <small>${DEPOSIT()}</small>
             ${team}
             <button class="btn btn-primary btn-lg" type="button" data-request="${id}">${ask} →</button>
