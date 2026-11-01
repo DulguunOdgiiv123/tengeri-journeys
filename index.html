@@ -569,6 +569,50 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
 .cafe-link:hover { border-color: #03c75a; }
 .cafe-link i { width: 28px; height: 28px; border-radius: 7px; background: #03c75a; color: #fff; display: grid; place-items: center; font: 800 .9rem/1 var(--f-body); font-style: normal; }
 .cafe-link small { display: block; color: var(--muted); font-size: .8rem; }
+
+/* Tour map (Leaflet): route pins, stop chips, lodge cards */
+.lmap { height: 380px; border-radius: var(--r); overflow: hidden; background: #e6eee8; position: relative; z-index: 0; }
+@media (max-width: 640px) { .lmap { height: 300px; } }
+.lmap .leaflet-control-attribution { font-size: 10px; }
+.pin-stop { width: 26px; height: 26px; border-radius: 50%; background: var(--accent); color: #fff; border: 2px solid #fff; box-shadow: 0 2px 6px rgba(0,0,0,.35); display: grid; place-items: center; font: 800 .74rem/1 var(--f-body); transition: transform .2s; }
+.pin-stop.cap { background: var(--ink); font-size: .62rem; }
+.pin-stop.on { background: var(--ink); transform: scale(1.2); }
+.pin-lodge { display: block; width: 18px; height: 18px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); border: 2px solid #fff; box-shadow: 0 2px 5px rgba(0,0,0,.4); background: var(--accent); }
+.pin-lodge.upgrade { background: var(--star); }
+.pin-lodge.budget { background: #8a8a85; }
+.pin-lodge.on { box-shadow: 0 0 0 3px var(--ink); }
+.map-ctl { display: flex; background: #fff; border-radius: 10px; box-shadow: 0 1px 4px rgba(0,0,0,.3); overflow: hidden; }
+.map-ctl button { border: 0; background: #fff; padding: 7px 11px; font: 700 .78rem var(--f-body); color: var(--ink); cursor: pointer; }
+.map-ctl button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+.map-tap { position: absolute; inset: 0; z-index: 500; display: grid; place-items: end center; padding: 0 0 14px; background: transparent; border: 0; cursor: pointer; }
+.map-tap span { background: rgba(27,27,27,.82); color: #fff; font: 700 .8rem var(--f-body); padding: 7px 12px; border-radius: 999px; }
+.stops { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 2px; }
+.stops button { flex: none; display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px 6px 6px; border-radius: 999px; border: 1.5px solid var(--line); background: var(--paper); font: 700 .84rem var(--f-body); color: var(--ink); cursor: pointer; }
+.stops button i { width: 20px; height: 20px; border-radius: 50%; background: var(--accent); color: #fff; display: grid; place-items: center; font: 800 .7rem/1 var(--f-body); font-style: normal; }
+.stops button[aria-pressed="true"] { border-color: var(--ink); background: var(--ink); color: #fff; }
+.stop-panel { display: grid; gap: 12px; padding: 16px; border-radius: var(--r); background: var(--mist); }
+.sp-head { display: flex; justify-content: space-between; align-items: baseline; gap: 6px 12px; flex-wrap: wrap; }
+.sp-head h4 { margin: 0; font-size: 1.05rem; font-weight: 800; }
+.sp-head small { flex: 1 1 auto; color: var(--muted); font-size: .84rem; }
+.lodges { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+.lodge { background: var(--paper); border: 1.5px solid var(--line); border-radius: 14px; padding: 12px 14px; display: grid; gap: 5px; align-content: start; transition: border-color .2s; }
+.lodge.on { border-color: var(--ink); }
+.lodge img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 8px; }
+.lodge .tier { justify-self: start; font: 800 .7rem/1 var(--f-body); padding: 5px 8px; border-radius: 6px; background: var(--accent-soft); color: var(--accent-deep); }
+.lodge.upgrade .tier { background: #fbf0dc; color: #8a5a12; }
+.lodge.budget .tier { background: #ececea; color: #55554f; }
+.lodge h5 { margin: 0; font-size: .98rem; font-weight: 800; }
+.lodge p { margin: 0; font-size: .84rem; color: var(--muted); }
+.lodge .lp { color: var(--ink); font-weight: 700; }
+.lodge .fac { display: flex; flex-wrap: wrap; gap: 4px; }
+.lodge .fac span { font-size: .74rem; font-weight: 700; padding: 3px 7px; border-radius: 999px; background: var(--mist); }
+.lodge .fac span.no { color: var(--red); }
+.lodge-acts { display: flex; flex-wrap: wrap; gap: 4px 14px; align-items: center; padding-top: 2px; }
+.lodge-acts a { font-size: .84rem; font-weight: 700; color: var(--accent); }
+.lodge-acts small { font-size: .78rem; color: var(--muted); }
+
+/* Leaflet 1.9.4 stylesheet (BSD-2-Clause, cdnjs leaflet.min.css), inlined; default marker and layer images removed */
+.leaflet-image-layer,.leaflet-layer,.leaflet-marker-icon,.leaflet-marker-shadow,.leaflet-pane,.leaflet-pane>canvas,.leaflet-pane>svg,.leaflet-tile,.leaflet-tile-container,.leaflet-zoom-box{position:absolute;left:0;top:0}.leaflet-container{overflow:hidden}.leaflet-marker-icon,.leaflet-marker-shadow,.leaflet-tile{-webkit-user-select:none;-moz-user-select:none;user-select:none;-webkit-user-drag:none}.leaflet-tile::selection{background:0 0}.leaflet-safari .leaflet-tile{image-rendering:-webkit-optimize-contrast}.leaflet-safari .leaflet-tile-container{width:1600px;height:1600px;-webkit-transform-origin:0 0}.leaflet-marker-icon,.leaflet-marker-shadow{display:block}.leaflet-container .leaflet-overlay-pane svg{max-width:none!important;max-height:none!important}.leaflet-container .leaflet-marker-pane img,.leaflet-container .leaflet-shadow-pane img,.leaflet-container .leaflet-tile,.leaflet-container .leaflet-tile-pane img,.leaflet-container img.leaflet-image-layer{max-width:none!important;max-height:none!important;width:auto;padding:0}.leaflet-container img.leaflet-tile{mix-blend-mode:plus-lighter}.leaflet-container.leaflet-touch-zoom{-ms-touch-action:pan-x pan-y;touch-action:pan-x pan-y}.leaflet-container.leaflet-touch-drag{-ms-touch-action:pinch-zoom;touch-action:none;touch-action:pinch-zoom}.leaflet-container.leaflet-touch-drag.leaflet-touch-zoom{-ms-touch-action:none;touch-action:none}.leaflet-container{-webkit-tap-highlight-color:transparent}.leaflet-container a{-webkit-tap-highlight-color:rgba(51,181,229,.4)}.leaflet-tile{filter:inherit;visibility:hidden}.leaflet-tile-loaded{visibility:inherit}.leaflet-zoom-box{width:0;height:0;-moz-box-sizing:border-box;box-sizing:border-box;z-index:800}.leaflet-overlay-pane svg{-moz-user-select:none}.leaflet-pane{z-index:400}.leaflet-tile-pane{z-index:200}.leaflet-overlay-pane{z-index:400}.leaflet-shadow-pane{z-index:500}.leaflet-marker-pane{z-index:600}.leaflet-tooltip-pane{z-index:650}.leaflet-popup-pane{z-index:700}.leaflet-map-pane canvas{z-index:100}.leaflet-map-pane svg{z-index:200}.leaflet-vml-shape{width:1px;height:1px}.lvml{behavior:url(#default#VML);display:inline-block;position:absolute}.leaflet-control{position:relative;z-index:800;pointer-events:visiblePainted;pointer-events:auto}.leaflet-bottom,.leaflet-top{position:absolute;z-index:1000;pointer-events:none}.leaflet-top{top:0}.leaflet-right{right:0}.leaflet-bottom{bottom:0}.leaflet-left{left:0}.leaflet-control{float:left;clear:both}.leaflet-right .leaflet-control{float:right}.leaflet-top .leaflet-control{margin-top:10px}.leaflet-bottom .leaflet-control{margin-bottom:10px}.leaflet-left .leaflet-control{margin-left:10px}.leaflet-right .leaflet-control{margin-right:10px}.leaflet-fade-anim .leaflet-popup{opacity:0;-webkit-transition:opacity .2s linear;-moz-transition:opacity .2s linear;transition:opacity .2s linear}.leaflet-fade-anim .leaflet-map-pane .leaflet-popup{opacity:1}.leaflet-zoom-animated{-webkit-transform-origin:0 0;-ms-transform-origin:0 0;transform-origin:0 0}svg.leaflet-zoom-animated{will-change:transform}.leaflet-zoom-anim .leaflet-zoom-animated{-webkit-transition:-webkit-transform .25s cubic-bezier(0,0,.25,1);-moz-transition:-moz-transform .25s cubic-bezier(0,0,.25,1);transition:transform .25s cubic-bezier(0,0,.25,1)}.leaflet-pan-anim .leaflet-tile,.leaflet-zoom-anim .leaflet-tile{-webkit-transition:none;-moz-transition:none;transition:none}.leaflet-zoom-anim .leaflet-zoom-hide{visibility:hidden}.leaflet-interactive{cursor:pointer}.leaflet-grab{cursor:-webkit-grab;cursor:-moz-grab;cursor:grab}.leaflet-crosshair,.leaflet-crosshair .leaflet-interactive{cursor:crosshair}.leaflet-control,.leaflet-popup-pane{cursor:auto}.leaflet-dragging .leaflet-grab,.leaflet-dragging .leaflet-grab .leaflet-interactive,.leaflet-dragging .leaflet-marker-draggable{cursor:move;cursor:-webkit-grabbing;cursor:-moz-grabbing;cursor:grabbing}.leaflet-image-layer,.leaflet-marker-icon,.leaflet-marker-shadow,.leaflet-pane>svg path,.leaflet-tile-container{pointer-events:none}.leaflet-image-layer.leaflet-interactive,.leaflet-marker-icon.leaflet-interactive,.leaflet-pane>svg path.leaflet-interactive,svg.leaflet-image-layer.leaflet-interactive path{pointer-events:visiblePainted;pointer-events:auto}.leaflet-container{background:#ddd;outline-offset:1px}.leaflet-container a{color:#0078a8}.leaflet-zoom-box{border:2px dotted #38f;background:rgba(255,255,255,.5)}.leaflet-container{font-family:"Helvetica Neue",Arial,Helvetica,sans-serif;font-size:12px;font-size:.75rem;line-height:1.5}.leaflet-bar{box-shadow:0 1px 5px rgba(0,0,0,.65);border-radius:4px}.leaflet-bar a{background-color:#fff;border-bottom:1px solid #ccc;width:26px;height:26px;line-height:26px;display:block;text-align:center;text-decoration:none;color:#000}.leaflet-bar a,.leaflet-control-layers-toggle{background-position:50% 50%;background-repeat:no-repeat;display:block}.leaflet-bar a:focus,.leaflet-bar a:hover{background-color:#f4f4f4}.leaflet-bar a:first-child{border-top-left-radius:4px;border-top-right-radius:4px}.leaflet-bar a:last-child{border-bottom-left-radius:4px;border-bottom-right-radius:4px;border-bottom:none}.leaflet-bar a.leaflet-disabled{cursor:default;background-color:#f4f4f4;color:#bbb}.leaflet-touch .leaflet-bar a{width:30px;height:30px;line-height:30px}.leaflet-touch .leaflet-bar a:first-child{border-top-left-radius:2px;border-top-right-radius:2px}.leaflet-touch .leaflet-bar a:last-child{border-bottom-left-radius:2px;border-bottom-right-radius:2px}.leaflet-control-zoom-in,.leaflet-control-zoom-out{font:bold 18px 'Lucida Console',Monaco,monospace;text-indent:1px}.leaflet-touch .leaflet-control-zoom-in,.leaflet-touch .leaflet-control-zoom-out{font-size:22px}.leaflet-control-layers{box-shadow:0 1px 5px rgba(0,0,0,.4);background:#fff;border-radius:5px}.leaflet-control-layers-toggle{width:36px;height:36px}.leaflet-retina .leaflet-control-layers-toggle{background-size:26px 26px}.leaflet-touch .leaflet-control-layers-toggle{width:44px;height:44px}.leaflet-control-layers .leaflet-control-layers-list,.leaflet-control-layers-expanded .leaflet-control-layers-toggle{display:none}.leaflet-control-layers-expanded .leaflet-control-layers-list{display:block;position:relative}.leaflet-control-layers-expanded{padding:6px 10px 6px 6px;color:#333;background:#fff}.leaflet-control-layers-scrollbar{overflow-y:scroll;overflow-x:hidden;padding-right:5px}.leaflet-control-layers-selector{margin-top:2px;position:relative;top:1px}.leaflet-control-layers label{display:block;font-size:13px;font-size:1.08333em}.leaflet-control-layers-separator{height:0;border-top:1px solid #ddd;margin:5px -10px 5px -6px}.leaflet-container .leaflet-control-attribution{background:#fff;background:rgba(255,255,255,.8);margin:0}.leaflet-control-attribution,.leaflet-control-scale-line{padding:0 5px;color:#333;line-height:1.4}.leaflet-control-attribution a{text-decoration:none}.leaflet-control-attribution a:focus,.leaflet-control-attribution a:hover{text-decoration:underline}.leaflet-attribution-flag{display:inline!important;vertical-align:baseline!important;width:1em;height:.6669em}.leaflet-left .leaflet-control-scale{margin-left:5px}.leaflet-bottom .leaflet-control-scale{margin-bottom:5px}.leaflet-control-scale-line{border:2px solid #777;border-top:none;line-height:1.1;padding:2px 5px 1px;white-space:nowrap;-moz-box-sizing:border-box;box-sizing:border-box;background:rgba(255,255,255,.8);text-shadow:1px 1px #fff}.leaflet-control-scale-line:not(:first-child){border-top:2px solid #777;border-bottom:none;margin-top:-2px}.leaflet-control-scale-line:not(:first-child):not(:last-child){border-bottom:2px solid #777}.leaflet-touch .leaflet-bar,.leaflet-touch .leaflet-control-attribution,.leaflet-touch .leaflet-control-layers{box-shadow:none}.leaflet-touch .leaflet-bar,.leaflet-touch .leaflet-control-layers{border:2px solid rgba(0,0,0,.2);background-clip:padding-box}.leaflet-popup{position:absolute;text-align:center;margin-bottom:20px}.leaflet-popup-content-wrapper{padding:1px;text-align:left;border-radius:12px}.leaflet-popup-content{margin:13px 24px 13px 20px;line-height:1.3;font-size:13px;font-size:1.08333em;min-height:1px}.leaflet-popup-content p{margin:17px 0;margin:1.3em 0}.leaflet-popup-tip-container{width:40px;height:20px;position:absolute;left:50%;margin-top:-1px;margin-left:-20px;overflow:hidden;pointer-events:none}.leaflet-popup-tip{width:17px;height:17px;padding:1px;margin:-10px auto 0;pointer-events:auto;-webkit-transform:rotate(45deg);-moz-transform:rotate(45deg);-ms-transform:rotate(45deg);transform:rotate(45deg)}.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:#fff;color:#333;box-shadow:0 3px 14px rgba(0,0,0,.4)}.leaflet-container a.leaflet-popup-close-button{position:absolute;top:0;right:0;border:none;text-align:center;width:24px;height:24px;font:16px/24px Tahoma,Verdana,sans-serif;color:#757575;text-decoration:none;background:0 0}.leaflet-container a.leaflet-popup-close-button:focus,.leaflet-container a.leaflet-popup-close-button:hover{color:#585858}.leaflet-popup-scrolled{overflow:auto}.leaflet-oldie .leaflet-popup-content-wrapper{-ms-zoom:1}.leaflet-oldie .leaflet-popup-tip{width:24px;margin:0 auto}.leaflet-oldie .leaflet-control-layers,.leaflet-oldie .leaflet-control-zoom,.leaflet-oldie .leaflet-popup-content-wrapper,.leaflet-oldie .leaflet-popup-tip{border:1px solid #999}.leaflet-div-icon{background:#fff;border:1px solid #666}.leaflet-tooltip{position:absolute;padding:6px;background-color:#fff;border:1px solid #fff;border-radius:3px;color:#222;white-space:nowrap;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;pointer-events:none;box-shadow:0 1px 3px rgba(0,0,0,.4)}.leaflet-tooltip.leaflet-interactive{cursor:pointer;pointer-events:auto}.leaflet-tooltip-bottom:before,.leaflet-tooltip-left:before,.leaflet-tooltip-right:before,.leaflet-tooltip-top:before{position:absolute;pointer-events:none;border:6px solid transparent;background:0 0;content:""}.leaflet-tooltip-bottom{margin-top:6px}.leaflet-tooltip-top{margin-top:-6px}.leaflet-tooltip-bottom:before,.leaflet-tooltip-top:before{left:50%;margin-left:-6px}.leaflet-tooltip-top:before{bottom:0;margin-bottom:-12px;border-top-color:#fff}.leaflet-tooltip-bottom:before{top:0;margin-top:-12px;margin-left:-6px;border-bottom-color:#fff}.leaflet-tooltip-left{margin-left:-6px}.leaflet-tooltip-right{margin-left:6px}.leaflet-tooltip-left:before,.leaflet-tooltip-right:before{top:50%;margin-top:-6px}.leaflet-tooltip-left:before{right:0;margin-right:-12px;border-left-color:#fff}.leaflet-tooltip-right:before{left:0;margin-left:-12px;border-right-color:#fff}@media print{.leaflet-control{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
 </style>
 </head>
 <body>
@@ -914,6 +958,12 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
     toolsUrl: "",     // e.g. "https://goldenjigu.life/" (not linked for now, by the owner's choice)
     email: "goldenjigutour@naver.com",   // the address used on the Naver cafe; switch to hello@goldenjigutour.com once Email Routing is on
     siteUrl: "https://goldenjigutour.com/",
+    // Tour map tiles. OpenStreetMap's tile servers allow light use with this attribution; if traffic grows,
+    // switch "map" to a keyed provider (e.g. MapTiler) whose key can be restricted to goldenjigutour.com.
+    tiles: {
+      map: { url: "https://tile.openstreetmap.org/{z}/{x}/{y}.png", attr: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors', max: 18 },
+      sat: { url: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", attr: "Imagery &copy; Esri, Maxar, Earthstar Geographics", max: 17 }
+    },
     // Shown in the footer once filled (Korean customers look for these to trust a company)
     company: { name: "", ceo: "", address: "", regNo: "", licenseNo: "", phone: "+976-8605-9966" }
   };
@@ -935,9 +985,10 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
     shineider:  { name: "Shine-Ider",       ko: "신이데르",         lat: 48.95, lon: 99.53 },
     khatgal:    { name: "Khatgal",          ko: "하트갈",           lat: 50.44, lon: 100.16 },
     renchin:    { name: "Renchinlkhümbe",   ko: "렌친룸베",         lat: 51.11, lon: 99.67 },
+    ongi:       { name: "Ongi Monastery",   ko: "엉기 사원",        lat: 45.34, lon: 104.00 },
     kharkhorin: { name: "Kharkhorin",       ko: "하라호름",         lat: 47.20, lon: 102.82 },
     orkhon:     { name: "Orkhon Waterfall", ko: "오르홍 폭포",      lat: 46.78, lon: 101.96 },
-    tsagaan:    { name: "Tsagaan Suvarga",  ko: "차강소브라가",     lat: 44.59, lon: 105.77 },
+    tsagaan:    { name: "Tsagaan Suvarga",  ko: "차강소브라가",     lat: 44.577, lon: 105.718 },
     yolyn:      { name: "Yolyn Am",         ko: "욜링암",           lat: 43.49, lon: 104.07 },
     khongor:    { name: "Khongoryn Els",    ko: "홍고린 엘스",      lat: 43.78, lon: 102.30 },
     bayanzag:   { name: "Bayanzag",         ko: "바양작",           lat: 44.14, lon: 103.72 },
@@ -998,8 +1049,49 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
   ];
   // Shared by every program (cafe post text); booking, refund and packing live in FAQ.
   const POLICY = {"incl":[["Airport pickup and drop-off (tours of 3 nights or more; extra fee for additional transfers)","공항 픽업·샌딩 (3박4일 이상 투어만 포함, 2회 이상 이용 시 추가 요금)"],["Korean-speaking guide","한국어 가이드"],["Private vehicle (Furgon, Starex, Alphard or SUV)","전용 차량 (푸르공, 스타렉스, 알파드, SUV 중 택일)"],["Lodging listed in the itinerary","일정표에 명시된 숙소"],["All meals listed in the itinerary","일정표에 포함된 전 일정 식사"],["All entrance fees in the itinerary","일정표에 포함된 모든 입장료"],["Bottled water, 3 × 500 ml per person per day","생수 1인당 하루 500ml × 3병"],["Sleeping bag, one per person","침낭 대여 1인당 1개"],["SIM card (Mobicom), 1 GB of data per day","유심 (MOBICOM) 1일 1GB"],["Special dinner: Korean pork-belly barbecue","특식: 삼겹살"],["One campfire night","캠프파이어 1회"],["One horse ride and one camel ride","승마·낙타 체험 각 1회"],["Rain poncho for each person; picnic mat and lantern for each team","판초 1인당 1개, 돗자리·랜턴 팀당 1개"],["Cooking kit (burner, pot, gas)","취사도구 (버너, 냄비, 가스) 제공"],["Two air beds per team; power strip on request","에어베드 팀당 2개, 멀티탭 팀당 1개 (요청 시)"]],"excl":[["International flights","항공권"],["Travel insurance (required)","해외 여행자 보험 (가입 필수)"],["Personal snacks and drinks","개인 간식 및 음료"],["Hotel nights in Ulaanbaatar (can be added)","시내 숙소 (요청 시 추가 가능)"],["Extra services and optional entrance fees","추가 서비스 및 개별 입장료"],["Traditional costume rental","전통 의상 체험 (유료 대여)"],["Tips for guide and driver (optional)","매너팁 (가이드·기사 자율)"]]};
-  // Camps per overnight stop from the cafe's lodging tables: [standard, upgrade, budget], each [[en, ko]].
-  const LODGING = {"tsagaan":[[["Tsagaan Suwarga Camp (traditional Mongolian ger)","Tsagaan suwarga camp (전통 몽골 게르)"],["Goviin Hulan Camp (traditional Mongolian ger)","Goviin hulan camp (전통 몽골 게르"]],[["Gobi Caravanserai Camp – $120, rooms for 2–4","Gobi caravanserai camp 120$ 2-4인실"]],[["Bulgaa ger guesthouse","Bulgaa 게르 게하"]]],"yolyn":[[["Goviin Urguu Camp (traditional Mongolian ger)","Goviin urguu camp (전통 몽골 게르)"],["Dungenee Camp (traditional Mongolian ger)","Dungenee camp (전통 몽골 게르)"]],[["Gobi Mirage Camp (modern ger)","Gobi mirage camp 현대식 게르"]],[["Ochiroo ger guesthouse","Ochiroo게르 게하"]]],"khongor":[[["Goviin Tugul Camp (traditional Mongolian ger)","Goviin tugul camp (전통 몽골 게르)"],["Sand of Treasures Camp (traditional Mongolian ger)","Sand of treasures camp (전통 몽골 게르)"]],[["Gobi Discovery Camp (modern ger)","Gobi discovery camp 현대식 게르"]],[]],"bayanzag":[[["Goviin Urguu 2 (traditional Mongolian ger)","Goviin urguu 2(전통 몽골 게르)"]],[["Mongol Gobi Camp (modern ger)","Mongol gobi camp 현대식 게르"]],[["Sugar ger guesthouse","Sugar게르 게하"]]],"bagagazar":[[["Baynbulag Camp (traditional Mongolian ger)","Baynbulag camp (전통 몽골 게르)"]],[],[["Ger guesthouse","게르 게하"]]],"ongi":[[["Ongi Energy (traditional Mongolian ger)","Ongi energy (전통 몽골 게르)"]],[],[]],"orkhon":[[["Orkhon Waterfall camp (traditional Mongolian ger)","Orkhon Waterfall camp (전통 몽골 게르)"]],[],[]],"terelj":[[["Humug camp (modern ger)","Humug camp (현대식 게르)"]],[["Energy Hills (modern ger)","Energy hills현대식 게르"],["Terelj Lodge (modern ger)","Terelj lodge현대식 게르"],["Juulchin Terelj (modern ger)","Juulchin terelj현대식 게르"],["Glory Resort (modern ger)","Glory resort현대식 게르"]],[]],"elsen":[[["Bataa camp (traditional Mongolian ger)","Bataa camp (전통 몽골 게르)"]],[["Bichigt Khad camp (modern ger)","Bichigt khad camp 현대식 게르"],["Burd Star camp (modern ger)","Burd star camp 현대식 게르"]],[["Sundui (nomad family ger)","Sundui 유목민 게르"]]],"tsenkher":[[["Altannutag camp (traditional Mongolian ger)","Altannutag camp (전통 몽골 게르)"],["Khangai camp (traditional Mongolian ger)","Khangai camp (전통 몽골 게르)"]],[["Duut Resort (traditional Mongolian ger)","Duut resort (전통 몽골 게르)"]],[]],"ugii":[[["Ugii Dalai camp (traditional Mongolian ger)","Ugii dalai camp (전통 몽골 게르)"],["Ugii Khishig camp (traditional Mongolian ger)","Ugii khishig camp (전통 몽골 게르)"]],[],[]],"terkhiin":[[["Dalai Van Camp (traditional Mongolian ger)","Dalai van camp (전통 몽골 게르)"]],[],[]],"shineider":[[["Ulziit Khishig Camp (traditional Mongolian ger)","Ulziit khishig camp (전통 몽골 게르)"]],[],[["Camping option available","캠핑 선택 가능"]]],"khuvsgul":[[["Misheel Camp (traditional Mongolian ger)","Misheel camp (전통 몽골 게르)"],["Khuvsgul Sor Camp (traditional Mongolian ger)","Khuvsgul sor camp (전통 몽골 게르)"]],[["Toilogt Camp (traditional Mongolian ger)","Toilogt camp (전통 몽골 게르)"]],[]],"bulgan":[[["Bulgan Suit Hotel (twin/double room)","Bulgan suit hotel 2인실"]],[],[]],"erdenet":[[["Deedes Hotel (rooms for 2-3)","Deedes hotel 2-3인실"]],[],[]]};
+  // Camps from data/lodges.csv: stop (PLACES key), tier, season (summer | all), n name, ty [type en, ko], ll [lat, lon] or null,
+  // price [en, ko]; ok = owner-approved, which adds about [en, ko], fac {shower, power, wifi, private_bath, restaurant}, url, phone, photo.
+  const LODGES = [
+    {"stop":"tsagaan","id":"tsagaan-tsagaan-suwarga-camp","tier":"standard","season":"summer","n":"Tsagaan Suwarga Camp","ty":["Traditional Mongolian ger","전통 몽골 게르"],"ll":null},
+    {"stop":"tsagaan","id":"tsagaan-goviin-hulan-camp","tier":"standard","season":"summer","n":"Goviin Hulan Camp","ty":["Traditional Mongolian ger","전통 몽골 게르"],"ll":[44.536,105.71454]},
+    {"stop":"tsagaan","id":"tsagaan-gobi-caravanserai-camp","tier":"upgrade","season":"summer","n":"Gobi Caravanserai Camp","ty":["Modern eco-lodge with rooms","현대식 에코 롯지 (객실)"],"ll":[44.5751,105.6461],"price":["$120 · rooms for 2–4","120$ · 2-4인실"]},
+    {"stop":"tsagaan","id":"tsagaan-bulgaa","tier":"budget","season":"summer","n":"Bulgaa","ty":["Ger guesthouse","게르 게스트하우스"],"ll":null},
+    {"stop":"yolyn","id":"yolyn-goviin-urguu-camp","tier":"standard","season":"summer","n":"Goviin Urguu Camp","ty":["Traditional Mongolian ger","전통 몽골 게르"],"ll":[43.55671,104.03304]},
+    {"stop":"yolyn","id":"yolyn-dungenee-camp","tier":"standard","season":"summer","n":"Dungenee Camp","ty":["Traditional Mongolian ger","전통 몽골 게르"],"ll":null},
+    {"stop":"yolyn","id":"yolyn-gobi-mirage-camp","tier":"upgrade","season":"summer","n":"Gobi Mirage Camp","ty":["Modern ger","현대식 게르"],"ll":[43.80991,103.90705]},
+    {"stop":"yolyn","id":"yolyn-ochiroo","tier":"budget","season":"summer","n":"Ochiroo","ty":["Ger guesthouse","게르 게스트하우스"],"ll":null},
+    {"stop":"khongor","id":"khongor-goviin-tugul-camp","tier":"standard","season":"summer","n":"Goviin Tugul Camp","ty":["Traditional Mongolian ger","전통 몽골 게르"],"ll":null},
+    {"stop":"khongor","id":"khongor-sand-of-treasures-camp","tier":"standard","season":"summer","n":"Sand of Treasures Camp","ty":["Traditional Mongolian ger","전통 몽골 게르"],"ll":null},
+    {"stop":"khongor","id":"khongor-gobi-discovery-camp","tier":"upgrade","season":"summer","n":"Gobi Discovery Camp","ty":["Modern ger","현대식 게르"],"ll":[43.77494,102.33889]},
+    {"stop":"bayanzag","id":"bayanzag-goviin-urguu-2","tier":"standard","season":"summer","n":"Goviin Urguu 2","ty":["Traditional Mongolian ger","전통 몽골 게르"],"ll":null},
+    {"stop":"bayanzag","id":"bayanzag-mongol-gobi-camp","tier":"upgrade","season":"summer","n":"Mongol Gobi Camp","ty":["Modern ger","현대식 게르"],"ll":[44.13047,103.70234]},
+    {"stop":"bayanzag","id":"bayanzag-sugar","tier":"budget","season":"summer","n":"Sugar","ty":["Ger guesthouse","게르 게스트하우스"],"ll":null},
+    {"stop":"bagagazar","id":"bagagazar-bayanbulag-camp","tier":"standard","season":"summer","n":"Bayanbulag Camp","ty":["Traditional Mongolian ger","전통 몽골 게르"],"ll":null},
+    {"stop":"bagagazar","id":"bagagazar-ger-guesthouse","tier":"budget","season":"summer","n":"Ger guesthouse","ty":["Ger guesthouse","게르 게스트하우스"],"ll":null},
+    {"stop":"ongi","id":"ongi-ongi-energy","tier":"standard","season":"summer","n":"Ongi Energy","ty":["Traditional Mongolian ger","전통 몽골 게르"],"ll":null},
+    {"stop":"orkhon","id":"orkhon-orkhon-waterfall-camp","tier":"standard","season":"summer","n":"Orkhon Waterfall Camp","ty":["Traditional Mongolian ger","전통 몽골 게르"],"ll":null},
+    {"stop":"terelj","id":"terelj-humug-camp","tier":"standard","season":"summer","n":"Humug Camp","ty":["Modern ger","현대식 게르"],"ll":[47.85281,107.41502]},
+    {"stop":"terelj","id":"terelj-energy-hills","tier":"upgrade","season":"all","n":"Energy Hills","ty":["Modern ger","현대식 게르"],"ll":[47.89575,107.42029]},
+    {"stop":"terelj","id":"terelj-terelj-lodge","tier":"upgrade","season":"summer","n":"Terelj Lodge","ty":["Modern ger","현대식 게르"],"ll":[47.8926,107.41476]},
+    {"stop":"terelj","id":"terelj-juulchin-terelj","tier":"upgrade","season":"summer","n":"Juulchin Terelj","ty":["Modern ger","현대식 게르"],"ll":[47.87193,107.38727]},
+    {"stop":"terelj","id":"terelj-glory-resort","tier":"upgrade","season":"summer","n":"Glory Resort","ty":["Modern ger","현대식 게르"],"ll":[47.82259,107.36524]},
+    {"stop":"elsen","id":"elsen-bataa-camp","tier":"standard","season":"summer","n":"Bataa Camp","ty":["Traditional Mongolian ger","전통 몽골 게르"],"ll":null},
+    {"stop":"elsen","id":"elsen-bichigt-khad-camp","tier":"upgrade","season":"summer","n":"Bichigt Khad Camp","ty":["Modern ger","현대식 게르"],"ll":[47.36611,103.81405]},
+    {"stop":"elsen","id":"elsen-burd-star-camp","tier":"upgrade","season":"summer","n":"Burd Star Camp","ty":["Modern ger","현대식 게르"],"ll":[47.36391,103.72015]},
+    {"stop":"elsen","id":"elsen-sundui","tier":"budget","season":"summer","n":"Sundui","ty":["Nomad family ger","유목민 가정 게르"],"ll":null},
+    {"stop":"tsenkher","id":"tsenkher-altannutag-camp","tier":"standard","season":"summer","n":"Altannutag Camp","ty":["Traditional Mongolian ger","전통 몽골 게르"],"ll":[47.31802,101.64909]},
+    {"stop":"tsenkher","id":"tsenkher-khangai-camp","tier":"standard","season":"summer","n":"Khangai Camp","ty":["Traditional Mongolian ger","전통 몽골 게르"],"ll":[47.32197,101.65688]},
+    {"stop":"tsenkher","id":"tsenkher-duut-resort","tier":"upgrade","season":"all","n":"Duut Resort","ty":["Traditional Mongolian ger","전통 몽골 게르"],"ll":[47.32049,101.65891]},
+    {"stop":"ugii","id":"ugii-ugii-dalai-camp","tier":"standard","season":"all","n":"Ugii Dalai Camp","ty":["Traditional Mongolian ger","전통 몽골 게르"],"ll":[47.75913,102.81345]},
+    {"stop":"ugii","id":"ugii-ugii-khishig-camp","tier":"standard","season":"summer","n":"Ugii Khishig Camp","ty":["Traditional Mongolian ger","전통 몽골 게르"],"ll":null},
+    {"stop":"terkhiin","id":"terkhiin-dalai-van-camp","tier":"standard","season":"summer","n":"Dalai Van Camp","ty":["Traditional Mongolian ger","전통 몽골 게르"],"ll":[48.143,99.76951]},
+    {"stop":"shineider","id":"shineider-ulziit-khishig-camp","tier":"standard","season":"summer","n":"Ulziit Khishig Camp","ty":["Traditional Mongolian ger","전통 몽골 게르"],"ll":null},
+    {"stop":"khuvsgul","id":"khuvsgul-misheel-camp","tier":"standard","season":"summer","n":"Misheel Camp","ty":["Traditional Mongolian ger","전통 몽골 게르"],"ll":[50.60376,100.19678]},
+    {"stop":"khuvsgul","id":"khuvsgul-khuvsgul-sor-camp","tier":"standard","season":"summer","n":"Khuvsgul Sor Camp","ty":["Traditional Mongolian ger","전통 몽골 게르"],"ll":[50.57208,100.15813]},
+    {"stop":"khuvsgul","id":"khuvsgul-toilogt-camp","tier":"upgrade","season":"summer","n":"Toilogt Camp","ty":["Traditional Mongolian ger","전통 몽골 게르"],"ll":[50.65533,100.25363]},
+    {"stop":"bulgan","id":"bulgan-bulgan-suite-hotel","tier":"standard","season":"summer","n":"Bulgan Suite Hotel","ty":["Hotel, twin or double rooms","호텔 (트윈·더블룸)"],"ll":null},
+    {"stop":"erdenet","id":"erdenet-deedes-hotel","tier":"standard","season":"summer","n":"Deedes Hotel","ty":["Hotel, rooms for 2–3","호텔 (2~3인실)"],"ll":[49.03664,104.05737]}
+  ];
   /* ==== END CAFE DATA ==== */
 
   /* ==== PRICES: generated by tools/apply_prices.py from data/prices.csv. Edit the CSV and run ./build.sh; changes here are overwritten. ==== */
@@ -1517,14 +1609,147 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
       <div class="lt-wrap"><table class="lt"><thead><tr><th>${T("Day", "일차")}</th>${t.alt[0].map((_, j) => `<th>${t.alt[0].length > 1 ? T("Option " + "ABC"[j], "ABC"[j] + "안") : T("Stop", "일정")}</th>`).join("")}</tr></thead>
       <tbody>${t.alt.map((r, i) => `<tr><th scope="row">${i + 1}</th>${t.alt[0].map((_, j) => `<td>${r[j] ? esc(pair(r[j])) : ""}</td>`).join("")}</tr>`).join("")}</tbody></table></div></details>`;
   function lodgingHTML(t) {
-    const stops = stopsOf(t).filter(k => LODGING[k]);
-    if (!stops.length || t.cats.includes("winter")) return "";   // winter posts list each night's lodging in the timetable instead
-    const cell = c => c.length ? c.map(x => esc(pair(x))).join("<br>") : "–";
+    const stops = stopsOf(t).filter(k => lodgesAt(t, k).length);
+    if (!stops.length || isWinter(t)) return "";   // winter posts list each night's lodging in the timetable instead
+    const cell = (k, tier) => lodgesAt(t, k).filter(l => l.tier === tier).map(l => esc(l.n + (l.ty ? ` (${pair(l.ty)})` : "") + (l.price ? ` · ${pair(l.price)}` : ""))).join("<br>") || "–";
     return `<details class="m-more"><summary>${T("Where you'll stay", "숙소 안내")}</summary>
       <div class="lt-wrap"><table class="lt"><thead><tr><th>${T("Stop", "지역")}</th><th>${T("Standard", "기본 중급 숙소")}</th><th>${T("Upgrade", "업그레이드 숙소")}</th><th>${T("Budget (₩30,000 off)", "다운 숙소 (3만원 할인)")}</th></tr></thead>
-      <tbody>${stops.map(k => `<tr><th scope="row">${pname(k)}</th>${LODGING[k].map(c => `<td>${cell(c)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>
+      <tbody>${stops.map(k => `<tr><th scope="row">${pname(k)}</th>${["standard", "upgrade", "budget"].map(tier => `<td>${cell(k, tier)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>
       <p>${T("In peak season, check upgrade and budget availability before you book.", "성수기에는 예약 전 업그레이드·다운 숙소 가능 여부를 확인해 주세요.")}</p></details>`;
   }
+
+  /* ---------- Tour map: route, stops and the camps at each stop (Leaflet; the drawn SVG map is the fallback) ---------- */
+  const TIER = { standard: ["Standard", "기본 숙소", "Included in your quote", "견적에 포함"], upgrade: ["Upgrade", "업그레이드", "Extra cost: ask us", "추가 요금 (문의)"], budget: ["Budget", "다운 숙소", "₩30,000 off", "3만원 할인"] };
+  const FAC = [["shower", "Shower", "샤워"], ["private_bath", "Private bathroom", "개별 욕실"], ["power", "Electricity", "전기"], ["wifi", "Wi-Fi", "와이파이"], ["restaurant", "Restaurant", "식당"]];
+  const isWinter = t => t.cats.includes("winter");
+  const lodgesAt = (t, k) => LODGES.filter(l => l.stop === k && (!isWinter(t) || l.season === "all"));
+  const nightsAt = (t, k) => t.sched.map((d, i) => i < t.sched.length - 1 && d.p[0].toLowerCase().includes(PLACES[k].name.toLowerCase()) ? i + 1 : 0).filter(Boolean);
+  function lodgeCard(l) {
+    const tier = TIER[l.tier], fac = l.fac ? FAC.filter(([k]) => k in l.fac) : [];
+    return `<article class="lodge ${l.tier}" data-lodge="${l.id}">
+      ${l.photo ? `<img src="${esc(l.photo)}" alt="" loading="lazy">` : ""}
+      <span class="tier">${T(tier[0], tier[1])}</span>
+      <h5>${esc(l.n)}</h5>
+      ${l.ty ? `<p>${esc(pair(l.ty))}</p>` : ""}
+      <p class="lp">${l.price ? esc(pair(l.price)) : T(tier[2], tier[3])}</p>
+      ${fac.length ? `<div class="fac">${fac.map(([k, e, ko]) => l.fac[k] ? `<span>${T(e, ko)}</span>` : `<span class="no">${T("No " + e.toLowerCase(), ko + " 없음")}</span>`).join("")}</div>` : ""}
+      ${l.about ? `<p>${esc(pair(l.about))}</p>` : ""}
+      <div class="lodge-acts">${l.ll ? `<button class="txt-btn" type="button" data-lodge-pin="${l.id}">${T("Show on map", "지도에서 보기")}</button>` : `<small>${T("Location to be confirmed", "위치 확인 중")}</small>`}${l.url ? `<a href="${esc(l.url)}" target="_blank" rel="noopener">${T("Website ↗", "홈페이지 ↗")}</a>` : ""}</div>
+    </article>`;
+  }
+  function stopPanel(t, k, n) {
+    const nights = nightsAt(t, k), d = nights.length ? t.sched[nights[0] - 1] : null, ls = lodgesAt(t, k);
+    const when = [nights.length && T(`Night of day ${nights.join(", ")}`, `${nights.join(", ")}일차 숙박`), d && d.h && T(`${d.h} h drive that day`, `이날 ${d.h}시간 이동`)].filter(Boolean).join(" · ");
+    return `<div class="sp-head"><h4>${n}. ${pname(k)}</h4><small>${when}</small><button class="txt-btn" type="button" data-map-route>${T("← Whole route", "← 전체 경로")}</button></div>
+      ${d && d.s ? `<p class="sd-foot"><span>${stayText(d.s)}</span></p>` : ""}
+      ${ls.length ? `<div class="lodges">${ls.map(lodgeCard).join("")}</div>
+        <p class="m-note">${T("Your planner confirms the camp when you book; upgrade and budget options depend on the season.", "숙소는 예약 시 확정되며, 업그레이드·다운 숙소는 시기에 따라 달라집니다.")}</p>`
+      : `<p class="m-note">${isWinter(t) ? T("Winter lodging is arranged for each trip; ask us for the current options.", "겨울 숙소는 일정별로 준비합니다. 현재 가능한 숙소를 문의해 주세요.") : T("We arrange lodging here when you book.", "이곳 숙소는 예약 시 안내해 드립니다.")}</p>`}`;
+  }
+
+  const LEAFLET = { src: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js", sri: "sha512-puJW3E/qXDqYp9IfhAI54BJEaWIfloJ7JWs7OeD5i6ruC9JZL1gERT1wjtwXFlh7CjE7ZJ+/vcRZRkIYIb6p4g==" };
+  let leafletLoad = null, tmap = null;
+  const loadLeaflet = () => leafletLoad || (leafletLoad = new Promise((res, rej) => {   // loaded on the first tour opened, not with the page
+    if (window.L) return res(window.L);
+    const s = Object.assign(document.createElement("script"), { src: LEAFLET.src, integrity: LEAFLET.sri, crossOrigin: "anonymous", referrerPolicy: "no-referrer" });
+    s.onload = () => window.L ? res(window.L) : rej();
+    s.onerror = () => { leafletLoad = null; rej(); };
+    document.head.appendChild(s);
+  }));
+  const tripStops = t => stopsOf(t).filter(k => k !== "ub");
+  function closeTripMap() { mapRun++; if (tmap) { tmap.map.stop(); tmap.map.remove(); tmap = null; } }
+  let mapRun = 0;   // only the latest initTripMap call may build a map
+  async function initTripMap(t) {
+    closeTripMap();
+    const run = ++mapRun;
+    $("#m-stops").innerHTML = tripStops(t).map((k, i) => `<button type="button" data-map-stop="${k}" aria-pressed="false"><i>${i + 1}</i>${pname(k)}</button>`).join("");
+    $("#m-stops").hidden = false;
+    let L;
+    try { L = await loadLeaflet(); } catch { return; }   // offline or blocked: the drawn map stays
+    if (run !== mapRun || current !== t.id || !dlg.open || !$("#m-lmap")) return;
+    const box = $("#m-lmap"), svg = $("#m-map"), touch = L.Browser.mobile;
+    box.hidden = false; svg.setAttribute("hidden", "");   // SVG elements have no .hidden property
+    // No wheel zoom, and on phones no dragging until tapped, so scrolling the dialog never gets stuck in the map.
+    const map = L.map(box, { scrollWheelZoom: false, dragging: !touch, touchZoom: !touch, zoomSnap: .5 });
+    map.attributionControl.setPrefix(false);
+    const base = Object.fromEntries(Object.entries(CONFIG.tiles).map(([id, c]) => [id, L.tileLayer(c.url, { attribution: c.attr, maxZoom: c.max || 18 })]));
+    let tiles = 0;
+    base.map.on("tileload", () => tiles++).addTo(map);
+    const accent = getComputedStyle(document.documentElement).getPropertyValue("--accent").trim() || "#2f6b4f";
+    const pts = t.route.map(r => [PLACES[key(r)].lat, PLACES[key(r)].lon]);
+    L.polyline(pts, { color: accent, weight: 3, opacity: .85 }).addTo(map);
+    const pin = (html, size) => L.divIcon({ className: "", html, iconSize: [size, size] });
+    L.marker([PLACES.ub.lat, PLACES.ub.lon], { icon: pin('<span class="pin-stop cap">UB</span>', 26), keyboard: false }).bindTooltip(pname("ub")).addTo(map);
+    const markers = {};
+    tripStops(t).forEach((k, i) => {
+      markers[k] = L.marker([PLACES[k].lat, PLACES[k].lon], { icon: pin(`<span class="pin-stop">${i + 1}</span>`, 26), title: pname(k) })
+        .bindTooltip(pname(k)).on("click", () => selectStop(k)).addTo(map);
+    });
+    const route = L.latLngBounds(pts);
+    map.fitBounds(route, { padding: [28, 28] });
+    const Switch = L.Control.extend({ onAdd() {
+      const d = L.DomUtil.create("div", "map-ctl");
+      d.innerHTML = `<button type="button" data-base="map" aria-pressed="true">${T("Map", "지도")}</button><button type="button" data-base="sat" aria-pressed="false">${T("Satellite", "위성")}</button>`;
+      L.DomEvent.disableClickPropagation(d);
+      d.addEventListener("click", e => {
+        const b = e.target.closest("[data-base]"); if (!b) return;
+        Object.values(base).forEach(l => map.removeLayer(l)); base[b.dataset.base].addTo(map);
+        d.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x === b));
+      });
+      return d;
+    } });
+    new Switch({ position: "bottomleft" }).addTo(map);   // top-right sits under the dialog's close button on phones
+    if (touch) {
+      const tap = Object.assign(document.createElement("button"), { type: "button", className: "map-tap", innerHTML: `<span>${T("Tap to move the map", "탭하여 지도 움직이기")}</span>` });
+      tap.addEventListener("click", () => { map.dragging.enable(); map.touchZoom.enable(); tap.remove(); });
+      box.appendChild(tap);
+    }
+    tmap = { L, map, markers, route, lodgeLayer: L.layerGroup().addTo(map), lodgeMarkers: {} };
+    setTimeout(() => { if (tmap && tmap.map === map) map.invalidateSize(); }, 350);   // the dialog animates open
+    // Tiles blocked (e.g. a sandboxed preview): go back to the drawn map; stop chips and lodge cards keep working.
+    setTimeout(() => { if (tmap && tmap.map === map && !tiles) { closeTripMap(); box.hidden = true; svg.removeAttribute("hidden"); } }, 8000);
+  }
+  function selectStop(k) {
+    const t = byId[current]; if (!t) return;
+    $$("#m-stops [data-map-stop]").forEach(b => b.setAttribute("aria-pressed", b.dataset.mapStop === k));
+    const panel = $("#m-stop");
+    panel.innerHTML = stopPanel(t, k, tripStops(t).indexOf(k) + 1);
+    panel.hidden = false;
+    if (!tmap) { panel.scrollIntoView({ block: "nearest", behavior: "smooth" }); return; }
+    const { L, map, markers, lodgeLayer } = tmap;
+    lodgeLayer.clearLayers(); tmap.lodgeMarkers = {};
+    Object.entries(markers).forEach(([mk, m]) => m.getElement()?.querySelector(".pin-stop")?.classList.toggle("on", mk === k));
+    const pts = [[PLACES[k].lat, PLACES[k].lon]];
+    lodgesAt(t, k).filter(l => l.ll).forEach(l => {
+      pts.push(l.ll);
+      tmap.lodgeMarkers[l.id] = L.marker(l.ll, { icon: L.divIcon({ className: "", html: `<span class="pin-lodge ${l.tier}"></span>`, iconSize: [18, 18], iconAnchor: [9, 18] }), title: l.n })
+        .bindTooltip(`${esc(l.n)} · ${T(TIER[l.tier][0], TIER[l.tier][1])}`).on("click", () => focusLodge(l.id, false)).addTo(lodgeLayer);
+    });
+    map.flyToBounds(L.latLngBounds(pts), { padding: [40, 40], maxZoom: pts.length > 1 ? 13 : 9, duration: .9 });
+  }
+  function showRoute() {
+    $$("#m-stops [data-map-stop]").forEach(b => b.setAttribute("aria-pressed", "false"));
+    $("#m-stop").hidden = true;
+    if (!tmap) return;
+    tmap.lodgeLayer.clearLayers(); tmap.lodgeMarkers = {};
+    Object.values(tmap.markers).forEach(m => m.getElement()?.querySelector(".pin-stop")?.classList.remove("on"));
+    tmap.map.flyToBounds(tmap.route, { padding: [28, 28], duration: .8 });
+  }
+  function focusLodge(id, fromCard) {
+    $$("#m-stop [data-lodge]").forEach(c => c.classList.toggle("on", c.dataset.lodge === id));
+    if (!fromCard) $(`#m-stop [data-lodge="${id}"]`)?.scrollIntoView({ block: "nearest", behavior: "smooth" });
+    const m = tmap && tmap.lodgeMarkers[id]; if (!m) return;
+    Object.entries(tmap.lodgeMarkers).forEach(([lid, mk]) => mk.getElement()?.querySelector(".pin-lodge")?.classList.toggle("on", lid === id));
+    if (fromCard) { tmap.map.flyTo(m.getLatLng(), Math.max(tmap.map.getZoom(), 13), { duration: .6 }); $("#m-lmap").scrollIntoView({ block: "nearest", behavior: "smooth" }); }
+    m.openTooltip();
+  }
+  dlg.addEventListener("click", e => {
+    const s = e.target.closest("[data-map-stop]");
+    if (s) selectStop(s.dataset.mapStop);
+    else if (e.target.closest("[data-map-route]")) showRoute();
+    else if (e.target.closest("[data-lodge-pin]")) focusLodge(e.target.closest("[data-lodge-pin]").dataset.lodgePin, true);
+  });
+  dlg.addEventListener("close", closeTripMap);
 
   function openTrip(id) {
     const t = byId[id]; if (!t) return;
@@ -1561,9 +1786,12 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
             ${t.cafe ? `<a class="txt-btn" href="${t.cafe}" target="_blank" rel="noopener">${T("See the original post with photos on Naver Cafe ↗", "네이버 카페에서 원문과 사진 보기 ↗")}</a>` : ""}</section>`
           : plan.length ? `<section class="m-sec"><h3>${T("Day by day", "일정")}</h3>
             <ol class="plan">${plan.map(([d, txt]) => `<li><span class="d">${T("Day " + d, d + "일차")}</span><p>${txt}</p></li>`).join("")}</ol></section>` : ""}
-          ${hasRoute ? `<section class="m-sec"><h3>${T("Route map", "경로 지도")}</h3>
-            <div class="m-map"><svg id="m-map" viewBox="0 0 900 450" role="img" aria-label="${T("Route map", "경로 지도")}"></svg>
-              <div class="legend"><span><i></i>${T("Overland", "육로")}</span>${flights ? `<span><i class="f"></i>${T("Domestic flight", "국내선")}</span>` : ""}<span class="mono" id="m-km"></span></div></div></section>` : ""}
+          ${hasRoute ? `<section class="m-sec"><h3>${T("Route map and where you sleep", "경로 지도와 숙소")}</h3>
+            <p class="m-note">${T("Pick a stop to zoom in and see the camps there.", "경유지를 누르면 확대되어 주변 숙소를 볼 수 있습니다.")}</p>
+            <div class="m-map"><div class="lmap" id="m-lmap" hidden></div><svg id="m-map" viewBox="0 0 900 450" role="img" aria-label="${T("Route map", "경로 지도")}"></svg>
+              <div class="legend"><span><i></i>${T("Overland", "육로")}</span>${flights ? `<span><i class="f"></i>${T("Domestic flight", "국내선")}</span>` : ""}<span class="mono" id="m-km"></span></div></div>
+            <div class="stops" id="m-stops" hidden></div>
+            <div class="stop-panel" id="m-stop" aria-live="polite" hidden></div></section>` : ""}
           <section class="m-sec"><h3>${T("Included", "포함 사항")}</h3><ul class="incl">${incl.map(i => `<li>${i}</li>`).join("")}</ul>
             <h3 style="font-size:1rem">${T("Not included", "불포함 사항")}</h3><ul class="incl out">${excl.map(i => `<li>${i}</li>`).join("")}</ul></section>
           <div>
@@ -1593,7 +1821,8 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
         </aside>
       </div>
       <div class="m-bar"><span class="price"><b>${priceText(t)}</b><small>${hasPrice(t) ? T("per person", "1인") : T("Custom quote", "맞춤 견적")}</small></span><span class="acts">${CONFIG.kakao ? `<a class="btn btn-kakao" href="${esc(CONFIG.kakao)}" target="_blank" rel="noopener" aria-label="${T("Ask on KakaoTalk", "카카오톡 상담")}">${ICON.kakao}</a>` : ""}<button class="btn btn-primary" type="button" data-request="${id}">${T("Ask now", "문의하기")}</button></span></div>`;
-    if (hasRoute) $("#m-km").textContent = kmText(drawMap($("#m-map"), t));
+    if (hasRoute) { $("#m-km").textContent = kmText(drawMap($("#m-map"), t)); initTripMap(t); }
+    else closeTripMap();
     if (!dlg.open) { dlg.showModal(); dlg.scrollTop = 0; }
     document.body.classList.add("lock");
     setHash("trip-" + id);
