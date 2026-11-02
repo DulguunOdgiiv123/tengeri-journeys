@@ -25,22 +25,24 @@
 <style>
 /* Layout: one clear page under a locked white header. Hero with a tour finder, then the tours themselves,
    trust, real reviews, seasons, FAQ and contact. Tours come first, decoration second.
-   Identity: plain charcoal and stone neutrals with one steppe-green accent; KakaoTalk yellow is the only bright colour. */
+   Identity: two colours only, white and the Golden Jigu logo blue (with its navy and pale tints); no green, yellow or amber.
+   Kakao, Naver and WhatsApp marks use the brand blue too. Red is kept for form errors alone. Crisp 1px edges, small radii. */
 :root {
   color-scheme: light;
   --paper: #ffffff;
-  --mist: #f4f4f2;          /* stone: quiet section background */
-  --ink: #1b1b1b;           /* charcoal text and primary buttons */
-  --muted: #6b6b6b;
-  --line: #e5e5e2;
-  --accent: #2f6b4f;        /* steppe green, used sparingly: links, active states, icons */
-  --accent-deep: #22503b;
-  --accent-soft: #edf3ef;
-  --star: #e2a53a;          /* ratings only */
-  --red: #b42318;           /* form errors */
-  --dark: #1b1b1b;          /* footer */
-  --logo: #24aaff;          /* Golden Jigu logo blue, logo only */
-  --kakao: #fee500;         /* KakaoTalk brand: the one bright colour on the page */
+  --mist: #f3f6f9;          /* cool slate: quiet section background */
+  --ink: #0f1b2d;           /* navy-charcoal text */
+  --muted: #586579;
+  --line: #dde3ea;          /* dividers */
+  --line-strong: #c6d0dc;   /* outlines of controls and cards */
+  --accent: #0a6cc4;        /* logo blue, deepened so text and white-on-blue pass WCAG AA (5.3:1) */
+  --accent-deep: #08569c;
+  --accent-soft: #e8f3fd;
+  --star: var(--accent);    /* ratings */
+  --red: #b42318;           /* form errors only */
+  --dark: #0f1b2d;          /* footer */
+  --logo: #24aaff;          /* Golden Jigu logo blue: logo and decorative marks, never text */
+  --kakao: var(--accent);   /* Kakao actions use the brand blue */
   --on-dark-soft: rgba(255,255,255,.72);
   /* older names, kept as aliases for markup generated elsewhere */
   --blue: var(--accent); --blue-deep: var(--accent-deep); --blue-soft: var(--accent-soft);
@@ -52,10 +54,11 @@
 
   --nav-h: 112px;   /* two header rows */
   --wrap: 1200px;
-  --r: 14px;
-  --r-lg: 20px;
-  --shadow: 0 1px 2px rgba(0,0,0,.04), 0 8px 24px -14px rgba(0,0,0,.16);
-  --shadow-lg: 0 24px 56px -28px rgba(0,0,0,.3);
+  --r-sm: 6px;      /* buttons, chips, inputs */
+  --r: 8px;         /* panels */
+  --r-lg: 10px;     /* cards */
+  --shadow: 0 1px 2px rgba(15,27,45,.06);
+  --shadow-lg: 0 12px 28px -14px rgba(15,27,45,.28);
   --ease: cubic-bezier(.2, .7, .2, 1);
 }
 
@@ -99,14 +102,15 @@ section[id] { scroll-margin-top: calc(var(--nav-h) + env(safe-area-inset-top, 0p
 @keyframes reveal { from { transform: translateY(28px); } to { transform: none; } }
 
 /* ---------- Buttons ---------- */
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 13px 20px; border-radius: 12px; border: 1.5px solid transparent; font: 700 .97rem/1.1 var(--f-body); text-decoration: none; cursor: pointer; white-space: nowrap; transition: transform .2s var(--ease), background-color .2s, border-color .2s, box-shadow .2s; }
-.btn:hover { transform: translateY(-1px); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 13px 20px; border-radius: var(--r-sm); border: 1px solid transparent; font: 700 .97rem/1.1 var(--f-body); text-decoration: none; cursor: pointer; white-space: nowrap; transition: transform .2s var(--ease), background-color .2s, border-color .2s, box-shadow .2s; }
+.btn:active { transform: translateY(1px); }
 .btn svg { width: 18px; height: 18px; flex: none; }
-.btn-primary { background: var(--ink); color: #fff; }
-.btn-primary:hover { background: #000; }
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-primary:hover { background: var(--accent-deep); }
 .btn-outline { background: var(--paper); color: var(--ink); border-color: var(--line); }
-.btn-outline:hover { border-color: var(--ink); }
-.btn-kakao { background: var(--kakao); color: #191919; }
+.btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+.btn-kakao { background: var(--paper); color: var(--accent); border-color: var(--accent); }
+.btn-kakao:hover { background: var(--accent-soft); }
 .btn-lg { padding: 16px 24px; font-size: 1.02rem; }
 .txt-btn { background: none; border: 0; padding: 0; font: 700 .9rem var(--f-body); color: var(--accent); cursor: pointer; text-decoration: none; }
 .txt-btn:hover { text-decoration: underline; text-underline-offset: 3px; }
@@ -120,8 +124,8 @@ section[id] { scroll-margin-top: calc(var(--nav-h) + env(safe-area-inset-top, 0p
 .logo-v { width: 140px; height: 112px; }  /* stacked logo (footer), ratio 1.25:1 */
 @media (max-width: 560px) { .logo-h { height: 34px; width: 153px; } }
 .nav-search, .m-search { position: relative; }
-.nav-search input, .m-search input { width: 100%; height: 44px; border-radius: 999px; border: 1.5px solid var(--line); background: var(--mist); padding: 0 18px 0 44px; font-size: .95rem; color: var(--ink); }
-.nav-search input:focus, .m-search input:focus { outline: none; border-color: var(--ink); background: var(--paper); }
+.nav-search input, .m-search input { width: 100%; height: 44px; border-radius: var(--r-sm); border: 1px solid var(--line-strong); background: var(--mist); padding: 0 18px 0 44px; font-size: .95rem; color: var(--ink); }
+.nav-search input:focus, .m-search input:focus { outline: none; border-color: var(--accent); background: var(--paper); }
 .nav-search svg, .m-search svg { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); width: 18px; height: 18px; color: var(--muted); pointer-events: none; }
 .nav-right { justify-self: end; display: flex; align-items: center; gap: 10px; }
 .nav-kakao { padding: 10px 14px; font-size: .9rem; }
@@ -131,16 +135,16 @@ section[id] { scroll-margin-top: calc(var(--nav-h) + env(safe-area-inset-top, 0p
 .nav-menu li { flex: none; }
 .nav-menu li:first-child { margin-left: auto; }
 .nav-menu li:last-child { margin-right: auto; }
-.nav-menu a { position: relative; display: block; padding: 10px 18px; white-space: nowrap; text-decoration: none; font-weight: 700; font-size: .97rem; color: var(--ink); border-radius: 10px; transition: background-color .2s, color .2s; }
+.nav-menu a { position: relative; display: block; padding: 10px 18px; white-space: nowrap; text-decoration: none; font-weight: 700; font-size: .97rem; color: var(--ink); border-radius: var(--r-sm); transition: background-color .2s, color .2s; }
 .nav-menu a:hover { background: var(--mist); }
 .nav-menu a[aria-current="true"] { color: var(--accent); }
 .nav-menu a[aria-current="true"]::after { content: ""; position: absolute; left: 18px; right: 18px; bottom: 2px; height: 2px; border-radius: 2px; background: var(--accent); }
 .nav-menu .sep { display: block; width: 1px; height: 18px; background: var(--line); margin: 0 8px; }
 .progress { position: absolute; left: 0; bottom: -1px; height: 2px; width: 100%; background: var(--accent); transform-origin: 0 50%; transform: scaleX(0); }
-.lang { display: inline-flex; padding: 3px; border-radius: 999px; border: 1.5px solid var(--line); flex: none; }
-.lang button { background: transparent; border: 0; padding: 7px 11px; border-radius: 999px; font-weight: 700; font-size: .8rem; line-height: 1; color: var(--muted); cursor: pointer; }
-.lang button[aria-pressed="true"] { background: var(--ink); color: #fff; }
-.burger { display: none; width: 44px; height: 44px; border-radius: 12px; border: 1.5px solid var(--line); background: var(--paper); color: var(--ink); cursor: pointer; position: relative; flex: none; }
+.lang { display: inline-flex; padding: 3px; border-radius: var(--r-sm); border: 1px solid var(--line-strong); flex: none; }
+.lang button { background: transparent; border: 0; padding: 7px 11px; border-radius: 4px; font-weight: 700; font-size: .8rem; line-height: 1; color: var(--muted); cursor: pointer; }
+.lang button[aria-pressed="true"] { background: var(--accent); color: #fff; }
+.burger { display: none; width: 44px; height: 44px; border-radius: var(--r-sm); border: 1px solid var(--line-strong); background: var(--paper); color: var(--ink); cursor: pointer; position: relative; flex: none; }
 .burger span { position: absolute; left: 12px; right: 12px; height: 2px; background: currentColor; border-radius: 2px; transition: transform .3s var(--ease), opacity .2s; }
 .burger span:nth-child(1) { top: 15px; } .burger span:nth-child(2) { top: 21px; } .burger span:nth-child(3) { top: 27px; }
 .burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
@@ -163,22 +167,22 @@ section[id] { scroll-margin-top: calc(var(--nav-h) + env(safe-area-inset-top, 0p
 .hero { position: relative; isolation: isolate; overflow: hidden; color: #fff; padding-top: calc(var(--nav-h) + env(safe-area-inset-top, 0px)); }
 .hero-bg { position: absolute; inset: 0; z-index: -2; }
 .hero-bg img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 62%; }
-.hero::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(0,0,0,.42) 0%, rgba(0,0,0,.5) 55%, rgba(0,0,0,.62) 100%); }
+.hero::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(15,27,45,.42) 0%, rgba(15,27,45,.5) 55%, rgba(15,27,45,.64) 100%); }
 .hero-center { display: grid; justify-items: center; text-align: center; gap: 18px; padding-block: clamp(56px, 8vw, 100px) clamp(36px, 5vw, 60px); }
-.badge-line { display: inline-flex; align-items: center; gap: 8px; padding: 8px 13px; border-radius: 999px; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.28); backdrop-filter: blur(6px); font-weight: 700; font-size: .84rem; line-height: 1; }
-.badge-line i { width: 8px; height: 8px; border-radius: 50%; background: #fff; }
+.badge-line { display: inline-flex; align-items: center; gap: 8px; padding: 8px 13px; border-radius: var(--r-sm); background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.28); backdrop-filter: blur(6px); font-weight: 700; font-size: .84rem; line-height: 1; }
+.badge-line i { width: 8px; height: 8px; border-radius: 50%; background: var(--logo); }
 .hero h1 { font: 700 clamp(2.2rem, 1.1rem + 3.8vw, 4.2rem)/1.08 var(--f-display); letter-spacing: -.035em; max-width: 20ch; }
 .hero h1 .hl { color: inherit; }
 :root[lang="ko"] .hero h1 { font-family: "Noto Sans KR", var(--f-body); font-weight: 800; line-height: 1.18; letter-spacing: -.045em; font-size: clamp(2.1rem, 1rem + 3.6vw, 3.9rem); }
 .hero-lede { font-size: clamp(1.02rem, 1rem + .3vw, 1.18rem); line-height: 1.65; color: rgba(255,255,255,.9); max-width: 46ch; }
-.finder-bar { width: min(780px, 100%); display: grid; grid-template-columns: 1fr 1fr auto; align-items: center; background: var(--paper); color: var(--ink); border-radius: 18px; padding: 8px; box-shadow: var(--shadow-lg); margin-top: 6px; }
+.finder-bar { width: min(780px, 100%); display: grid; grid-template-columns: 1fr 1fr auto; align-items: center; background: var(--paper); color: var(--ink); border-radius: var(--r-lg); padding: 8px; box-shadow: var(--shadow-lg); margin-top: 6px; }
 .fb-field { display: grid; gap: 2px; text-align: left; padding: 6px 18px; min-width: 0; }
 .fb-field + .fb-field { border-left: 1px solid var(--line); }
 .fb-field label { font-size: .76rem; font-weight: 700; color: var(--muted); }
 .fb-field select { width: 100%; appearance: none; border: 0; background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%236b6b6b' stroke-width='1.8'/%3E%3C/svg%3E") no-repeat right 2px center; font: 700 1rem var(--f-body); color: var(--ink); padding: 4px 24px 4px 0; cursor: pointer; }
 .fb-field select:focus { outline: none; }
 .fb-field:focus-within label { color: var(--accent); }
-.finder-bar .btn { border-radius: 12px; height: 100%; min-height: 54px; }
+.finder-bar .btn { border-radius: var(--r-sm); height: 100%; min-height: 54px; }
 .finder-note { font-size: .9rem; color: rgba(255,255,255,.85); }
 .finder-note .txt-btn { color: #fff; }
 @media (max-width: 640px) { .finder-bar { grid-template-columns: 1fr; padding: 10px; } .fb-field { padding: 8px 10px; } .fb-field + .fb-field { border-left: 0; border-top: 1px solid var(--line); } .finder-bar .btn { margin-top: 6px; } }
@@ -186,7 +190,7 @@ section[id] { scroll-margin-top: calc(var(--nav-h) + env(safe-area-inset-top, 0p
 /* ---------- Form fields (shared) ---------- */
 .field { display: grid; gap: 6px; min-width: 0; }
 .field label, fieldset.field legend { font-size: .84rem; font-weight: 700; color: var(--ink); }
-.field input, .field select, .field textarea { width: 100%; font-size: 1rem; color: var(--ink); background: var(--mist); border: 1.5px solid transparent; border-radius: 12px; padding: 12px 14px; }
+.field input, .field select, .field textarea { width: 100%; font-size: 1rem; color: var(--ink); background: var(--mist); border: 1px solid transparent; border-radius: var(--r-sm); padding: 12px 14px; }
 .field select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%236b6b6b' stroke-width='1.8'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
 .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--accent); background-color: var(--paper); }
 .field textarea { min-height: 110px; resize: vertical; }
@@ -199,7 +203,7 @@ fieldset.field legend { padding: 0; margin-bottom: 6px; }
 .trust-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .trust-item { display: grid; justify-items: center; align-content: start; text-align: center; gap: 8px; padding: 26px 16px; }
 .trust-item + .trust-item { border-left: 1px solid var(--line); }
-.ti { width: 42px; height: 42px; border-radius: 12px; background: var(--accent-soft); color: var(--accent); display: grid; place-items: center; flex: none; }
+.ti { width: 42px; height: 42px; border-radius: var(--r-sm); background: var(--accent-soft); color: var(--accent); display: grid; place-items: center; flex: none; }
 .ti svg { width: 22px; height: 22px; }
 .trust-item strong { display: block; font-weight: 800; font-size: .98rem; }
 .trust-item div > span { font-size: .86rem; color: var(--muted); }
@@ -219,23 +223,23 @@ fieldset.field legend { padding: 0; margin-bottom: 6px; }
 .tabs::-webkit-scrollbar { display: none; }
 .tabs > :first-child { margin-left: auto; }
 .tabs > :last-child { margin-right: auto; }
-.tab { display: inline-flex; align-items: center; gap: 8px; flex: none; padding: 6px 14px 6px 6px; border-radius: 999px; border: 1.5px solid var(--line); background: var(--paper); font-weight: 700; font-size: .92rem; color: var(--ink); cursor: pointer; transition: border-color .2s, background-color .2s, color .2s; }
+.tab { display: inline-flex; align-items: center; gap: 8px; flex: none; padding: 6px 14px 6px 6px; border-radius: var(--r-sm); border: 1px solid var(--line-strong); background: var(--paper); font-weight: 700; font-size: .92rem; color: var(--ink); cursor: pointer; transition: border-color .2s, background-color .2s, color .2s; }
 .tab img { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; }
 .tab.noimg { padding-left: 16px; }
-.tab:hover { border-color: var(--ink); }
-.tab[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: #fff; }
+.tab:hover { border-color: var(--accent); }
+.tab[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
 .tab .n { font: 500 .74rem var(--f-mono); opacity: .65; }
 .filter-state { display: flex; justify-content: center; align-items: center; gap: 10px 14px; flex-wrap: wrap; margin-top: 14px; font-size: .92rem; color: var(--muted); font-weight: 600; }
-.pill-x { display: inline-flex; align-items: center; gap: 6px; padding: 6px 11px; border-radius: 999px; background: var(--accent-soft); color: var(--accent-deep); font-weight: 700; font-size: .86rem; border: 0; cursor: pointer; }
+.pill-x { display: inline-flex; align-items: center; gap: 6px; padding: 6px 11px; border-radius: var(--r-sm); background: var(--accent-soft); color: var(--accent-deep); font-weight: 700; font-size: .86rem; border: 0; cursor: pointer; }
 .cards { display: grid; gap: 16px; max-width: 1160px; margin: 20px auto 0; }
 .lcard { display: grid; grid-template-columns: 300px minmax(0, 1fr) 210px; min-height: 220px; background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; cursor: pointer; transition: box-shadow .25s, transform .25s var(--ease); }
-.lcard:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+.lcard:hover { border-color: var(--accent); box-shadow: var(--shadow); }
 .lc-img { position: relative; overflow: hidden; background: var(--mist); }
 .lc-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease); }
 .lcard:hover .lc-img img { transform: scale(1.04); }
 .tags { position: absolute; left: 12px; top: 12px; display: flex; gap: 6px; flex-wrap: wrap; }
 .tag { display: inline-block; font: 700 .74rem/1 var(--f-body); padding: 6px 9px; border-radius: 8px; background: rgba(255,255,255,.95); color: var(--ink); }
-.tag.blue, .tag.red, .tag.gold { background: var(--ink); color: #fff; }
+.tag.blue, .tag.red, .tag.gold { background: var(--accent); color: #fff; }
 .lc-body { display: grid; align-content: center; gap: 9px; padding: 20px 24px; min-width: 0; }
 .lc-name { font-size: .84rem; font-weight: 700; color: var(--muted); }
 .lc-title { font-size: 1.1rem; font-weight: 800; line-height: 1.45; letter-spacing: -.02em; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
@@ -243,7 +247,7 @@ fieldset.field legend { padding: 0; margin-bottom: 6px; }
 .lc-hl { display: flex; gap: 4px 16px; list-style: none; margin: 0; padding: 0; font-size: .9rem; font-weight: 600; overflow: hidden; white-space: nowrap; }
 .lc-hl li::before { content: "✓"; color: var(--accent); font-weight: 800; margin-right: 6px; }
 .lc-inc { display: flex; flex-wrap: wrap; gap: 5px; list-style: none; margin: 0; padding: 0; }
-.lc-inc li { display: inline-flex; align-items: center; gap: 4px; padding: 3px 8px; border-radius: 999px; background: var(--mist); font-size: .76rem; white-space: nowrap; font-weight: 600; color: var(--muted); }
+.lc-inc li { display: inline-flex; align-items: center; gap: 4px; padding: 3px 8px; border-radius: var(--r-sm); background: var(--mist); font-size: .76rem; white-space: nowrap; font-weight: 600; color: var(--muted); }
 .lc-inc svg { width: 13px; height: 13px; color: var(--accent); flex: none; }
 .lc-foot { font-size: .84rem; color: var(--muted); }
 .lc-side { display: grid; align-content: center; gap: 10px; padding: 20px; border-left: 1px solid var(--line); text-align: center; }
@@ -255,7 +259,7 @@ fieldset.field legend { padding: 0; margin-bottom: 6px; }
 .rating .s { color: var(--star); }
 .rating .c { color: var(--muted); font-weight: 500; }
 .more-wrap { display: flex; justify-content: center; margin-top: 22px; }
-.empty { padding: 44px 20px; text-align: center; border: 1.5px dashed #d9d9d5; border-radius: var(--r-lg); color: var(--muted); display: grid; gap: 14px; justify-items: center; background: var(--paper); }
+.empty { padding: 44px 20px; text-align: center; border: 1px dashed var(--line-strong); border-radius: var(--r-lg); color: var(--muted); display: grid; gap: 14px; justify-items: center; background: var(--paper); }
 .note { max-width: 780px; margin: 18px auto 0; text-align: center; font-size: .86rem; color: var(--muted); }
 @media (max-width: 960px) {
   .lcard { grid-template-columns: 240px minmax(0, 1fr); }
@@ -279,7 +283,7 @@ fieldset.field legend { padding: 0; margin-bottom: 6px; }
 .why-points .wp { color: var(--muted); font-size: .94rem; }
 .reels { display: grid; grid-template-columns: repeat(3, minmax(0, 260px)); justify-content: center; gap: 16px; align-items: start; }
 .reel { margin: 0; display: grid; gap: 8px; min-width: 0; }
-.reel-frame { position: relative; aspect-ratio: 9 / 16; max-width: 100%; border-radius: 16px; overflow: hidden; background: #050b14; box-shadow: var(--shadow); }
+.reel-frame { position: relative; aspect-ratio: 9 / 16; max-width: 100%; border-radius: var(--r); overflow: hidden; background: #050b14; box-shadow: var(--shadow); }
 .reel-frame video { width: 100%; height: 100%; object-fit: cover; }
 .reel figcaption { text-align: center; font-size: .84rem; font-weight: 700; color: var(--muted); }
 .vt { position: absolute; right: 10px; bottom: 10px; z-index: 2; width: 36px; height: 36px; border-radius: 50%; border: 0; cursor: pointer; display: grid; place-items: center; background: rgba(255,255,255,.24); color: #fff; backdrop-filter: blur(8px); }
@@ -294,7 +298,7 @@ fieldset.field legend { padding: 0; margin-bottom: 6px; }
 .rev-summary { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
 .rev-summary .big { font: 600 2.4rem/1 var(--f-display); color: var(--ink); }
 .stars { display: inline-flex; gap: 2px; color: var(--star); font-size: 1.02rem; line-height: 1; }
-.stars .off { color: #dcdcd8; }
+.stars .off { color: #cfd6df; }
 .rev-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; align-items: start; margin-top: 20px; }
 @media (max-width: 1000px) { .rev-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 640px) { .rev-grid { grid-template-columns: 1fr; } }
@@ -306,14 +310,13 @@ fieldset.field legend { padding: 0; margin-bottom: 6px; }
 .rev.open .rev-text { display: block; }
 .rev-meta { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; font-size: .88rem; color: var(--muted); }
 .rev-meta b { color: var(--ink); }
-.rev-trip { font: 700 .8rem var(--f-body); padding: 5px 10px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); border: 0; cursor: pointer; }
+.rev-trip { font: 700 .8rem var(--f-body); padding: 5px 10px; border-radius: var(--r-sm); background: var(--accent-soft); color: var(--accent); border: 0; cursor: pointer; }
 .rev-actions { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; padding-top: 12px; border-top: 1px solid var(--line); }
 .src { display: inline-flex; align-items: center; gap: 7px; font: 700 .86rem var(--f-body); text-decoration: none; color: var(--ink); }
 .src i { width: 18px; height: 18px; border-radius: 4px; display: grid; place-items: center; font: 800 .68rem/1 var(--f-body); font-style: normal; color: #fff; background: var(--ink); }
-.src.naver i { background: #03c75a; }
-.src.google i { background: #4285f4; }
-.src.kakao i { background: var(--kakao); color: #191919; }
-.rev-empty { display: grid; grid-template-columns: 1.25fr 1fr; gap: clamp(24px, 4vw, 56px); align-items: center; background: var(--paper); border: 1.5px dashed #d9d9d5; border-radius: var(--r-lg); padding: clamp(24px, 4vw, 44px); }
+.src.naver i, .src.google i { background: var(--accent); }
+.src.kakao i { background: var(--accent); color: #fff; }
+.rev-empty { display: grid; grid-template-columns: 1.25fr 1fr; gap: clamp(24px, 4vw, 56px); align-items: center; background: var(--paper); border: 1px dashed var(--line-strong); border-radius: var(--r-lg); padding: clamp(24px, 4vw, 44px); }
 @media (max-width: 860px) { .rev-empty { grid-template-columns: 1fr; } }
 .rev-empty h3 { font-size: clamp(1.25rem, 1rem + 1vw, 1.6rem); font-weight: 800; }
 .rev-empty ol { margin: 0; padding-left: 1.3em; display: grid; gap: 8px; color: var(--muted); }
@@ -322,6 +325,36 @@ fieldset.field legend { padding: 0; margin-bottom: 6px; }
 .policy strong { display: block; font-weight: 800; }
 .policy p span { font-size: .9rem; color: var(--muted); }
 .rev-cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+/* Traveller posts: link cards to trip diaries on Naver blog / cafe and Brunch (POSTS) */
+.posts { display: grid; gap: 18px; }
+.rev-grid + .posts { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--line); }
+.posts-head { display: grid; gap: 6px; }
+.posts-head h3 { font-size: clamp(1.15rem, 1rem + .6vw, 1.4rem); font-weight: 800; }
+.posts-head p { margin: 0; color: var(--muted); font-size: .95rem; }
+.post-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+@media (max-width: 1000px) { .post-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .post-grid { grid-template-columns: 1fr; } }
+.post { position: relative; display: flex; flex-direction: column; background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; transition: box-shadow .25s, transform .25s, border-color .25s; }
+.post:hover { border-color: var(--accent); }
+.post:has(.post-title a:focus-visible) { outline: 3px solid var(--accent); outline-offset: 2px; }
+.post-img { position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: linear-gradient(135deg, var(--accent-soft), var(--mist)); }
+.post-img img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
+.post:hover .post-img img { transform: scale(1.04); }
+.post-img .src { position: absolute; left: 12px; top: 12px; padding: 5px 10px 5px 6px; border-radius: var(--r-sm); background: rgba(255,255,255,.94); font-size: .78rem; box-shadow: 0 1px 3px rgba(0,0,0,.12); }
+.post-body { flex: 1; display: flex; flex-direction: column; gap: 10px; padding: 16px 18px 18px; }
+.post-title { font-size: 1rem; font-weight: 700; line-height: 1.45; letter-spacing: -.01em; word-break: keep-all; overflow-wrap: anywhere; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.post-title a { color: var(--ink); text-decoration: none; }
+.post-title a::after { content: ""; position: absolute; inset: 0; z-index: 1; }   /* whole card is the link */
+.post-title a:focus-visible { outline: none; }                                   /* the card shows the focus ring */
+.post-meta { display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: baseline; font-size: .86rem; color: var(--muted); }
+.post-meta b { color: var(--ink); font-weight: 600; }
+.post-meta .mono { font-size: .76rem; }
+.post-foot { margin-top: auto; display: flex; justify-content: space-between; align-items: center; gap: 10px; padding-top: 12px; border-top: 1px solid var(--line); }
+.post-reg { position: relative; z-index: 2; font: 700 .8rem var(--f-body); padding: 5px 10px; border-radius: var(--r-sm); background: var(--accent-soft); color: var(--accent); text-decoration: none; transition: background .2s, color .2s; }
+.post-reg:hover { background: var(--accent); color: #fff; }
+.post-go { font: 700 .86rem var(--f-body); color: var(--accent); }
+.posts-more { justify-self: center; }
+@media (prefers-reduced-motion: reduce) { .post, .post-img img { transition: none; } .post:hover, .post:hover .post-img img { transform: none; } }
 
 /* ---------- Seasons ---------- */
 .seasons { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
@@ -338,18 +371,18 @@ fieldset.field legend { padding: 0; margin-bottom: 6px; }
 .temp { font: 500 .86rem var(--f-mono); color: var(--accent); }
 .season p { font-size: .93rem; color: var(--muted); }
 .chips { display: flex; flex-wrap: wrap; gap: 6px; }
-.chip-trip { font: 700 .8rem var(--f-body); padding: 6px 10px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); border: 0; cursor: pointer; transition: background-color .2s, color .2s; }
+.chip-trip { font: 700 .8rem var(--f-body); padding: 6px 10px; border-radius: var(--r-sm); background: var(--accent-soft); color: var(--accent); border: 0; cursor: pointer; transition: background-color .2s, color .2s; }
 .chip-trip:hover { background: var(--accent); color: #fff; }
 
 /* ---------- FAQ ---------- */
 .faq-wrap { max-width: 860px; margin: 0 auto; }
 .faq-cats { list-style: none; margin: 0 0 16px; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
-.faq-cats button { display: inline-flex; align-items: center; gap: 8px; padding: 9px 15px; border-radius: 999px; border: 1.5px solid var(--line); background: var(--paper); color: var(--ink); font-weight: 700; font-size: .92rem; cursor: pointer; }
-.faq-cats button:hover { border-color: var(--ink); }
-.faq-cats button[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: #fff; }
+.faq-cats button { display: inline-flex; align-items: center; gap: 8px; padding: 9px 15px; border-radius: var(--r-sm); border: 1px solid var(--line-strong); background: var(--paper); color: var(--ink); font-weight: 700; font-size: .92rem; cursor: pointer; }
+.faq-cats button:hover { border-color: var(--accent); }
+.faq-cats button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
 .faq-cats .n { font: 400 .74rem var(--f-mono); opacity: .7; }
 .faq-search { position: relative; margin-bottom: 12px; }
-.faq-search input { width: 100%; font-size: 1rem; color: var(--ink); background: var(--paper); border: 1.5px solid var(--line); border-radius: 12px; padding: 14px 18px 14px 48px; }
+.faq-search input { width: 100%; font-size: 1rem; color: var(--ink); background: var(--paper); border: 1px solid var(--line-strong); border-radius: var(--r-sm); padding: 14px 18px 14px 48px; }
 .faq-search input:focus { outline: none; border-color: var(--accent); }
 .faq-search svg { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; color: var(--muted); }
 details.qa { border-bottom: 1px solid var(--line); }
@@ -366,24 +399,25 @@ details.qa p { padding: 0 0 20px; color: var(--muted); max-width: 70ch; }
 .contact-sec { background: var(--paper); color: var(--ink); border-top: 1px solid var(--line); overflow: hidden; }
 .steps { list-style: none; margin: 0 auto 28px; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; counter-reset: s; max-width: 1100px; }
 .steps li { counter-increment: s; display: grid; justify-items: center; align-content: start; text-align: center; gap: 8px; padding: 22px 16px; border-radius: var(--r-lg); background: var(--mist); }
-.steps li::before { content: counter(s); width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: var(--ink); color: #fff; font-weight: 800; }
+.steps li::before { content: counter(s); width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: var(--accent); color: #fff; font-weight: 800; }
 .steps strong { display: block; font-weight: 800; }
 .steps li div > span { color: var(--muted); font-size: .9rem; }
 .ccards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; max-width: 1100px; margin: 0 auto 28px; }
 .ccard { display: flex; align-items: center; gap: 14px; padding: 16px 18px; border-radius: var(--r); background: var(--mist); border: 1px solid var(--line); color: var(--ink); text-decoration: none; transition: transform .2s var(--ease), background-color .2s; }
-.ccard:hover { transform: translateY(-2px); background: #ececea; }
-.ccard.kakao { background: var(--kakao); border-color: var(--kakao); color: #191919; }
+.ccard:hover { border-color: var(--accent); background: #e9eef4; }
+.ccard.kakao { background: var(--accent); border-color: var(--accent); color: #fff; }
+.ccard.kakao:hover { background: var(--accent-deep); }
 .ccard.soon { cursor: default; transform: none; opacity: .82; }
 .ccard strong { display: block; font-weight: 800; }
 .ccard small { font-size: .86rem; opacity: .8; overflow-wrap: anywhere; }
 .ccard > span:not(.ic) { min-width: 0; }
-.ccard .copy { margin-left: auto; font: 700 .8rem var(--f-body); padding: 7px 12px; border-radius: 999px; border: 1.5px solid var(--line); background: var(--paper); color: var(--ink); cursor: pointer; }
+.ccard .copy { margin-left: auto; font: 700 .8rem var(--f-body); padding: 7px 12px; border-radius: var(--r-sm); border: 1px solid var(--line-strong); background: var(--paper); color: var(--ink); cursor: pointer; }
 .ic { width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; flex: none; }
 .ic svg { width: 19px; height: 19px; }
-.ic.kakao { background: #191919; color: var(--kakao); }
-.ic.wa { background: #25d366; color: #fff; }
+.ic.kakao { background: #fff; color: var(--accent); }
+.ic.wa { background: var(--accent); color: #fff; }
 .ic.mail { background: var(--paper); color: var(--accent); }
-.ic.form { background: var(--ink); color: #fff; }
+.ic.form { background: var(--accent); color: #fff; }
 form.inq { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; max-width: 820px; margin: 0 auto; background: var(--paper); color: var(--ink); border-radius: var(--r-lg); padding: clamp(22px, 3vw, 34px); border: 1px solid var(--line); box-shadow: var(--shadow); }
 form.inq .full { grid-column: 1 / -1; }
 form.inq h3 { font-size: 1.4rem; font-weight: 800; text-align: center; }
@@ -416,93 +450,151 @@ footer a:hover { color: #fff; }
 .dock { position: fixed; z-index: 40; right: calc(18px + env(safe-area-inset-right, 0px)); bottom: calc(18px + env(safe-area-inset-bottom, 0px)); display: grid; justify-items: end; gap: 10px; transition: opacity .3s, transform .3s var(--ease); }
 body[data-at="contact"] .dock { opacity: 0; pointer-events: none; transform: translateY(12px); }
 .dock-menu { display: grid; gap: 8px; justify-items: end; }
-.dock-item { display: inline-flex; align-items: center; gap: 10px; padding: 8px 16px 8px 8px; border-radius: 999px; background: var(--paper); color: var(--ink); text-decoration: none; font: 700 .92rem/1.2 var(--f-body); box-shadow: 0 12px 28px -14px rgba(10,26,51,.55), 0 0 0 1px var(--line); animation: pop .3s var(--ease) both; transition: transform .2s var(--ease); }
+.dock-item { display: inline-flex; align-items: center; gap: 10px; padding: 8px 16px 8px 8px; border-radius: var(--r-sm); background: var(--paper); color: var(--ink); text-decoration: none; font: 700 .92rem/1.2 var(--f-body); box-shadow: 0 12px 28px -14px rgba(10,26,51,.55), 0 0 0 1px var(--line); animation: pop .3s var(--ease) both; transition: transform .2s var(--ease); }
 .dock-item:hover { transform: translateY(-2px); }
 .dock-item small { display: block; font: 500 .74rem var(--f-body); color: var(--muted); }
 .dock-item.soon { cursor: default; opacity: .8; }
 .dock-item.soon:hover { transform: none; }
-.dock-item .ic.kakao { background: var(--kakao); color: #191919; }
+.dock-item .ic.kakao { background: var(--accent); color: #fff; }
 .dock-item .ic.mail { background: var(--accent-soft); color: var(--accent); }
-.dock-btn { text-decoration: none; display: inline-flex; align-items: center; gap: 10px; padding: 13px 18px 13px 14px; border-radius: 999px; border: 0; background: var(--kakao); color: #191919; font: 800 .95rem var(--f-body); cursor: pointer; box-shadow: 0 14px 30px -12px rgba(10,26,51,.6); transition: transform .25s var(--ease); }
+.dock-btn { text-decoration: none; display: inline-flex; align-items: center; gap: 10px; padding: 13px 18px 13px 14px; border-radius: var(--r-sm); border: 0; background: var(--accent); color: #fff; font: 800 .95rem var(--f-body); cursor: pointer; box-shadow: 0 14px 30px -12px rgba(10,26,51,.6); transition: transform .25s var(--ease); }
 .dock-btn:hover { transform: translateY(-3px); }
 .dock-btn svg { width: 22px; height: 22px; flex: none; }
 @media (max-width: 520px) { .dock-btn span { display: none; } .dock-btn { padding: 14px; } }
 @keyframes pop { from { transform: translateY(16px) scale(.98); } to { transform: none; } }
 
-/* ---------- Tour detail dialog ---------- */
-.modal { width: min(1100px, calc(100% - 32px)); max-width: none; max-height: calc(100dvh - 40px); padding: 0; border: 0; border-radius: 24px; background: var(--paper); color: var(--ink); overflow: auto; overscroll-behavior: contain; box-shadow: var(--shadow-lg); }
-.modal::backdrop { background: rgba(6,16,34,.62); backdrop-filter: blur(6px); }
+/* ---------- Tour detail dialog ----------
+   Photo, then the summary beside the price box, then a sticky bar of section links (and the price on wide screens).
+   Body: day cards in three columns, the map beside its stop list, three panels (included / not included / good to know),
+   then stays and policies. */
+.modal { width: min(1240px, calc(100% - 32px)); max-width: none; max-height: calc(100dvh - 40px); padding: 0; border: 0; border-radius: 12px; background: var(--paper); color: var(--ink); overflow: auto; overscroll-behavior: contain; box-shadow: var(--shadow-lg); }
+.modal::backdrop { background: rgba(15,27,45,.6); }
 .modal[open] { animation: pop .4s var(--ease); }
-.m-close { position: absolute; top: 14px; right: 14px; z-index: 3; width: 42px; height: 42px; border-radius: 50%; border: 0; background: rgba(255,255,255,.94); color: var(--ink); font-size: 1.4rem; line-height: 1; cursor: pointer; box-shadow: 0 6px 20px -8px rgba(0,0,0,.4); }
-.modal > .m-close, .rmodal > .m-close { position: sticky; top: 12px; right: auto; display: grid; place-items: center; margin: 12px 12px -54px auto; }
-.m-hero { position: relative; aspect-ratio: 21 / 8; max-width: 100%; overflow: hidden; background: var(--mist); }
+.m-close { position: absolute; top: 14px; right: 14px; z-index: 3; width: 42px; height: 42px; border-radius: var(--r); border: 1px solid var(--line-strong); background: var(--paper); color: var(--ink); font-size: 1.4rem; line-height: 1; cursor: pointer; box-shadow: var(--shadow); }
+.m-close:hover { border-color: var(--accent); color: var(--accent); }
+/* 9px + 42px: vertically centred on the 60px section bar once that sticks */
+.modal > .m-close, .rmodal > .m-close { position: sticky; top: 9px; right: auto; display: grid; place-items: center; margin: 9px 12px -51px auto; }
+.m-hero { position: relative; aspect-ratio: 3 / 1; max-width: 100%; overflow: hidden; background: var(--mist); }
 .m-hero img { width: 100%; height: 100%; object-fit: cover; }
-.m-wrap { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: clamp(24px, 3vw, 40px); padding: clamp(20px, 3vw, 36px); align-items: start; }
-.m-main { display: grid; gap: 28px; min-width: 0; }
-.m-head { display: grid; gap: 10px; }
+.m-top { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 24px 40px; padding: 32px 36px; align-items: start; }
+.m-head { display: grid; gap: 10px; align-content: start; min-width: 0; }
 .m-code { font: 500 .78rem var(--f-mono); color: var(--muted); }
 .m-head h2 { font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.1rem); font-weight: 800; }
 .m-route { font-size: .94rem; line-height: 1.6; color: var(--muted); }
 .m-route b { color: var(--ink); margin-right: 8px; }
-.m-facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; }
+.m-head .lede { max-width: 68ch; }
+.m-facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: 8px; border: 1px solid var(--line-strong); border-radius: var(--r); overflow: hidden; }
 .m-facts div { padding: 12px 14px; display: grid; gap: 2px; min-width: 0; }
 .m-facts div + div { border-left: 1px solid var(--line); }
-.m-facts small { font-size: .76rem; font-weight: 700; color: var(--muted); }
+.m-facts small { font-size: .74rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
+:root[lang="ko"] .m-facts small { letter-spacing: 0; }
 .m-facts b { font-size: .98rem; }
 @media (max-width: 560px) { .m-facts { grid-template-columns: 1fr 1fr; } .m-facts div:nth-child(3) { border-left: 0; } .m-facts div:nth-child(n+3) { border-top: 1px solid var(--line); } }
-.m-sec { display: grid; gap: 14px; }
-.m-sec h3 { font-size: 1.12rem; font-weight: 800; }
-.m-sec h3 .c { color: var(--muted); font-weight: 600; }
-.plan { list-style: none; margin: 0; padding: 0; display: grid; }
-.plan li { display: grid; grid-template-columns: 74px 1fr; gap: 14px; position: relative; padding-bottom: 16px; }
-.plan li::before { content: ""; position: absolute; left: 36px; top: 28px; bottom: 0; width: 2px; background: var(--line); }
-.plan li:last-child { padding-bottom: 0; }
-.plan li:last-child::before { display: none; }
-.plan .d { font: 700 .78rem/1 var(--f-body); color: var(--accent); background: var(--accent-soft); border-radius: 999px; padding: 8px 0; text-align: center; height: max-content; position: relative; z-index: 1; }
-.incl { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0; padding: 0; }
-.incl li { font-size: .88rem; font-weight: 600; padding: 7px 12px; border-radius: 999px; background: var(--accent-soft); color: var(--accent-deep); }
-.incl.out li { background: transparent; border: 1px dashed #d9d9d5; color: var(--muted); }
-.m-map { background: var(--mist); border-radius: var(--r); padding: 14px 16px; display: grid; gap: 8px; }
-.m-map svg { width: 100%; height: auto; }
-.legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: .82rem; color: var(--muted); }
-.legend i { display: inline-block; width: 22px; vertical-align: middle; margin-right: 6px; border-top: 3px solid var(--accent); }
-.legend i.f { border-top: 2px dashed var(--accent); }
-details.m-more { border-top: 1px solid var(--line); }
-details.m-more summary { cursor: pointer; list-style: none; padding: 16px 30px 16px 0; font-weight: 800; position: relative; }
-details.m-more summary::-webkit-details-marker { display: none; }
-details.m-more summary::after { content: "+"; position: absolute; right: 2px; top: 50%; transform: translateY(-50%); color: var(--accent); font-size: 1.3rem; }
-details.m-more[open] summary::after { content: "−"; }
-details.m-more ul { margin: 0 0 16px; padding-left: 1.1em; display: grid; gap: 6px; color: var(--muted); font-size: .94rem; }
-details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
-.m-reviews { display: grid; gap: 10px; }
-.m-rev { background: var(--mist); border-radius: var(--r); padding: 14px 16px; display: grid; gap: 6px; font-size: .94rem; }
-.m-aside { position: sticky; top: 16px; display: grid; gap: 14px; }
-.pricebox { border: 1px solid var(--line); border-radius: var(--r-lg); padding: 20px; display: grid; gap: 12px; box-shadow: var(--shadow); }
+.m-aside { display: grid; gap: 12px; }
+.pricebox { border: 1px solid var(--line-strong); border-top: 3px solid var(--accent); border-radius: var(--r); padding: 20px; display: grid; gap: 12px; }
 .pricebox .p { font-size: 1.75rem; font-weight: 800; letter-spacing: -.02em; line-height: 1.1; }
 .pricebox small { color: var(--muted); font-size: .82rem; }
 .pricebox .btn { width: 100%; }
 .team { width: 100%; border-collapse: collapse; font-size: .88rem; font-variant-numeric: tabular-nums; }
 .team th, .team td { padding: 7px 0; border-bottom: 1px solid var(--line); text-align: left; font-weight: 600; }
 .team td { text-align: right; font-weight: 800; }
-.sharebox { display: grid; gap: 10px; padding: 0 4px; }
+.sharebox { display: grid; gap: 10px; padding: 0 2px; }
 .sharebox small { color: var(--muted); font-weight: 700; font-size: .82rem; }
 .share { display: flex; flex-wrap: wrap; gap: 8px; }
-.share-btn { display: inline-flex; align-items: center; gap: 7px; padding: 8px 13px; border-radius: 999px; border: 1.5px solid var(--line); background: var(--paper); color: var(--ink); font-weight: 700; font-size: .86rem; cursor: pointer; }
-.share-btn:hover { border-color: var(--ink); }
-.share-btn.kakao { background: var(--kakao); border-color: var(--kakao); color: #191919; }
+.share-btn { display: inline-flex; align-items: center; gap: 7px; padding: 8px 13px; border-radius: var(--r-sm); border: 1px solid var(--line-strong); background: var(--paper); color: var(--ink); font-weight: 700; font-size: .86rem; cursor: pointer; }
+.share-btn:hover { border-color: var(--accent); color: var(--accent); }
+.share-btn.kakao { background: var(--paper); border-color: var(--accent); color: var(--accent); }
 .share-btn svg { width: 15px; height: 15px; flex: none; }
+
+/* Sticky section bar */
+.m-nav { position: sticky; top: 0; z-index: 2; display: flex; align-items: stretch; gap: 16px; height: 60px; padding: 0 70px 0 24px; background: var(--paper); border-block: 1px solid var(--line); }
+.m-tabs { display: flex; gap: 2px; flex: 1; min-width: 0; overflow-x: auto; scrollbar-width: none; }
+.m-tabs::-webkit-scrollbar { display: none; }
+.m-tabs button { position: relative; flex: none; border: 0; background: none; padding: 0 12px; font: 700 .93rem var(--f-body); color: var(--muted); cursor: pointer; }
+.m-tabs button:hover { color: var(--ink); }
+.m-tabs button[aria-current="true"] { color: var(--accent); }
+.m-tabs button[aria-current="true"]::after { content: ""; position: absolute; left: 12px; right: 12px; bottom: -1px; height: 2px; background: var(--accent); }
+.m-cta { display: flex; align-items: center; gap: 14px; flex: none; }
+.m-cta .price { text-align: right; }
+.m-cta .price b { font-size: 1.05rem; }
+.m-cta .btn { padding: 10px 16px; font-size: .9rem; }
+
+/* Sections */
+.m-body { display: grid; gap: 44px; padding: 32px 36px 44px; }
+.m-sec { display: grid; gap: 16px; min-width: 0; }
+.modal .m-sec { scroll-margin-top: 76px; }   /* beats the page-wide section[id] offset: here only the 60px bar is above */
+.m-sec-h { display: flex; justify-content: space-between; align-items: baseline; gap: 6px 20px; flex-wrap: wrap; }
+.m-sec h3 { font-size: 1.25rem; font-weight: 800; }
+.m-sec h3 .c { color: var(--muted); font-weight: 600; }
+
+/* Day by day: one card per day, three across */
+.days { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.day { display: flex; flex-direction: column; min-width: 0; border: 1px solid var(--line-strong); border-radius: var(--r); background: var(--paper); overflow: hidden; }
+.day-h { display: flex; align-items: center; gap: 10px; padding: 11px 14px; background: var(--mist); border-bottom: 1px solid var(--line); }
+.day-n { flex: none; font: 800 .72rem/1 var(--f-body); letter-spacing: .06em; text-transform: uppercase; color: #fff; background: var(--accent); padding: 6px 8px; border-radius: 4px; }
+:root[lang="ko"] .day-n { letter-spacing: 0; }
+.day-h h4 { margin: 0; min-width: 0; font-size: 1.02rem; font-weight: 800; line-height: 1.3; }
+.day-b { flex: 1; display: grid; gap: 10px; align-content: start; padding: 14px; }
+.day-b > p { margin: 0; font-size: .92rem; }
+.day-f { display: grid; gap: 7px; padding: 11px 14px 13px; border-top: 1px solid var(--line); font-size: .82rem; line-height: 1.4; color: var(--muted); }
+.day-f > span { display: grid; grid-template-columns: 16px 1fr; gap: 8px; align-items: start; }
+.day-f svg { width: 16px; height: 16px; color: var(--accent); }
+.day-f b { color: var(--ink); font-weight: 700; }
+.day-f em { font-style: normal; font-weight: 700; color: var(--ink); }
+@media (max-width: 1040px) { .days { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .days { grid-template-columns: 1fr; } }
+
+/* Map beside the list of stops */
+.m-mapgrid { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 14px; align-items: start; }
+.m-stoplist { display: grid; gap: 10px; align-content: start; }
+.m-map { background: var(--mist); border: 1px solid var(--line); border-radius: var(--r); padding: 12px; display: grid; gap: 8px; }
+.m-map svg { width: 100%; height: auto; }
+.legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: .82rem; color: var(--muted); }
+.legend i { display: inline-block; width: 22px; vertical-align: middle; margin-right: 6px; border-top: 3px solid var(--accent); }
+.legend i.f { border-top: 2px dashed var(--accent); }
+
+/* Included / not included / good to know */
+.m-cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; align-items: start; }
+.m-panel { border: 1px solid var(--line-strong); border-radius: var(--r); overflow: hidden; min-width: 0; }
+.m-panel h4 { margin: 0; padding: 12px 16px; font-size: .95rem; font-weight: 800; background: var(--mist); border-bottom: 1px solid var(--line); }
+.checks { list-style: none; margin: 0; padding: 14px 16px 16px; display: grid; gap: 9px; font-size: .9rem; line-height: 1.45; }
+.checks li { display: grid; grid-template-columns: 16px 1fr; gap: 8px; }
+.checks li::before { content: "✓"; color: var(--accent); font-weight: 800; }
+.checks.out li { color: var(--muted); }
+.checks.out li::before { content: "✕"; color: var(--muted); font-weight: 700; }
+.checks.info li::before { content: ""; width: 6px; height: 6px; margin: .55em 0 0 4px; background: var(--accent); }
+@media (max-width: 1040px) { .m-cols { grid-template-columns: 1fr 1fr; } .m-cols > :first-child { grid-row: span 2; } }
+@media (max-width: 640px) { .m-cols { grid-template-columns: 1fr; } .m-cols > :first-child { grid-row: auto; } }
+
+/* Accordions: stays, other day orders, cancellation */
+.m-acc { display: grid; gap: 10px; }
+details.m-more { border: 1px solid var(--line-strong); border-radius: var(--r); padding: 0 16px; }
+details.m-more summary { cursor: pointer; list-style: none; padding: 14px 30px 14px 0; font-weight: 800; position: relative; }
+details.m-more summary::-webkit-details-marker { display: none; }
+details.m-more summary::after { content: "+"; position: absolute; right: 0; top: 50%; transform: translateY(-50%); color: var(--accent); font-size: 1.3rem; }
+details.m-more[open] summary::after { content: "−"; }
+details.m-more[open] summary { border-bottom: 1px solid var(--line); margin-bottom: 12px; }
+details.m-more ul { margin: 0 0 16px; padding-left: 1.1em; display: grid; gap: 6px; color: var(--muted); font-size: .94rem; }
+details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
+.m-reviews { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.m-rev { background: var(--paper); border: 1px solid var(--line-strong); border-radius: var(--r); padding: 14px 16px; display: grid; gap: 6px; align-content: start; font-size: .94rem; }
+@media (max-width: 900px) { .m-reviews { grid-template-columns: 1fr; } }
+
 .m-bar { display: none; }
 @media (max-width: 900px) {
-  .modal { width: calc(100% - 12px); max-height: calc(100dvh - 12px); border-radius: 20px; }
+  .modal { width: calc(100% - 12px); max-height: calc(100dvh - 12px); border-radius: var(--r-lg); }
   .m-hero { aspect-ratio: 16 / 9; }
-  .m-wrap { grid-template-columns: 1fr; }
-  .m-aside { position: static; }
-  .m-bar { display: flex; position: sticky; bottom: 0; z-index: 2; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px)); background: rgba(255,255,255,.96); backdrop-filter: blur(10px); border-top: 1px solid var(--line); }
+  .m-top { grid-template-columns: 1fr; padding: 22px 16px; }
+  .m-nav { padding: 0 62px 0 6px; }
+  .m-cta { display: none; }
+  .m-body { padding: 24px 16px 32px; gap: 36px; }
+  .m-mapgrid { grid-template-columns: 1fr; }
+  .m-bar { display: flex; position: sticky; bottom: 0; z-index: 2; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px)); background: var(--paper); border-top: 1px solid var(--line); }
 }
 
 /* Map shapes */
-.map-land { fill: #e6eee8; stroke: var(--accent); stroke-width: 1.6; stroke-linejoin: round; }
-.map-grat { stroke: #d9d9d5; stroke-width: 1; stroke-dasharray: 2 6; fill: none; }
+.map-land { fill: #e4eef8; stroke: var(--accent); stroke-width: 1.6; stroke-linejoin: round; }
+.map-grat { stroke: #cfd8e3; stroke-width: 1; stroke-dasharray: 2 6; fill: none; }
 .map-route { fill: none; stroke: var(--accent); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1200; stroke-dashoffset: 1200; animation: draw 1.4s var(--ease) forwards; }
 .map-route.flight { stroke-dasharray: 7 9; stroke-dashoffset: 0; animation: none; stroke-width: 2.6; }
 @keyframes draw { to { stroke-dashoffset: 0; } }
@@ -511,8 +603,8 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
 .map-label { fill: var(--ink); font: 700 20px var(--f-body); paint-order: stroke; stroke: var(--mist); stroke-width: 6px; stroke-linejoin: round; }
 
 /* ---------- Review form dialog ---------- */
-.rmodal { width: min(660px, calc(100% - 24px)); max-width: none; max-height: calc(100dvh - 32px); padding: 0; border: 0; border-radius: 24px; background: var(--paper); color: var(--ink); overflow: auto; box-shadow: var(--shadow-lg); }
-.rmodal::backdrop { background: rgba(6,16,34,.62); backdrop-filter: blur(6px); }
+.rmodal { width: min(660px, calc(100% - 24px)); max-width: none; max-height: calc(100dvh - 32px); padding: 0; border: 0; border-radius: 12px; background: var(--paper); color: var(--ink); overflow: auto; box-shadow: var(--shadow-lg); }
+.rmodal::backdrop { background: rgba(15,27,45,.6); }
 .rmodal[open] { animation: pop .4s var(--ease); }
 .rmodal form, .rmodal .rv-done { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; padding: clamp(24px, 4vw, 36px); }
 .rmodal .full { grid-column: 1 / -1; }
@@ -520,7 +612,7 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
 @media (max-width: 560px) { .rmodal form { grid-template-columns: 1fr; } }
 .rate { position: relative; display: flex; flex-direction: row-reverse; justify-content: flex-end; gap: 4px; }
 .rate input { position: absolute; opacity: 0; width: 1px; height: 1px; pointer-events: none; }
-.rate label { font-size: 2rem; line-height: 1; color: #dcdcd8; cursor: pointer; transition: color .15s; }
+.rate label { font-size: 2rem; line-height: 1; color: #cfd6df; cursor: pointer; transition: color .15s; }
 .rate input:checked ~ label, .rate label:hover, .rate label:hover ~ label { color: var(--star); }
 .rate input:focus-visible + label { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
 .check { display: flex; gap: 10px; align-items: flex-start; font-size: .9rem; color: var(--muted); }
@@ -531,86 +623,91 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
 .quickbar::-webkit-scrollbar { display: none; }
 .quickbar > :first-child { margin-left: auto; }
 .quickbar > :last-child { margin-right: auto; }
-.qk { display: inline-flex; align-items: center; gap: 9px; flex: none; padding: 6px 16px 6px 6px; border-radius: 999px; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.3); color: #fff; backdrop-filter: blur(8px); font-weight: 700; font-size: .92rem; text-decoration: none; cursor: pointer; transition: background-color .2s; }
+.qk { display: inline-flex; align-items: center; gap: 9px; flex: none; padding: 6px 16px 6px 6px; border-radius: var(--r-sm); background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.3); color: #fff; backdrop-filter: blur(8px); font-weight: 700; font-size: .92rem; text-decoration: none; cursor: pointer; transition: background-color .2s; }
 .qk:hover { background: rgba(255,255,255,.26); }
 .qk img { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; }
 .qk .qi { width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; background: rgba(255,255,255,.2); color: #fff; }
 .qk .qi svg { width: 17px; height: 17px; }
-.qk.kakao { background: var(--kakao); border-color: var(--kakao); color: #191919; }
-.qk.kakao .qi { background: #191919; color: var(--kakao); }
+.qk.kakao { background: var(--accent); border-color: var(--accent); color: #fff; }
+.qk.kakao .qi { background: #fff; color: var(--accent); }
 .qk.soon { opacity: .85; cursor: default; }
-.kakao-banner { display: grid; justify-items: center; text-align: center; gap: 12px; max-width: 1160px; margin: 28px auto 0; padding: clamp(22px, 3vw, 32px); border-radius: var(--r-lg); background: var(--kakao); color: #191919; }
-.kb-icon { width: 54px; height: 54px; border-radius: 16px; background: #191919; color: var(--kakao); display: grid; place-items: center; }
+.kakao-banner { display: grid; justify-items: center; text-align: center; gap: 12px; max-width: 1160px; margin: 28px auto 0; padding: clamp(22px, 3vw, 32px); border-radius: var(--r-lg); background: var(--accent); color: #fff; }
+.kb-icon { width: 54px; height: 54px; border-radius: var(--r); background: #fff; color: var(--accent); display: grid; place-items: center; }
 .kb-icon svg { width: 30px; height: 30px; }
 .kb-text { display: grid; justify-items: center; gap: 4px; }
 .kb-text strong { font-size: 1.2rem; font-weight: 800; }
 .kb-text > span { font-size: .94rem; opacity: .8; }
-.kb-btn { background: #191919; color: var(--kakao); }
-.kb-btn:hover { background: #000; }
+.kb-btn { background: #fff; color: var(--accent); }
+.kb-btn:hover { background: var(--accent-soft); }
 .m-bar .acts { display: flex; gap: 8px; }
 .m-bar .btn-kakao { padding: 12px; }
 
-/* Cafe timetable, lodging table and Naver Cafe link (tour dialog) */
-.sched .sd { display: grid; gap: 8px; padding-top: 2px; }
-.sched h4 { margin: 0; font-size: 1rem; font-weight: 800; }
-.sd-t { list-style: none; margin: 0; padding: 0; display: grid; gap: 3px; font-size: .92rem; }
-.sd-t li { display: grid; grid-template-columns: 48px 1fr; gap: 8px; padding: 0; }
-.sd-t li::before { content: none; }
-.sd-t time { font: 600 .8rem/1.6 var(--f-mono); color: var(--accent); }
-.sd-t li.nt { display: block; color: var(--muted); font-size: .84rem; }
-.sd-m { margin: 0; font-size: .84rem; color: var(--muted); }
+/* Cafe timetable (inside each day card), lodging table and Naver Cafe link (tour dialog) */
+.sd-t { list-style: none; margin: 0; padding: 0; display: grid; gap: 5px; font-size: .9rem; line-height: 1.45; }
+.sd-t li { display: grid; grid-template-columns: 44px 1fr; gap: 8px; }
+.sd-t time { font: 600 .8rem/1.8 var(--f-mono); color: var(--accent); }
+.sd-t li.nt { display: block; color: var(--muted); font-size: .82rem; }
+.sd-m { margin: 0; font-size: .82rem; color: var(--muted); }
 .sd-foot { margin: 0; display: flex; flex-wrap: wrap; gap: 6px; }
-.sd-foot > span { font-size: .8rem; font-weight: 600; line-height: 1.35; padding: 5px 10px; border-radius: 999px; background: var(--mist); color: var(--muted); }
+.sd-foot > span { font-size: .8rem; font-weight: 600; line-height: 1.35; padding: 5px 10px; border-radius: var(--r-sm); background: var(--paper); border: 1px solid var(--line); color: var(--muted); }
 .sd-foot b { color: var(--ink); font-weight: 700; }
-.sd-foot em { font-style: normal; color: var(--red); }
+.sd-foot em { font-style: normal; font-weight: 700; color: var(--ink); }
 .m-note { margin: 0; font-size: .84rem; color: var(--muted); }
 .lt-wrap { overflow-x: auto; margin-bottom: 12px; }
 .lt { width: 100%; min-width: 480px; border-collapse: collapse; font-size: .86rem; }
 .lt th, .lt td { padding: 8px 10px 8px 0; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
 .lt thead th { font-size: .78rem; font-weight: 700; color: var(--muted); }
 .lt tbody th { font-weight: 700; white-space: nowrap; }
-.cafe-link { display: grid; grid-template-columns: 28px 1fr auto; gap: 10px; align-items: center; padding: 14px 16px; border: 1px solid var(--line); border-radius: var(--r-lg); color: var(--ink); text-decoration: none; }
-.cafe-link:hover { border-color: #03c75a; }
-.cafe-link i { width: 28px; height: 28px; border-radius: 7px; background: #03c75a; color: #fff; display: grid; place-items: center; font: 800 .9rem/1 var(--f-body); font-style: normal; }
+.cafe-link { display: grid; grid-template-columns: 28px 1fr auto; gap: 10px; align-items: center; padding: 14px 16px; border: 1px solid var(--line-strong); border-radius: var(--r); color: var(--ink); text-decoration: none; }
+.cafe-link:hover { border-color: var(--accent); }
+.cafe-link i { width: 28px; height: 28px; border-radius: var(--r-sm); background: var(--accent); color: #fff; display: grid; place-items: center; font: 800 .9rem/1 var(--f-body); font-style: normal; }
 .cafe-link small { display: block; color: var(--muted); font-size: .8rem; }
 
 /* Tour map (Leaflet): route pins, stop chips, lodge cards */
-.lmap { height: 380px; border-radius: var(--r); overflow: hidden; background: #e6eee8; position: relative; z-index: 0; }
+.lmap { height: 380px; border-radius: var(--r); overflow: hidden; background: #e4eef8; position: relative; z-index: 0; }
 @media (max-width: 640px) { .lmap { height: 300px; } }
 .lmap .leaflet-control-attribution { font-size: 10px; }
+.lmap .leaflet-tile-pane { filter: grayscale(1) brightness(1.03); }
 .pin-stop { width: 26px; height: 26px; border-radius: 50%; background: var(--accent); color: #fff; border: 2px solid #fff; box-shadow: 0 2px 6px rgba(0,0,0,.35); display: grid; place-items: center; font: 800 .74rem/1 var(--f-body); transition: transform .2s; }
 .pin-stop.cap { background: var(--ink); font-size: .62rem; }
 .pin-stop.on { background: var(--ink); transform: scale(1.2); }
 .pin-lodge { display: block; width: 18px; height: 18px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); border: 2px solid #fff; box-shadow: 0 2px 5px rgba(0,0,0,.4); background: var(--accent); }
-.pin-lodge.upgrade { background: var(--star); }
-.pin-lodge.budget { background: #8a8a85; }
+.pin-lodge.upgrade { background: var(--ink); }
+.pin-lodge.budget { background: #8796aa; }
 .pin-lodge.on { box-shadow: 0 0 0 3px var(--ink); }
-.map-ctl { display: flex; background: #fff; border-radius: 10px; box-shadow: 0 1px 4px rgba(0,0,0,.3); overflow: hidden; }
+.map-ctl { display: flex; background: #fff; border-radius: var(--r-sm); box-shadow: 0 1px 4px rgba(0,0,0,.3); overflow: hidden; }
 .map-ctl button { border: 0; background: #fff; padding: 7px 11px; font: 700 .78rem var(--f-body); color: var(--ink); cursor: pointer; }
-.map-ctl button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+.map-ctl button[aria-pressed="true"] { background: var(--accent); color: #fff; }
 .map-tap { position: absolute; inset: 0; z-index: 500; display: grid; place-items: end center; padding: 0 0 14px; background: transparent; border: 0; cursor: pointer; }
-.map-tap span { background: rgba(27,27,27,.82); color: #fff; font: 700 .8rem var(--f-body); padding: 7px 12px; border-radius: 999px; }
+.map-tap span { background: rgba(27,27,27,.82); color: #fff; font: 700 .8rem var(--f-body); padding: 7px 12px; border-radius: var(--r-sm); }
 .stops { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 2px; }
-.stops button { flex: none; display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px 6px 6px; border-radius: 999px; border: 1.5px solid var(--line); background: var(--paper); font: 700 .84rem var(--f-body); color: var(--ink); cursor: pointer; }
+.stops button { flex: none; display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px 6px 6px; border-radius: var(--r-sm); border: 1px solid var(--line-strong); background: var(--paper); font: 700 .84rem var(--f-body); color: var(--ink); cursor: pointer; }
 .stops button i { width: 20px; height: 20px; border-radius: 50%; background: var(--accent); color: #fff; display: grid; place-items: center; font: 800 .7rem/1 var(--f-body); font-style: normal; }
-.stops button[aria-pressed="true"] { border-color: var(--ink); background: var(--ink); color: #fff; }
+.stops button[aria-pressed="true"] { border-color: var(--accent); background: var(--accent); color: #fff; }
 .stop-panel { display: grid; gap: 12px; padding: 16px; border-radius: var(--r); background: var(--mist); }
+/* Inside the map grid the stops are a vertical list with the nights spent at each; on phones they are chips again */
+.m-stoplist .stops { flex-direction: column; overflow: visible; gap: 6px; }
+.m-stoplist .stops button { width: 100%; padding: 9px 12px 9px 9px; border-radius: var(--r-sm); text-align: left; }
+.stops button small { margin-left: auto; padding-left: 8px; font: 600 .76rem var(--f-body); color: var(--muted); white-space: nowrap; }
+.stops button[aria-pressed="true"] small { color: rgba(255,255,255,.85); }
+.stops button[aria-pressed="true"] i { background: #fff; color: var(--accent); }
+@media (max-width: 900px) { .m-stoplist .stops { flex-direction: row; overflow-x: auto; } .m-stoplist .stops button { width: auto; } .stops button small { display: none; } }
 .sp-head { display: flex; justify-content: space-between; align-items: baseline; gap: 6px 12px; flex-wrap: wrap; }
 .sp-head h4 { margin: 0; font-size: 1.05rem; font-weight: 800; }
 .sp-head small { flex: 1 1 auto; color: var(--muted); font-size: .84rem; }
 .lodges { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
-.lodge { background: var(--paper); border: 1.5px solid var(--line); border-radius: 14px; padding: 12px 14px; display: grid; gap: 5px; align-content: start; transition: border-color .2s; }
-.lodge.on { border-color: var(--ink); }
+.lodge { background: var(--paper); border: 1px solid var(--line-strong); border-radius: var(--r); padding: 12px 14px; display: grid; gap: 5px; align-content: start; transition: border-color .2s; }
+.lodge.on { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
 .lodge img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 8px; }
 .lodge .tier { justify-self: start; font: 800 .7rem/1 var(--f-body); padding: 5px 8px; border-radius: 6px; background: var(--accent-soft); color: var(--accent-deep); }
-.lodge.upgrade .tier { background: #fbf0dc; color: #8a5a12; }
-.lodge.budget .tier { background: #ececea; color: #55554f; }
+.lodge.upgrade .tier { background: var(--accent); color: #fff; }
+.lodge.budget .tier { background: var(--mist); color: var(--muted); box-shadow: inset 0 0 0 1px var(--line-strong); }
 .lodge h5 { margin: 0; font-size: .98rem; font-weight: 800; }
 .lodge p { margin: 0; font-size: .84rem; color: var(--muted); }
 .lodge .lp { color: var(--ink); font-weight: 700; }
 .lodge .fac { display: flex; flex-wrap: wrap; gap: 4px; }
-.lodge .fac span { font-size: .74rem; font-weight: 700; padding: 3px 7px; border-radius: 999px; background: var(--mist); }
-.lodge .fac span.no { color: var(--red); }
+.lodge .fac span { font-size: .74rem; font-weight: 700; padding: 3px 7px; border-radius: var(--r-sm); background: var(--mist); }
+.lodge .fac span.no { color: var(--muted); text-decoration: line-through; }
 .lodge-acts { display: flex; flex-wrap: wrap; gap: 4px 14px; align-items: center; padding-top: 2px; }
 .lodge-acts a { font-size: .84rem; font-weight: 700; color: var(--accent); }
 .lodge-acts small { font-size: .78rem; color: var(--muted); }
@@ -780,6 +877,7 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
       <div class="rev-cta">
         <button class="btn btn-primary" type="button" id="rev-write"><span data-en>Write a review</span><span data-ko>후기 남기기</span> →</button>
         <a class="btn btn-outline" data-naver href="#" target="_blank" rel="noopener" hidden><span data-en>More on our Naver blog</span><span data-ko>네이버 블로그에서 더 보기</span> ↗</a>
+        <a class="btn btn-outline" href="https://mongogo.kr/agencies/golden-jigu-tour/" target="_blank" rel="noopener"><span data-en>Our page on Mongogo</span><span data-ko>몽고고에서 업체 정보 보기</span> ↗</a>
       </div>
     </div>
   </section>
@@ -1196,6 +1294,29 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
   //   text: "…", source: "naver" | "google" | "kakao" | "direct", url: "https://blog.naver.com/…" }
   const REVIEWS = [];
 
+  // Trip diaries travellers posted about us (Naver blog / Naver cafe / Brunch). Link cards only: title, author nickname,
+  // date and their cover image (hotlinked, never copied). Shape: { src: "blog" | "cafe" | "brunch", url, title, by, date, region (REGIONS key), img }
+  const POSTS = [
+    {"src": "blog", "url": "https://blog.naver.com/gnuoyaneel_/224458798404", "title": "[몽골] 낭만 찾아 몽골 여행 #4", "by": "나영", "date": "2026-10-30", "region": "gobi", "img": "https://blogthumb.pstatic.net/MjAyNjEwMjdfMjYx/MDAxNzkzMDc2NzU5Mzky.au1zdPKUKw0B4OOeJboHgodAkLk_nx0fPj-EP3IRankg.l17hWFt7btlH93_fzpT2cVEKAzjsCBHjUqBDt18jwg4g.JPEG/IMG%A3%DF2731.jpg?type=w2"},
+    {"src": "blog", "url": "https://blog.naver.com/gnuoyaneel_/224442751194", "title": "[몽골] 낭만 찾아 몽골 여행 #2", "by": "나영", "date": "2026-10-15", "region": "gobi", "img": "https://blogthumb.pstatic.net/MjAyNjEwMTVfMjM3/MDAxNzkyMDQxNjE1ODA2.xNaq-XSznjz3SIczKURIGuZQP8NI4upfkj_-wzrx8Rcg.r7SAOFgUHQqjRmdDBiXVC_MWC_4IOdzuijBBuSdwHUMg.JPEG/IMG%A3%DF1068.jpg?type=w2"},
+    {"src": "blog", "url": "https://blog.naver.com/rhffhr0316/224423130105", "title": "9월 몽골여행 골든지구투어 중부 4박 5일 패키지 - day 3 (에르덴조 사원, 어기 호수, 캠프파이어)", "by": "아영짜장", "date": "2026-09-28", "region": "central", "img": "https://blogthumb.pstatic.net/MjAyNjA5MjNfMTcz/MDAxNzkwMTQ3MDk1Mjcz.Weawh5FWsRmiZ3GVzrXLuE98BiSAYDwwacGwdkx9hAgg.m5K5fM5j3nz9AD-5rX740U1-ESFtzREexsx7RB-2KPIg.JPEG/IMG%A3%DF8051.JPG?type=w2"},
+    {"src": "blog", "url": "https://blog.naver.com/15jungju/224414952443", "title": "몽골 남고비투어) 대만족 투어사 추천, 남고비 호텔급 게르 추천", "by": "줍줍이", "date": "2026-09-17", "region": "gobi", "img": "https://blogthumb.pstatic.net/MjAyNjA5MTdfMTIz/MDAxNzg5NjI1Njc4MjM2.YI4J2ElN4oZBeJMoDwn4OrOx41vMCKRBoPf8f355meIg.HBuQMWt1OoDaKIk77dedomrs2D9WbamKl1-6_XheGhAg.JPEG/IMG%A3%DF151349%A3%DF0.jpg?type=w2"},
+    {"src": "blog", "url": "https://blog.naver.com/rhffhr0316/224414258019", "title": "몽골 갔다온 후에 기록하는 여행 준비기록! ㅣ 준비물 필요 유무 정리, 골든지구투어 일정표 공유", "by": "아영짜장", "date": "2026-09-17", "region": "central", "img": "https://postfiles.pstatic.net/MjAyNjA5MTZfMTkx/MDAxNzg5NTU0MTY1NTgy.ChEUB-C0SBkFWhoUxmiT8M7wrLi4LuYTdkoWfljvbQkg.qpuRbW-BAc2XQU3GGssStVWEVRDZxiJKC_rv351Wb7Eg.JPEG/IMG%EF%BC%BF8431.JPG?type=w773"},
+    {"src": "blog", "url": "https://blog.naver.com/ertyuj25/224412752739", "title": "9월 4박5일 몽골 여행 DAY2 [쳉헤르온천] 골든지구투어", "by": "뉴나짬뽕", "date": "2026-09-15", "region": "central", "img": "https://blogthumb.pstatic.net/MjAyNjA5MTRfMjQ2/MDAxNzg5Mzk1ODM0MDA1.6lbZo7K1ZGVxoj-EyUjZ5cG15QQWV5b-D5gFGAC3l9kg.qGFQSeW6hMjtdoF1se5sDgOIpPVz_Jb0YT7j6fZpktkg.JPEG/output%A3%DF2420510827.jpg?type=w2"},
+    {"src": "blog", "url": "https://blog.naver.com/ertyuj25/224411525067", "title": "9월 4박5일 몽골 여행 DAY1 [노민마트,노마딕쇼,엘승타사르하이 모래썰매] 골든지구투어", "by": "뉴나짬뽕", "date": "2026-09-14", "region": "central", "img": "https://blogthumb.pstatic.net/MjAyNjA5MTRfNTUg/MDAxNzg5MzY1MjkzMjQ5.5yraB_unkAL8eiymykQJBdxTXWfCBUUkYLHGhZlhqocg.rNKqG7iMf4vD-997IYLR_y-JhkpCDPAdh6r4lqi7z-kg.JPEG/IMG%A3%DF3438.jpg?type=w2"},
+    {"src": "cafe", "url": "https://cafe.naver.com/lovemongol/280928", "title": "[골든지구투어]30살 내 인생 최고의 여행지였다!!(🩷BEST가이드 주믿음씨 감사합니다!)", "by": "몽골에서생긴일", "date": "2026-08-31", "region": "north", "img": "https://cafeptthumb-phinf.pstatic.net/MjAyNjA4MzFfNDEg/MDAxNzg4MTQ1ODA1MzUz.D2mVpf-s460DMtiJQOb5zZ-UjaQ_eeq3y9b4u5V0MhMg.fYMv6gXjkoVmCOAvu0SQk4UiG4s7WZC8tTsjJ6yaQQ4g.PNG/image.png?type=w740"},
+    {"src": "blog", "url": "https://blog.naver.com/cntnwls1737/224359591945", "title": "3박4일 몽골 중부투어 후기 (골든지구투어) 어기호수-미니사막-테를지", "by": "abcd", "date": "2026-07-27", "region": "central", "img": "https://blogthumb.pstatic.net/MjAyNjA3MjhfOCAg/MDAxNzg1MjQzODk3MTk4.rYH2oX1fAn3WwrhBA1wLlgdCBisyAytQs1g58zx0pksg.SakkSoQ5_tk55bQORsvtfmt5q5AYidmREMrWXMIK2X4g.JPEG/IMG%A3%DF7427.jpg?type=w2"},
+    {"src": "blog", "url": "https://blog.naver.com/ultoria/224358410951", "title": "골든지구투어 몽골 중부여행 3박4일 패키지 후기", "by": "나롱", "date": "2026-07-26", "region": "central", "img": "https://blogthumb.pstatic.net/MjAyNjA3MjNfMjYz/MDAxNzg0ODE4MDUwNjgw.wY82XGdWzrlY16RzbBN2XANUEE_fP4908Pjv-H4hDH8g.KtotKt8c36Zc1w9K9A_pVDGLhNiL6e2wImNcKAZmt74g.JPEG/IMG%A3%DF4238.jpg?type=w2"},
+    {"src": "blog", "url": "https://blog.naver.com/hhe777/224358327384", "title": "60대 부모님과 함께 간 몽골여행 (골든지구투어, 달없는 날, 여름몽골)", "by": "고양이야옹", "date": "2026-07-26", "region": "central", "img": "https://blogthumb.pstatic.net/MjAyNjA3MjJfNTcg/MDAxNzg0NzI0NTgwNjQ2.q2ujVmCjtW0aqHWVxuAg8QTDFrbo9wj1ITcyvu6xVcYg.FvJqgaIULNTXXEQpFtMz7GRtzF3dBzsot2TviQixaKUg.JPEG/IMG%A3%DF9558.jpg?type=w2"},
+    {"src": "blog", "url": "https://blog.naver.com/shan0112/224337661064", "title": "[여행] 몽골 4박 5일 중부투어(+골든지구투어 하기Haagii 가이드선생님, 우리팀 최고최고 짱짱짱)", "by": "썬샨", "date": "2026-07-06", "region": "central", "img": "https://blogthumb.pstatic.net/MjAyNjA3MDRfMjA5/MDAxNzgzMTM0Njc2ODk0.AVahu5jaKs7SRDGe-281FXqXzp-mZX3G8j4a3JgrMg4g.lbEewVTwaVM4us4MYici5fqKqYHcmYaj_eJXBOijhsQg.JPEG/IMG_4914.jpeg?type=w2"},
+    {"src": "blog", "url": "https://blog.naver.com/wantoec/224328924471", "title": "몽골 중부 여행 A to Z 까지 다~ 알려드립니다 (with 골든지구투어)", "by": "소보루", "date": "2026-06-27", "region": "central", "img": "https://blogthumb.pstatic.net/MjAyNjA2MjNfMjMy/MDAxNzgyMTc3NjY0MjUz.YzRxN0kz3FvGIGlHvZNwbgb33Wr20xXUEGVlqHeTgaEg.P4VC_vZP7iuwj5TqrJDO4o_llFfJInhroAc9GGXkjCIg.JPEG/IMG%A3%DF9915.jpg?type=w2"},
+    {"src": "blog", "url": "https://blog.naver.com/ddubucklee/224328055837", "title": "[몽골/중부투어] 4박 5일 여행 with 골든지구투어", "by": "Ddubuck", "date": "2026-06-26", "region": "central", "img": "https://blogthumb.pstatic.net/MjAyNjA2MTlfOTIg/MDAxNzgxODc3OTI1ODM4.NMZoioKyVGqXHWKY-3Tc3Q3WtGfFSliF8xWN-XaLnwsg.O8r4zJgHlJXhyEPrQ7mof8QxE6CvLxgaRmyTWHYUdBYg.JPEG/IMG%A3%DF7290.JPG?type=w2"},
+    {"src": "blog", "url": "https://blog.naver.com/ahjiworld/224327045567", "title": "부모님 모시고 몽골 여행 - 골든지구투어", "by": "아지", "date": "2026-06-25", "region": "central", "img": "https://blogthumb.pstatic.net/MjAyNjA2MjVfNDAg/MDAxNzgyMzUzNTc5NTE1.CaiHVWINOPdkBA1_-9tWFelmJcz5omevnAnLdbQV4qEg.xIeVcCpnA97cE1-vEuzXp_Ryfgsa-XbW0C5Zb-jAy00g.JPEG/IMG%A3%DF3300.jpg?type=w2"},
+    {"src": "cafe", "url": "https://cafe.naver.com/lovemongol/267598", "title": "[여행후기] 여운 찐하게 남는 4박5일 중부투어 (골***** / 모* 가이드님 / 오* 기사님)", "by": "2징징", "date": "2026-06-09", "region": "central", "img": "https://cafeptthumb-phinf.pstatic.net/MjAyNjA2MDVfMjQ5/MDAxNzgwNjcwMjgxNzI3.1HfLBR349cwZbrMFoKs5IEiVoRcT1UW4IUT2zjBFy4cg.-H_ZIiSX_nTaNu330X7vHv-0QbFJ2csSj6NifoOVSc8g.PNG/4_%EB%82%99%ED%83%80%EB%8B%A8%EC%B2%B4.png?type=w740"},
+    {"src": "cafe", "url": "https://cafe.naver.com/lovemongol/255111", "title": "골x xx (with 미x 가이드)의 중부4일 투어 후기", "by": "부울뚝이", "date": "2026-03-04", "region": "central", "img": "https://cafeptthumb-phinf.pstatic.net/MjAyNjAzMDRfNDAg/MDAxNzcyNjAzODMyNjc0.oZt0Z97pDBrEJofrrF9PGHc8uLwKEjAKZIuP280fPRgg.x395SH9UjMKnt39bZxq7ievau7gq__NuzR8_bnOt5Tgg.PNG/image.png?type=w740"},
+    {"src": "brunch", "url": "https://brunch.co.kr/@minjokim/30", "title": "[몽골여행1] 고비사막 투어 준비", "by": "칠레워홀러", "date": "2025-07-29", "region": "gobi", "img": "https://img1.kakaocdn.net/thumb/R640x0.fjpg/?fname=http://t1.daumcdn.net/brunch/service/user/3M80/image/EJtrnDLW64y0lXc_iWdvri6rwAE.jpg"}
+  ];
+
   const NOTES = {
     en: ["The order of stops can change because of weather or road conditions; your guide will always explain why.",
          "Wear your seat belt on every drive. Sights are far apart and many roads are unpaved.",
@@ -1376,7 +1497,9 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
     van: '<path d="M3 7h11l4 4h3v6h-2M3 7v10h2"/><circle cx="7.5" cy="17.5" r="2"/><circle cx="16.5" cy="17.5" r="2"/><path d="M9.5 17.5h5"/>',
     bed: '<path d="M3 18V8M21 18v-5a3 3 0 0 0-3-3h-8v6M3 14h18"/><circle cx="6.5" cy="11.5" r="1.5"/>',
     plane: '<path d="M2 16l20-6-3-3-7 3-5-5-2 1 3 6-4 2-2-1-1 1z"/>',
-    shower: '<path d="M5 12a7 7 0 0 1 14 0zM8 16v1M12 16v2M16 16v1M10 19v1M14 19v1"/>'
+    shower: '<path d="M5 12a7 7 0 0 1 14 0zM8 16v1M12 16v2M16 16v1M10 19v1M14 19v1"/>',
+    pin: '<path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>',
+    info: '<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/>'
   };
   const icon = k => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[k]}</svg>`;
   // Hot shower only when every night of the tour has one (sched[].s = [type, camp, "shower power internet" flags])
@@ -1604,13 +1727,20 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
     const lacks = no.length ? `<em>${T("no " + no.map(a => a[0]).join(" or "), no.map(a => a[1]).join("·") + " 불가")}</em>` : "";
     return `<b>${pair(STAY[kind])}${name ? " · " + esc(name) : ""}</b> ${[has, lacks].filter(Boolean).join(T("; ", ", "))}`;
   }
-  const schedHTML = t => `<ol class="plan sched">${t.sched.map((d, i) => `<li><span class="d">${T("Day " + (i + 1), (i + 1) + "일차")}</span><div class="sd">
-      <h4>${esc(pair(d.p))}</h4>
-      <ul class="sd-t">${d.t.map(([tm, e, k]) => `<li${tm ? "" : ' class="nt"'}>${tm ? `<time>${tm}</time>` : ""}<span>${esc(T(e, k))}</span></li>`).join("")}</ul>
-      ${d.m ? `<p class="sd-m">${esc(pair(d.m))}</p>` : ""}
-      <p class="sd-foot">${[d.h && T(`${d.h} h drive`, `${d.h}시간 이동`), d.s && stayText(d.s), d.drop && T("Drop-off at your hotel or the airport", "숙소·공항 드롭"),
-        d.shop && T("Shopping depends on your flight time", "항공 시간에 따라 쇼핑 여부 결정"), ...(d.n || []).map(n => esc(pair(n)))].filter(Boolean).map(x => `<span>${x}</span>`).join("")}</p>
-    </div></li>`).join("")}</ol>`;
+  // One card per day: header (day + place), timetable, footer (drive, lodging, drop-off, notes)
+  const schedHTML = t => `<ol class="days">${t.sched.map((d, i) => `<li class="day">
+      <div class="day-h"><span class="day-n">${T("Day " + (i + 1), (i + 1) + "일차")}</span><h4>${esc(pair(d.p))}</h4></div>
+      <div class="day-b">
+        <ul class="sd-t">${d.t.map(([tm, e, k]) => `<li${tm ? "" : ' class="nt"'}>${tm ? `<time>${tm}</time>` : ""}<span>${esc(T(e, k))}</span></li>`).join("")}</ul>
+        ${d.m ? `<p class="sd-m">${esc(pair(d.m))}</p>` : ""}
+      </div>${dayFoot(d)}</li>`).join("")}</ol>`;
+  const dayFoot = d => {
+    const rows = [d.h && ["van", T(`${d.h} h drive`, `${d.h}시간 이동`)], d.s && ["bed", stayText(d.s)],
+      d.drop && ["pin", T("Drop-off at your hotel or the airport", "숙소·공항 드롭")],
+      d.shop && ["info", T("Shopping depends on your flight time", "항공 시간에 따라 쇼핑 여부 결정")],
+      ...(d.n || []).map(n => ["info", esc(pair(n))])].filter(Boolean);
+    return rows.length ? `<div class="day-f">${rows.map(([ic, x]) => `<span>${icon(ic)}<span>${x}</span></span>`).join("")}</div>` : "";
+  };
   const altHTML = t => !t.alt ? "" : `<details class="m-more"><summary>${T("Different flight times? Other day orders", "항공 시간에 따른 일정 순서")}</summary>
       <p>${T("Depending on your flight times, the route can also run in this order:", "항공 시간에 따라 아래 순서로 변경할 수 있습니다.")}</p>
       <div class="lt-wrap"><table class="lt"><thead><tr><th>${T("Day", "일차")}</th>${t.alt[0].map((_, j) => `<th>${t.alt[0].length > 1 ? T("Option " + "ABC"[j], "ABC"[j] + "안") : T("Stop", "일정")}</th>`).join("")}</tr></thead>
@@ -1669,7 +1799,8 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
   async function initTripMap(t) {
     closeTripMap();
     const run = ++mapRun;
-    $("#m-stops").innerHTML = tripStops(t).map((k, i) => `<button type="button" data-map-stop="${k}" aria-pressed="false"><i>${i + 1}</i>${pname(k)}</button>`).join("");
+    $("#m-stops").innerHTML = tripStops(t).map((k, i) => { const n = nightsAt(t, k);
+      return `<button type="button" data-map-stop="${k}" aria-pressed="false"><i>${i + 1}</i>${pname(k)}${n.length ? `<small>${T((n.length > 1 ? "Nights " : "Night ") + n.join(", "), n.join(", ") + "일차 숙박")}</small>` : ""}</button>`; }).join("");
     $("#m-stops").hidden = false;
     let L;
     try { L = await loadLeaflet(); } catch { return; }   // offline or blocked: the drawn map stays
@@ -1682,7 +1813,7 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
     const base = Object.fromEntries(Object.entries(CONFIG.tiles).filter(([, c]) => c && c.url).map(([id, c]) => [id, L.tileLayer(c.url, { attribution: c.attr, maxZoom: c.max || 18 })]));
     let tiles = 0;
     base.map.on("tileload", () => tiles++).addTo(map);
-    const accent = getComputedStyle(document.documentElement).getPropertyValue("--accent").trim() || "#2f6b4f";
+    const accent = getComputedStyle(document.documentElement).getPropertyValue("--accent").trim() || "#0a6cc4";
     const pts = t.route.map(r => [PLACES[key(r)].lat, PLACES[key(r)].lon]);
     L.polyline(pts, { color: accent, weight: 3, opacity: .85 }).addTo(map);
     const pin = (html, size) => L.divIcon({ className: "", html, iconSize: [size, size] });
@@ -1751,12 +1882,29 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
     m.openTooltip();
   }
   dlg.addEventListener("click", e => {
+    const j = e.target.closest("[data-m-jump]");
+    if (j) {   // the clicked tab stays marked while the dialog scrolls there
+      clearTimeout(jumpLock); jumpLock = setTimeout(() => { jumpLock = 0; }, 1200);
+      $$("#m-content [data-m-jump]").forEach(b => b.setAttribute("aria-current", String(b === j)));
+      $("#" + j.dataset.mJump)?.scrollIntoView({ block: "start", behavior: calm ? "auto" : "smooth" });
+      return;
+    }
     const s = e.target.closest("[data-map-stop]");
     if (s) selectStop(s.dataset.mapStop);
     else if (e.target.closest("[data-map-route]")) showRoute();
     else if (e.target.closest("[data-lodge-pin]")) focusLodge(e.target.closest("[data-lodge-pin]").dataset.lodgePin, true);
   });
   dlg.addEventListener("close", closeTripMap);
+  // Section bar: mark the section whose heading has passed under the bar
+  let jumpLock = 0;
+  dlg.addEventListener("scroll", () => {
+    const bar = $("#m-content .m-nav"); if (!bar || jumpLock) return;
+    const y = bar.getBoundingClientRect().bottom + 24;
+    let cur = $("#m-content [data-m-sec]")?.id;
+    $$("#m-content [data-m-sec]").forEach(sec => { if (sec.getBoundingClientRect().top <= y) cur = sec.id; });
+    if (dlg.scrollTop + dlg.clientHeight >= dlg.scrollHeight - 4) cur = [...$$("#m-content [data-m-sec]")].pop()?.id;   // bottom reached: the last section
+    $$("#m-content [data-m-jump]").forEach(b => b.setAttribute("aria-current", String(b.dataset.mJump === cur)));
+  }, { passive: true });
 
   function openTrip(id) {
     const t = byId[id]; if (!t) return;
@@ -1770,48 +1918,29 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
     const rows = teamPrices(t);
     const team = rows ? `<table class="team"><caption class="sr-only">${T("Price per person by team size", "팀 인원별 1인 요금")}</caption><tbody>${rows.map(r => `<tr><th scope="row">${T(`Team of ${r.n}`, `${r.n}인 팀`)}</th><td>${r.krw ? T("₩" + r.krw.toLocaleString("en-US"), r.krw.toLocaleString("ko-KR") + "원") : usd(r.usd)}</td></tr>`).join("")}</tbody></table>` : "";
     const ask = T("Ask about this tour", "이 상품 문의하기");
+    const secs = [
+      (t.sched || plan.length) && ["m-s-days", T("Itinerary", "일정")],
+      hasRoute && ["m-s-map", T("Map & stays", "지도·숙소")],
+      ["m-s-incl", T("Included", "포함 사항")],
+      ["m-s-pol", T("Policies", "예약 규정")],
+      REVIEWS.length && ["m-s-rev", T("Reviews", "후기")]
+    ].filter(Boolean);
+    const lodging = lodgingHTML(t);
     $("#m-content").innerHTML = `
       <div class="m-hero"><img src="${t.img || "img/dunes.jpg"}" alt="${esc(l.name)}"><span class="tags">${tagsHTML(t)}</span></div>
-      <div class="m-wrap">
-        <div class="m-main">
-          <div class="m-head">
-            <span class="m-code">${lang === "ko" ? krTitle + " · " : ""}${T("Tour code", "상품코드")} GJ-${id.toUpperCase()}</span>
-            <h2 id="m-title">${l.name}</h2>
-            ${rt ? `<span class="rating"><span class="s">★</span>${rt.avg.toFixed(1)}<span class="c">(${T(`${rt.n} reviews`, `후기 ${rt.n}개`)})</span></span>` : ""}
-            ${hasRoute ? `<p class="m-route"><b>${T("Route", "경로")}</b>${routeLine(t)}</p>` : ""}
-            <p class="lede">${l.text}</p>
-          </div>
+      <div class="m-top">
+        <div class="m-head">
+          <span class="m-code">${lang === "ko" ? krTitle + " · " : ""}${T("Tour code", "상품코드")} GJ-${id.toUpperCase()}</span>
+          <h2 id="m-title">${l.name}</h2>
+          ${rt ? `<span class="rating"><span class="s">★</span>${rt.avg.toFixed(1)}<span class="c">(${T(`${rt.n} reviews`, `후기 ${rt.n}개`)})</span></span>` : ""}
+          ${hasRoute ? `<p class="m-route"><b>${T("Route", "경로")}</b>${routeLine(t)}</p>` : ""}
+          <p class="lede">${l.text}</p>
           <div class="m-facts">
             <div><small>${T("Length", "기간")}</small><b>${daysText(t.days)}</b></div>
             <div><small>${T("Season", "시기")}</small><b>${l.season}</b></div>
             <div><small>${T("Level", "난이도")}</small><b>${l.level}</b></div>
             <div><small>${T("Group", "인원")}</small><b>${T("Private or small group", "단독·소규모")}</b></div>
           </div>
-          ${t.sched ? `<section class="m-sec"><h3>${T("Day by day", "일정")}</h3>${schedHTML(t)}
-            <p class="m-note">${T("If a flight or anything else delays your arrival at a stop, that part of the program continues the next morning.", "항공 스케줄 또는 기타 상황으로 목적지 도착이 지연되면 해당 일정은 다음 날 오전부터 진행됩니다.")}</p>
-            <div>${altHTML(t)}</div>
-            ${t.cafe ? `<a class="txt-btn" href="${t.cafe}" target="_blank" rel="noopener">${T("See the original post with photos on Naver Cafe ↗", "네이버 카페에서 원문과 사진 보기 ↗")}</a>` : ""}</section>`
-          : plan.length ? `<section class="m-sec"><h3>${T("Day by day", "일정")}</h3>
-            <ol class="plan">${plan.map(([d, txt]) => `<li><span class="d">${T("Day " + d, d + "일차")}</span><p>${txt}</p></li>`).join("")}</ol></section>` : ""}
-          ${hasRoute ? `<section class="m-sec"><h3>${T("Route map and where you sleep", "경로 지도와 숙소")}</h3>
-            <p class="m-note">${T("Pick a stop to zoom in and see the camps there.", "경유지를 누르면 확대되어 주변 숙소를 볼 수 있습니다.")}</p>
-            <div class="m-map"><div class="lmap" id="m-lmap" hidden></div><svg id="m-map" viewBox="0 0 900 450" role="img" aria-label="${T("Route map", "경로 지도")}"></svg>
-              <div class="legend"><span><i></i>${T("Overland", "육로")}</span>${flights ? `<span><i class="f"></i>${T("Domestic flight", "국내선")}</span>` : ""}<span class="mono" id="m-km"></span></div></div>
-            <div class="stops" id="m-stops" hidden></div>
-            <div class="stop-panel" id="m-stop" aria-live="polite" hidden></div></section>` : ""}
-          <section class="m-sec"><h3>${T("Included", "포함 사항")}</h3><ul class="incl">${incl.map(i => `<li>${i}</li>`).join("")}</ul>
-            <h3 style="font-size:1rem">${T("Not included", "불포함 사항")}</h3><ul class="incl out">${excl.map(i => `<li>${i}</li>`).join("")}</ul></section>
-          <div>
-            ${lodgingHTML(t)}
-            <details class="m-more"><summary>${T("Good to know", "여행 유의사항")}</summary><ul>${NOTES[lang].map(n => `<li>${n}</li>`).join("")}</ul></details>
-            <details class="m-more"><summary>${T("Cancellation and refunds", "취소·환불 규정")}</summary><p>${L(FAQ.find(f => f.id === "refund")).a}</p>
-              <p><a class="txt-btn" href="#faq" data-faq-cat="booking">${T("Booking and payment questions →", "예약·결제 자주 묻는 질문 →")}</a></p></details>
-          </div>
-          ${REVIEWS.length ? `<section class="m-sec"><h3>${T("Reviews", "이용자 후기")} <span class="c">(${revs.length})</span></h3>
-            ${revs.length
-              ? `<div class="m-reviews">${revs.slice(0, 3).map(miniReview).join("")}</div><a class="txt-btn" href="#reviews">${T("All reviews →", "전체 후기 보기 →")}</a>`
-              : `<p class="m-route">${T("No reviews for this tour yet.", "아직 이 상품의 후기가 없습니다.")} <button class="txt-btn" type="button" data-write-review="${id}">${T("Write the first one", "첫 후기 남기기")}</button></p>`}
-          </section>` : ""}
         </div>
         <aside class="m-aside">
           <div class="pricebox">
@@ -1826,6 +1955,50 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
           ${t.cafe ? `<a class="cafe-link" href="${t.cafe}" target="_blank" rel="noopener"><i aria-hidden="true">N</i><span><b>${T("View on Naver Cafe", "네이버 카페 원문 보기")}</b><small>${T("The full post with photos, in Korean", "사진과 상세 안내가 담긴 원문")}</small></span><span aria-hidden="true">↗</span></a>` : ""}
           <div class="sharebox"><small>${T("Share this tour", "이 상품 공유하기")}</small><div class="share">${shareButtons()}</div></div>
         </aside>
+      </div>
+      <nav class="m-nav" aria-label="${T("Tour sections", "상품 안내 목차")}">
+        <div class="m-tabs">${secs.map(([sid, label], i) => `<button type="button" data-m-jump="${sid}" aria-current="${i === 0}">${label}</button>`).join("")}</div>
+        <div class="m-cta">${hasPrice(t) ? `<span class="price"><b>${priceText(t)}</b><small>${T("per person", "1인")}</small></span>` : ""}<button class="btn btn-primary" type="button" data-request="${id}">${ask} →</button></div>
+      </nav>
+      <div class="m-body">
+        ${t.sched ? `<section class="m-sec" id="m-s-days" data-m-sec>
+          <div class="m-sec-h"><h3>${T("Day by day", "일정")} <span class="c">· ${daysText(t.days)}</span></h3>
+            ${t.cafe ? `<a class="txt-btn" href="${t.cafe}" target="_blank" rel="noopener">${T("Original post with photos on Naver Cafe ↗", "네이버 카페에서 원문과 사진 보기 ↗")}</a>` : ""}</div>
+          ${schedHTML(t)}
+          <p class="m-note">${T("If a flight or anything else delays your arrival at a stop, that part of the program continues the next morning.", "항공 스케줄 또는 기타 상황으로 목적지 도착이 지연되면 해당 일정은 다음 날 오전부터 진행됩니다.")}</p>
+          ${t.alt ? `<div class="m-acc">${altHTML(t)}</div>` : ""}</section>`
+        : plan.length ? `<section class="m-sec" id="m-s-days" data-m-sec>
+          <div class="m-sec-h"><h3>${T("Day by day", "일정")} <span class="c">· ${daysText(t.days)}</span></h3></div>
+          <ol class="days">${plan.map(([d, txt]) => `<li class="day"><div class="day-h"><span class="day-n">${T("Day " + d, d + "일차")}</span></div><div class="day-b"><p>${txt}</p></div></li>`).join("")}</ol></section>` : ""}
+        ${hasRoute ? `<section class="m-sec" id="m-s-map" data-m-sec>
+          <div class="m-sec-h"><h3>${T("Route map and where you sleep", "경로 지도와 숙소")}</h3></div>
+          <div class="m-mapgrid">
+            <div class="m-map"><div class="lmap" id="m-lmap" hidden></div><svg id="m-map" viewBox="0 0 900 450" role="img" aria-label="${T("Route map", "경로 지도")}"></svg>
+              <div class="legend"><span><i></i>${T("Overland", "육로")}</span>${flights ? `<span><i class="f"></i>${T("Domestic flight", "국내선")}</span>` : ""}<span class="mono" id="m-km"></span></div></div>
+            <div class="m-stoplist"><p class="m-note">${T("Pick a stop to zoom in and see the camps there.", "경유지를 누르면 확대되어 주변 숙소를 볼 수 있습니다.")}</p><div class="stops" id="m-stops" hidden></div></div>
+          </div>
+          <div class="stop-panel" id="m-stop" aria-live="polite" hidden></div></section>` : ""}
+        <section class="m-sec" id="m-s-incl" data-m-sec>
+          <div class="m-sec-h"><h3>${T("What's included", "포함·불포함 사항")}</h3></div>
+          <div class="m-cols">
+            <div class="m-panel"><h4>${T("Included", "포함 사항")}</h4><ul class="checks">${incl.map(i => `<li>${i}</li>`).join("")}</ul></div>
+            <div class="m-panel"><h4>${T("Not included", "불포함 사항")}</h4><ul class="checks out">${excl.map(i => `<li>${i}</li>`).join("")}</ul></div>
+            <div class="m-panel"><h4>${T("Good to know", "여행 유의사항")}</h4><ul class="checks info">${NOTES[lang].map(n => `<li>${n}</li>`).join("")}</ul></div>
+          </div>
+        </section>
+        <section class="m-sec" id="m-s-pol" data-m-sec>
+          <div class="m-sec-h"><h3>${lodging ? T("Stays and cancellation", "숙소 및 취소·환불") : T("Cancellation and refunds", "취소·환불 규정")}</h3></div>
+          <div class="m-acc">${lodging}
+            <details class="m-more"${lodging ? "" : " open"}><summary>${T("Cancellation and refunds", "취소·환불 규정")}</summary><p>${L(FAQ.find(f => f.id === "refund")).a}</p>
+              <p><a class="txt-btn" href="#faq" data-faq-cat="booking">${T("Booking and payment questions →", "예약·결제 자주 묻는 질문 →")}</a></p></details>
+          </div>
+        </section>
+        ${REVIEWS.length ? `<section class="m-sec" id="m-s-rev" data-m-sec>
+          <div class="m-sec-h"><h3>${T("Reviews", "이용자 후기")} <span class="c">(${revs.length})</span></h3>${revs.length ? `<a class="txt-btn" href="#reviews">${T("All reviews →", "전체 후기 보기 →")}</a>` : ""}</div>
+          ${revs.length
+            ? `<div class="m-reviews">${revs.slice(0, 3).map(miniReview).join("")}</div>`
+            : `<p class="m-route">${T("No reviews for this tour yet.", "아직 이 상품의 후기가 없습니다.")} <button class="txt-btn" type="button" data-write-review="${id}">${T("Write the first one", "첫 후기 남기기")}</button></p>`}
+        </section>` : ""}
       </div>
       <div class="m-bar"><span class="price"><b>${priceText(t)}</b><small>${hasPrice(t) ? T("per person", "1인") : T("Custom quote", "맞춤 견적")}</small></span><span class="acts">${CONFIG.kakao ? `<a class="btn btn-kakao" href="${esc(CONFIG.kakao)}" target="_blank" rel="noopener" aria-label="${T("Ask on KakaoTalk", "카카오톡 상담")}">${ICON.kakao}</a>` : ""}<button class="btn btn-primary" type="button" data-request="${id}">${T("Ask now", "문의하기")}</button></span></div>`;
     if (hasRoute) { $("#m-km").textContent = kmText(drawMap($("#m-map"), t)); initTripMap(t); }
@@ -1906,11 +2079,52 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
         : `<span class="src ${s.cls}"><i>${s.mark}</i>${T(s.en, s.ko)}</span>`}<button class="txt-btn" type="button" data-rev-share="${esc(r.id)}">${T("Share", "공유")}</button></div>
     </article>`;
   };
+  /* ---------- Traveller posts (link cards, POSTS) ---------- */
+  const PSRC = {
+    blog:   { cls: "naver", mark: "N", en: "Naver blog", ko: "네이버 블로그" },
+    cafe:   { cls: "naver", mark: "N", en: "Naver cafe", ko: "네이버 카페" },
+    brunch: { cls: "", mark: "b", en: "Brunch", ko: "브런치" }
+  };
+  const POSTS_SHOWN = 6;
+  let postRegion = "all", postsOpen = false;
+  // Naver images refuse other sites' Referer, so thumbnails load with referrerpolicy="no-referrer"; a dead image falls back to the tinted box.
+  const postCard = p => {
+    const s = PSRC[p.src] || PSRC.blog, r = REGIONS[p.region];
+    return `<article class="post">
+      <div class="post-img">${p.img ? `<img src="${esc(p.img)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer">` : ""}<span class="src ${s.cls}"><i>${s.mark}</i>${T(s.en, s.ko)}</span></div>
+      <div class="post-body">
+        <h4 class="post-title" lang="ko"><a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.title)}</a></h4>
+        <div class="post-meta"><b>${esc(p.by)}</b><span class="mono">${fmtDate(p.date)}</span></div>
+        <div class="post-foot">${r ? `<a class="post-reg" href="#tours" data-region-link="${esc(p.region)}">${T(r.en, r.ko)}</a>` : "<span></span>"}<span class="post-go" aria-hidden="true">${T("Read", "읽기")} ↗</span></div>
+      </div>
+    </article>`;
+  };
+  function postsHTML() {
+    const cnt = k => POSTS.filter(p => p.region === k).length, regs = Object.keys(REGIONS).filter(cnt).sort((x, y) => cnt(y) - cnt(x));
+    if (postRegion !== "all" && !regs.includes(postRegion)) postRegion = "all";
+    const list = POSTS.filter(p => postRegion === "all" || p.region === postRegion).sort((a, b) => String(b.date).localeCompare(String(a.date)));
+    const shown = postsOpen ? list : list.slice(0, POSTS_SHOWN);
+    const tabs = [["all", T("All", "전체"), POSTS.length], ...regs.map(k => [k, T(REGIONS[k].en, REGIONS[k].ko), cnt(k)])];
+    return `<div class="posts">
+      <div class="posts-head"><h3>${T("Trip diaries from our travellers", "여행자들이 직접 쓴 여행기")}</h3>
+        <p>${T("Posted in Korean on Naver and Brunch. Each card opens the original post.", "네이버 블로그·카페와 브런치에 올라온 글입니다. 카드를 누르면 원문으로 이동합니다.")}</p></div>
+      ${regs.length > 1 ? `<div class="tabs" role="group" aria-label="${T("Filter trip diaries by region", "지역별 여행기 필터")}">${tabs.map(([id, name, c]) => `<button class="tab noimg" type="button" data-post-filter="${id}" aria-pressed="${id === postRegion}">${name}<span class="n">${c}</span></button>`).join("")}</div>` : ""}
+      <div class="post-grid">${shown.map(postCard).join("")}</div>
+      ${list.length > shown.length ? `<button class="btn btn-outline posts-more" type="button" data-posts-more>${T(`Show all ${list.length} stories`, `여행기 ${list.length}개 모두 보기`)}</button>` : ""}
+    </div>`;
+  }
+  const rerenderPosts = () => { const el = $("#rev-body .posts"); if (el) el.outerHTML = postsHTML(); };
+
   function renderReviews() {
-    const n = REVIEWS.length;
-    // Owner's choice: the whole reviews area stays hidden until the first real review is added.
-    $("#reviews").hidden = !n;
-    $$('a[href="#reviews"]').forEach(a => { (a.closest("li") || a).hidden = !n; });
+    const n = REVIEWS.length, np = POSTS.length;
+    // Owner's choice: the whole reviews area stays hidden until the first real review (or linked traveller post) is added.
+    $("#reviews").hidden = !(n || np);
+    $$('a[href="#reviews"]').forEach(a => { (a.closest("li") || a).hidden = !(n || np); });
+    if (!n && np) {
+      $("#rev-summary").innerHTML = `<span class="big">${np}</span><span class="mono">${T("trip diaries by real travellers", "여행자가 직접 쓴 여행기")}</span>`;
+      $("#rev-body").innerHTML = postsHTML();
+      return;
+    }
     if (!n) {
       $("#rev-summary").innerHTML = `<p class="lede" style="max-width:40ch">${T("Only real reviews from real travellers, each linked to its original post.", "실제 여행자의 진짜 후기만, 원문 링크와 함께 보여 드립니다.")}</p>`;
       $("#rev-body").innerHTML = `<div class="rev-empty">
@@ -1936,9 +2150,13 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
     const tabs = [["all", T("All", "전체"), n], ...tripsWith.map(t => [t.id, L(t).name, REVIEWS.filter(r => r.trip === t.id).length])];
     const list = REVIEWS.filter(r => revFilter === "all" || r.trip === revFilter).sort((a, b) => String(b.date).localeCompare(String(a.date)));
     $("#rev-body").innerHTML = `<div class="tabs" role="group" aria-label="${T("Filter reviews by tour", "상품별 후기 필터")}">${tabs.map(([id, name, c]) => `<button class="tab noimg" type="button" data-rev-filter="${id}" aria-pressed="${id === revFilter}">${name}<span class="n">${c}</span></button>`).join("")}</div>
-      <div class="rev-grid">${list.map(revCard).join("")}</div>`;
+      <div class="rev-grid">${list.map(revCard).join("")}</div>${np ? postsHTML() : ""}`;
   }
+  $("#rev-body").addEventListener("error", e => { if (e.target.matches?.(".post-img img")) e.target.remove(); }, true);
   $("#rev-body").addEventListener("click", e => {
+    const pf = e.target.closest("[data-post-filter]");
+    if (pf) { postRegion = pf.dataset.postFilter; postsOpen = false; rerenderPosts(); $(`[data-post-filter="${postRegion}"]`)?.focus(); return; }
+    if (e.target.closest("[data-posts-more]")) { postsOpen = true; rerenderPosts(); $$("#rev-body .post-title a")[POSTS_SHOWN]?.focus({ preventScroll: true }); return; }
     const f = e.target.closest("[data-rev-filter]");
     if (f) { revFilter = f.dataset.revFilter; renderReviews(); return; }
     const m = e.target.closest("[data-rev-more]");
