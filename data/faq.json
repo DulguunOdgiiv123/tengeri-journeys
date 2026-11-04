@@ -1,0 +1,258 @@
+{
+  "questions": [
+    {
+      "c": "booking",
+      "q": "How do I book a tour?",
+      "a": "1. Message us on KakaoTalk or send the inquiry form with your dates, route, group size and flights.\n2. We send an invoice. Pay a deposit of ₩100,000 per person within 3 days (one transfer per team is easiest).\n3. Your booking is confirmed when the deposit arrives, and you sign the travel contract and waiver.\n4. Send a photo of your passport at least 2 weeks before the trip, for your SIM card.\n5. Pay the balance in Korean won cash on day 1.",
+      "ko": {
+        "q": "투어 예약은 어떻게 하나요?",
+        "a": "1. 카카오톡이나 문의 양식으로 희망 일정, 코스, 인원, 항공 스케줄을 알려 주세요.\n2. 인보이스(견적서)를 확인한 뒤 3일 이내에 1인당 10만원 예약금을 송금합니다 (팀은 한 번에 송금 권장).\n3. 예약금 입금이 확인되면 예약이 확정되며, 여행 계약서와 면책동의서에 서명합니다.\n4. 유심 준비를 위해 투어 2주 전까지 여권 사진을 보내 주세요.\n5. 잔금은 투어 첫날 현지에서 원화 현금으로 결제합니다."
+      }
+    },
+    {
+      "c": "booking",
+      "q": "When is the balance due?",
+      "a": "On day 1 of your tour, paid in Korean won cash. Card payments and currency exchange are awkward in the countryside, so bring the cash from Korea.",
+      "ko": {
+        "q": "잔금은 언제 내나요?",
+        "a": "투어 첫날 현지에서 원화 현금으로 결제합니다. 몽골 현지에서는 카드 결제와 환전이 불편할 수 있으니 한국에서 미리 원화 현금을 준비해 주세요."
+      }
+    },
+    {
+      "c": "booking",
+      "q": "What is included in the price?",
+      "a": "A Korean-speaking guide, a private vehicle and driver, the lodging and meals in the itinerary, entrance fees, bottled water, a sleeping bag, a SIM card with 1 GB of data a day, one horse ride and one camel ride, a pork-belly barbecue and a campfire. Airport pickup and drop-off are included on tours of 3 nights or more. Flights, travel insurance, snacks, hotel nights in Ulaanbaatar and tips are not included.",
+      "ko": {
+        "q": "요금에는 무엇이 포함되나요?",
+        "a": "한국어 가이드, 전용 차량과 기사, 일정표의 숙소와 식사, 입장료, 생수, 침낭, 1일 1GB 유심, 승마·낙타 체험 각 1회, 삼겹살 특식, 캠프파이어가 포함됩니다. 3박4일 이상 투어는 공항 픽업·샌딩도 포함됩니다. 항공권, 여행자 보험, 개인 간식, 시내 숙소, 매너팁은 불포함입니다."
+      }
+    },
+    {
+      "c": "booking",
+      "q": "Can we travel as our own private group?",
+      "a": "Yes. Every tour can run privately for your group on your dates. The quote depends on your group size.",
+      "ko": {
+        "q": "우리끼리 단독으로 여행할 수 있나요?",
+        "a": "네. 모든 투어는 원하시는 날짜에 단독으로 진행할 수 있으며, 견적은 인원에 따라 달라집니다."
+      }
+    },
+    {
+      "c": "booking",
+      "q": "What is your cancellation policy?",
+      "a": "30 days or more before the start: 100% refund.\n15–29 days before: 50% refund.\n7–14 days before: 20% refund.\nLess than 7 days before: no refund.\nIf only some of your team cancel, these terms apply to them and the price is recalculated for the rest. Please cancel in writing (KakaoTalk or email); the date we receive it counts. Refunds arrive within 5–7 business days.",
+      "ko": {
+        "q": "취소 규정은 어떻게 되나요?",
+        "a": "투어 시작 30일 전까지 취소: 100% 환불\n15일 전까지 취소: 50% 환불\n7일 전까지 취소: 20% 환불\n7일 이내 취소: 환불 불가\n팀원 일부만 취소하면 해당 인원에게 위 규정이 적용되고, 남은 인원 기준으로 금액이 재책정될 수 있습니다. 취소는 카카오톡·이메일 등 서면으로 접수하며 접수일 기준으로 적용됩니다. 환불은 영업일 기준 5~7일 내 입금됩니다."
+      },
+      "id": "refund"
+    },
+    {
+      "c": "booking",
+      "q": "When should I book for July and August?",
+      "a": "At least a month ahead. Camps, guides and vehicles sell out early from July to September, especially in July, August and the Chuseok holidays.",
+      "ko": {
+        "q": "7~8월 성수기에는 언제 예약해야 하나요?",
+        "a": "여행 시작 최소 1달 전 예약을 권장합니다. 7~9월 성수기, 특히 7~8월 극성수기와 추석 연휴에는 캠프, 가이드, 차량이 일찍 마감됩니다."
+      }
+    },
+    {
+      "c": "booking",
+      "q": "Can I choose the vehicle?",
+      "a": "Yes, if you book before 15 June: choose a Starex van or a Furgon, the classic Russian 4×4 van. For bookings made between 15 June and 1 September the vehicle type is assigned, because vehicles run short in peak season.",
+      "ko": {
+        "q": "차량을 선택할 수 있나요?",
+        "a": "6월 15일 이전에 예약하시면 스타렉스 또는 푸르공 중에서 선택할 수 있습니다. 6월 15일~9월 1일 성수기 예약은 차량이 부족해 차종이 랜덤 배정됩니다."
+      }
+    },
+    {
+      "c": "booking",
+      "q": "Do I need travel insurance?",
+      "a": "Yes. Please travel with insurance that covers medical treatment and evacuation from remote areas.",
+      "ko": {
+        "q": "여행자 보험이 필요한가요?",
+        "a": "네. 오지에서의 치료와 긴급 후송을 보장하는 여행자 보험에 꼭 가입해 주세요."
+      }
+    },
+    {
+      "c": "entry",
+      "q": "Do I need a visa for Mongolia?",
+      "a": "Citizens of many countries, including the United States, Canada, Japan, South Korea and several European countries, can enter visa-free for a set number of days. Rules change, so check with your nearest Mongolian embassy. If you need a visa, we provide the invitation letter.",
+      "ko": {
+        "q": "몽골 여행에 비자가 필요한가요?",
+        "a": "대한민국 국민은 2026년 말까지 단기 방문 시 무비자로 입국할 수 있습니다. 규정은 바뀔 수 있으니 출발 전 주한 몽골 대사관에서 확인해 주세요. 비자가 필요한 경우 초청장을 발급해 드립니다."
+      }
+    },
+    {
+      "c": "entry",
+      "q": "How do I get to Mongolia?",
+      "a": "Fly into Chinggis Khaan International Airport (UBN), about 50 km south of Ulaanbaatar. There are direct flights from Seoul, Beijing, Tokyo, Istanbul and Frankfurt, among others. The Trans-Mongolian railway is a slower, scenic option.",
+      "ko": {
+        "q": "몽골까지 어떻게 가나요?",
+        "a": "울란바토르 남쪽 약 50km에 있는 칭기스칸 국제공항(UBN)으로 들어옵니다. 인천과 부산에서 직항편이 있으며, 인천에서 약 3시간 30분 걸립니다."
+      }
+    },
+    {
+      "c": "entry",
+      "q": "Will someone meet me at the airport?",
+      "a": "Yes. Airport pickup and drop-off are included on tours of 3 nights or more. Tours start from the airport between 06:00 and 13:00 depending on your flight, or from Ulaanbaatar at 08:00. For early-morning arrivals we meet in front of the supermarket on the airport's ground floor.",
+      "ko": {
+        "q": "공항으로 마중 나오나요?",
+        "a": "네. 3박4일 이상 투어는 공항 픽업·샌딩이 포함됩니다. 공항 출발은 항공편에 따라 오전 6시~13시, 시내 출발은 오전 8시입니다. 새벽 도착 항공편은 공항 1층 슈퍼마켓 앞에서 만납니다."
+      }
+    },
+    {
+      "c": "entry",
+      "q": "What if my flight lands late?",
+      "a": "If you land after 14:00, day 1 sightseeing moves to the next morning. Lunch on day 1 and meals on the last day may be skipped because of flight times, and we refund those meals.",
+      "ko": {
+        "q": "항공편이 늦게 도착하면요?",
+        "a": "오후 2시 이후 도착하면 첫날 관광은 다음 날 아침에 진행합니다. 첫날 중식과 마지막 날 조식·중식은 항공 시간에 따라 생략될 수 있으며, 그만큼 비용에서 차감해 드립니다."
+      }
+    },
+    {
+      "c": "entry",
+      "q": "When does the tour end?",
+      "a": "We drive you to the airport in time for your flight (we leave the city 4 hours before departure), or drop you in Ulaanbaatar around 15:00–18:00. If the last stop isn't Terelj, book a flight home that leaves after 18:00–20:00, or stay one more night if you want time for shopping.",
+      "ko": {
+        "q": "투어는 언제 끝나나요?",
+        "a": "귀국 항공편에 맞춰 공항까지 모셔다 드리며(시내에서 비행기 출발 4시간 전 출발), 시내 종료 시 오후 3~6시경 끝납니다. 마지막 일정지가 테렐지가 아니면 귀국편은 오후 6~8시 이후여야 하며, 시내 쇼핑을 원하시면 다음 날 귀국을 권장합니다."
+      }
+    },
+    {
+      "c": "trip",
+      "q": "How long are the drives?",
+      "a": "Sights in Mongolia are far apart. On Gobi and Khövsgöl tours most days have 5–10 hours on the road, much of it on dirt tracks. Central and Terelj tours have shorter drives. Every tour lists the driving time for each day.",
+      "ko": {
+        "q": "이동 시간은 얼마나 되나요?",
+        "a": "몽골은 관광지 사이 거리가 멉니다. 고비와 홉스골 투어는 대부분 하루 5~10시간을 이동하며 비포장도로가 많습니다. 중부와 테렐지 투어는 이동이 짧습니다. 각 투어 일정에 날짜별 이동 시간이 나와 있습니다."
+      }
+    },
+    {
+      "c": "trip",
+      "q": "What is a ger camp like?",
+      "a": "Most nights are in tourist ger camps: round felt gers for 4–6 people, or gers and cabins for 2–4 with more privacy, with a restaurant, toilets, showers and electricity. You can upgrade to resort cabins with a private bathroom. Nomad family gers are basic, with a shared pit toilet, but the night sky is unforgettable. Each tour shows where you sleep every night.",
+      "ko": {
+        "q": "게르 캠프는 어떤가요?",
+        "a": "대부분 여행자 게르 캠프에서 묵습니다. 4~6인 일반 게르나 2~4인 현지식 게르·하우스형 숙소이며, 식당, 화장실·샤워실, 전기가 있습니다. 내부 화장실이 있는 고급 숙소로 업그레이드할 수 있습니다. 유목민 전통 게르는 재래식 공용 화장실로 시설은 제한적이지만 별과 은하수를 볼 수 있습니다. 투어마다 날짜별 숙소가 나와 있습니다."
+      }
+    },
+    {
+      "c": "trip",
+      "q": "What should I pack?",
+      "a": "Your passport (valid 6+ months), Korean won cash and an international card. Clothes in layers: even in July, nights on the steppe can drop close to freezing. Korean staples such as gim, gochujang, kimchi and ramyeon (sold in Mongolia but pricier). Toiletries and a towel, since some camps provide none. A power bank, basic medicines, zip bags, hand warmers, a padlock for your ger and an umbrella or raincoat. Sleeping bags are lent free.",
+      "ko": {
+        "q": "무엇을 챙겨야 하나요?",
+        "a": "여권(유효기간 6개월 이상), 원화 현금, 해외결제 카드. 겹쳐 입을 옷(7월에도 초원의 밤은 영하 가까이 떨어집니다). 김, 고추장, 김치, 라면, 마른 반찬(몽골에서도 살 수 있지만 더 비쌉니다). 일부 캠프는 세면도구를 제공하지 않으니 세면도구와 수건. 보조배터리(전기 제한 지역 많음), 비상약, 지퍼백, 핫팩, 게르용 자물쇠, 우산이나 우비. 침낭은 무료로 빌려 드립니다."
+      }
+    },
+    {
+      "c": "trip",
+      "q": "Can I use cards and my phone?",
+      "a": "The currency is the tögrög (MNT). Cards work in Ulaanbaatar; carry cash for the countryside. Mobile coverage reaches most soums (district centres), but not open steppe or mountains.",
+      "ko": {
+        "q": "카드와 휴대폰을 쓸 수 있나요?",
+        "a": "화폐는 투그릭(MNT)입니다. 울란바토르에서는 카드를 쓸 수 있지만 시골에서는 현금이 필요합니다. 휴대폰은 대부분의 솜(군 소재지)에서 터지지만 초원 한가운데나 산에서는 안 됩니다."
+      }
+    },
+    {
+      "c": "trip",
+      "q": "What is the food like?",
+      "a": "Camp meals are mostly Mongolian dishes built around mutton, such as khorkhog, buuz and goulash. Your guide also cooks some meals, including simple Korean food and a pork-belly barbecue. Tell us about allergies, a vegetarian diet or avoiding mutton when you book.",
+      "ko": {
+        "q": "식사는 어떤가요?",
+        "a": "캠프 식사는 주로 양고기 중심의 몽골 현지식입니다(허르헉, 보즈, 고랴쓰 등). 일부 식사는 가이드가 간단한 한식과 삼겹살 특식으로 준비합니다. 알레르기, 채식, 양고기를 피하고 싶으시면 예약 시 알려 주세요."
+      }
+    },
+    {
+      "c": "safety",
+      "q": "How fit do I need to be?",
+      "a": "If you can sit through long drives on rough roads and walk for an hour or two at a time, you can join any of our tours. Horse and camel rides are short and beginners are welcome.",
+      "ko": {
+        "q": "체력이 얼마나 필요한가요?",
+        "a": "비포장도로 장거리 이동과 한두 시간 걷기가 가능하면 모든 투어에 참여할 수 있습니다. 승마와 낙타 체험은 짧게 진행되며 초보자도 환영합니다."
+      }
+    },
+    {
+      "c": "safety",
+      "q": "Is Mongolia safe for travellers?",
+      "a": "Mongolia is generally a safe and welcoming country. In Ulaanbaatar, watch for pickpockets in crowded markets and on buses, as in any big city. In the countryside, the main risks are road travel and weather, which our drivers know well.",
+      "ko": {
+        "q": "몽골은 안전한가요?",
+        "a": "몽골은 대체로 안전하고 친절한 나라입니다. 울란바토르의 붐비는 시장이나 버스에서는 다른 대도시처럼 소매치기를 조심하세요. 시골에서는 도로와 날씨가 주된 위험 요소인데, 저희 기사들이 잘 알고 있습니다."
+      }
+    },
+    {
+      "c": "safety",
+      "q": "What happens if someone gets sick or injured?",
+      "a": "Your guide contacts our Ulaanbaatar office straight away, and we arrange transport to a clinic or hospital. Travel insurance with evacuation cover is required.",
+      "ko": {
+        "q": "아프거나 다치면 어떻게 하나요?",
+        "a": "가이드가 즉시 울란바토르 사무실에 연락하고, 필요하면 병원 이송을 준비합니다. 긴급 후송을 보장하는 여행자 보험이 필요합니다."
+      }
+    },
+    {
+      "c": "winter",
+      "q": "How cold is it in winter?",
+      "a": "Daytime temperatures from December to February are typically −15 to −30 °C, with dry air and bright sunshine. Gers and hotels are kept warm, and you spend most of your outdoor time in short, active spells.",
+      "ko": {
+        "q": "겨울에는 얼마나 추운가요?",
+        "a": "12월부터 2월까지 낮 기온은 보통 영하 15도에서 영하 30도이고, 공기는 건조하고 햇살은 밝습니다. 게르와 호텔은 따뜻하게 유지되며, 야외 활동은 짧고 활동적으로 진행됩니다."
+      }
+    },
+    {
+      "c": "winter",
+      "q": "Do I need special clothing for a winter trip?",
+      "a": "Bring thermal base layers, a down jacket, insulated boots and good gloves.",
+      "ko": {
+        "q": "겨울 여행에 특별한 옷이 필요한가요?",
+        "a": "기능성 내의, 다운 재킷, 방한화, 좋은 장갑을 챙기세요."
+      }
+    },
+    {
+      "c": "winter",
+      "q": "Do winter lodgings have showers and power?",
+      "a": "Hotels and tourist ger camps do. Some winter routes include a night in a nomad family ger or a ger guesthouse, which may have no shower and sometimes no electricity. Each tour shows this for every night.",
+      "ko": {
+        "q": "겨울 숙소에 샤워와 전기가 있나요?",
+        "a": "호텔과 여행자 게르는 있습니다. 일부 겨울 일정의 유목민 게르나 게르 게스트하우스는 샤워가 불가하고 전기가 없는 경우도 있습니다. 투어마다 날짜별로 안내되어 있습니다."
+      }
+    }
+  ],
+  "categories": [
+    {
+      "id": "booking",
+      "name": "Booking & payment",
+      "ko": {
+        "name": "예약·결제"
+      }
+    },
+    {
+      "id": "entry",
+      "name": "Visa & arrival",
+      "ko": {
+        "name": "비자·입국"
+      }
+    },
+    {
+      "id": "trip",
+      "name": "On the trip",
+      "ko": {
+        "name": "여행 중"
+      }
+    },
+    {
+      "id": "safety",
+      "name": "Health & safety",
+      "ko": {
+        "name": "건강·안전"
+      }
+    },
+    {
+      "id": "winter",
+      "name": "Winter travel",
+      "ko": {
+        "name": "겨울 여행"
+      }
+    }
+  ]
+}
