@@ -2,7 +2,17 @@
   "kakao": "https://pf.kakao.com/_pYpxln/chat",
   "kakaoId": "goldenjigutour",
   "email": "goldenjigutour@naver.com",
+  "whatsapp": "",
+  "naverBlog": "",
+  "instagram": "",
   "company": {
+    "name": "",
+    "ceo": "",
+    "address": "",
+    "regNo": "",
+    "licenseNo": "",
     "phone": "+976-8605-9966"
-  }
+  },
+  "formKey": "",
+  "kakaoJsKey": ""
 }

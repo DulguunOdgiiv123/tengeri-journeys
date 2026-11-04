@@ -1,0 +1,419 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms@0.249.1/schema/sveltia-cms.json
+#
+# Admin for goldenjigutour.com, run by Sveltia CMS (https://sveltiacms.app) at goldenjigutour.com/admin.
+# Each file below is one data/*.json file. index.html loads them and fromAdmin() turns them into what the page uses,
+# so a new field here also needs handling there. Labels are in Mongolian for the office staff.
+# Fields are required unless marked `required: false`.
+
+backend:
+  name: github
+  repo: DulguunOdgiiv123/tengeri-journeys
+  branch: main
+
+app_title: Golden Jigu Tour · Админ
+site_url: https://goldenjigutour.com
+display_url: https://goldenjigutour.com
+
+media_folder: img
+public_folder: /img
+media_libraries:
+  all:
+    transformations:
+      raster_image: { format: webp, quality: 82, width: 1600, height: 1600 }   # phone photos are shrunk on upload
+
+collections:
+  - name: content
+    label: Сайтын агуулга
+    icon: edit_note
+    files:
+      - name: tours
+        label: Аялалууд
+        icon: landscape
+        file: data/tours.json
+        format: json
+        fields:
+          - name: tours
+            label: Аялалууд
+            label_singular: аялал
+            widget: list
+            collapsed: true
+            thumbnail: img
+            summary: "{{name}} · {{days}} өдөр"
+            hint: "Шинэ аялал нэмэхдээ төстэй аяллын ⋮ цэснээс Duplicate (хуулах) дарж, хуулбарыг нь засвал хамгийн амар."
+            fields:
+              - { name: name, label: "Аяллын нэр (English)", widget: string }
+              - { name: name_ko, label: "Аяллын нэр (한국어)", widget: string, required: false }
+              - { name: img, label: Зураг, widget: image, hint: "Утасны зургийг шууд оруулж болно, сайт өөрөө жижигрүүлнэ." }
+              - { name: tag, label: "Товч шошго (English)", widget: string, required: false, hint: "Зурган дээр харагдана, ж: Most popular" }
+              - { name: tag_ko, label: "Товч шошго (한국어)", widget: string, required: false }
+              - { name: text, label: "Товч тайлбар (English)", widget: text, required: false }
+              - { name: text_ko, label: "Товч тайлбар (한국어)", widget: text, required: false }
+              - { name: days, label: Хэдэн өдөр, widget: number, value_type: int, min: 1 }
+              - { name: season, label: "Улирал (English)", widget: string, required: false, hint: "ж: May–Oct" }
+              - { name: season_ko, label: "Улирал (한국어)", widget: string, required: false, hint: "ж: 5–10월" }
+              - name: level
+                label: Хүндрэл
+                widget: select
+                options:
+                  - { label: Хялбар, value: Easy }
+                  - { label: Дунд, value: Moderate }
+                  - { label: Хүнд, value: Challenging }
+              - name: months
+                label: Явагддаг сарууд
+                widget: select
+                multiple: true
+                options: &months
+                  - { label: 1-р сар, value: 1 }
+                  - { label: 2-р сар, value: 2 }
+                  - { label: 3-р сар, value: 3 }
+                  - { label: 4-р сар, value: 4 }
+                  - { label: 5-р сар, value: 5 }
+                  - { label: 6-р сар, value: 6 }
+                  - { label: 7-р сар, value: 7 }
+                  - { label: 8-р сар, value: 8 }
+                  - { label: 9-р сар, value: 9 }
+                  - { label: 10-р сар, value: 10 }
+                  - { label: 11-р сар, value: 11 }
+                  - { label: 12-р сар, value: 12 }
+              - name: cats
+                label: Ангилал
+                widget: select
+                multiple: true
+                options:
+                  - { label: Говь, value: gobi }
+                  - { label: "Хөвсгөл, хойд бүс", value: north }
+                  - { label: Төв бүс, value: central }
+                  - { label: "Алтай, баруун бүс", value: west }
+                  - { label: Өвөл, value: winter }
+                  - { label: Фестиваль, value: festival }
+                  - { label: Богино аялал, value: short }
+              - name: team
+                label: Үнэ (хүний тоогоор)
+                label_singular: үнэ
+                widget: list
+                required: false
+                summary: "{{n}} хүн · ₩{{krw}}"
+                hint: "Хоосон бол сайт дээр «Үнийн санал авах» гэж харагдана."
+                fields:
+                  - { name: n, label: Багийн хүний тоо, widget: number, value_type: int, min: 1 }
+                  - { name: krw, label: "Нэг хүний үнэ (₩)", widget: number, value_type: int, min: 0 }
+              - { name: cafe, label: Naver cafe холбоос, widget: string, required: false }
+              - name: schedule
+                label: Өдөр бүрийн хөтөлбөр
+                label_singular: өдөр
+                widget: list
+                collapsed: true
+                summary: "{{place}}"
+                fields:
+                  - { name: place, label: "Газар (English)", widget: string }
+                  - { name: place_ko, label: "Газар (한국어)", widget: string, required: false }
+                  - { name: hours, label: Замд явах цаг, widget: string, required: false, hint: "ж: 5 эсвэл 8–9. Явахгүй бол хоосон." }
+                  - { name: plan, label: "Хуваарь (English)", widget: text, hint: "Мөр бүрт нэг ажил, эхэнд нь цаг: 08:00 Tour begins" }
+                  - { name: plan_ko, label: "Хуваарь (한국어)", widget: text, required: false, hint: "Англи хуваарьтай ижил дараалал, ижил тооны мөр." }
+                  - { name: meals, label: "Хоол (English)", widget: string, required: false }
+                  - { name: meals_ko, label: "Хоол (한국어)", widget: string, required: false }
+                  - name: stay
+                    label: Хонох газар
+                    widget: select
+                    options:
+                      - { label: Жуулчны гэр бааз, value: ger }
+                      - { label: Зочид буудал, value: hotel }
+                      - { label: Гэр буудал, value: gerhouse }
+                      - { label: Малчин айлын гэр, value: nomad }
+                      - { label: "Хонохгүй (сүүлийн өдөр)", value: none }
+                  - { name: camp, label: "Баазын нэр (заавал биш)", widget: string, required: false }
+                  - { name: shower, label: Шүршүүртэй, widget: boolean, required: false }
+                  - { name: power, label: Цахилгаантай, widget: boolean, required: false }
+                  - { name: wifi, label: Интернэттэй, widget: boolean, required: false }
+                  - { name: notes, label: "Нэмэлт тэмдэглэл (English)", widget: text, required: false, hint: "Мөр бүрт нэг." }
+                  - { name: notes_ko, label: "Нэмэлт тэмдэглэл (한국어)", widget: text, required: false }
+                  - { name: drop, label: Буудал эсвэл онгоцны буудал хүргэж өгнө, widget: boolean, required: false }
+                  - { name: shop, label: Дэлгүүр хэсэх эсэх нь нислэгийн цагаас хамаарна, widget: boolean, required: false }
+              - name: advanced
+                label: "Техникийн тохиргоо (хөндөх шаардлагагүй)"
+                widget: object
+                collapsed: true
+                required: false
+                fields:
+                  - { name: id, label: Аяллын код, widget: string, required: false, hint: "Холбоосонд ашиглагдана. Хоосон бол сайт аяллын нэрээс өөрөө үүсгэнэ." }
+                  - { name: art, label: Naver cafe нийтлэлийн дугаар, widget: number, value_type: int, required: false }
+                  - name: route
+                    label: Маршрут (газрын зургийн цэгийн кодууд)
+                    widget: list
+                    required: false
+                    hint: "ж: ub, tsagaan, bayanzag, ub. Дотоодын нислэгээр очих цэгийн өмнө ~ тавина."
+                  - name: alt
+                    label: Нислэгийн цагаас хамаарсан өөр дараалал
+                    label_singular: өдөр
+                    widget: list
+                    required: false
+                    fields:
+                      - name: options
+                        label: Хувилбарууд (A, B, C)
+                        widget: list
+                        fields:
+                          - { name: en, label: English, widget: string }
+                          - { name: ko, label: 한국어, widget: string }
+
+      - name: posts
+        label: Аялагчдын нийтлэл
+        icon: rate_review
+        file: data/posts.json
+        format: json
+        fields:
+          - name: posts
+            label: Нийтлэлүүд
+            label_singular: нийтлэл
+            widget: list
+            collapsed: true
+            add_to_top: true
+            summary: "{{date}} · {{title}}"
+            fields:
+              - name: src
+                label: Хаана нийтэлсэн
+                widget: select
+                options:
+                  - { label: Naver blog, value: blog }
+                  - { label: Naver cafe, value: cafe }
+                  - { label: Brunch, value: brunch }
+              - { name: url, label: Нийтлэлийн холбоос, widget: string }
+              - { name: title, label: Гарчиг, widget: string }
+              - { name: by, label: Зохиогчийн нэр, widget: string, required: false }
+              - { name: date, label: Огноо, widget: datetime, type: date }
+              - name: region
+                label: Бүс нутаг
+                widget: select
+                required: false
+                options: &regions
+                  - { label: Говь, value: gobi }
+                  - { label: "Хөвсгөл, хойд бүс", value: north }
+                  - { label: Төв бүс, value: central }
+                  - { label: "Алтай, баруун бүс", value: west }
+                  - { label: Өвөл, value: winter }
+              - { name: img, label: Нүүр зургийн холбоос, widget: string, required: false, hint: "Нийтлэлийн нүүр зураг дээр баруун товч дарж «Copy image address», энд буулгана." }
+
+      - name: faq
+        label: Түгээмэл асуулт
+        icon: quiz
+        file: data/faq.json
+        format: json
+        fields:
+          - name: questions
+            label: Асуултууд
+            label_singular: асуулт
+            widget: list
+            collapsed: true
+            summary: "{{q}}"
+            fields:
+              - name: c
+                label: Бүлэг
+                widget: select
+                options:
+                  - { label: "Захиалга, төлбөр", value: booking }
+                  - { label: "Виз, ирэх", value: entry }
+                  - { label: Аяллын үеэр, value: trip }
+                  - { label: "Эрүүл мэнд, аюулгүй байдал", value: safety }
+                  - { label: Өвлийн аялал, value: winter }
+              - { name: q, label: "Асуулт (English)", widget: string }
+              - { name: a, label: "Хариулт (English)", widget: text }
+              - { name: q_ko, label: "Асуулт (한국어)", widget: string, required: false }
+              - { name: a_ko, label: "Хариулт (한국어)", widget: text, required: false }
+              - { name: id, widget: hidden }
+          - name: categories
+            label: Бүлгийн нэрс
+            widget: list
+            collapsed: true
+            allow_add: false
+            allow_remove: false
+            summary: "{{name}}"
+            fields:
+              - { name: id, widget: hidden }
+              - { name: name, label: "Нэр (English)", widget: string }
+              - { name: name_ko, label: "Нэр (한국어)", widget: string, required: false }
+
+      - name: policy
+        label: Үнэд багтсан зүйлс
+        icon: checklist
+        file: data/policy.json
+        format: json
+        fields:
+          - { name: incl, label: "Үнэд багтсан (English)", widget: text, hint: "Мөр бүрт нэг зүйл." }
+          - { name: incl_ko, label: "Үнэд багтсан (한국어)", widget: text, required: false }
+          - { name: excl, label: "Үнэд багтаагүй (English)", widget: text }
+          - { name: excl_ko, label: "Үнэд багтаагүй (한국어)", widget: text, required: false }
+          - { name: notes, label: "Аюулгүй байдлын санамж (English)", widget: text, required: false }
+          - { name: notes_ko, label: "Аюулгүй байдлын санамж (한국어)", widget: text, required: false }
+
+      - name: seasons
+        label: Улирал
+        icon: calendar_month
+        file: data/seasons.json
+        format: json
+        fields:
+          - name: seasons
+            label: Улирлууд
+            widget: list
+            collapsed: true
+            allow_add: false
+            allow_remove: false
+            thumbnail: img
+            summary: "{{name}}"
+            fields:
+              - { name: name, label: "Нэр (English)", widget: string }
+              - { name: name_ko, label: "Нэр (한국어)", widget: string, required: false }
+              - { name: from, label: Эхлэх сар, widget: select, options: *months }
+              - { name: to, label: Дуусах сар, widget: select, options: *months }
+              - { name: img, label: Зураг, widget: image }
+              - { name: text, label: "Тайлбар (English)", widget: text }
+              - { name: text_ko, label: "Тайлбар (한국어)", widget: text, required: false }
+              - { name: peak, label: "«Оргил улирал» тэмдэг", widget: boolean, required: false }
+
+      - name: reviews
+        label: Сэтгэгдэл
+        icon: reviews
+        file: data/reviews.json
+        format: json
+        fields:
+          - name: reviews
+            label: Сэтгэгдлүүд
+            label_singular: сэтгэгдэл
+            widget: list
+            required: false
+            collapsed: true
+            add_to_top: true
+            summary: "{{date}} · {{name}}"
+            hint: "Нэг ч сэтгэгдэл байвал сайт дээр «Сэтгэгдэл» хэсэг гарч ирнэ. Зөвхөн аялагчийн зөвшөөрөлтэйгөөр."
+            fields:
+              - { name: id, widget: hidden, default: "{{uuid_short}}" }
+              - { name: name, label: "Нэр (нууцалсан, ж: K****)", widget: string }
+              - { name: date, label: Огноо, widget: datetime, type: date }
+              - name: trip
+                label: Аялал
+                widget: relation
+                collection: content
+                file: tours
+                value_field: "tours.*.advanced.id"
+                search_fields: ["tours.*.name"]
+                display_fields: ["tours.*.name"]
+              - { name: rating, label: "Од (1–5)", widget: number, value_type: int, min: 1, max: 5, default: 5 }
+              - name: lang
+                label: Хэл
+                widget: select
+                default: ko
+                options: [{ label: 한국어, value: ko }, { label: English, value: en }]
+              - { name: text, label: Сэтгэгдэл, widget: text }
+              - name: source
+                label: Хаана бичсэн
+                widget: select
+                default: direct
+                options:
+                  - { label: Naver, value: naver }
+                  - { label: Google, value: google }
+                  - { label: KakaoTalk, value: kakao }
+                  - { label: Бидэнд шууд илгээсэн, value: direct }
+              - { name: url, label: "Холбоос (заавал биш)", widget: string, required: false }
+
+      - name: settings
+        label: Холбоо барих
+        icon: contact_phone
+        file: data/settings.json
+        format: json
+        fields:
+          - { name: kakao, label: KakaoTalk channel холбоос, widget: string, required: false }
+          - { name: kakaoId, label: KakaoTalk ID, widget: string, required: false }
+          - { name: email, label: И-мэйл, widget: string, required: false }
+          - { name: whatsapp, label: WhatsApp дугаар, widget: string, required: false, hint: "Улсын кодтой, зөвхөн тоо, ж: 97699112233", pattern: ["^[0-9]*$", "Зөвхөн тоо бичнэ."] }
+          - { name: naverBlog, label: Naver blog холбоос, widget: string, required: false }
+          - { name: instagram, label: Instagram холбоос, widget: string, required: false }
+          - name: company
+            label: Компанийн мэдээлэл (сайтын доод хэсэгт)
+            widget: object
+            required: false
+            fields:
+              - { name: name, label: Компанийн нэр, widget: string, required: false }
+              - { name: ceo, label: Захирал, widget: string, required: false }
+              - { name: address, label: Хаяг, widget: string, required: false }
+              - { name: regNo, label: Регистрийн дугаар, widget: string, required: false }
+              - { name: licenseNo, label: Тусгай зөвшөөрлийн дугаар, widget: string, required: false }
+              - { name: phone, label: Утас, widget: string, required: false }
+          - { name: formKey, label: Web3Forms түлхүүр, widget: string, required: false, hint: "Захиалгын маягтыг ажиллуулна. Захиа энэ түлхүүрийг үүсгэсэн и-мэйл рүү очно." }
+          - { name: kakaoJsKey, label: Kakao JavaScript түлхүүр, widget: string, required: false, hint: "KakaoTalk-р хуваалцах товчийг ажиллуулна." }
+
+  - name: advanced
+    label: Нарийвчилсан (админ)
+    icon: settings
+    description: Газрын зураг ба буудлууд. Ихэвчлэн өөрчлөх шаардлагагүй.
+    files:
+      - name: lodges
+        label: Буудал, баазууд
+        icon: hotel
+        file: data/lodges.json
+        format: json
+        editor: { preview: false }
+        fields:
+          - name: lodges
+            label: Буудлууд
+            label_singular: буудал
+            widget: list
+            collapsed: true
+            summary: "{{name}} ({{stop}})"
+            fields:
+              - { name: name, label: Нэр, widget: string }
+              - { name: stop, label: Газрын зургийн цэгийн код, widget: string, hint: "Газрын зургийн цэгүүд хэсгийн код, ж: tsagaan" }
+              - name: tier
+                label: Ангилал
+                widget: select
+                options:
+                  - { label: "Үндсэн (үнэд багтсан)", value: standard }
+                  - { label: "Ахисан (нэмэлт төлбөртэй)", value: upgrade }
+                  - { label: "Хямд (₩30,000 хасна)", value: budget }
+              - name: season
+                label: Ажиллах хугацаа
+                widget: select
+                options:
+                  - { label: Зөвхөн зун, value: summer }
+                  - { label: "Жилийн турш (өвлийн аялалд ч харагдана)", value: all }
+              - { name: type, label: "Төрөл (English)", widget: string, required: false }
+              - { name: type_ko, label: "Төрөл (한국어)", widget: string, required: false }
+              - { name: lat, label: Өргөрөг, widget: number, value_type: float, required: false, hint: "Google Maps дээр баруун товч дарж координатыг хуулна. Мэдэхгүй бол хоосон." }
+              - { name: lon, label: Уртраг, widget: number, value_type: float, required: false }
+              - { name: price, label: "Үнийн тэмдэглэл (English)", widget: string, required: false }
+              - { name: price_ko, label: "Үнийн тэмдэглэл (한국어)", widget: string, required: false }
+              - { name: about, label: "Тайлбар (English)", widget: text, required: false }
+              - { name: about_ko, label: "Тайлбар (한국어)", widget: text, required: false }
+              - name: fac
+                label: Тохижилт (мэдэхгүй бол хоосон)
+                widget: object
+                collapsed: true
+                required: false
+                fields:
+                  - { name: shower, label: Шүршүүр, widget: select, required: false, options: &yesno [{ label: Байгаа, value: "yes" }, { label: Байхгүй, value: "no" }] }
+                  - { name: private_bath, label: Хувийн угаалгын өрөө, widget: select, required: false, options: *yesno }
+                  - { name: power, label: Цахилгаан, widget: select, required: false, options: *yesno }
+                  - { name: wifi, label: Wi-Fi, widget: select, required: false, options: *yesno }
+                  - { name: restaurant, label: Ресторан, widget: select, required: false, options: *yesno }
+              - { name: url, label: Вэб сайт, widget: string, required: false }
+              - { name: phone, label: Утас, widget: string, required: false }
+              - { name: photo, label: Зургийн холбоос, widget: string, required: false }
+              - { name: id, widget: hidden, default: "{{uuid_short}}" }
+
+      - name: places
+        label: Газрын зургийн цэгүүд
+        icon: map
+        file: data/places.json
+        format: json
+        editor: { preview: false }
+        fields:
+          - name: places
+            label: Цэгүүд
+            label_singular: цэг
+            widget: list
+            collapsed: true
+            summary: "{{name}} ({{id}})"
+            fields:
+              - { name: id, label: Код, widget: string, pattern: ["^[a-z0-9]+$", "Зөвхөн латин жижиг үсэг, тоо."], hint: "Аяллын маршрутад ашиглагдана. Ашиглагдаж байх үед бүү өөрчил." }
+              - { name: name, label: "Нэр (English)", widget: string }
+              - { name: name_ko, label: "Нэр (한국어)", widget: string, required: false }
+              - { name: lat, label: Өргөрөг, widget: number, value_type: float }
+              - { name: lon, label: Уртраг, widget: number, value_type: float }
+              - { name: cap, label: Нийслэл (зөвхөн Улаанбаатар), widget: boolean, required: false }

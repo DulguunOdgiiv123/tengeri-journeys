@@ -3,7 +3,7 @@
     {
       "id": "ub",
       "name": "Ulaanbaatar",
-      "ko": "울란바토르",
+      "name_ko": "울란바토르",
       "lat": 47.92,
       "lon": 106.92,
       "cap": true
@@ -11,7 +11,7 @@
     {
       "id": "terelj",
       "name": "Terelj",
-      "ko": "테렐지",
+      "name_ko": "테렐지",
       "lat": 47.98,
       "lon": 107.45,
       "cap": false
@@ -19,7 +19,7 @@
     {
       "id": "khustai",
       "name": "Khustai",
-      "ko": "후스타이",
+      "name_ko": "후스타이",
       "lat": 47.72,
       "lon": 105.88,
       "cap": false
@@ -27,7 +27,7 @@
     {
       "id": "elsen",
       "name": "Elsen Tasarkhai",
-      "ko": "엘승타사르하이",
+      "name_ko": "엘승타사르하이",
       "lat": 47.36,
       "lon": 103.67,
       "cap": false
@@ -35,7 +35,7 @@
     {
       "id": "tsenkher",
       "name": "Tsenkher Hot Springs",
-      "ko": "쳉헤르 온천",
+      "name_ko": "쳉헤르 온천",
       "lat": 47.33,
       "lon": 101.66,
       "cap": false
@@ -43,7 +43,7 @@
     {
       "id": "ugii",
       "name": "Ugii Lake",
-      "ko": "어기 호수",
+      "name_ko": "어기 호수",
       "lat": 47.77,
       "lon": 102.77,
       "cap": false
@@ -51,7 +51,7 @@
     {
       "id": "bagagazar",
       "name": "Baga Gazriin Chuluu",
-      "ko": "바가가즈린촐로",
+      "name_ko": "바가가즈린촐로",
       "lat": 46.22,
       "lon": 106.05,
       "cap": false
@@ -59,7 +59,7 @@
     {
       "id": "mandalgovi",
       "name": "Mandalgovi",
-      "ko": "만달고비",
+      "name_ko": "만달고비",
       "lat": 45.76,
       "lon": 106.27,
       "cap": false
@@ -67,7 +67,7 @@
     {
       "id": "dalanzadgad",
       "name": "Dalanzadgad",
-      "ko": "달란자드가드",
+      "name_ko": "달란자드가드",
       "lat": 43.57,
       "lon": 104.42,
       "cap": false
@@ -75,7 +75,7 @@
     {
       "id": "bulgan",
       "name": "Bulgan",
-      "ko": "볼강",
+      "name_ko": "볼강",
       "lat": 48.81,
       "lon": 103.53,
       "cap": false
@@ -83,7 +83,7 @@
     {
       "id": "erdenet",
       "name": "Erdenet",
-      "ko": "에르데네트",
+      "name_ko": "에르데네트",
       "lat": 49.03,
       "lon": 104.08,
       "cap": false
@@ -91,7 +91,7 @@
     {
       "id": "terkhiin",
       "name": "Terkhiin Tsagaan Lake",
-      "ko": "테르힝 차강 호수",
+      "name_ko": "테르힝 차강 호수",
       "lat": 48.17,
       "lon": 99.72,
       "cap": false
@@ -99,7 +99,7 @@
     {
       "id": "shineider",
       "name": "Shine-Ider",
-      "ko": "신이데르",
+      "name_ko": "신이데르",
       "lat": 48.95,
       "lon": 99.53,
       "cap": false
@@ -107,7 +107,7 @@
     {
       "id": "khatgal",
       "name": "Khatgal",
-      "ko": "하트갈",
+      "name_ko": "하트갈",
       "lat": 50.44,
       "lon": 100.16,
       "cap": false
@@ -115,7 +115,7 @@
     {
       "id": "renchin",
       "name": "Renchinlkhümbe",
-      "ko": "렌친룸베",
+      "name_ko": "렌친룸베",
       "lat": 51.11,
       "lon": 99.67,
       "cap": false
@@ -123,7 +123,7 @@
     {
       "id": "ongi",
       "name": "Ongi Monastery",
-      "ko": "엉기 사원",
+      "name_ko": "엉기 사원",
       "lat": 45.34,
       "lon": 104,
       "cap": false
@@ -131,7 +131,7 @@
     {
       "id": "kharkhorin",
       "name": "Kharkhorin",
-      "ko": "하라호름",
+      "name_ko": "하라호름",
       "lat": 47.2,
       "lon": 102.82,
       "cap": false
@@ -139,7 +139,7 @@
     {
       "id": "orkhon",
       "name": "Orkhon Waterfall",
-      "ko": "오르홍 폭포",
+      "name_ko": "오르홍 폭포",
       "lat": 46.78,
       "lon": 101.96,
       "cap": false
@@ -147,7 +147,7 @@
     {
       "id": "tsagaan",
       "name": "Tsagaan Suvarga",
-      "ko": "차강소브라가",
+      "name_ko": "차강소브라가",
       "lat": 44.577,
       "lon": 105.718,
       "cap": false
@@ -155,7 +155,7 @@
     {
       "id": "yolyn",
       "name": "Yolyn Am",
-      "ko": "욜링암",
+      "name_ko": "욜링암",
       "lat": 43.49,
       "lon": 104.07,
       "cap": false
@@ -163,7 +163,7 @@
     {
       "id": "khongor",
       "name": "Khongoryn Els",
-      "ko": "홍고린 엘스",
+      "name_ko": "홍고린 엘스",
       "lat": 43.78,
       "lon": 102.3,
       "cap": false
@@ -171,7 +171,7 @@
     {
       "id": "bayanzag",
       "name": "Bayanzag",
-      "ko": "바양작",
+      "name_ko": "바양작",
       "lat": 44.14,
       "lon": 103.72,
       "cap": false
@@ -179,7 +179,7 @@
     {
       "id": "amar",
       "name": "Amarbayasgalant",
-      "ko": "아마르바야스갈랑트",
+      "name_ko": "아마르바야스갈랑트",
       "lat": 49.48,
       "lon": 105.08,
       "cap": false
@@ -187,7 +187,7 @@
     {
       "id": "murun",
       "name": "Mörön",
-      "ko": "무릉",
+      "name_ko": "무릉",
       "lat": 49.64,
       "lon": 100.16,
       "cap": false
@@ -195,7 +195,7 @@
     {
       "id": "khuvsgul",
       "name": "Lake Khövsgöl",
-      "ko": "홉스골 호수",
+      "name_ko": "홉스골 호수",
       "lat": 50.7,
       "lon": 100.4,
       "cap": false
@@ -203,7 +203,7 @@
     {
       "id": "tsaatan",
       "name": "Darkhad",
-      "ko": "다르하드",
+      "name_ko": "다르하드",
       "lat": 51.3,
       "lon": 99.4,
       "cap": false
@@ -211,7 +211,7 @@
     {
       "id": "olgii",
       "name": "Ölgii",
-      "ko": "울기",
+      "name_ko": "울기",
       "lat": 48.97,
       "lon": 89.97,
       "cap": false
@@ -219,7 +219,7 @@
     {
       "id": "tavanbogd",
       "name": "Tavan Bogd",
-      "ko": "타반복드",
+      "name_ko": "타반복드",
       "lat": 49.15,
       "lon": 87.85,
       "cap": false

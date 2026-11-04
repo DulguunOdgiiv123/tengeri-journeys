@@ -1,481 +1,979 @@
 {
   "lodges": [
     {
-      "id": "tsagaan-tsagaan-suwarga-camp",
       "name": "Tsagaan Suwarga Camp",
       "stop": "tsagaan",
       "tier": "standard",
       "season": "summer",
-      "type": {
-        "en": "Traditional Mongolian ger",
-        "ko": "전통 몽골 게르"
-      }
+      "type": "Traditional Mongolian ger",
+      "type_ko": "전통 몽골 게르",
+      "lat": null,
+      "lon": null,
+      "price": "",
+      "price_ko": "",
+      "about": "",
+      "about_ko": "",
+      "fac": {
+        "shower": "",
+        "private_bath": "",
+        "power": "",
+        "wifi": "",
+        "restaurant": ""
+      },
+      "url": "",
+      "phone": "",
+      "photo": "",
+      "id": "tsagaan-tsagaan-suwarga-camp"
     },
     {
-      "id": "tsagaan-goviin-hulan-camp",
       "name": "Goviin Hulan Camp",
       "stop": "tsagaan",
       "tier": "standard",
       "season": "summer",
-      "type": {
-        "en": "Traditional Mongolian ger",
-        "ko": "전통 몽골 게르"
-      },
+      "type": "Traditional Mongolian ger",
+      "type_ko": "전통 몽골 게르",
       "lat": 44.536,
-      "lon": 105.71454
+      "lon": 105.71454,
+      "price": "",
+      "price_ko": "",
+      "about": "",
+      "about_ko": "",
+      "fac": {
+        "shower": "",
+        "private_bath": "",
+        "power": "",
+        "wifi": "",
+        "restaurant": ""
+      },
+      "url": "",
+      "phone": "",
+      "photo": "",
+      "id": "tsagaan-goviin-hulan-camp"
     },
     {
-      "id": "tsagaan-gobi-caravanserai-camp",
       "name": "Gobi Caravanserai Camp",
       "stop": "tsagaan",
       "tier": "upgrade",
       "season": "summer",
-      "type": {
-        "en": "Modern eco-lodge with rooms",
-        "ko": "현대식 에코 롯지 (객실)"
-      },
+      "type": "Modern eco-lodge with rooms",
+      "type_ko": "현대식 에코 롯지 (객실)",
       "lat": 44.5751,
       "lon": 105.6461,
-      "price": {
-        "en": "$120 · rooms for 2–4",
-        "ko": "120$ · 2-4인실"
-      }
+      "price": "$120 · rooms for 2–4",
+      "price_ko": "120$ · 2-4인실",
+      "about": "",
+      "about_ko": "",
+      "fac": {
+        "shower": "",
+        "private_bath": "",
+        "power": "",
+        "wifi": "",
+        "restaurant": ""
+      },
+      "url": "",
+      "phone": "",
+      "photo": "",
+      "id": "tsagaan-gobi-caravanserai-camp"
     },
     {
-      "id": "tsagaan-bulgaa",
       "name": "Bulgaa",
       "stop": "tsagaan",
       "tier": "budget",
       "season": "summer",
-      "type": {
-        "en": "Ger guesthouse",
-        "ko": "게르 게스트하우스"
-      }
+      "type": "Ger guesthouse",
+      "type_ko": "게르 게스트하우스",
+      "lat": null,
+      "lon": null,
+      "price": "",
+      "price_ko": "",
+      "about": "",
+      "about_ko": "",
+      "fac": {
+        "shower": "",
+        "private_bath": "",
+        "power": "",
+        "wifi": "",
+        "restaurant": ""
+      },
+      "url": "",
+      "phone": "",
+      "photo": "",
+      "id": "tsagaan-bulgaa"
     },
     {
-      "id": "yolyn-goviin-urguu-camp",
       "name": "Goviin Urguu Camp",
       "stop": "yolyn",
       "tier": "standard",
       "season": "summer",
-      "type": {
-        "en": "Traditional Mongolian ger",
-        "ko": "전통 몽골 게르"
-      },
+      "type": "Traditional Mongolian ger",
+      "type_ko": "전통 몽골 게르",
       "lat": 43.55671,
-      "lon": 104.03304
+      "lon": 104.03304,
+      "price": "",
+      "price_ko": "",
+      "about": "",
+      "about_ko": "",
+      "fac": {
+        "shower": "",
+        "private_bath": "",
+        "power": "",
+        "wifi": "",
+        "restaurant": ""
+      },
+      "url": "",
+      "phone": "",
+      "photo": "",
+      "id": "yolyn-goviin-urguu-camp"
     },
     {
-      "id": "yolyn-dungenee-camp",
       "name": "Dungenee Camp",
       "stop": "yolyn",
       "tier": "standard",
       "season": "summer",
-      "type": {
-        "en": "Traditional Mongolian ger",
-        "ko": "전통 몽골 게르"
-      }
+      "type": "Traditional Mongolian ger",
+      "type_ko": "전통 몽골 게르",
+      "lat": null,
+      "lon": null,
+      "price": "",
+      "price_ko": "",
+      "about": "",
+      "about_ko": "",
+      "fac": {
+        "shower": "",
+        "private_bath": "",
+        "power": "",
+        "wifi": "",
+        "restaurant": ""
+      },
+      "url": "",
+      "phone": "",
+      "photo": "",
+      "id": "yolyn-dungenee-camp"
     },
     {
-      "id": "yolyn-gobi-mirage-camp",
       "name": "Gobi Mirage Camp",
       "stop": "yolyn",
       "tier": "upgrade",
       "season": "summer",
-      "type": {
-        "en": "Modern ger",
-        "ko": "현대식 게르"
-      },
+      "type": "Modern ger",
+      "type_ko": "현대식 게르",
       "lat": 43.80991,
-      "lon": 103.90705
+      "lon": 103.90705,
+      "price": "",
+      "price_ko": "",
+      "about": "",
+      "about_ko": "",
+      "fac": {
+        "shower": "",
+        "private_bath": "",
+        "power": "",
+        "wifi": "",
+        "restaurant": ""
+      },
+      "url": "",
+      "phone": "",
+      "photo": "",
+      "id": "yolyn-gobi-mirage-camp"
     },
     {
-      "id": "yolyn-ochiroo",
       "name": "Ochiroo",
       "stop": "yolyn",
       "tier": "budget",
       "season": "summer",
-      "type": {
-        "en": "Ger guesthouse",
-        "ko": "게르 게스트하우스"
-      }
+      "type": "Ger guesthouse",
+      "type_ko": "게르 게스트하우스",
+      "lat": null,
+      "lon": null,
+      "price": "",
+      "price_ko": "",
+      "about": "",
+      "about_ko": "",
+      "fac": {
+        "shower": "",
+        "private_bath": "",
+        "power": "",
+        "wifi": "",
+        "restaurant": ""
+      },
+      "url": "",
+      "phone": "",
+      "photo": "",
+      "id": "yolyn-ochiroo"
     },
     {
-      "id": "khongor-goviin-tugul-camp",
       "name": "Goviin Tugul Camp",
       "stop": "khongor",
       "tier": "standard",
       "season": "summer",
-      "type": {
-        "en": "Traditional Mongolian ger",
-        "ko": "전통 몽골 게르"
-      }
+      "type": "Traditional Mongolian ger",
+      "type_ko": "전통 몽골 게르",
+      "lat": null,
+      "lon": null,
+      "price": "",
+      "price_ko": "",
+      "about": "",
+      "about_ko": "",
+      "fac": {
+        "shower": "",
+        "private_bath": "",
+        "power": "",
+        "wifi": "",
+        "restaurant": ""
+      },
+      "url": "",
+      "phone": "",
+      "photo": "",
+      "id": "khongor-goviin-tugul-camp"
     },
     {
-      "id": "khongor-sand-of-treasures-camp",
       "name": "Sand of Treasures Camp",
       "stop": "khongor",
       "tier": "standard",
       "season": "summer",
-      "type": {
-        "en": "Traditional Mongolian ger",
-        "ko": "전통 몽골 게르"
-      }
+      "type": "Traditional Mongolian ger",
+      "type_ko": "전통 몽골 게르",
+      "lat": null,
+      "lon": null,
+      "price": "",
+      "price_ko": "",
+      "about": "",
+      "about_ko": "",
+      "fac": {
+        "shower": "",
+        "private_bath": "",
+        "power": "",
+        "wifi": "",
+        "restaurant": ""
+      },
+      "url": "",
+      "phone": "",
+      "photo": "",
+      "id": "khongor-sand-of-treasures-camp"
     },
     {
-      "id": "khongor-gobi-discovery-camp",
       "name": "Gobi Discovery Camp",
       "stop": "khongor",
       "tier": "upgrade",
       "season": "summer",
-      "type": {
-        "en": "Modern ger",
-        "ko": "현대식 게르"
-      },
+      "type": "Modern ger",
+      "type_ko": "현대식 게르",
       "lat": 43.77494,
-      "lon": 102.33889
+      "lon": 102.33889,
+      "price": "",
+      "price_ko": "",
+      "about": "",
+      "about_ko": "",
+      "fac": {
+        "shower": "",
+        "private_bath": "",
+        "power": "",
+        "wifi": "",
+        "restaurant": ""
+      },
+      "url": "",
+      "phone": "",
+      "photo": "",
+      "id": "khongor-gobi-discovery-camp"
     },
     {
-      "id": "bayanzag-goviin-urguu-2",
       "name": "Goviin Urguu 2",
       "stop": "bayanzag",
       "tier": "standard",
       "season": "summer",
-      "type": {
-        "en": "Traditional Mongolian ger",
-        "ko": "전통 몽골 게르"
-      }
+      "type": "Traditional Mongolian ger",
+      "type_ko": "전통 몽골 게르",
+      "lat": null,
+      "lon": null,
+      "price": "",
+      "price_ko": "",
+      "about": "",
+      "about_ko": "",
+      "fac": {
+        "shower": "",
+        "private_bath": "",
+        "power": "",
+        "wifi": "",
+        "restaurant": ""
+      },
+      "url": "",
+      "phone": "",
+      "photo": "",
+      "id": "bayanzag-goviin-urguu-2"
     },
     {
-      "id": "bayanzag-mongol-gobi-camp",
       "name": "Mongol Gobi Camp",
       "stop": "bayanzag",
       "tier": "upgrade",
       "season": "summer",
-      "type": {
-        "en": "Modern ger",
-        "ko": "현대식 게르"
-      },
+      "type": "Modern ger",
+      "type_ko": "현대식 게르",
       "lat": 44.13047,
-      "lon": 103.70234
+      "lon": 103.70234,
+      "price": "",
+      "price_ko": "",
+      "about": "",
+      "about_ko": "",
+      "fac": {
+        "shower": "",
+        "private_bath": "",
+        "power": "",
+        "wifi": "",
+        "restaurant": ""
+      },
+      "url": "",
+      "phone": "",
+      "photo": "",
+      "id": "bayanzag-mongol-gobi-camp"
     },
     {
-      "id": "bayanzag-sugar",
       "name": "Sugar",
       "stop": "bayanzag",
       "tier": "budget",
       "season": "summer",
-      "type": {
-        "en": "Ger guesthouse",
-        "ko": "게르 게스트하우스"
-      }
+      "type": "Ger guesthouse",
+      "type_ko": "게르 게스트하우스",
+      "lat": null,
+      "lon": null,
+      "price": "",
+      "price_ko": "",
+      "about": "",
+      "about_ko": "",
+      "fac": {
+        "shower": "",
+        "private_bath": "",
+        "power": "",
+        "wifi": "",
+        "restaurant": ""
+      },
+      "url": "",
+      "phone": "",
+      "photo": "",
+      "id": "bayanzag-sugar"
     },
     {
-      "id": "bagagazar-bayanbulag-camp",
       "name": "Bayanbulag Camp",
       "stop": "bagagazar",
       "tier": "standard",
       "season": "summer",
-      "type": {
-        "en": "Traditional Mongolian ger",
-        "ko": "전통 몽골 게르"
-      }
+      "type": "Traditional Mongolian ger",
+      "type_ko": "전통 몽골 게르",
+      "lat": null,
+      "lon": null,
+      "price": "",
+      "price_ko": "",
+      "about": "",
+      "about_ko": "",
+      "fac": {
+        "shower": "",
+        "private_bath": "",
+        "power": "",
+        "wifi": "",
+        "restaurant": ""
+      },
+      "url": "",
+      "phone": "",
+      "photo": "",
+      "id": "bagagazar-bayanbulag-camp"
     },
     {
-      "id": "bagagazar-ger-guesthouse",
       "name": "Ger guesthouse",
       "stop": "bagagazar",
       "tier": "budget",
       "season": "summer",
-      "type": {
-        "en": "Ger guesthouse",
-        "ko": "게르 게스트하우스"
-      }
+      "type": "Ger guesthouse",
+      "type_ko": "게르 게스트하우스",
+      "lat": null,
+      "lon": null,
+      "price": "",
+      "price_ko": "",
+      "about": "",
+      "about_ko": "",
+      "fac": {
+        "shower": "",
+        "private_bath": "",
+        "power": "",
+        "wifi": "",
+        "restaurant": ""
+      },
+      "url": "",
+      "phone": "",
+      "photo": "",
+      "id": "bagagazar-ger-guesthouse"
     },
     {
-      "id": "ongi-ongi-energy",
       "name": "Ongi Energy",
       "stop": "ongi",
       "tier": "standard",
       "season": "summer",
-      "type": {
-        "en": "Traditional Mongolian ger",
-        "ko": "전통 몽골 게르"
-      }
+      "type": "Traditional Mongolian ger",
+      "type_ko": "전통 몽골 게르",
+      "lat": null,
+      "lon": null,
+      "price": "",
+      "price_ko": "",
+      "about": "",
+      "about_ko": "",
+      "fac": {
+        "shower": "",
+        "private_bath": "",
+        "power": "",
+        "wifi": "",
+        "restaurant": ""
+      },
+      "url": "",
+      "phone": "",
+      "photo": "",
+      "id": "ongi-ongi-energy"
     },
     {
-      "id": "orkhon-orkhon-waterfall-camp",
       "name": "Orkhon Waterfall Camp",
       "stop": "orkhon",
       "tier": "standard",
       "season": "summer",
-      "type": {
-        "en": "Traditional Mongolian ger",
-        "ko": "전통 몽골 게르"
-      }
+      "type": "Traditional Mongolian ger",
+      "type_ko": "전통 몽골 게르",
+      "lat": null,
+      "lon": null,
+      "price": "",
+      "price_ko": "",
+      "about": "",
+      "about_ko": "",
+      "fac": {
+        "shower": "",
+        "private_bath": "",
+        "power": "",
+        "wifi": "",
+        "restaurant": ""
+      },
+      "url": "",
+      "phone": "",
+      "photo": "",
+      "id": "orkhon-orkhon-waterfall-camp"
     },
     {
-      "id": "terelj-humug-camp",
       "name": "Humug Camp",
       "stop": "terelj",
       "tier": "standard",
       "season": "summer",
-      "type": {
-        "en": "Modern ger",
-        "ko": "현대식 게르"
-      },
+      "type": "Modern ger",
+      "type_ko": "현대식 게르",
       "lat": 47.85281,
-      "lon": 107.41502
+      "lon": 107.41502,
+      "price": "",
+      "price_ko": "",
+      "about": "",
+      "about_ko": "",
+      "fac": {
+        "shower": "",
+        "private_bath": "",
+        "power": "",
+        "wifi": "",
+        "restaurant": ""
+      },
+      "url": "",
+      "phone": "",
+      "photo": "",
+      "id": "terelj-humug-camp"
     },
     {
-      "id": "terelj-energy-hills",
       "name": "Energy Hills",
       "stop": "terelj",
       "tier": "upgrade",
       "season": "all",
-      "type": {
-        "en": "Modern ger",
-        "ko": "현대식 게르"
-      },
+      "type": "Modern ger",
+      "type_ko": "현대식 게르",
       "lat": 47.89575,
-      "lon": 107.42029
+      "lon": 107.42029,
+      "price": "",
+      "price_ko": "",
+      "about": "",
+      "about_ko": "",
+      "fac": {
+        "shower": "",
+        "private_bath": "",
+        "power": "",
+        "wifi": "",
+        "restaurant": ""
+      },
+      "url": "",
+      "phone": "",
+      "photo": "",
+      "id": "terelj-energy-hills"
     },
     {
-      "id": "terelj-terelj-lodge",
       "name": "Terelj Lodge",
       "stop": "terelj",
       "tier": "upgrade",
       "season": "summer",
-      "type": {
-        "en": "Modern ger",
-        "ko": "현대식 게르"
-      },
+      "type": "Modern ger",
+      "type_ko": "현대식 게르",
       "lat": 47.8926,
-      "lon": 107.41476
+      "lon": 107.41476,
+      "price": "",
+      "price_ko": "",
+      "about": "",
+      "about_ko": "",
+      "fac": {
+        "shower": "",
+        "private_bath": "",
+        "power": "",
+        "wifi": "",
+        "restaurant": ""
+      },
+      "url": "",
+      "phone": "",
+      "photo": "",
+      "id": "terelj-terelj-lodge"
     },
     {
-      "id": "terelj-juulchin-terelj",
       "name": "Juulchin Terelj",
       "stop": "terelj",
       "tier": "upgrade",
       "season": "summer",
-      "type": {
-        "en": "Modern ger",
-        "ko": "현대식 게르"
-      },
+      "type": "Modern ger",
+      "type_ko": "현대식 게르",
       "lat": 47.87193,
-      "lon": 107.38727
+      "lon": 107.38727,
+      "price": "",
+      "price_ko": "",
+      "about": "",
+      "about_ko": "",
+      "fac": {
+        "shower": "",
+        "private_bath": "",
+        "power": "",
+        "wifi": "",
+        "restaurant": ""
+      },
+      "url": "",
+      "phone": "",
+      "photo": "",
+      "id": "terelj-juulchin-terelj"
     },
     {
-      "id": "terelj-glory-resort",
       "name": "Glory Resort",
       "stop": "terelj",
       "tier": "upgrade",
       "season": "summer",
-      "type": {
-        "en": "Modern ger",
-        "ko": "현대식 게르"
-      },
+      "type": "Modern ger",
+      "type_ko": "현대식 게르",
       "lat": 47.82259,
-      "lon": 107.36524
+      "lon": 107.36524,
+      "price": "",
+      "price_ko": "",
+      "about": "",
+      "about_ko": "",
+      "fac": {
+        "shower": "",
+        "private_bath": "",
+        "power": "",
+        "wifi": "",
+        "restaurant": ""
+      },
+      "url": "",
+      "phone": "",
+      "photo": "",
+      "id": "terelj-glory-resort"
     },
     {
-      "id": "elsen-bataa-camp",
       "name": "Bataa Camp",
       "stop": "elsen",
       "tier": "standard",
       "season": "summer",
-      "type": {
-        "en": "Traditional Mongolian ger",
-        "ko": "전통 몽골 게르"
-      }
+      "type": "Traditional Mongolian ger",
+      "type_ko": "전통 몽골 게르",
+      "lat": null,
+      "lon": null,
+      "price": "",
+      "price_ko": "",
+      "about": "",
+      "about_ko": "",
+      "fac": {
+        "shower": "",
+        "private_bath": "",
+        "power": "",
+        "wifi": "",
+        "restaurant": ""
+      },
+      "url": "",
+      "phone": "",
+      "photo": "",
+      "id": "elsen-bataa-camp"
     },
     {
-      "id": "elsen-bichigt-khad-camp",
       "name": "Bichigt Khad Camp",
       "stop": "elsen",
       "tier": "upgrade",
       "season": "summer",
-      "type": {
-        "en": "Modern ger",
-        "ko": "현대식 게르"
-      },
+      "type": "Modern ger",
+      "type_ko": "현대식 게르",
       "lat": 47.36611,
-      "lon": 103.81405
+      "lon": 103.81405,
+      "price": "",
+      "price_ko": "",
+      "about": "",
+      "about_ko": "",
+      "fac": {
+        "shower": "",
+        "private_bath": "",
+        "power": "",
+        "wifi": "",
+        "restaurant": ""
+      },
+      "url": "",
+      "phone": "",
+      "photo": "",
+      "id": "elsen-bichigt-khad-camp"
     },
     {
-      "id": "elsen-burd-star-camp",
       "name": "Burd Star Camp",
       "stop": "elsen",
       "tier": "upgrade",
       "season": "summer",
-      "type": {
-        "en": "Modern ger",
-        "ko": "현대식 게르"
-      },
+      "type": "Modern ger",
+      "type_ko": "현대식 게르",
       "lat": 47.36391,
-      "lon": 103.72015
+      "lon": 103.72015,
+      "price": "",
+      "price_ko": "",
+      "about": "",
+      "about_ko": "",
+      "fac": {
+        "shower": "",
+        "private_bath": "",
+        "power": "",
+        "wifi": "",
+        "restaurant": ""
+      },
+      "url": "",
+      "phone": "",
+      "photo": "",
+      "id": "elsen-burd-star-camp"
     },
     {
-      "id": "elsen-sundui",
       "name": "Sundui",
       "stop": "elsen",
       "tier": "budget",
       "season": "summer",
-      "type": {
-        "en": "Nomad family ger",
-        "ko": "유목민 가정 게르"
-      }
+      "type": "Nomad family ger",
+      "type_ko": "유목민 가정 게르",
+      "lat": null,
+      "lon": null,
+      "price": "",
+      "price_ko": "",
+      "about": "",
+      "about_ko": "",
+      "fac": {
+        "shower": "",
+        "private_bath": "",
+        "power": "",
+        "wifi": "",
+        "restaurant": ""
+      },
+      "url": "",
+      "phone": "",
+      "photo": "",
+      "id": "elsen-sundui"
     },
     {
-      "id": "tsenkher-altannutag-camp",
       "name": "Altannutag Camp",
       "stop": "tsenkher",
       "tier": "standard",
       "season": "summer",
-      "type": {
-        "en": "Traditional Mongolian ger",
-        "ko": "전통 몽골 게르"
-      },
+      "type": "Traditional Mongolian ger",
+      "type_ko": "전통 몽골 게르",
       "lat": 47.31802,
-      "lon": 101.64909
+      "lon": 101.64909,
+      "price": "",
+      "price_ko": "",
+      "about": "",
+      "about_ko": "",
+      "fac": {
+        "shower": "",
+        "private_bath": "",
+        "power": "",
+        "wifi": "",
+        "restaurant": ""
+      },
+      "url": "",
+      "phone": "",
+      "photo": "",
+      "id": "tsenkher-altannutag-camp"
     },
     {
-      "id": "tsenkher-khangai-camp",
       "name": "Khangai Camp",
       "stop": "tsenkher",
       "tier": "standard",
       "season": "summer",
-      "type": {
-        "en": "Traditional Mongolian ger",
-        "ko": "전통 몽골 게르"
-      },
+      "type": "Traditional Mongolian ger",
+      "type_ko": "전통 몽골 게르",
       "lat": 47.32197,
-      "lon": 101.65688
+      "lon": 101.65688,
+      "price": "",
+      "price_ko": "",
+      "about": "",
+      "about_ko": "",
+      "fac": {
+        "shower": "",
+        "private_bath": "",
+        "power": "",
+        "wifi": "",
+        "restaurant": ""
+      },
+      "url": "",
+      "phone": "",
+      "photo": "",
+      "id": "tsenkher-khangai-camp"
     },
     {
-      "id": "tsenkher-duut-resort",
       "name": "Duut Resort",
       "stop": "tsenkher",
       "tier": "upgrade",
       "season": "all",
-      "type": {
-        "en": "Traditional Mongolian ger",
-        "ko": "전통 몽골 게르"
-      },
+      "type": "Traditional Mongolian ger",
+      "type_ko": "전통 몽골 게르",
       "lat": 47.32049,
-      "lon": 101.65891
+      "lon": 101.65891,
+      "price": "",
+      "price_ko": "",
+      "about": "",
+      "about_ko": "",
+      "fac": {
+        "shower": "",
+        "private_bath": "",
+        "power": "",
+        "wifi": "",
+        "restaurant": ""
+      },
+      "url": "",
+      "phone": "",
+      "photo": "",
+      "id": "tsenkher-duut-resort"
     },
     {
-      "id": "ugii-ugii-dalai-camp",
       "name": "Ugii Dalai Camp",
       "stop": "ugii",
       "tier": "standard",
       "season": "all",
-      "type": {
-        "en": "Traditional Mongolian ger",
-        "ko": "전통 몽골 게르"
-      },
+      "type": "Traditional Mongolian ger",
+      "type_ko": "전통 몽골 게르",
       "lat": 47.75913,
-      "lon": 102.81345
+      "lon": 102.81345,
+      "price": "",
+      "price_ko": "",
+      "about": "",
+      "about_ko": "",
+      "fac": {
+        "shower": "",
+        "private_bath": "",
+        "power": "",
+        "wifi": "",
+        "restaurant": ""
+      },
+      "url": "",
+      "phone": "",
+      "photo": "",
+      "id": "ugii-ugii-dalai-camp"
     },
     {
-      "id": "ugii-ugii-khishig-camp",
       "name": "Ugii Khishig Camp",
       "stop": "ugii",
       "tier": "standard",
       "season": "summer",
-      "type": {
-        "en": "Traditional Mongolian ger",
-        "ko": "전통 몽골 게르"
-      }
+      "type": "Traditional Mongolian ger",
+      "type_ko": "전통 몽골 게르",
+      "lat": null,
+      "lon": null,
+      "price": "",
+      "price_ko": "",
+      "about": "",
+      "about_ko": "",
+      "fac": {
+        "shower": "",
+        "private_bath": "",
+        "power": "",
+        "wifi": "",
+        "restaurant": ""
+      },
+      "url": "",
+      "phone": "",
+      "photo": "",
+      "id": "ugii-ugii-khishig-camp"
     },
     {
-      "id": "terkhiin-dalai-van-camp",
       "name": "Dalai Van Camp",
       "stop": "terkhiin",
       "tier": "standard",
       "season": "summer",
-      "type": {
-        "en": "Traditional Mongolian ger",
-        "ko": "전통 몽골 게르"
-      },
+      "type": "Traditional Mongolian ger",
+      "type_ko": "전통 몽골 게르",
       "lat": 48.143,
-      "lon": 99.76951
+      "lon": 99.76951,
+      "price": "",
+      "price_ko": "",
+      "about": "",
+      "about_ko": "",
+      "fac": {
+        "shower": "",
+        "private_bath": "",
+        "power": "",
+        "wifi": "",
+        "restaurant": ""
+      },
+      "url": "",
+      "phone": "",
+      "photo": "",
+      "id": "terkhiin-dalai-van-camp"
     },
     {
-      "id": "shineider-ulziit-khishig-camp",
       "name": "Ulziit Khishig Camp",
       "stop": "shineider",
       "tier": "standard",
       "season": "summer",
-      "type": {
-        "en": "Traditional Mongolian ger",
-        "ko": "전통 몽골 게르"
-      }
+      "type": "Traditional Mongolian ger",
+      "type_ko": "전통 몽골 게르",
+      "lat": null,
+      "lon": null,
+      "price": "",
+      "price_ko": "",
+      "about": "",
+      "about_ko": "",
+      "fac": {
+        "shower": "",
+        "private_bath": "",
+        "power": "",
+        "wifi": "",
+        "restaurant": ""
+      },
+      "url": "",
+      "phone": "",
+      "photo": "",
+      "id": "shineider-ulziit-khishig-camp"
     },
     {
-      "id": "khuvsgul-misheel-camp",
       "name": "Misheel Camp",
       "stop": "khuvsgul",
       "tier": "standard",
       "season": "summer",
-      "type": {
-        "en": "Traditional Mongolian ger",
-        "ko": "전통 몽골 게르"
-      },
+      "type": "Traditional Mongolian ger",
+      "type_ko": "전통 몽골 게르",
       "lat": 50.60376,
-      "lon": 100.19678
+      "lon": 100.19678,
+      "price": "",
+      "price_ko": "",
+      "about": "",
+      "about_ko": "",
+      "fac": {
+        "shower": "",
+        "private_bath": "",
+        "power": "",
+        "wifi": "",
+        "restaurant": ""
+      },
+      "url": "",
+      "phone": "",
+      "photo": "",
+      "id": "khuvsgul-misheel-camp"
     },
     {
-      "id": "khuvsgul-khuvsgul-sor-camp",
       "name": "Khuvsgul Sor Camp",
       "stop": "khuvsgul",
       "tier": "standard",
       "season": "summer",
-      "type": {
-        "en": "Traditional Mongolian ger",
-        "ko": "전통 몽골 게르"
-      },
+      "type": "Traditional Mongolian ger",
+      "type_ko": "전통 몽골 게르",
       "lat": 50.57208,
-      "lon": 100.15813
+      "lon": 100.15813,
+      "price": "",
+      "price_ko": "",
+      "about": "",
+      "about_ko": "",
+      "fac": {
+        "shower": "",
+        "private_bath": "",
+        "power": "",
+        "wifi": "",
+        "restaurant": ""
+      },
+      "url": "",
+      "phone": "",
+      "photo": "",
+      "id": "khuvsgul-khuvsgul-sor-camp"
     },
     {
-      "id": "khuvsgul-toilogt-camp",
       "name": "Toilogt Camp",
       "stop": "khuvsgul",
       "tier": "upgrade",
       "season": "summer",
-      "type": {
-        "en": "Traditional Mongolian ger",
-        "ko": "전통 몽골 게르"
-      },
+      "type": "Traditional Mongolian ger",
+      "type_ko": "전통 몽골 게르",
       "lat": 50.65533,
-      "lon": 100.25363
+      "lon": 100.25363,
+      "price": "",
+      "price_ko": "",
+      "about": "",
+      "about_ko": "",
+      "fac": {
+        "shower": "",
+        "private_bath": "",
+        "power": "",
+        "wifi": "",
+        "restaurant": ""
+      },
+      "url": "",
+      "phone": "",
+      "photo": "",
+      "id": "khuvsgul-toilogt-camp"
     },
     {
-      "id": "bulgan-bulgan-suite-hotel",
       "name": "Bulgan Suite Hotel",
       "stop": "bulgan",
       "tier": "standard",
       "season": "summer",
-      "type": {
-        "en": "Hotel, twin or double rooms",
-        "ko": "호텔 (트윈·더블룸)"
-      }
+      "type": "Hotel, twin or double rooms",
+      "type_ko": "호텔 (트윈·더블룸)",
+      "lat": null,
+      "lon": null,
+      "price": "",
+      "price_ko": "",
+      "about": "",
+      "about_ko": "",
+      "fac": {
+        "shower": "",
+        "private_bath": "",
+        "power": "",
+        "wifi": "",
+        "restaurant": ""
+      },
+      "url": "",
+      "phone": "",
+      "photo": "",
+      "id": "bulgan-bulgan-suite-hotel"
     },
     {
-      "id": "erdenet-deedes-hotel",
       "name": "Deedes Hotel",
       "stop": "erdenet",
       "tier": "standard",
       "season": "summer",
-      "type": {
-        "en": "Hotel, rooms for 2–3",
-        "ko": "호텔 (2~3인실)"
-      },
+      "type": "Hotel, rooms for 2–3",
+      "type_ko": "호텔 (2~3인실)",
       "lat": 49.03664,
-      "lon": 104.05737
+      "lon": 104.05737,
+      "price": "",
+      "price_ko": "",
+      "about": "",
+      "about_ko": "",
+      "fac": {
+        "shower": "",
+        "private_bath": "",
+        "power": "",
+        "wifi": "",
+        "restaurant": ""
+      },
+      "url": "",
+      "phone": "",
+      "photo": "",
+      "id": "erdenet-deedes-hotel"
     }
   ]
 }

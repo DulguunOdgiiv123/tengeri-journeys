@@ -1,43 +1,43 @@
 {
   "seasons": [
     {
-      "en": "Spring",
-      "ko": "봄",
-      "from": "4",
-      "to": "5",
+      "name": "Spring",
+      "name_ko": "봄",
+      "from": 4,
+      "to": 5,
       "img": "img/terelj.jpg",
       "text": "A windy thaw and newborn animals. Ger camps reopen in mid-May.",
-      "textKo": "바람 부는 해빙기, 새끼 가축이 태어나는 계절. 5월 중순 게르 캠프가 문을 엽니다.",
+      "text_ko": "바람 부는 해빙기, 새끼 가축이 태어나는 계절. 5월 중순 게르 캠프가 문을 엽니다.",
       "peak": false
     },
     {
-      "en": "Summer",
-      "ko": "여름",
-      "from": "6",
-      "to": "8",
+      "name": "Summer",
+      "name_ko": "여름",
+      "from": 6,
+      "to": 8,
       "img": "img/lake.jpg",
       "text": "Peak season: green steppe, long days and Naadam on 11–13 July.",
-      "textKo": "성수기. 푸른 초원과 긴 낮, 7월 11–13일 나담 축제.",
+      "text_ko": "성수기. 푸른 초원과 긴 낮, 7월 11–13일 나담 축제.",
       "peak": true
     },
     {
-      "en": "Autumn",
-      "ko": "가을",
-      "from": "9",
-      "to": "10",
+      "name": "Autumn",
+      "name_ko": "가을",
+      "from": 9,
+      "to": 10,
       "img": "img/bayanzag.jpg",
       "text": "Golden larches, quiet roads and the Golden Eagle Festival in early October.",
-      "textKo": "황금빛 낙엽송과 한적한 길, 10월 초 골든 이글 페스티벌.",
+      "text_ko": "황금빛 낙엽송과 한적한 길, 10월 초 골든 이글 페스티벌.",
       "peak": false
     },
     {
-      "en": "Winter",
-      "ko": "겨울",
-      "from": "11",
-      "to": "3",
+      "name": "Winter",
+      "name_ko": "겨울",
+      "from": 11,
+      "to": 3,
       "img": "img/winter.jpg",
       "text": "Snowy steppe under bright skies, Tsagaan Sar and the Ice Festival on Khövsgöl.",
-      "textKo": "맑은 하늘 아래 눈 덮인 초원, 차강사르와 홉스골 얼음 축제.",
+      "text_ko": "맑은 하늘 아래 눈 덮인 초원, 차강사르와 홉스골 얼음 축제.",
       "peak": false
     }
   ]

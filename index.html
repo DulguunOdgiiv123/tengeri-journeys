@@ -1104,116 +1104,157 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
   const esc = t => String(t).replace(/[&<>"]/g, ch => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[ch]));
 
   /* ---------- Content ----------
-     Tours, lodges, FAQ and the rest live in data/*.json and are edited in the admin (Pages CMS, app.pagescms.org;
-     its form fields are defined in .pages.yml). The admin stores named fields such as { en, ko } and { time, en, ko };
-     fromAdmin() turns them back into the compact shapes the rest of this script reads ([en, ko], [time, en, ko], ...)
-     and leaves out entries that would break the page (a tour without an ID, a route stop that doesn't exist). */
+     Tours, FAQ, posts and the rest live in data/*.json and are edited in the admin at /admin (Sveltia CMS; its
+     forms are in admin/config.yml). The admin keeps easy-to-edit shapes, e.g. a day's timetable as one text box per
+     language with one row per line ("08:00 Tour begins"). fromAdmin() turns them into the compact shapes the rest
+     of this script reads ([time, en, ko], [en, ko], ...) and leaves out entries that would break the page.
+     Preview: the admin's preview pane shows this page as /?preview and hands it the unsaved file by postMessage
+     (admin/preview.js), with what is being edited, so the page can open that tour or section. */
   const ADMIN_FILES = ["settings", "places", "tours", "lodges", "policy", "seasons", "faq", "posts", "reviews"];
+  const PREVIEW = new URLSearchParams(location.search).has("preview") && window.top !== window;
+  let previewFocus = null;
+  const draftFromAdmin = () => new Promise(resolve => {
+    addEventListener("message", e => { if (e.origin === location.origin && e.data && e.data.type === "gj-draft") resolve(e.data); });
+    window.top.postMessage({ type: "gj-ready" }, location.origin);
+  });
   async function loadAdmin() {
+    const draft = PREVIEW ? draftFromAdmin() : null;
     const texts = await Promise.all(ADMIN_FILES.map(async f => {
       const res = await fetch(`data/${f}.json`, { cache: "no-cache" });   // revalidate, so admin edits show up quickly
       if (!res.ok) throw new Error(`data/${f}.json: HTTP ${res.status}`);
       return res.text();
     }));
-    // The admin saves a file it has emptied (e.g. every review deleted) as a blank file, not {}.
-    return Object.fromEntries(ADMIN_FILES.map((f, i) => [f, texts[i].trim() ? JSON.parse(texts[i]) : {}]));
+    const data = Object.fromEntries(ADMIN_FILES.map((f, i) => [f, texts[i].trim() ? JSON.parse(texts[i]) : {}]));
+    if (draft) { const d = await draft; data[d.file] = d.data; previewFocus = d.focus; }
+    return data;
   }
 
   function fromAdmin(d) {
     const arr = a => Array.isArray(a) ? a : [];
-    const str = v => v == null ? "" : String(v);
+    const str = v => v == null ? "" : String(v).trim();
     const num = v => v === "" || v == null || isNaN(+v) ? null : +v;
-    const filled = o => !!(o && (o.en || o.ko));
-    const two = o => [str(o?.en || o?.ko), str(o?.ko || o?.en)];   // { en, ko } -> [en, ko]; a blank side shows the other language
+    const both = (en, ko) => [str(en) || str(ko), str(ko) || str(en)];   // [en, ko]; a blank side shows the other language
+    const rows = t => str(t).split(/\r?\n/).map(s => s.trim()).filter(Boolean);
+    const pairRows = (en, ko) => { const e = rows(en), k = rows(ko); return Array.from({ length: Math.max(e.length, k.length) }, (_, i) => both(e[i], k[i])); };
+    const timed = s => { const m = /^(\d{1,2}:\d{2})\s+(.+)$/.exec(s || ""); return m ? [m[1].padStart(5, "0"), m[2]] : [null, s || ""]; };
+    const plan = (en, ko) => {   // "08:00 Tour begins" lines -> [time, en, ko]; the English line sets the time
+      const e = rows(en).map(timed), k = rows(ko).map(timed);
+      return Array.from({ length: Math.max(e.length, k.length) }, (_, i) => {
+        const a = e[i] || [null, ""], b = k[i] || [null, ""];
+        return [e[i] ? a[0] : b[0], a[1] || b[1], b[1] || a[1]];
+      });
+    };
+    const slug = s => str(s).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+    const img = v => str(v).replace(/^\/+/, "");   // new uploads are saved as /img/..., older ones as img/...
     const lines = t => str(t).replace(/\r?\n/g, "<br>");
 
     const PLACES = {};
     for (const p of arr(d.places.places)) {
-      const lat = num(p.lat), lon = num(p.lon);
-      if (!p.id || !p.name || lat === null || lon === null) { console.warn("Map stop left out (needs ID, name, latitude and longitude):", p); continue; }
-      PLACES[p.id] = { name: p.name, ko: p.ko || p.name, lat, lon, ...(p.cap ? { cap: true } : {}) };
+      const id = str(p.id), lat = num(p.lat), lon = num(p.lon);
+      if (!id || !str(p.name) || lat === null || lon === null) { console.warn("Map stop left out (needs code, name, latitude and longitude):", p); continue; }
+      PLACES[id] = { name: str(p.name), ko: str(p.name_ko) || str(p.name), lat, lon, ...(p.cap ? { cap: true } : {}) };
     }
 
     const day = x => {
-      const st = x.stay || {};
+      const stay = ["ger", "hotel", "gerhouse", "nomad"].includes(x.stay) ? x.stay : null;
       const o = {
-        p: two(x.place),
-        t: arr(x.times).map(r => [r.time || null, str(r.en || r.ko), str(r.ko || r.en)]),
-        s: st.type ? [st.type, st.camp || null, [st.shower, st.power, st.wifi].map(f => f ? "1" : "0").join("")] : null,
-        h: x.hours == null || x.hours === "" ? null : String(x.hours)
+        p: both(x.place, x.place_ko), t: plan(x.plan, x.plan_ko),
+        s: stay ? [stay, str(x.camp) || null, [x.shower, x.power, x.wifi].map(f => f ? "1" : "0").join("")] : null,
+        h: str(x.hours) || null
       };
       if (x.drop) o.drop = 1;
       if (x.shop) o.shop = 1;
-      if (arr(x.notes).some(filled)) o.n = x.notes.filter(filled).map(two);
-      if (filled(x.meals)) o.m = two(x.meals);
+      const notes = pairRows(x.notes, x.notes_ko);
+      if (notes.length) o.n = notes;
+      if (str(x.meals) || str(x.meals_ko)) o.m = both(x.meals, x.meals_ko);
       return o;
     };
-    const TRIPS = [];
-    for (const t of arr(d.tours.tours)) {
-      if (!t.id || !t.name) { console.warn("Tour left out (needs an ID and a name):", t); continue; }
-      const ko = t.ko || {}, route = [];
-      for (const k of arr(t.route).map(r => str(r).trim()))
-        if (PLACES[k.replace("~", "")]) route.push(k); else console.warn(`Tour ${t.id}: map stop "${k}" doesn't exist, left out of the route`);
+    const LEVEL_KO = { Easy: "쉬움", Moderate: "보통", Challenging: "어려움" };
+    const TRIPS = [], tourIdAt = [], used = new Set();
+    arr(d.tours.tours).forEach((t, i) => {
+      const name = str(t.name), adv = t.advanced || {};
+      if (!name) { console.warn("Tour left out (needs a name):", t); return; }
+      const base = slug(adv.id) || slug(name) || "tour";
+      let id = base;
+      for (let n = 2; used.has(id); n++) id = `${base}-${n}`;   // a duplicated tour keeps its copy's code until changed
+      used.add(id);
+      tourIdAt[i] = id;
+      const route = [];
+      for (const k of arr(adv.route).map(str).filter(Boolean))
+        if (PLACES[k.replace("~", "")]) route.push(k); else console.warn(`Tour ${id}: map stop "${k}" doesn't exist, left out of the route`);
+      const level = str(t.level), season = str(t.season), tag = str(t.tag), text = str(t.text);
       const o = {
-        id: t.id, name: t.name, days: num(t.days) || arr(t.schedule).length || 1,
-        season: str(t.season), level: str(t.level), price: null, img: t.img || "img/dunes.jpg", tag: str(t.tag),
-        cats: arr(t.cats), months: arr(t.months).map(Number).filter(m => m >= 1 && m <= 12), text: str(t.text),
-        route, sched: arr(t.schedule).map(day),
-        ko: { name: ko.name || t.name, season: ko.season || str(t.season), level: ko.level || str(t.level), tag: ko.tag || str(t.tag), text: ko.text || str(t.text) }
+        id, name, days: num(t.days) || arr(t.schedule).length || 1, season, level, price: null,
+        img: img(t.img) || "img/dunes.jpg", tag, cats: arr(t.cats).map(str).filter(Boolean),
+        months: arr(t.months).map(Number).filter(m => m >= 1 && m <= 12), text, route, sched: arr(t.schedule).map(day),
+        ko: { name: str(t.name_ko) || name, season: str(t.season_ko) || season, level: LEVEL_KO[level] || level, tag: str(t.tag_ko) || tag, text: str(t.text_ko) || text }
       };
-      if (t.cafe) o.cafe = t.cafe;
-      if (num(t.art) !== null) o.art = num(t.art);
+      if (str(t.cafe)) o.cafe = str(t.cafe);
+      if (num(adv.art) !== null) o.art = num(adv.art);
       const team = arr(t.team).map(r => ({ n: num(r.n), krw: num(r.krw) })).filter(r => r.n && r.krw).sort((a, b) => b.n - a.n);
       if (team.length) o.team = team;
-      const alt = arr(t.alt).map(r => arr(r.options).filter(filled).map(two)).filter(r => r.length);
+      const alt = arr(adv.alt).map(r => arr(r.options).filter(c => str(c.en) || str(c.ko)).map(c => both(c.en, c.ko))).filter(r => r.length);
       if (alt.length) o.alt = alt;
       TRIPS.push(o);
-    }
+    });
 
-    const LODGES = arr(d.lodges.lodges).filter(l => l.name && l.stop).map((l, i) => {
+    const LODGES = arr(d.lodges.lodges).filter(l => str(l.name) && str(l.stop)).map((l, i) => {
       const lat = num(l.lat), lon = num(l.lon);
       const o = {
-        stop: l.stop, id: l.id || `${l.stop}-${i + 1}`, tier: ["standard", "upgrade", "budget"].includes(l.tier) ? l.tier : "standard",
-        season: l.season === "all" ? "all" : "summer", n: l.name, ll: lat !== null && lon !== null ? [lat, lon] : null
+        stop: str(l.stop), id: str(l.id) || `${str(l.stop)}-${i + 1}`, tier: ["standard", "upgrade", "budget"].includes(l.tier) ? l.tier : "standard",
+        season: l.season === "all" ? "all" : "summer", n: str(l.name), ll: lat !== null && lon !== null ? [lat, lon] : null
       };
-      if (filled(l.type)) o.ty = two(l.type);
-      if (filled(l.price)) o.price = two(l.price);
-      if (filled(l.about)) o.about = two(l.about);
+      if (str(l.type) || str(l.type_ko)) o.ty = both(l.type, l.type_ko);
+      if (str(l.price) || str(l.price_ko)) o.price = both(l.price, l.price_ko);
+      if (str(l.about) || str(l.about_ko)) o.about = both(l.about, l.about_ko);
       const fac = Object.fromEntries(["shower", "private_bath", "power", "wifi", "restaurant"]
         .filter(k => l.fac?.[k] === "yes" || l.fac?.[k] === "no").map(k => [k, l.fac[k] === "yes"]));
       if (Object.keys(fac).length) o.fac = fac;
-      for (const k of ["url", "phone", "photo"]) if (l[k]) o[k] = l[k];
+      for (const k of ["url", "phone", "photo"]) if (str(l[k])) o[k] = str(l[k]);
       return o;
     });
 
-    const notes = arr(d.policy.notes).filter(filled).map(two);
-    const SEASONS = arr(d.seasons.seasons).filter(x => x.en).map(x => {
+    const SEASONS = arr(d.seasons.seasons).filter(x => str(x.name)).map(x => {
       const first = num(x.from) || 1, last = num(x.to) || first, months = [];
       for (let m = first; ; m = m % 12 + 1) { months.push(m); if (m === last || months.length === 12) break; }   // Nov–Mar wraps round the year
-      return { en: x.en, ko: x.ko || x.en, months, img: x.img || "img/dunes.jpg", text: str(x.text), textKo: x.textKo || str(x.text), ...(x.peak ? { peak: true } : {}) };
+      return { en: str(x.name), ko: str(x.name_ko) || str(x.name), months, img: img(x.img) || "img/dunes.jpg", text: str(x.text), textKo: str(x.text_ko) || str(x.text), ...(x.peak ? { peak: true } : {}) };
     });
 
+    const pol = d.policy, notes = pairRows(pol.notes, pol.notes_ko);
     const st = d.settings, settings = {};
     for (const k of ["kakao", "kakaoId", "whatsapp", "naverBlog", "instagram", "email", "formKey", "kakaoJsKey"]) settings[k] = str(st[k]);
     settings.company = {};
     for (const k of ["name", "ceo", "address", "regNo", "licenseNo", "phone"]) settings.company[k] = str(st.company?.[k]);
 
     return {
-      settings, PLACES, TRIPS, LODGES, SEASONS,
-      POLICY: { incl: arr(d.policy.incl).filter(filled).map(two), excl: arr(d.policy.excl).filter(filled).map(two) },
+      settings, PLACES, TRIPS, tourIdAt, LODGES, SEASONS,
+      POLICY: { incl: pairRows(pol.incl, pol.incl_ko), excl: pairRows(pol.excl, pol.excl_ko) },
       NOTES: { en: notes.map(n => n[0]), ko: notes.map(n => n[1]) },
-      FAQ_CATS: arr(d.faq.categories).filter(c => c.id).map(c => ({ id: c.id, name: c.name || c.id, ko: { name: c.ko?.name || c.name || c.id } })),
-      FAQ: arr(d.faq.questions).filter(q => q.q).map(q => ({
-        c: q.c, q: q.q, a: lines(q.a), ko: { q: q.ko?.q || q.q, a: lines(q.ko?.a || q.a) }, ...(q.id ? { id: q.id } : {})
+      FAQ_CATS: arr(d.faq.categories).filter(c => str(c.id)).map(c => ({ id: str(c.id), name: str(c.name) || str(c.id), ko: { name: str(c.name_ko) || str(c.name) || str(c.id) } })),
+      FAQ: arr(d.faq.questions).filter(q => str(q.q)).map(q => ({
+        c: str(q.c), q: str(q.q), a: lines(q.a), ko: { q: str(q.q_ko) || str(q.q), a: lines(str(q.a_ko) || q.a) }, ...(str(q.id) ? { id: str(q.id) } : {})
       })),
-      POSTS: arr(d.posts.posts).filter(p => p.url && p.title).map(p => ({
-        src: p.src || "blog", url: p.url, title: p.title, by: str(p.by), date: str(p.date), region: str(p.region), img: str(p.img)
+      POSTS: arr(d.posts.posts).filter(p => str(p.url) && str(p.title)).map(p => ({
+        src: str(p.src) || "blog", url: str(p.url), title: str(p.title), by: str(p.by), date: str(p.date), region: str(p.region), img: str(p.img)
       })),
-      REVIEWS: arr(d.reviews.reviews).filter(r => r.text && r.trip).map((r, i) => ({
-        id: r.id || `r${i + 1}`, name: str(r.name), date: str(r.date), trip: r.trip, rating: Math.min(5, Math.max(1, Math.round(num(r.rating) || 5))),
-        lang: r.lang || "ko", text: r.text, source: r.source || "direct", ...(r.url ? { url: r.url } : {})
+      REVIEWS: arr(d.reviews.reviews).filter(r => str(r.text) && str(r.trip)).map((r, i) => ({
+        id: str(r.id) || `r${i + 1}`, name: str(r.name), date: str(r.date), trip: str(r.trip), rating: Math.min(5, Math.max(1, Math.round(num(r.rating) || 5))),
+        lang: str(r.lang) || "ko", text: str(r.text), source: str(r.source) || "direct", ...(str(r.url) ? { url: str(r.url) } : {})
       }))
     };
+  }
+
+  // In the admin preview: open the tour (and day) or scroll to the section being edited. Runs after the page is built.
+  function showPreviewFocus() {
+    const f = previewFocus || {}, id = f.index != null ? C.tourIdAt[f.index] : null;
+    if (id && byId[id]) {
+      openTrip(id);
+      const target = () => f.day != null ? $$("#m-content .day")[f.day] : f.sub ? document.getElementById(f.sub) : null;
+      setTimeout(() => { const el = target(); if (el) el.scrollIntoView({ block: "start" }); }, 350);
+    } else if (f.section) {
+      const el = document.getElementById(f.section);
+      if (el) el.scrollIntoView({ block: "start" });
+    }
   }
 
   let C;
@@ -2342,6 +2383,7 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
   }
   followHash();
   addEventListener("hashchange", followHash);
+  if (PREVIEW) showPreviewFocus();
 })();
 </script>
 </body>
