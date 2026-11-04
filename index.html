@@ -28,7 +28,9 @@
    trust, real reviews, seasons, FAQ and contact. Tours come first, decoration second.
    Identity: two colours only, white and the Golden Jigu logo blue #24aaff (with navy and pale tints); no green, yellow or amber.
    Night mode swaps white for deep navy; it follows the device setting and the header toggle overrides it.
-   Kakao, Naver and WhatsApp marks use the brand blue too. Red is kept for form errors alone. Crisp 1px edges, small radii. */
+   Kakao, Naver and WhatsApp marks use the brand blue too. Red is kept for form errors alone. Crisp 1px edges, small radii.
+   Signature touches (still blue only): "eternal blue sky" gradients from sky to deep blue on buttons, icons and headline words,
+   a brush underline under the hero headline, a mountain-and-steppe horizon closing the hero, and a soft blue glow on hover. */
 :root {
   color-scheme: light;
   --paper: #ffffff;
@@ -68,6 +70,12 @@
   --shadow: 0 1px 2px rgba(15,27,45,.06);
   --shadow-lg: 0 12px 28px -14px rgba(15,27,45,.28);
   --ease: cubic-bezier(.2, .7, .2, 1);
+  /* Sky gradients: the logo blue, lighter above and deeper below */
+  --grad: linear-gradient(135deg, #5cc8ff 0%, #24aaff 48%, #0b84dc 100%);
+  --grad-text: linear-gradient(90deg, #24aaff 0%, #0a6fc6 100%);
+  --glow: 0 10px 22px -10px rgba(36,170,255,.65);
+  --shadow-blue: 0 22px 40px -22px rgba(14,120,210,.5);
+  --sky-glow: radial-gradient(1100px 420px at 50% 0%, rgba(36,170,255,.10), transparent 70%);
 }
 
 /* Night mode tokens: device setting unless the visitor picked light; or picked dark */
@@ -87,6 +95,9 @@
   --star-off: #2a3d52;
   --shadow: 0 1px 2px rgba(0,0,0,.4);
   --shadow-lg: 0 16px 36px -14px rgba(0,0,0,.7);
+  --grad-text: linear-gradient(90deg, #8fd8ff 0%, #24aaff 100%);
+  --shadow-blue: 0 22px 40px -22px rgba(36,170,255,.35);
+  --sky-glow: radial-gradient(1100px 420px at 50% 0%, rgba(36,170,255,.12), transparent 70%);
 } }
 :root[data-theme="dark"] {
   color-scheme: dark;
@@ -104,6 +115,9 @@
   --star-off: #2a3d52;
   --shadow: 0 1px 2px rgba(0,0,0,.4);
   --shadow-lg: 0 16px 36px -14px rgba(0,0,0,.7);
+  --grad-text: linear-gradient(90deg, #8fd8ff 0%, #24aaff 100%);
+  --shadow-blue: 0 22px 40px -22px rgba(36,170,255,.35);
+  --sky-glow: radial-gradient(1100px 420px at 50% 0%, rgba(36,170,255,.12), transparent 70%);
 }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .lmap .leaflet-tile-pane { filter: grayscale(1) invert(1) brightness(.85) contrast(.9); } }
 :root[data-theme="dark"] .lmap .leaflet-tile-pane { filter: grayscale(1) invert(1) brightness(.85) contrast(.9); }
@@ -136,6 +150,9 @@ section[id] { scroll-margin-top: calc(var(--nav-h) + env(safe-area-inset-top, 0p
 
 .khee { display: none; }   /* the meander border is retired in the plain palette */
 .eyebrow { font: 700 .8rem/1 var(--f-body); letter-spacing: .12em; text-transform: uppercase; color: var(--accent-ink); }
+.sec-head .eyebrow { display: inline-flex; align-items: center; gap: 10px; }
+.sec-head .eyebrow::before, .sec-head .eyebrow::after { content: ""; width: 22px; height: 2px; border-radius: 2px; background: var(--grad); }
+.sec-head h2 .hl { background: var(--grad-text); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
 :root[lang="ko"] .eyebrow { letter-spacing: .02em; }
 .mono { font-family: var(--f-mono); font-size: .8rem; font-variant-numeric: tabular-nums; }
 .lede { color: var(--muted); font-size: 1.06rem; line-height: 1.7; max-width: 58ch; }
@@ -151,8 +168,8 @@ section[id] { scroll-margin-top: calc(var(--nav-h) + env(safe-area-inset-top, 0p
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 13px 20px; border-radius: var(--r-sm); border: 1px solid transparent; font: 700 .97rem/1.1 var(--f-body); text-decoration: none; cursor: pointer; white-space: nowrap; transition: transform .2s var(--ease), background-color .2s, border-color .2s, box-shadow .2s; }
 .btn:active { transform: translateY(1px); }
 .btn svg { width: 18px; height: 18px; flex: none; }
-.btn-primary { background: var(--accent); color: #fff; }
-.btn-primary:hover { background: var(--accent-deep); }
+.btn-primary { background: var(--accent) var(--grad); color: #fff; box-shadow: var(--glow); }
+.btn-primary:hover { background: var(--accent-deep) var(--grad); filter: saturate(1.15) brightness(.96); transform: translateY(-1px); }
 .btn-outline { background: var(--paper); color: var(--ink); border-color: var(--line); }
 .btn-outline:hover { border-color: var(--accent-ink); color: var(--accent-ink); }
 .btn-kakao { background: var(--paper); color: var(--accent-ink); border-color: var(--accent-ink); }
@@ -186,7 +203,7 @@ section[id] { scroll-margin-top: calc(var(--nav-h) + env(safe-area-inset-top, 0p
 .nav-menu a[aria-current="true"] { color: var(--accent-ink); }
 .nav-menu a[aria-current="true"]::after { content: ""; position: absolute; left: 18px; right: 18px; bottom: 2px; height: 2px; border-radius: 2px; background: var(--accent); }
 .nav-menu .sep { display: block; width: 1px; height: 18px; background: var(--line); margin: 0 8px; }
-.progress { position: absolute; left: 0; bottom: -1px; height: 2px; width: 100%; background: var(--accent); transform-origin: 0 50%; transform: scaleX(0); }
+.progress { position: absolute; left: 0; bottom: -1px; height: 2px; width: 100%; background: var(--grad); transform-origin: 0 50%; transform: scaleX(0); }
 .lang { display: inline-flex; padding: 3px; border-radius: var(--r-sm); border: 1px solid var(--line-strong); flex: none; }
 .lang button { background: transparent; border: 0; padding: 7px 11px; border-radius: 4px; font-weight: 700; font-size: .8rem; line-height: 1; color: var(--muted); cursor: pointer; }
 .lang button[aria-pressed="true"] { background: var(--accent); color: #fff; }
@@ -220,12 +237,21 @@ section[id] { scroll-margin-top: calc(var(--nav-h) + env(safe-area-inset-top, 0p
 .hero { position: relative; isolation: isolate; overflow: hidden; color: #fff; padding-top: calc(var(--nav-h) + env(safe-area-inset-top, 0px)); }
 .hero-bg { position: absolute; inset: 0; z-index: -2; }
 .hero-bg img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 62%; }
-.hero::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(15,27,45,.42) 0%, rgba(15,27,45,.5) 55%, rgba(15,27,45,.64) 100%); }
-.hero-center { display: grid; justify-items: center; text-align: center; gap: 18px; padding-block: clamp(56px, 8vw, 100px) clamp(36px, 5vw, 60px); }
+/* Overlay: a blue sky wash at the top fading into navy at the horizon */
+.hero::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(8,70,130,.58) 0%, rgba(15,27,45,.38) 42%, rgba(15,27,45,.52) 72%, rgba(10,40,75,.72) 100%); }
+.hero-center { position: relative; z-index: 1; display: grid; justify-items: center; text-align: center; gap: 18px; padding-block: clamp(56px, 8vw, 100px) calc(clamp(28px, 4vw, 44px) + clamp(30px, 5vw, 72px)); }
+/* Horizon: distant blue mountains and the steppe in front, melting into the page */
+.hero-ridge { position: absolute; left: 0; right: 0; bottom: -1px; z-index: 0; width: 100%; height: clamp(40px, 6.5vw, 96px); pointer-events: none; }
+.hero-ridge .r1 { fill: #24aaff; opacity: .5; }
+.hero-ridge .r2 { fill: var(--paper); }
 .badge-line { display: inline-flex; align-items: center; gap: 8px; padding: 8px 13px; border-radius: var(--r-sm); background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.28); backdrop-filter: blur(6px); font-weight: 700; font-size: .84rem; line-height: 1; }
-.badge-line i { width: 8px; height: 8px; border-radius: 50%; background: var(--logo); }
+.badge-line i { width: 8px; height: 8px; border-radius: 50%; background: var(--logo); animation: ping 2.4s ease-out infinite; }
+@keyframes ping { 0% { box-shadow: 0 0 0 0 rgba(36,170,255,.8); } 70%, 100% { box-shadow: 0 0 0 9px rgba(36,170,255,0); } }
 .hero h1 { font: 700 clamp(2.2rem, 1.1rem + 3.8vw, 4.2rem)/1.08 var(--f-display); letter-spacing: -.035em; max-width: 20ch; }
-.hero h1 .hl { color: inherit; }
+.hero h1 .hl { color: #dff3ff; padding-bottom: .12em; -webkit-box-decoration-break: clone; box-decoration-break: clone;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 20' preserveAspectRatio='none'%3E%3Cpath d='M4 14C55 6 130 4 196 9' fill='none' stroke='%2324aaff' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat 0 100% / 100% .3em;
+  animation: swoosh 1s .35s var(--ease) both; }
+@keyframes swoosh { from { background-size: 0 .3em; } }
 :root[lang="ko"] .hero h1 { font-family: "Noto Sans KR", var(--f-body); font-weight: 800; line-height: 1.18; letter-spacing: -.045em; font-size: clamp(2.1rem, 1rem + 3.6vw, 3.9rem); }
 .hero-lede { font-size: clamp(1.02rem, 1rem + .3vw, 1.18rem); line-height: 1.65; color: rgba(255,255,255,.9); max-width: 46ch; }
 .finder-bar { width: min(780px, 100%); display: grid; grid-template-columns: 1fr 1fr auto; align-items: center; background: var(--paper); color: var(--ink); border-radius: var(--r-lg); padding: 8px; box-shadow: var(--shadow-lg); margin-top: 6px; }
@@ -256,7 +282,7 @@ fieldset.field legend { padding: 0; margin-bottom: 6px; }
 .trust-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .trust-item { display: grid; justify-items: center; align-content: start; text-align: center; gap: 8px; padding: 26px 16px; }
 .trust-item + .trust-item { border-left: 1px solid var(--line); }
-.ti { width: 42px; height: 42px; border-radius: var(--r-sm); background: var(--accent-soft); color: var(--accent-ink); display: grid; place-items: center; flex: none; }
+.ti { width: 44px; height: 44px; border-radius: 50%; background: var(--accent) var(--grad); color: #fff; box-shadow: var(--glow); display: grid; place-items: center; flex: none; }
 .ti svg { width: 22px; height: 22px; }
 .trust-item strong { display: block; font-weight: 800; font-size: .98rem; }
 .trust-item div > span { font-size: .86rem; color: var(--muted); }
@@ -265,7 +291,7 @@ fieldset.field legend { padding: 0; margin-bottom: 6px; }
 
 /* ---------- Sections: centered heads, balanced content ---------- */
 .section { position: relative; padding-block: clamp(64px, 8vw, 104px); }
-.bg-mist { background: var(--mist); }
+.bg-mist { background: var(--sky-glow), var(--mist); }
 .sec-head { display: grid; justify-items: center; text-align: center; gap: 12px; max-width: 780px; margin: 0 auto clamp(26px, 3vw, 38px); }
 .sec-head .sh { display: grid; justify-items: center; gap: 10px; }
 .sec-head h2 { font-size: clamp(1.75rem, 1.2rem + 1.8vw, 2.5rem); font-weight: 800; }
@@ -280,19 +306,20 @@ fieldset.field legend { padding: 0; margin-bottom: 6px; }
 .tab img { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; }
 .tab.noimg { padding-left: 16px; }
 .tab:hover { border-color: var(--accent-ink); }
-.tab[aria-pressed="true"] { background: var(--accent); border-color: var(--accent-ink); color: #fff; }
+.tab[aria-pressed="true"] { background: var(--accent) var(--grad); border-color: transparent; color: #fff; box-shadow: var(--glow); }
 .tab .n { font: 500 .74rem var(--f-mono); opacity: .65; }
 .filter-state { display: flex; justify-content: center; align-items: center; gap: 10px 14px; flex-wrap: wrap; margin-top: 14px; font-size: .92rem; color: var(--muted); font-weight: 600; }
 .pill-x { display: inline-flex; align-items: center; gap: 6px; padding: 6px 11px; border-radius: var(--r-sm); background: var(--accent-soft); color: var(--accent-ink); font-weight: 700; font-size: .86rem; border: 0; cursor: pointer; }
 .cards { display: grid; gap: 16px; max-width: 1160px; margin: 20px auto 0; }
 .lcard { display: grid; grid-template-columns: 300px minmax(0, 1fr) 210px; min-height: 220px; background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; cursor: pointer; transition: box-shadow .25s, transform .25s var(--ease); }
-.lcard:hover { border-color: var(--accent-ink); box-shadow: var(--shadow); }
+.lcard:hover { border-color: var(--accent-ink); box-shadow: var(--shadow-blue); transform: translateY(-3px); }
+.lc-side { background: linear-gradient(180deg, var(--accent-soft), transparent 75%); }
 .lc-img { position: relative; overflow: hidden; background: var(--mist); }
 .lc-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease); }
 .lcard:hover .lc-img img { transform: scale(1.04); }
 .tags { position: absolute; left: 12px; top: 12px; display: flex; gap: 6px; flex-wrap: wrap; }
 .tag { display: inline-block; font: 700 .74rem/1 var(--f-body); padding: 6px 9px; border-radius: 8px; background: rgba(255,255,255,.95); color: var(--navy); }
-.tag.blue, .tag.red, .tag.gold { background: var(--accent); color: #fff; }
+.tag.blue, .tag.red, .tag.gold { background: var(--accent) var(--grad); color: #fff; }
 .lc-body { display: grid; align-content: center; gap: 9px; padding: 20px 24px; min-width: 0; }
 .lc-name { font-size: .84rem; font-weight: 700; color: var(--muted); }
 .lc-title { font-size: 1.1rem; font-weight: 800; line-height: 1.45; letter-spacing: -.02em; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
@@ -413,7 +440,10 @@ fieldset.field legend { padding: 0; margin-bottom: 6px; }
 .seasons { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
 @media (max-width: 1020px) { .seasons { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 560px) { .seasons { grid-template-columns: 1fr; } }
-.season { position: relative; background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; display: flex; flex-direction: column; }
+.season { position: relative; background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; display: flex; flex-direction: column; transition: transform .25s var(--ease), box-shadow .25s, border-color .25s; }
+.season:hover { transform: translateY(-3px); box-shadow: var(--shadow-blue); border-color: var(--accent); }
+.season-img img { transition: transform .8s var(--ease); }
+.season:hover .season-img img { transform: scale(1.05); }
 .season-img { aspect-ratio: 16 / 10; max-width: 100%; overflow: hidden; background: var(--mist); }
 .season-img img { width: 100%; height: 100%; object-fit: cover; }
 .season .peak { position: absolute; top: 12px; right: 12px; }
@@ -432,7 +462,7 @@ fieldset.field legend { padding: 0; margin-bottom: 6px; }
 .faq-cats { list-style: none; margin: 0 0 16px; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
 .faq-cats button { display: inline-flex; align-items: center; gap: 8px; padding: 9px 15px; border-radius: var(--r-sm); border: 1px solid var(--line-strong); background: var(--paper); color: var(--ink); font-weight: 700; font-size: .92rem; cursor: pointer; }
 .faq-cats button:hover { border-color: var(--accent-ink); }
-.faq-cats button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent-ink); color: #fff; }
+.faq-cats button[aria-pressed="true"] { background: var(--accent) var(--grad); border-color: transparent; color: #fff; box-shadow: var(--glow); }
 .faq-cats .n { font: 400 .74rem var(--f-mono); opacity: .7; }
 .faq-search { position: relative; margin-bottom: 12px; }
 .faq-search input { width: 100%; font-size: 1rem; color: var(--ink); background: var(--paper); border: 1px solid var(--line-strong); border-radius: var(--r-sm); padding: 14px 18px 14px 48px; }
@@ -452,7 +482,7 @@ details.qa p { padding: 0 0 20px; color: var(--muted); max-width: 70ch; }
 .contact-sec { background: var(--paper); color: var(--ink); border-top: 1px solid var(--line); overflow: hidden; }
 .steps { list-style: none; margin: 0 auto 28px; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; counter-reset: s; max-width: 1100px; }
 .steps li { counter-increment: s; display: grid; justify-items: center; align-content: start; text-align: center; gap: 8px; padding: 22px 16px; border-radius: var(--r-lg); background: var(--mist); }
-.steps li::before { content: counter(s); width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: var(--accent); color: #fff; font-weight: 800; }
+.steps li::before { content: counter(s); width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: var(--accent) var(--grad); color: #fff; font-weight: 800; box-shadow: var(--glow); }
 .steps strong { display: block; font-weight: 800; }
 .steps li div > span { color: var(--muted); font-size: .9rem; }
 .ccards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; max-width: 1100px; margin: 0 auto 28px; }
@@ -484,7 +514,7 @@ form.inq h3 { font-size: 1.4rem; font-weight: 800; text-align: center; }
 @media (max-width: 560px) { .steps { grid-template-columns: 1fr; } form.inq { grid-template-columns: 1fr; } }
 
 /* ---------- Footer ---------- */
-footer { background: var(--dark); color: rgba(255,255,255,.68); font-size: .9rem; }
+footer { background: var(--dark); color: rgba(255,255,255,.68); font-size: .9rem; border-top: 3px solid transparent; border-image: var(--grad) 1; }
 .foot { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 32px; padding-block: 56px 28px; }
 @media (max-width: 760px) { .foot { grid-template-columns: 1fr 1fr; } .foot > :first-child { grid-column: 1 / -1; } }
 footer .brand { color: #fff; }
@@ -510,7 +540,7 @@ body[data-at="contact"] .dock { opacity: 0; pointer-events: none; transform: tra
 .dock-item.soon:hover { transform: none; }
 .dock-item .ic.kakao { background: var(--accent); color: #fff; }
 .dock-item .ic.mail { background: var(--accent-soft); color: var(--accent-ink); }
-.dock-btn { text-decoration: none; display: inline-flex; align-items: center; gap: 10px; padding: 13px 18px 13px 14px; border-radius: var(--r-sm); border: 0; background: var(--accent); color: #fff; font: 800 .95rem var(--f-body); cursor: pointer; box-shadow: 0 14px 30px -12px rgba(10,26,51,.6); transition: transform .25s var(--ease); }
+.dock-btn { text-decoration: none; display: inline-flex; align-items: center; gap: 10px; padding: 13px 18px 13px 14px; border-radius: var(--r-sm); border: 0; background: var(--accent) var(--grad); color: #fff; font: 800 .95rem var(--f-body); cursor: pointer; box-shadow: 0 14px 30px -12px rgba(10,26,51,.6); transition: transform .25s var(--ease); }
 .dock-btn:hover { transform: translateY(-3px); }
 .dock-btn svg { width: 22px; height: 22px; flex: none; }
 @media (max-width: 520px) { .dock-btn span { display: none; } .dock-btn { padding: 14px; } }
@@ -684,7 +714,9 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
 .qk.kakao { background: var(--accent); border-color: var(--accent-ink); color: #fff; }
 .qk.kakao .qi { background: #fff; color: var(--accent-ink); }
 .qk.soon { opacity: .85; cursor: default; }
-.kakao-banner { display: grid; justify-items: center; text-align: center; gap: 12px; max-width: 1160px; margin: 28px auto 0; padding: clamp(22px, 3vw, 32px); border-radius: var(--r-lg); background: var(--accent); color: #fff; }
+.kakao-banner { position: relative; overflow: hidden; isolation: isolate; display: grid; justify-items: center; text-align: center; gap: 12px; max-width: 1160px; margin: 28px auto 0; padding: clamp(26px, 3.4vw, 40px); border-radius: var(--r-lg); background: linear-gradient(120deg, #0a5fa8 0%, #1592e6 45%, #4cc0ff 100%); color: #fff; box-shadow: var(--shadow-blue); }
+.kb-mark { position: absolute; z-index: -1; right: -40px; bottom: -60px; width: clamp(180px, 26vw, 300px); height: auto; fill: #fff; opacity: .12; pointer-events: none; }
+.kb-mark.l { right: auto; left: -60px; top: -70px; bottom: auto; width: clamp(120px, 16vw, 190px); opacity: .07; }
 .kb-icon { width: 54px; height: 54px; border-radius: var(--r); background: #fff; color: var(--accent-ink); display: grid; place-items: center; }
 .kb-icon svg { width: 30px; height: 30px; }
 .kb-text { display: grid; justify-items: center; gap: 4px; }
@@ -864,6 +896,10 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
         <a class="qk kakao" data-kakao-soon><span class="qi"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.8 1.9 5.3 4.7 6.7l-.9 3.8 4.3-2.8c.6.1 1.2.1 1.9.1 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg></span><span data-en>Tour consultation</span><span data-ko>투어상담</span></a>
       </nav>
     </div>
+    <svg class="hero-ridge" viewBox="0 0 1440 100" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+      <path class="r1" d="M0 72L70 60L140 66L250 30L320 50L380 42L470 64L570 22L650 46L710 38L800 62L910 18L990 48L1060 40L1150 60L1250 28L1320 48L1380 42L1440 54V100H0Z"/>
+      <path class="r2" d="M0 88C240 76 480 94 720 86C960 78 1200 92 1440 82V100H0Z"/>
+    </svg>
   </section>
 
   <!-- Trust strip -->
@@ -890,6 +926,8 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
       <div class="more-wrap"><button class="btn btn-outline btn-lg" type="button" id="more-btn" hidden></button></div>
       <p class="note"><span data-en>Prices are per person in Korean won and depend on team size; tours without a price are quoted on request. Book with a ₩100,000 deposit per person; the balance is paid in Korean won cash on day 1. International flights are not included.</span><span data-ko>가격은 팀 인원에 따른 1인 요금(원)이며, 가격이 없는 상품은 견적 문의로 안내해 드립니다. 1인 10만원 예약금으로 예약하고, 잔금은 여행 첫날 현지에서 원화 현금으로 결제합니다. 국제선 항공권은 포함되지 않습니다.</span></p>
       <div class="kakao-banner" data-kakao-block hidden>
+        <svg class="kb-mark" viewBox="213 0 533 517" aria-hidden="true" focusable="false"><use href="#gj-e"/></svg>
+        <svg class="kb-mark l" viewBox="213 0 533 517" aria-hidden="true" focusable="false"><use href="#gj-e"/></svg>
         <span class="kb-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.8 1.9 5.3 4.7 6.7l-.9 3.8 4.3-2.8c.6.1 1.2.1 1.9.1 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg></span>
         <div class="kb-text"><strong><span data-en>Questions? Chat with us on KakaoTalk</span><span data-ko>궁금한 점은 카카오톡으로 1:1 상담하세요</span></strong><span><span data-en>Ask about routes, prices or what to pack, one to one.</span><span data-ko>일정, 견적, 준비물까지 편하게 물어보세요.</span></span><span class="mono" data-kakao-id></span></div>
         <a class="btn btn-lg kb-btn" data-kakao href="#" target="_blank" rel="noopener" hidden><span data-en>Start a chat</span><span data-ko>카톡 상담 시작하기</span> →</a>
