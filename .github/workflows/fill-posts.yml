@@ -1,0 +1,56 @@
+# Fill traveller posts from their links.
+# Staff paste only a post's link in the admin (Аялагчдын нийтлэл) and pick its region. When the admin saves
+# data/posts.json, this runs .github/scripts/fill_posts.py: it fills the empty title, author and date from the post's
+# public page, copies the cover photo into img/posts/ and commits the result, so the card appears 1-2 minutes later.
+# Run it by hand from the Actions tab: "fill" retries anything still empty, "check" only reports what each page says.
+name: Fill traveller posts
+
+on:
+  push:
+    branches: [main]
+    paths: [data/posts.json]
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "fill = fill empty fields and copy photos; check = compare every post with its page, change nothing"
+        type: choice
+        options: [fill, check]
+        default: fill
+
+permissions:
+  contents: write   # commit the filled posts.json and photos
+  pages: write      # ask GitHub Pages to rebuild after that commit
+
+concurrency:
+  group: fill-posts
+  cancel-in-progress: false
+
+jobs:
+  fill:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Read the post links
+        run: python3 .github/scripts/fill_posts.py ${{ inputs.mode == 'check' && '--check' || '' }}
+
+      - name: Save what was filled
+        if: inputs.mode != 'check'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ -z "$(git status --porcelain -- data/posts.json img/posts)" ]; then echo "Nothing new to save."; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/posts.json img/posts
+          git commit -m "Posts: fill from their links"
+          # The admin may have saved again meanwhile: replay on top of it and retry
+          for i in 1 2 3; do
+            if git pull --rebase origin main && git push origin HEAD:main; then
+              gh api -X POST "repos/${{ github.repository }}/pages/builds" --silent || true
+              exit 0
+            fi
+            sleep 5
+          done
+          exit 1

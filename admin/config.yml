@@ -168,29 +168,32 @@ collections:
             collapsed: true
             add_to_top: true
             summary: "{{date}} · {{title}}"
+            # Staff fill only the link and the region. On save, .github/workflows/fill-posts.yml fills the empty
+            # fields from the post page and copies the cover photo into img/posts/ (1-2 minutes); typed values are kept.
             fields:
               - name: src
                 label: Хаана нийтэлсэн
                 widget: select
+                required: false
+                hint: "Хоосон орхивол холбоосоос автоматаар танина."
                 options:
                   - { label: Naver blog, value: blog }
                   - { label: Naver cafe, value: cafe }
                   - { label: Brunch, value: brunch }
-              - { name: url, label: Нийтлэлийн холбоос, widget: string }
-              - { name: title, label: Гарчиг, widget: string }
-              - { name: by, label: Зохиогчийн нэр, widget: string, required: false }
-              - { name: date, label: Огноо, widget: datetime, type: date }
+              - { name: url, label: Нийтлэлийн холбоос, widget: string, hint: "Холбоосыг буулгаад, бүс нутгаа сонгоод хадгалахад хангалттай. Гарчиг, зохиогч, огноо, нүүр зургийг 1-2 минутын дараа автоматаар бөглөнө." }
+              - { name: title, label: Гарчиг, widget: string, required: false, hint: "Хоосон орхивол автоматаар бөглөнө. Naver cafe-ийн зөвхөн гишүүдэд нээлттэй нийтлэлийн гарчгийг гараар бичнэ." }
+              - { name: by, label: Зохиогчийн нэр, widget: string, required: false, hint: "Хоосон орхивол автоматаар бөглөнө." }
+              - { name: date, label: Огноо, widget: datetime, type: date, required: false, hint: "Хоосон орхивол нийтэлсэн огноог автоматаар бөглөнө." }
               - name: region
                 label: Бүс нутаг
                 widget: select
-                required: false
                 options: &regions
                   - { label: Говь, value: gobi }
                   - { label: "Хөвсгөл, хойд бүс", value: north }
                   - { label: Төв бүс, value: central }
                   - { label: "Алтай, баруун бүс", value: west }
                   - { label: Өвөл, value: winter }
-              - { name: img, label: Нүүр зургийн холбоос, widget: string, required: false, hint: "Нийтлэлийн нүүр зураг дээр баруун товч дарж «Copy image address», энд буулгана." }
+              - { name: img, label: Нүүр зураг, widget: string, required: false, hint: "Хоосон орхивол нийтлэлийн нүүр зургийг сайт руу автоматаар хуулна. Өөр зураг хэрэгтэй бол зургийн холбоосыг энд буулгана." }
 
       - name: faq
         label: Түгээмэл асуулт
