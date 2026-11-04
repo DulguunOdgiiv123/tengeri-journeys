@@ -8,7 +8,7 @@ GitHub runs this script (.github/workflows/fill-posts.yml) after every save of d
     publish date) and fills only the fields that are still empty;
   - downloads the cover photo into img/posts/, so cards never go blank when Naver refuses other sites' requests.
 Nothing staff typed is overwritten, and the region is always theirs. No AI: plain web requests and fixed patterns,
-Python standard library only.
+Python standard library plus Pillow for shrinking photos (optional: without it photos are kept as downloaded).
 
   python3 .github/scripts/fill_posts.py                 fill empty fields, copy photos, rewrite data/posts.json
   python3 .github/scripts/fill_posts.py --check         read every post's page, compare with what is stored, change nothing
@@ -19,6 +19,7 @@ import email.utils
 import hashlib
 import html
 import http.cookiejar
+import io
 import json
 import os
 import re
@@ -215,14 +216,38 @@ def read_post(src, key, url):
 
 
 def photo_candidates(u):
-    """Bigger copies of the same picture first: Naver serves one photo at several widths and from two hosts."""
+    """A card-sized copy first, then the link as given. Naver blog photos come in width w773 from postfiles
+    (blogthumb has no such size); Naver cafe photos take w800; Brunch's Kakao CDN takes R640x0."""
     s = urllib.parse.urlsplit(u)
+    if s.netloc in ("blogthumb.pstatic.net", "postfiles.pstatic.net"):
+        return [urllib.parse.urlunsplit(("https", "postfiles.pstatic.net", s.path, "type=w773", "")), u]
     if s.netloc.endswith("pstatic.net"):
-        hosts = [s.netloc] + (["postfiles.pstatic.net"] if s.netloc == "blogthumb.pstatic.net" else [])
-        return [urllib.parse.urlunsplit(("https", h, s.path, "type=w773", "")) for h in hosts] + [u]
+        return [urllib.parse.urlunsplit(("https", s.netloc, s.path, "type=w800", "")), u]
     if s.netloc.endswith("kakaocdn.net"):
         return [re.sub(r"/thumb/R\d+x\d+[^/]*/", "/thumb/R640x0.fjpg/", u), u]
     return [u]
+
+
+def shrink(body):
+    """The photo as a JPEG at most 960 px wide (cards are about 400 px), or None without Pillow or on a bad file.
+    The workflow installs Pillow; without it the photo is kept as downloaded."""
+    try:
+        from PIL import Image, ImageOps
+    except ImportError:
+        return None
+    try:
+        im = ImageOps.exif_transpose(Image.open(io.BytesIO(body)))
+        if im.mode != "RGB":   # flatten transparency onto white, not black
+            rgba = im.convert("RGBA")
+            im = Image.new("RGB", rgba.size, "white")
+            im.paste(rgba, mask=rgba.getchannel("A"))
+        im.thumbnail((960, 2880))
+        out = io.BytesIO()
+        im.save(out, "JPEG", quality=82, optimize=True, progressive=True)
+        return out.getvalue()
+    except Exception as e:
+        log(f"    could not resize the photo ({e.__class__.__name__}: {e}), keeping it as downloaded")
+        return None
 
 
 def fetch_photo(u, src):
@@ -231,6 +256,9 @@ def fetch_photo(u, src):
         _, ctype, body = get(c, referer=REFERER.get(src))
         kind = ctype.split(";")[0].strip().lower()
         if kind.startswith("image/") and len(body) >= 2000:
+            small = shrink(body)
+            if small:
+                return "jpg", small, c
             ext = {"image/jpeg": "jpg", "image/png": "png", "image/webp": "webp", "image/gif": "gif"}.get(kind, "jpg")
             return ext, body, c
     return None
