@@ -22,7 +22,7 @@
   };
 
   const sitePreview = file => function SitePreview({ entry, getAsset }) {
-    const frame = useRef(null), prev = useRef(null), focus = useRef(null), draft = useRef(null), timer = useRef(0), mounted = useRef(false);
+    const frame = useRef(null), prev = useRef(null), focus = useRef(null), draft = useRef(null), timer = useRef(0), mounted = useRef(false), sent = useRef("");
     const data = entry.get("data").toJS();
 
     if (file === "tours") {
@@ -48,8 +48,12 @@
       return () => { removeEventListener("message", answer); clearTimeout(timer.current); };
     }, []);
 
+    // Reload only when the content really changed: the admin also re-renders the preview for other reasons.
+    const json = JSON.stringify(data);
     useEffect(() => {
-      if (!mounted.current) { mounted.current = true; return; }   // the first load asks for the draft by itself
+      if (!mounted.current) { mounted.current = true; sent.current = json; return; }   // the first load asks for the draft by itself
+      if (json === sent.current) return;
+      sent.current = json;
       clearTimeout(timer.current);
       timer.current = setTimeout(() => { if (frame.current) frame.current.contentWindow.location.reload(); }, 700);
     });

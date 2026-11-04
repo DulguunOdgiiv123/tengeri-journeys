@@ -1270,7 +1270,7 @@
     {
       "name": "Mini Desert & Terelj",
       "name_ko": "중부 2박3일",
-      "img": "video/horses.jpg",
+      "img": "img/horses.jpg",
       "tag": "Short break",
       "tag_ko": "단기",
       "text": "Sand dunes, sledding and a camel ride at Elsen Tasarkhai, then a horse ride in Terelj.",
@@ -1949,7 +1949,7 @@
     {
       "name": "Mini Desert & Two Nights in Terelj",
       "name_ko": "중부 3박4일 (미니사막+테렐지 2박)",
-      "img": "video/herd.jpg",
+      "img": "img/herd.jpg",
       "tag": "Slow pace",
       "tag_ko": "여유 일정",
       "text": "A night at the Elsen Tasarkhai dunes, then two relaxed nights in Terelj.",
@@ -2285,7 +2285,7 @@
     {
       "name": "Central Mongolia at an Easy Pace",
       "name_ko": "중부 5박6일",
-      "img": "video/horses.jpg",
+      "img": "img/horses.jpg",
       "tag": "Hot springs",
       "tag_ko": "온천",
       "text": "The classic central route with two nights at the Tsenkher hot springs.",
