@@ -420,3 +420,4 @@ collections:
               - { name: lat, label: Өргөрөг, widget: number, value_type: float }
               - { name: lon, label: Уртраг, widget: number, value_type: float }
               - { name: cap, label: Нийслэл (зөвхөн Улаанбаатар), widget: boolean, required: false }
+              - { name: img, label: "Ерөнхий зураг (заавал биш)", widget: image, required: false, hint: "Тухайн газрын зураг. Аяллын газрын зураг дээр цэг болон тэндхийн баазуудыг хулганаар заахад урьдчилан харагдана. Баазын өөрийн зураг байвал тэрийг нь харуулна." }

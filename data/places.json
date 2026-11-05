@@ -6,7 +6,8 @@
       "name_ko": "울란바토르",
       "lat": 47.92,
       "lon": 106.92,
-      "cap": true
+      "cap": true,
+      "img": "img/ulaanbaatar.jpg"
     },
     {
       "id": "terelj",
@@ -14,7 +15,8 @@
       "name_ko": "테렐지",
       "lat": 47.98,
       "lon": 107.45,
-      "cap": false
+      "cap": false,
+      "img": "img/terelj.jpg"
     },
     {
       "id": "khustai",
@@ -30,7 +32,8 @@
       "name_ko": "엘승타사르하이",
       "lat": 47.36,
       "lon": 103.67,
-      "cap": false
+      "cap": false,
+      "img": "img/elsen.jpg"
     },
     {
       "id": "tsenkher",
@@ -38,7 +41,8 @@
       "name_ko": "쳉헤르 온천",
       "lat": 47.33,
       "lon": 101.66,
-      "cap": false
+      "cap": false,
+      "img": "img/tsenkher.jpg"
     },
     {
       "id": "ugii",
@@ -46,7 +50,8 @@
       "name_ko": "어기 호수",
       "lat": 47.77,
       "lon": 102.77,
-      "cap": false
+      "cap": false,
+      "img": "img/ugii.jpg"
     },
     {
       "id": "bagagazar",
@@ -54,7 +59,8 @@
       "name_ko": "바가가즈린촐로",
       "lat": 46.22,
       "lon": 106.05,
-      "cap": false
+      "cap": false,
+      "img": "img/baga-gazar.jpg"
     },
     {
       "id": "mandalgovi",
@@ -78,7 +84,8 @@
       "name_ko": "볼강",
       "lat": 48.81,
       "lon": 103.53,
-      "cap": false
+      "cap": false,
+      "img": "img/bulgan.jpg"
     },
     {
       "id": "erdenet",
@@ -86,7 +93,8 @@
       "name_ko": "에르데네트",
       "lat": 49.03,
       "lon": 104.08,
-      "cap": false
+      "cap": false,
+      "img": "img/erdenet.jpg"
     },
     {
       "id": "terkhiin",
@@ -94,7 +102,8 @@
       "name_ko": "테르힝 차강 호수",
       "lat": 48.17,
       "lon": 99.72,
-      "cap": false
+      "cap": false,
+      "img": "img/terkhiin.jpg"
     },
     {
       "id": "shineider",
@@ -102,7 +111,8 @@
       "name_ko": "신이데르",
       "lat": 48.95,
       "lon": 99.53,
-      "cap": false
+      "cap": false,
+      "img": "img/ider.jpg"
     },
     {
       "id": "khatgal",
@@ -110,7 +120,8 @@
       "name_ko": "하트갈",
       "lat": 50.44,
       "lon": 100.16,
-      "cap": false
+      "cap": false,
+      "img": "img/khatgal.jpg"
     },
     {
       "id": "renchin",
@@ -118,7 +129,8 @@
       "name_ko": "렌친룸베",
       "lat": 51.11,
       "lon": 99.67,
-      "cap": false
+      "cap": false,
+      "img": "img/darkhad.jpg"
     },
     {
       "id": "ongi",
@@ -142,7 +154,8 @@
       "name_ko": "오르홍 폭포",
       "lat": 46.78,
       "lon": 101.96,
-      "cap": false
+      "cap": false,
+      "img": "img/orkhon.jpg"
     },
     {
       "id": "tsagaan",
@@ -150,7 +163,8 @@
       "name_ko": "차강소브라가",
       "lat": 44.577,
       "lon": 105.718,
-      "cap": false
+      "cap": false,
+      "img": "img/tsagaan-suvarga.jpg"
     },
     {
       "id": "yolyn",
@@ -158,7 +172,8 @@
       "name_ko": "욜링암",
       "lat": 43.49,
       "lon": 104.07,
-      "cap": false
+      "cap": false,
+      "img": "img/yolyn.jpg"
     },
     {
       "id": "khongor",
@@ -166,7 +181,8 @@
       "name_ko": "홍고린 엘스",
       "lat": 43.78,
       "lon": 102.3,
-      "cap": false
+      "cap": false,
+      "img": "img/dunes2.jpg"
     },
     {
       "id": "bayanzag",
@@ -174,7 +190,8 @@
       "name_ko": "바양작",
       "lat": 44.14,
       "lon": 103.72,
-      "cap": false
+      "cap": false,
+      "img": "img/bayanzag.jpg"
     },
     {
       "id": "amar",
@@ -198,7 +215,8 @@
       "name_ko": "홉스골 호수",
       "lat": 50.7,
       "lon": 100.4,
-      "cap": false
+      "cap": false,
+      "img": "img/lake.jpg"
     },
     {
       "id": "tsaatan",
@@ -206,7 +224,8 @@
       "name_ko": "다르하드",
       "lat": 51.3,
       "lon": 99.4,
-      "cap": false
+      "cap": false,
+      "img": "img/tsaatan.jpg"
     },
     {
       "id": "olgii",
