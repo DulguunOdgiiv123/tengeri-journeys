@@ -9,6 +9,9 @@ backend:
   name: github
   repo: DulguunOdgiiv123/tengeri-journeys
   branch: main
+  # "Sign in with GitHub" goes through this Cloudflare Worker (sveltia/sveltia-cms-auth). It holds the secret of the
+  # GitHub OAuth App "Golden Jigu Admin", so staff log in with the office GitHub account instead of pasting a token.
+  base_url: https://sveltia-cms-auth.enkhtulgamunkhbold09.workers.dev
 
 app_title: Golden Jigu Tour · Админ
 site_url: https://goldenjigutour.com
