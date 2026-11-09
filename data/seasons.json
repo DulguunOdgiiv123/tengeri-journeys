@@ -15,7 +15,7 @@
       "name_ko": "여름",
       "from": 6,
       "to": 8,
-      "img": "img/lake.jpg",
+      "img": "img/cafe-central.jpg",
       "text": "Peak season: green steppe, long days and Naadam on 11–13 July.",
       "text_ko": "성수기. 푸른 초원과 긴 낮, 7월 11–13일 나담 축제.",
       "peak": true
@@ -35,7 +35,7 @@
       "name_ko": "겨울",
       "from": 11,
       "to": 3,
-      "img": "img/winter.jpg",
+      "img": "img/cafe-ice.jpg",
       "text": "Snowy steppe under bright skies, Tsagaan Sar and the Ice Festival on Khövsgöl.",
       "text_ko": "맑은 하늘 아래 눈 덮인 초원, 차강사르와 홉스골 얼음 축제.",
       "peak": false

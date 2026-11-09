@@ -3,7 +3,7 @@
     {
       "name": "Gobi Highlights",
       "name_ko": "고비 4박5일",
-      "img": "img/dunes2.jpg",
+      "img": "img/cafe-gobi.jpg",
       "tag": "Most popular",
       "tag_ko": "인기",
       "text": "The classic Gobi loop: the striped cliffs of Tsagaan Suvarga, the Flaming Cliffs of Bayanzag, a camel ride at the Khongoryn Els dunes and a hike in Yolyn Am.",
@@ -398,7 +398,7 @@
     {
       "name": "Terelj & the Gobi",
       "name_ko": "고비&테렐지 5박6일",
-      "img": "img/dunes.jpg",
+      "img": "img/cafe-gobi.jpg",
       "tag": "With Terelj",
       "tag_ko": "테렐지 포함",
       "text": "Start in Terelj with the giant Chinggis Khaan statue, Turtle Rock and a horse ride, then head south for the full Gobi loop.",
@@ -1270,7 +1270,7 @@
     {
       "name": "Mini Desert & Terelj",
       "name_ko": "중부 2박3일",
-      "img": "img/horses.jpg",
+      "img": "img/cafe-central.jpg",
       "tag": "Short break",
       "tag_ko": "단기",
       "text": "Sand dunes, sledding and a camel ride at Elsen Tasarkhai, then a horse ride in Terelj.",
@@ -1949,7 +1949,7 @@
     {
       "name": "Mini Desert & Two Nights in Terelj",
       "name_ko": "중부 3박4일 (미니사막+테렐지 2박)",
-      "img": "img/herd.jpg",
+      "img": "img/cafe-central.jpg",
       "tag": "Slow pace",
       "tag_ko": "여유 일정",
       "text": "A night at the Elsen Tasarkhai dunes, then two relaxed nights in Terelj.",
@@ -2285,7 +2285,7 @@
     {
       "name": "Central Mongolia at an Easy Pace",
       "name_ko": "중부 5박6일",
-      "img": "img/horses.jpg",
+      "img": "img/cafe-central.jpg",
       "tag": "Hot springs",
       "tag_ko": "온천",
       "text": "The classic central route with two nights at the Tsenkher hot springs.",
@@ -2507,7 +2507,7 @@
     {
       "name": "Lake Khövsgöl Express",
       "name_ko": "홉스골 4박5일",
-      "img": "img/lake.jpg",
+      "img": "img/cafe-khuvsgul.jpg",
       "tag": "Express",
       "tag_ko": "속성",
       "text": "The quickest way to Mongolia's great northern lake: two nights at Khövsgöl with a horse ride and a boat trip, and hotels in Bulgan and Erdenet.",
@@ -2635,7 +2635,7 @@
     {
       "name": "Mini Desert & Lake Khövsgöl",
       "name_ko": "홉스골 5박6일",
-      "img": "img/lake.jpg",
+      "img": "img/cafe-khuvsgul.jpg",
       "tag": "Desert + lake",
       "tag_ko": "사막+호수",
       "text": "Start with dunes and a camel ride at Elsen Tasarkhai, then two nights by Lake Khövsgöl.",
@@ -2782,7 +2782,7 @@
     {
       "name": "Khövsgöl by the Volcano Route",
       "name_ko": "홉스골 6박7일",
-      "img": "img/lake.jpg",
+      "img": "img/cafe-khuvsgul.jpg",
       "tag": "Volcano",
       "tag_ko": "화산",
       "text": "Chuluut Gorge, a climb up Khorgo Volcano and a night at Terkhiin Tsagaan Lake on the way to Khövsgöl.",
@@ -2948,7 +2948,7 @@
     {
       "name": "Khövsgöl, Hot Springs & Volcano",
       "name_ko": "홉스골 7박8일",
-      "img": "img/lake.jpg",
+      "img": "img/cafe-khuvsgul.jpg",
       "tag": "Hot springs",
       "tag_ko": "온천",
       "text": "The volcano route north with Erdene Zuu Monastery and a night at the Tsenkher hot springs added.",
@@ -3133,7 +3133,7 @@
     {
       "name": "Grand Khövsgöl & Terelj",
       "name_ko": "홉스골 8박9일",
-      "img": "img/lake.jpg",
+      "img": "img/cafe-khuvsgul.jpg",
       "tag": "Longest",
       "tag_ko": "최장 일정",
       "text": "Our longest program: hot springs, Khorgo Volcano, two nights at Lake Khövsgöl and a last night in Terelj.",
@@ -3337,7 +3337,7 @@
     {
       "name": "Winter Mini Desert, Ugii Lake & Terelj",
       "name_ko": "겨울 중부 3박4일 (엘승타사르하이·어기 호수·테렐지)",
-      "img": "img/winter.jpg",
+      "img": "img/cafe-yak.jpg",
       "tag": "Nomad family",
       "tag_ko": "유목민 가정",
       "text": "A night with a nomad family by the Elsen Tasarkhai dunes, then Ugii Lake and Terelj.",
@@ -3449,7 +3449,7 @@
     {
       "name": "Winter Mini Desert, Hot Springs & Ugii Lake",
       "name_ko": "겨울 중부 3박4일 (엘승타사르하이·쳉헤르·어기 호수)",
-      "img": "img/winter.jpg",
+      "img": "img/cafe-yak.jpg",
       "tag": "Hot springs",
       "tag_ko": "온천",
       "text": "A nomad family night at Elsen Tasarkhai, a soak in the Tsenkher hot springs and Ugii Lake.",
@@ -3561,7 +3561,7 @@
     {
       "name": "Winter Central Mongolia",
       "name_ko": "겨울 중부 4박5일",
-      "img": "img/winter.jpg",
+      "img": "img/cafe-yak.jpg",
       "tag": "Hot springs",
       "tag_ko": "온천",
       "text": "Snowy dunes at Elsen Tasarkhai, Erdene Zuu Monastery, the Tsenkher hot springs, Ugii Lake and Terelj.",
@@ -3692,7 +3692,7 @@
     {
       "name": "Winter Gobi",
       "name_ko": "겨울 고비 5박6일",
-      "img": "img/winter.jpg",
+      "img": "img/cafe-yak.jpg",
       "tag": "Snowy Gobi",
       "tag_ko": "설경 고비",
       "text": "The Gobi under snow: Baga Gazriin Chuluu, the ice gorge of Yolyn Am, camels at Khongoryn Els, Bayanzag and Tsagaan Suvarga.",
@@ -3842,7 +3842,7 @@
     {
       "name": "Winter Khövsgöl",
       "name_ko": "겨울 홉스골 5박6일",
-      "img": "img/winter.jpg",
+      "img": "img/cafe-ice.jpg",
       "tag": "Sleigh ride",
       "tag_ko": "말썰매",
       "text": "Frozen Lake Khövsgöl, two nights in Khatgal, the Renchinlkhümbe valley and a horse-drawn sleigh ride.",
@@ -3992,7 +3992,7 @@
     {
       "name": "Winter Khövsgöl & the Reindeer Herders",
       "name_ko": "겨울 홉스골 6박7일",
-      "img": "img/winter.jpg",
+      "img": "img/cafe-ice.jpg",
       "tag": "Reindeer",
       "tag_ko": "순록",
       "text": "Frozen Lake Khövsgöl, a horse-drawn sleigh ride in Khatgal and a visit to Tsaatan reindeer-herding families.",
@@ -4161,7 +4161,7 @@
     {
       "name": "Winter Gobi & Terelj",
       "name_ko": "겨울 고비 6박7일",
-      "img": "img/winter.jpg",
+      "img": "img/cafe-yak.jpg",
       "tag": "With Terelj",
       "tag_ko": "테렐지 포함",
       "text": "The winter Gobi loop with a last night in Terelj.",
@@ -4330,7 +4330,7 @@
     {
       "name": "Winter Khövsgöl, Reindeer & Terelj",
       "name_ko": "겨울 홉스골 7박8일",
-      "img": "img/winter.jpg",
+      "img": "img/cafe-ice.jpg",
       "tag": "Reindeer",
       "tag_ko": "순록",
       "text": "The reindeer-herder route with a last night in Terelj on the way back to the city.",
