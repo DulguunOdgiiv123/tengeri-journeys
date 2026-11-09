@@ -3,7 +3,7 @@
     {
       "name": "Gobi Highlights",
       "name_ko": "고비 4박5일",
-      "img": "img/cafe-gobi.jpg",
+      "img": "img/cafe/75.jpg",
       "tag": "Most popular",
       "tag_ko": "인기",
       "text": "The classic Gobi loop: the striped cliffs of Tsagaan Suvarga, the Flaming Cliffs of Bayanzag, a camel ride at the Khongoryn Els dunes and a hike in Yolyn Am.",
@@ -24,7 +24,7 @@
         "gobi"
       ],
       "team": [],
-      "cafe": "https://cafe.naver.com/goldenjigu/4",
+      "cafe": "https://cafe.naver.com/goldenjigu/75",
       "schedule": [
         {
           "place": "Tsagaan Suvarga",
@@ -175,7 +175,7 @@
     {
       "name": "Gobi & Baga Gazriin Chuluu",
       "name_ko": "고비 5박6일",
-      "img": "img/bayanzag.jpg",
+      "img": "img/cafe/74.jpg",
       "tag": "Granite rocks",
       "tag_ko": "기암지대",
       "text": "The Gobi loop plus a night among the granite rocks of Baga Gazriin Chuluu, which breaks up the long drive home.",
@@ -196,7 +196,7 @@
         "gobi"
       ],
       "team": [],
-      "cafe": "https://cafe.naver.com/goldenjigu/3",
+      "cafe": "https://cafe.naver.com/goldenjigu/74",
       "schedule": [
         {
           "place": "Tsagaan Suvarga",
@@ -398,7 +398,7 @@
     {
       "name": "Terelj & the Gobi",
       "name_ko": "고비&테렐지 5박6일",
-      "img": "img/cafe-gobi.jpg",
+      "img": "img/cafe/73.jpg",
       "tag": "With Terelj",
       "tag_ko": "테렐지 포함",
       "text": "Start in Terelj with the giant Chinggis Khaan statue, Turtle Rock and a horse ride, then head south for the full Gobi loop.",
@@ -419,7 +419,7 @@
         "gobi"
       ],
       "team": [],
-      "cafe": "https://cafe.naver.com/goldenjigu/6",
+      "cafe": "https://cafe.naver.com/goldenjigu/73",
       "schedule": [
         {
           "place": "Terelj",
@@ -597,7 +597,7 @@
     {
       "name": "Gobi, Baga Gazriin Chuluu & Terelj",
       "name_ko": "고비&테렐지 6박7일",
-      "img": "img/yak.jpg",
+      "img": "img/cafe/72.jpg",
       "tag": "With Terelj",
       "tag_ko": "테렐지 포함",
       "text": "The Gobi loop, the granite rocks of Baga Gazriin Chuluu and a last night in Terelj before the city.",
@@ -618,7 +618,7 @@
         "gobi"
       ],
       "team": [],
-      "cafe": "https://cafe.naver.com/goldenjigu/2",
+      "cafe": "https://cafe.naver.com/goldenjigu/72",
       "schedule": [
         {
           "place": "Tsagaan Suvarga",
@@ -879,7 +879,7 @@
     {
       "name": "Grand Gobi: Two Nights at the Dunes",
       "name_ko": "고비&테렐지 7박8일 (홍고린엘스 2박)",
-      "img": "img/yolyn.jpg",
+      "img": "img/cafe/71.jpg",
       "tag": "Slow pace",
       "tag_ko": "여유 일정",
       "text": "A slower Gobi with two nights at the Khongoryn Els dunes, then Baga Gazriin Chuluu and a last night in Terelj.",
@@ -900,7 +900,7 @@
         "gobi"
       ],
       "team": [],
-      "cafe": "https://cafe.naver.com/goldenjigu/5",
+      "cafe": "https://cafe.naver.com/goldenjigu/71",
       "schedule": [
         {
           "place": "Tsagaan Suvarga",
@@ -1195,7 +1195,7 @@
     {
       "name": "Terelj Overnight",
       "name_ko": "테렐지 1박2일",
-      "img": "img/terelj.jpg",
+      "img": "img/cafe/91.jpg",
       "tag": "Overnight",
       "tag_ko": "1박",
       "text": "One night in a ger camp in Gorkhi-Terelj National Park: the Chinggis Khaan statue, a horse ride and a campfire, then Aryapala Temple and Turtle Rock.",
@@ -1217,7 +1217,7 @@
         "short"
       ],
       "team": [],
-      "cafe": "https://cafe.naver.com/goldenjigu/33",
+      "cafe": "https://cafe.naver.com/goldenjigu/91",
       "schedule": [
         {
           "place": "Terelj",
@@ -1270,7 +1270,7 @@
     {
       "name": "Mini Desert & Terelj",
       "name_ko": "중부 2박3일",
-      "img": "img/cafe-central.jpg",
+      "img": "img/cafe/89.jpg",
       "tag": "Short break",
       "tag_ko": "단기",
       "text": "Sand dunes, sledding and a camel ride at Elsen Tasarkhai, then a horse ride in Terelj.",
@@ -1292,7 +1292,7 @@
         "short"
       ],
       "team": [],
-      "cafe": "https://cafe.naver.com/goldenjigu/10",
+      "cafe": "https://cafe.naver.com/goldenjigu/89",
       "schedule": [
         {
           "place": "Elsen Tasarkhai",
@@ -1389,7 +1389,7 @@
     {
       "name": "Terelj Ger Escape",
       "name_ko": "테렐지 2박3일",
-      "img": "img/yurt.jpg",
+      "img": "img/cafe/90.jpg",
       "tag": "Short break",
       "tag_ko": "단기",
       "text": "Two easy nights in Terelj with a horse ride, Aryapala Temple and Turtle Rock, close to the city and with no long drives.",
@@ -1411,7 +1411,7 @@
         "short"
       ],
       "team": [],
-      "cafe": "https://cafe.naver.com/goldenjigu/26",
+      "cafe": "https://cafe.naver.com/goldenjigu/90",
       "schedule": [
         {
           "place": "Terelj",
@@ -1482,7 +1482,7 @@
     {
       "name": "Mini Desert, Hot Springs & Terelj",
       "name_ko": "중부 3박4일",
-      "img": "img/orkhon.jpg",
+      "img": "img/cafe/88.jpg",
       "tag": "Hot springs",
       "tag_ko": "온천",
       "text": "Dunes and camels at Elsen Tasarkhai, Erdene Zuu Monastery and a soak at the Tsenkher hot springs, then Terelj.",
@@ -1503,7 +1503,7 @@
         "central"
       ],
       "team": [],
-      "cafe": "https://cafe.naver.com/goldenjigu/9",
+      "cafe": "https://cafe.naver.com/goldenjigu/88",
       "schedule": [
         {
           "place": "Elsen Tasarkhai",
@@ -1627,7 +1627,7 @@
     {
       "name": "Mini Desert, Ugii Lake & Terelj",
       "name_ko": "중부 3박4일 (미니사막·어기 호수·테렐지)",
-      "img": "img/terelj.jpg",
+      "img": "img/cafe/86.jpg",
       "tag": "Lakeside",
       "tag_ko": "호수",
       "text": "Elsen Tasarkhai's dunes, Erdene Zuu Monastery and a lakeside night at Ugii, then Terelj.",
@@ -1648,7 +1648,7 @@
         "central"
       ],
       "team": [],
-      "cafe": "https://cafe.naver.com/goldenjigu/22",
+      "cafe": "https://cafe.naver.com/goldenjigu/86",
       "schedule": [
         {
           "place": "Elsen Tasarkhai",
@@ -1788,7 +1788,7 @@
     {
       "name": "Mini Desert, Hot Springs & Ugii Lake",
       "name_ko": "중부 3박4일 (미니사막·쳉헤르 온천·어기 호수)",
-      "img": "img/yurt.jpg",
+      "img": "img/cafe/85.jpg",
       "tag": "Hot springs",
       "tag_ko": "온천",
       "text": "Further west: Elsen Tasarkhai, the Tsenkher hot springs and Ugii Lake, then straight back to the city.",
@@ -1809,7 +1809,7 @@
         "central"
       ],
       "team": [],
-      "cafe": "https://cafe.naver.com/goldenjigu/23",
+      "cafe": "https://cafe.naver.com/goldenjigu/85",
       "schedule": [
         {
           "place": "Elsen Tasarkhai",
@@ -1949,7 +1949,7 @@
     {
       "name": "Mini Desert & Two Nights in Terelj",
       "name_ko": "중부 3박4일 (미니사막+테렐지 2박)",
-      "img": "img/cafe-central.jpg",
+      "img": "img/cafe/87.jpg",
       "tag": "Slow pace",
       "tag_ko": "여유 일정",
       "text": "A night at the Elsen Tasarkhai dunes, then two relaxed nights in Terelj.",
@@ -1970,7 +1970,7 @@
         "central"
       ],
       "team": [],
-      "cafe": "https://cafe.naver.com/goldenjigu/34",
+      "cafe": "https://cafe.naver.com/goldenjigu/87",
       "schedule": [
         {
           "place": "Elsen Tasarkhai",
@@ -2093,7 +2093,7 @@
     {
       "name": "Central Mongolia Classic",
       "name_ko": "중부 4박5일",
-      "img": "img/orkhon.jpg",
+      "img": "img/cafe/82.jpg",
       "tag": "Most popular",
       "tag_ko": "인기",
       "text": "Our most-viewed program: dunes, Erdene Zuu Monastery, the Tsenkher hot springs, Ugii Lake and Terelj in five days.",
@@ -2114,7 +2114,7 @@
         "central"
       ],
       "team": [],
-      "cafe": "https://cafe.naver.com/goldenjigu/7",
+      "cafe": "https://cafe.naver.com/goldenjigu/82",
       "schedule": [
         {
           "place": "Elsen Tasarkhai",
@@ -2285,7 +2285,7 @@
     {
       "name": "Central Mongolia at an Easy Pace",
       "name_ko": "중부 5박6일",
-      "img": "img/cafe-central.jpg",
+      "img": "img/cafe/81.jpg",
       "tag": "Hot springs",
       "tag_ko": "온천",
       "text": "The classic central route with two nights at the Tsenkher hot springs.",
@@ -2306,7 +2306,7 @@
         "central"
       ],
       "team": [],
-      "cafe": "https://cafe.naver.com/goldenjigu/8",
+      "cafe": "https://cafe.naver.com/goldenjigu/81",
       "schedule": [
         {
           "place": "Elsen Tasarkhai",
@@ -2507,7 +2507,7 @@
     {
       "name": "Lake Khövsgöl Express",
       "name_ko": "홉스골 4박5일",
-      "img": "img/cafe-khuvsgul.jpg",
+      "img": "img/cafe/80.jpg",
       "tag": "Express",
       "tag_ko": "속성",
       "text": "The quickest way to Mongolia's great northern lake: two nights at Khövsgöl with a horse ride and a boat trip, and hotels in Bulgan and Erdenet.",
@@ -2526,7 +2526,7 @@
         "north"
       ],
       "team": [],
-      "cafe": "https://cafe.naver.com/goldenjigu/12",
+      "cafe": "https://cafe.naver.com/goldenjigu/80",
       "schedule": [
         {
           "place": "Bulgan city",
@@ -2635,7 +2635,7 @@
     {
       "name": "Mini Desert & Lake Khövsgöl",
       "name_ko": "홉스골 5박6일",
-      "img": "img/cafe-khuvsgul.jpg",
+      "img": "img/cafe/79.jpg",
       "tag": "Desert + lake",
       "tag_ko": "사막+호수",
       "text": "Start with dunes and a camel ride at Elsen Tasarkhai, then two nights by Lake Khövsgöl.",
@@ -2654,7 +2654,7 @@
         "north"
       ],
       "team": [],
-      "cafe": "https://cafe.naver.com/goldenjigu/13",
+      "cafe": "https://cafe.naver.com/goldenjigu/79",
       "schedule": [
         {
           "place": "Elsen Tasarkhai",
@@ -2782,7 +2782,7 @@
     {
       "name": "Khövsgöl by the Volcano Route",
       "name_ko": "홉스골 6박7일",
-      "img": "img/cafe-khuvsgul.jpg",
+      "img": "img/cafe/78.jpg",
       "tag": "Volcano",
       "tag_ko": "화산",
       "text": "Chuluut Gorge, a climb up Khorgo Volcano and a night at Terkhiin Tsagaan Lake on the way to Khövsgöl.",
@@ -2801,7 +2801,7 @@
         "north"
       ],
       "team": [],
-      "cafe": "https://cafe.naver.com/goldenjigu/14",
+      "cafe": "https://cafe.naver.com/goldenjigu/78",
       "schedule": [
         {
           "place": "Elsen Tasarkhai",
@@ -2948,7 +2948,7 @@
     {
       "name": "Khövsgöl, Hot Springs & Volcano",
       "name_ko": "홉스골 7박8일",
-      "img": "img/cafe-khuvsgul.jpg",
+      "img": "img/cafe/77.jpg",
       "tag": "Hot springs",
       "tag_ko": "온천",
       "text": "The volcano route north with Erdene Zuu Monastery and a night at the Tsenkher hot springs added.",
@@ -2967,7 +2967,7 @@
         "north"
       ],
       "team": [],
-      "cafe": "https://cafe.naver.com/goldenjigu/15",
+      "cafe": "https://cafe.naver.com/goldenjigu/77",
       "schedule": [
         {
           "place": "Elsen Tasarkhai",
@@ -3133,7 +3133,7 @@
     {
       "name": "Grand Khövsgöl & Terelj",
       "name_ko": "홉스골 8박9일",
-      "img": "img/cafe-khuvsgul.jpg",
+      "img": "img/cafe/76.jpg",
       "tag": "Longest",
       "tag_ko": "최장 일정",
       "text": "Our longest program: hot springs, Khorgo Volcano, two nights at Lake Khövsgöl and a last night in Terelj.",
@@ -3152,7 +3152,7 @@
         "north"
       ],
       "team": [],
-      "cafe": "https://cafe.naver.com/goldenjigu/16",
+      "cafe": "https://cafe.naver.com/goldenjigu/76",
       "schedule": [
         {
           "place": "Elsen Tasarkhai",
@@ -3337,7 +3337,7 @@
     {
       "name": "Winter Mini Desert, Ugii Lake & Terelj",
       "name_ko": "겨울 중부 3박4일 (엘승타사르하이·어기 호수·테렐지)",
-      "img": "img/cafe-yak.jpg",
+      "img": "img/cafe/62.jpg",
       "tag": "Nomad family",
       "tag_ko": "유목민 가정",
       "text": "A night with a nomad family by the Elsen Tasarkhai dunes, then Ugii Lake and Terelj.",
@@ -3358,7 +3358,7 @@
         "winter"
       ],
       "team": [],
-      "cafe": "https://cafe.naver.com/goldenjigu/46",
+      "cafe": "https://cafe.naver.com/goldenjigu/62",
       "schedule": [
         {
           "place": "Elsen Tasarkhai",
@@ -3449,7 +3449,7 @@
     {
       "name": "Winter Mini Desert, Hot Springs & Ugii Lake",
       "name_ko": "겨울 중부 3박4일 (엘승타사르하이·쳉헤르·어기 호수)",
-      "img": "img/cafe-yak.jpg",
+      "img": "img/cafe/61.jpg",
       "tag": "Hot springs",
       "tag_ko": "온천",
       "text": "A nomad family night at Elsen Tasarkhai, a soak in the Tsenkher hot springs and Ugii Lake.",
@@ -3470,7 +3470,7 @@
         "winter"
       ],
       "team": [],
-      "cafe": "https://cafe.naver.com/goldenjigu/47",
+      "cafe": "https://cafe.naver.com/goldenjigu/61",
       "schedule": [
         {
           "place": "Elsen Tasarkhai",
@@ -3561,7 +3561,7 @@
     {
       "name": "Winter Central Mongolia",
       "name_ko": "겨울 중부 4박5일",
-      "img": "img/cafe-yak.jpg",
+      "img": "img/cafe/60.jpg",
       "tag": "Hot springs",
       "tag_ko": "온천",
       "text": "Snowy dunes at Elsen Tasarkhai, Erdene Zuu Monastery, the Tsenkher hot springs, Ugii Lake and Terelj.",
@@ -3582,7 +3582,7 @@
         "winter"
       ],
       "team": [],
-      "cafe": "https://cafe.naver.com/goldenjigu/45",
+      "cafe": "https://cafe.naver.com/goldenjigu/60",
       "schedule": [
         {
           "place": "Elsen Tasarkhai",
@@ -3713,7 +3713,7 @@
         "winter"
       ],
       "team": [],
-      "cafe": "https://cafe.naver.com/goldenjigu/43",
+      "cafe": "https://cafe.naver.com/goldenjigu",
       "schedule": [
         {
           "place": "Baga Gazriin Chuluu",
@@ -3842,7 +3842,7 @@
     {
       "name": "Winter Khövsgöl",
       "name_ko": "겨울 홉스골 5박6일",
-      "img": "img/cafe-ice.jpg",
+      "img": "img/cafe/56.jpg",
       "tag": "Sleigh ride",
       "tag_ko": "말썰매",
       "text": "Frozen Lake Khövsgöl, two nights in Khatgal, the Renchinlkhümbe valley and a horse-drawn sleigh ride.",
@@ -3863,7 +3863,7 @@
         "winter"
       ],
       "team": [],
-      "cafe": "https://cafe.naver.com/goldenjigu/48",
+      "cafe": "https://cafe.naver.com/goldenjigu/56",
       "schedule": [
         {
           "place": "Bulgan",
@@ -3992,7 +3992,7 @@
     {
       "name": "Winter Khövsgöl & the Reindeer Herders",
       "name_ko": "겨울 홉스골 6박7일",
-      "img": "img/cafe-ice.jpg",
+      "img": "img/cafe/55.jpg",
       "tag": "Reindeer",
       "tag_ko": "순록",
       "text": "Frozen Lake Khövsgöl, a horse-drawn sleigh ride in Khatgal and a visit to Tsaatan reindeer-herding families.",
@@ -4013,7 +4013,7 @@
         "winter"
       ],
       "team": [],
-      "cafe": "https://cafe.naver.com/goldenjigu/41",
+      "cafe": "https://cafe.naver.com/goldenjigu/55",
       "schedule": [
         {
           "place": "Bulgan",
@@ -4182,7 +4182,7 @@
         "winter"
       ],
       "team": [],
-      "cafe": "https://cafe.naver.com/goldenjigu/44",
+      "cafe": "https://cafe.naver.com/goldenjigu",
       "schedule": [
         {
           "place": "Baga Gazriin Chuluu",
@@ -4351,7 +4351,7 @@
         "winter"
       ],
       "team": [],
-      "cafe": "https://cafe.naver.com/goldenjigu/42",
+      "cafe": "https://cafe.naver.com/goldenjigu",
       "schedule": [
         {
           "place": "Bulgan",

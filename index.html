@@ -291,9 +291,9 @@ body:has(> .menu:not([hidden]))::after { content: ""; position: fixed; inset: 0;
 .hero { position: relative; isolation: isolate; overflow: hidden; color: #fff; padding-top: calc(var(--nav-h) + env(safe-area-inset-top, 0px)); }
 .hero-bg { position: absolute; inset: 0; z-index: -2; }
 .hero-bg img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 62%; }
-/* Hero slideshow: seven photos crossfade every 4 s (script: "Hero slideshow"); the active one zooms out slowly */
-[data-hero-slides] img { position: absolute; inset: 0; object-position: var(--pos, 50% 50%); opacity: 0; transform: scale(1.07); transition: opacity 1.4s ease, transform 0s linear 1.4s; }
-[data-hero-slides] img.is-on { opacity: 1; transform: scale(1); transition: opacity 1.4s ease, transform 7s ease-out; }
+/* Hero slideshow: eight photos crossfade every 4 s (script: "Hero slideshow"). No zoom: scaling would soften the 4K photos. */
+[data-hero-slides] img { position: absolute; inset: 0; object-position: var(--pos, 50% 50%); opacity: 0; transition: opacity 1.2s ease; }
+[data-hero-slides] img.is-on { opacity: 1; }
 .hero-cap { position: absolute; z-index: 2; right: max(16px, env(safe-area-inset-right, 0px)); bottom: calc(clamp(40px, 6.5vw, 96px) + 6px); display: flex; align-items: center; gap: 8px; font-size: .8rem; font-weight: 600; color: rgba(255,255,255,.92); text-shadow: 0 1px 3px rgba(0,0,0,.45); }
 .hero-cap > svg { width: 14px; height: 14px; flex: none; }
 .hero-cap .hc { display: none; }
@@ -305,7 +305,8 @@ body:has(> .menu:not([hidden]))::after { content: ""; position: fixed; inset: 0;
 .hc-btn[aria-pressed="true"] .i-play { display: block; }
 @media (max-width: 560px) { .hero-cap { bottom: calc(clamp(40px, 6.5vw, 96px) - 4px); } }
 /* Overlay: a blue sky wash at the top fading into navy at the horizon */
-.hero::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(8,70,130,.58) 0%, rgba(15,27,45,.38) 42%, rgba(15,27,45,.52) 72%, rgba(10,40,75,.72) 100%); }
+.hero::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(8,50,100,.42) 0%, rgba(15,27,45,.18) 38%, rgba(15,27,45,.3) 70%, rgba(10,40,75,.58) 100%); }
+.hero h1, .hero-lede { text-shadow: 0 2px 18px rgba(0,0,0,.38), 0 1px 3px rgba(0,0,0,.3); }
 .hero-center { position: relative; z-index: 1; display: grid; justify-items: center; text-align: center; gap: 18px; padding-block: clamp(56px, 8vw, 100px) calc(clamp(28px, 4vw, 44px) + clamp(30px, 5vw, 72px)); }
 /* Horizon: distant blue mountains and the steppe in front, melting into the page */
 .hero-ridge { position: absolute; left: 0; right: 0; bottom: -1px; z-index: 0; width: 100%; height: clamp(40px, 6.5vw, 96px); pointer-events: none; }
@@ -396,6 +397,9 @@ fieldset.field legend { padding: 0; margin-bottom: 6px; }
 .lc-img { position: relative; aspect-ratio: 16 / 10; overflow: hidden; background: var(--mist); }
 .lc-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease); }
 .lcard:hover .lc-img img { transform: scale(1.04); }
+/* Cafe tour covers (img/cafe/<post>.jpg) carry the product name in Korean: never crop it away.
+   Where the frame is narrower or wider than the cover, show all of it over a blurred copy. */
+.ph-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: blur(16px) brightness(.85); transform: scale(1.15); }
 .tags { position: absolute; left: 12px; top: 12px; display: flex; gap: 6px; flex-wrap: wrap; }
 .tag { display: inline-block; font: 700 .74rem/1 var(--f-body); padding: 6px 10px; border-radius: var(--r-pill); background: rgba(255,255,255,.95); color: var(--navy); }
 .tag.blue, .tag.red { background: var(--green-deep) linear-gradient(135deg, #2a9d52, #1d7f45); color: #fff; }   /* tour labels: grassland */
@@ -425,6 +429,7 @@ fieldset.field legend { padding: 0; margin-bottom: 6px; }
   .cards { gap: 12px; }
   .lcard { display: grid; grid-template-columns: 112px minmax(0, 1fr); }
   .lc-img { aspect-ratio: auto; min-height: 100%; }
+  .lc-img.is-cover img:not(.ph-bg) { object-fit: contain; }
   .lc-img .tags { left: 6px; top: 6px; }
   .lc-img .tag { font-size: .68rem; padding: 4px 6px; }
   .lc-body { padding: 12px 14px; gap: 5px; }
@@ -659,6 +664,9 @@ body[data-at="contact"] .dock { opacity: 0; pointer-events: none; transform: tra
 .modal > .m-close, .rmodal > .m-close { position: sticky; top: 9px; right: auto; display: grid; place-items: center; margin: 9px 12px -51px auto; }
 .m-hero { position: relative; aspect-ratio: 3 / 1; max-width: 100%; overflow: hidden; background: var(--mist); }
 .m-hero img { width: 100%; height: 100%; object-fit: cover; }
+.m-hero.is-cover img:not(.ph-bg) { position: relative; object-fit: contain; }
+/* the Korean title sits at the top of the covers: keep the tag chips off it */
+.m-hero.is-cover .tags, .lc-img.is-cover .tags { top: auto; bottom: 10px; z-index: 2; }
 .m-top { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 24px 40px; padding: 32px 36px; align-items: start; }
 .m-head { display: grid; gap: 10px; align-content: start; min-width: 0; }
 .m-code { font: 500 .78rem var(--f-mono); color: var(--muted); }
@@ -1002,12 +1010,13 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
   <!-- Hero: centered headline and tour search -->
   <section class="hero" aria-labelledby="hero-title" data-spy-for="">
     <div class="hero-bg" data-hero-slides>
-      <img class="tr is-on" src="img/hero-ub-1280.webp" srcset="img/hero-ub-1280.webp 1280w, img/hero-ub-1920.webp 1920w, img/hero-ub-2560.webp 2560w, img/hero-ub-3840.webp 3840w" sizes="100vw" style="--pos: 48% 38%" alt="Sükhbaatar Square and the Blue Sky Tower in central Ulaanbaatar in the late-afternoon sun" data-ko-alt="오후 햇살 속 울란바토르 도심의 수흐바타르 광장과 블루스카이 타워" fetchpriority="high">
-      <img class="tr" data-src="img/hero-khuvsgul-1280.webp" data-srcset="img/hero-khuvsgul-1280.webp 1280w, img/hero-khuvsgul-1920.webp 1920w, img/hero-khuvsgul-2560.webp 2560w, img/hero-khuvsgul-3840.webp 3840w" sizes="100vw" style="--pos: 62% 35%" alt="Lake Khövsgöl, with the snow-capped Munku-Sardyk range behind" data-ko-alt="만년설 덮인 뭉크사르딕 산맥을 배경으로 한 홉스골 호수">
-      <img class="tr" data-src="img/hero-yolyn-1280.webp" data-srcset="img/hero-yolyn-1280.webp 1280w, img/hero-yolyn-1920.webp 1920w, img/hero-yolyn-2560.webp 2560w, img/hero-yolyn-3840.webp 3840w" sizes="100vw" style="--pos: 50% 45%" alt="The jagged rock walls of Yolyn Am gorge in the Gobi" data-ko-alt="고비 사막 욜링암 협곡의 날카로운 암벽">
-      <img class="tr" data-src="img/hero-terelj-1280.webp" data-srcset="img/hero-terelj-1280.webp 1280w, img/hero-terelj-1920.webp 1920w, img/hero-terelj-2560.webp 2560w, img/hero-terelj-3840.webp 3840w" sizes="100vw" style="--pos: 60% 55%" alt="Autumn larches and rock peaks in Gorkhi-Terelj National Park, seen from a cave" data-ko-alt="동굴에서 바라본 테렐지 국립공원의 가을 낙엽송과 바위산">
-      <img class="tr" data-src="img/hero-tsagaan-1280.webp" data-srcset="img/hero-tsagaan-1280.webp 1280w, img/hero-tsagaan-1920.webp 1920w, img/hero-tsagaan-2560.webp 2560w, img/hero-tsagaan-3840.webp 3840w" sizes="100vw" style="--pos: 62% 50%" alt="The eroded cliffs of Tsagaan Suvarga in the Gobi" data-ko-alt="고비 사막 차강소브라가의 침식된 절벽">
-      <img class="tr" data-src="img/hero-orkhon-1280.webp" data-srcset="img/hero-orkhon-1280.webp 1280w, img/hero-orkhon-1920.webp 1920w, img/hero-orkhon-2560.webp 2560w, img/hero-orkhon-3840.webp 3840w" sizes="100vw" style="--pos: 55% 70%" alt="Orkhon Waterfall (Ulaan Tsutgalan) pouring over a basalt cliff below larch trees" data-ko-alt="낙엽송 아래 현무암 절벽으로 떨어지는 어르헝 폭포">
+      <img class="tr is-on" src="img/hero-ub-1280.webp" srcset="img/hero-ub-1280.webp 1280w, img/hero-ub-1920.webp 1920w, img/hero-ub-2560.webp 2560w, img/hero-ub-3840.webp 3840w" sizes="(orientation: portrait) 135vh, 100vw" style="--pos: 50% 60%" alt="Ulaanbaatar's apartment towers spreading toward the mountains, seen from a hillside" data-ko-alt="산자락에서 내려다본 울란바토르 도심과 그 너머 산맥" fetchpriority="high">
+      <img class="tr" data-src="img/hero-khuvsgul-1280.webp" data-srcset="img/hero-khuvsgul-1280.webp 1280w, img/hero-khuvsgul-1920.webp 1920w, img/hero-khuvsgul-2560.webp 2560w, img/hero-khuvsgul-3840.webp 3840w" sizes="(orientation: portrait) 135vh, 100vw" style="--pos: 62% 35%" alt="Lake Khövsgöl, with the snow-capped Munku-Sardyk range behind" data-ko-alt="만년설 덮인 뭉크사르딕 산맥을 배경으로 한 홉스골 호수">
+      <img class="tr" data-src="img/hero-yolyn-1280.webp" data-srcset="img/hero-yolyn-1280.webp 1280w, img/hero-yolyn-1920.webp 1920w, img/hero-yolyn-2560.webp 2560w, img/hero-yolyn-3840.webp 3840w" sizes="(orientation: portrait) 135vh, 100vw" style="--pos: 50% 45%" alt="The jagged rock walls of Yolyn Am gorge in the Gobi" data-ko-alt="고비 사막 욜링암 협곡의 날카로운 암벽">
+      <img class="tr" data-src="img/hero-terelj-1280.webp" data-srcset="img/hero-terelj-1280.webp 1280w, img/hero-terelj-1920.webp 1920w, img/hero-terelj-2560.webp 2560w, img/hero-terelj-3840.webp 3840w" sizes="(orientation: portrait) 135vh, 100vw" style="--pos: 60% 55%" alt="Autumn larches and rock peaks in Gorkhi-Terelj National Park, seen from a cave" data-ko-alt="동굴에서 바라본 테렐지 국립공원의 가을 낙엽송과 바위산">
+      <img class="tr" data-src="img/hero-tsagaan-1280.webp" data-srcset="img/hero-tsagaan-1280.webp 1280w, img/hero-tsagaan-1920.webp 1920w, img/hero-tsagaan-2560.webp 2560w, img/hero-tsagaan-3840.webp 3840w" sizes="(orientation: portrait) 135vh, 100vw" style="--pos: 62% 50%" alt="The eroded cliffs of Tsagaan Suvarga in the Gobi" data-ko-alt="고비 사막 차강소브라가의 침식된 절벽">
+      <img class="tr" data-src="img/hero-tamir-1280.webp" data-srcset="img/hero-tamir-1280.webp 1280w, img/hero-tamir-1920.webp 1920w, img/hero-tamir-2560.webp 2560w, img/hero-tamir-3840.webp 3840w" sizes="(orientation: portrait) 135vh, 100vw" style="--pos: 60% 55%" alt="A lone ger below a rocky ridge in the green Tamir valley, Arkhangai" data-ko-alt="아르항가이 타미르 계곡의 초원과 바위산 아래 게르 한 채">
+      <img class="tr" data-src="img/hero-orkhon-1280.webp" data-srcset="img/hero-orkhon-1280.webp 1280w, img/hero-orkhon-1920.webp 1920w, img/hero-orkhon-2560.webp 2560w, img/hero-orkhon-3840.webp 3840w" sizes="(orientation: portrait) 135vh, 100vw" style="--pos: 55% 70%" alt="Orkhon Waterfall (Ulaan Tsutgalan) pouring over a basalt cliff below larch trees" data-ko-alt="낙엽송 아래 현무암 절벽으로 떨어지는 어르헝 폭포">
       <img class="tr" data-src="img/hero-van-1536.jpg" data-srcset="img/hero-van-1536.jpg 1536w" sizes="100vw" style="--pos: 58% 60%" alt="A Golden Jigu tour van alone on the open steppe under a vast streaky blue sky" data-ko-alt="끝없이 펼쳐진 푸른 하늘 아래 초원 위의 골든지구 투어 차량">
     </div>
     <div class="hero-cap">
@@ -1017,6 +1026,7 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
       <span class="hc"><span data-en>Yolyn Am</span><span data-ko>욜링암</span></span>
       <span class="hc"><span data-en>Gorkhi-Terelj National Park</span><span data-ko>테렐지 국립공원</span></span>
       <span class="hc"><span data-en>Tsagaan Suvarga</span><span data-ko>차강소브라가</span></span>
+      <span class="hc"><span data-en>Tamir valley, Arkhangai</span><span data-ko>아르항가이 타미르 계곡</span></span>
       <span class="hc"><span data-en>Orkhon Waterfall</span><span data-ko>어르헝 폭포</span></span>
       <span class="hc"><span data-en>Our tour van on the steppe</span><span data-ko>초원 위의 골든지구 투어 차량</span></span>
       <button class="hc-btn tr" type="button" aria-pressed="false" aria-label="Pause the photo slideshow" data-ko-aria-label="배경 사진 넘김 멈추기"><svg class="i-pause" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><rect x="2" y="1.5" width="2.6" height="9" rx=".6"/><rect x="7.4" y="1.5" width="2.6" height="9" rx=".6"/></svg><svg class="i-play" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M3 1.6v8.8L10.4 6z"/></svg></button>
@@ -1266,8 +1276,8 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
     <span>© 2026 Golden Jigu Tour</span>
     <details>
       <summary><span data-en>Photo credits</span><span data-ko>사진 출처</span></summary>
-      <p class="credits">Videos, the Gobi, central steppe, Khövsgöl and winter photos (from our Naver cafe), and the tour van, road and red-rock photos © Golden Jigu Tour. Other photos via Wikimedia Commons:
-        <a href="https://commons.wikimedia.org/wiki/File:New_Ulaanbaatar_skyline_(7341288738).jpg" target="_blank" rel="noopener">Ulaanbaatar skyline</a> by Francisco Anzola (CC BY 2.0);
+      <p class="credits">Videos, the tour cover photos from our Naver cafe, and the tour van, road and red-rock photos © Golden Jigu Tour. Other photos via Wikimedia Commons:
+        <a href="https://www.pexels.com/photo/aerial-view-of-ulaanbaatar-s-urban-landscape-32616068/" target="_blank" rel="noopener">Ulaanbaatar</a> by Uuganbayar Otgonbayar and <a href="https://www.pexels.com/photo/arkhangai-province-ikh-tamir-sum-north-tamir-valley-2024-08-01-mongolia-28103660/" target="_blank" rel="noopener">Tamir valley</a> by Dal Tamiraa (Pexels License);
         <a href="https://commons.wikimedia.org/wiki/File:View_from_Hovsgol_Lake_to_Munku-Sardyk_-_panoramio.jpg" target="_blank" rel="noopener">Lake Khövsgöl and Munku-Sardyk</a> by Michael Karavanov (CC BY-SA 3.0);
         <a href="https://commons.wikimedia.org/wiki/File:Yolyn_Am_05.jpg" target="_blank" rel="noopener">Yolyn Am gorge</a> by Bernard Gagnon (CC0);
         <a href="https://commons.wikimedia.org/wiki/File:Terelj_National_Park,_Mongolia_(48810429023).jpg" target="_blank" rel="noopener">Gorkhi-Terelj in autumn</a> by Dan Nevill (CC BY 2.0);
@@ -1498,6 +1508,7 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
   /* ---------- Data ---------- */
   const PLACES = C.PLACES;
 
+  const isCover = src => /^img\/cafe\/\d+\.jpg$/.test(src || "");   // a cafe tour cover with its Korean title
   const REGIONS = {
     gobi:    { en: "Gobi Desert",      ko: "고비사막",    img: "img/cafe-gobi.jpg" },
     north:   { en: "Khövsgöl & north", ko: "홉스골·북부", img: "img/cafe-khuvsgul.jpg" },
@@ -1798,7 +1809,7 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
     const meta = [regionName(regionOf(t)), lang === "ko" ? "" : daysText(t.days), l.season ? T(l.season, `${l.season} 출발`) : ""].filter(Boolean).join(" · ");
     const hl = [...highlightsOf(t).slice(0, 3), ...(allShower(t) ? [T("Hot showers", "온수 샤워")] : [])];
     return `<article class="lcard" data-card="${t.id}">
-      <div class="lc-img"><img src="${t.img || "img/dunes.jpg"}" alt="" loading="lazy">${tag ? `<span class="tags"><span class="tag blue">${tag}</span></span>` : ""}</div>
+      <div class="lc-img${isCover(t.img) ? " is-cover" : ""}">${isCover(t.img) ? `<img class="ph-bg" src="${t.img}" alt="" aria-hidden="true" loading="lazy">` : ""}<img src="${t.img || "img/dunes.jpg"}" alt="" loading="lazy">${tag ? `<span class="tags"><span class="tag blue">${tag}</span></span>` : ""}</div>
       <div class="lc-body">
         <span class="lc-meta">${meta}</span>
         <h3 class="lc-title">${l.name}</h3>
@@ -2275,7 +2286,7 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
     ].filter(Boolean);
     const lodging = lodgingHTML(t);
     $("#m-content").innerHTML = `
-      <div class="m-hero"><img src="${t.img || "img/dunes.jpg"}" alt="${esc(l.name)}"><span class="tags">${tagsHTML(t)}</span></div>
+      <div class="m-hero${isCover(t.img) ? " is-cover" : ""}">${isCover(t.img) ? `<img class="ph-bg" src="${t.img}" alt="" aria-hidden="true">` : ""}<img src="${t.img || "img/dunes.jpg"}" alt="${esc(l.name)}"><span class="tags">${tagsHTML(t)}</span></div>
       <div class="m-top">
         <div class="m-head">
           <span class="m-code">${lang === "ko" ? krTitle + " · " : ""}${T("Tour code", "상품코드")} GJ-${id.toUpperCase()}</span>
@@ -2649,7 +2660,7 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
   const copyBtn = $("#copy-email");
   copyBtn.addEventListener("click", () => copyText(CONFIG.email, copyBtn));
 
-  /* ---------- Hero slideshow: seven photos, one every 4 s ---------- */
+  /* ---------- Hero slideshow: eight photos, one every 4 s ---------- */
   // Only the first photo is in the HTML src; each next one is fetched while the current one is on screen.
   // Stops while the tab is hidden; starts paused for prefers-reduced-motion (the button plays it).
   (() => {
