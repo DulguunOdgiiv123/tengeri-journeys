@@ -291,6 +291,19 @@ body:has(> .menu:not([hidden]))::after { content: ""; position: fixed; inset: 0;
 .hero { position: relative; isolation: isolate; overflow: hidden; color: #fff; padding-top: calc(var(--nav-h) + env(safe-area-inset-top, 0px)); }
 .hero-bg { position: absolute; inset: 0; z-index: -2; }
 .hero-bg img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 62%; }
+/* Hero slideshow: seven photos crossfade every 4 s (script: "Hero slideshow"); the active one zooms out slowly */
+[data-hero-slides] img { position: absolute; inset: 0; object-position: var(--pos, 50% 50%); opacity: 0; transform: scale(1.07); transition: opacity 1.4s ease, transform 0s linear 1.4s; }
+[data-hero-slides] img.is-on { opacity: 1; transform: scale(1); transition: opacity 1.4s ease, transform 7s ease-out; }
+.hero-cap { position: absolute; z-index: 2; right: max(16px, env(safe-area-inset-right, 0px)); bottom: calc(clamp(40px, 6.5vw, 96px) + 6px); display: flex; align-items: center; gap: 8px; font-size: .8rem; font-weight: 600; color: rgba(255,255,255,.92); text-shadow: 0 1px 3px rgba(0,0,0,.45); }
+.hero-cap > svg { width: 14px; height: 14px; flex: none; }
+.hero-cap .hc { display: none; }
+.hero-cap .hc.is-on { display: inline; }
+.hc-btn { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; border: 1px solid rgba(255,255,255,.45); background: rgba(15,27,45,.28); color: #fff; cursor: pointer; }
+.hc-btn:hover { background: rgba(15,27,45,.5); }
+.hc-btn svg { width: 12px; height: 12px; }
+.hc-btn .i-play, .hc-btn[aria-pressed="true"] .i-pause { display: none; }
+.hc-btn[aria-pressed="true"] .i-play { display: block; }
+@media (max-width: 560px) { .hero-cap { bottom: calc(clamp(40px, 6.5vw, 96px) - 4px); } }
 /* Overlay: a blue sky wash at the top fading into navy at the horizon */
 .hero::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(8,70,130,.58) 0%, rgba(15,27,45,.38) 42%, rgba(15,27,45,.52) 72%, rgba(10,40,75,.72) 100%); }
 .hero-center { position: relative; z-index: 1; display: grid; justify-items: center; text-align: center; gap: 18px; padding-block: clamp(56px, 8vw, 100px) calc(clamp(28px, 4vw, 44px) + clamp(30px, 5vw, 72px)); }
@@ -429,10 +442,10 @@ fieldset.field legend { padding: 0; margin-bottom: 6px; }
 .why-points li { display: grid; justify-items: center; align-content: start; text-align: center; gap: 10px; padding: 24px 20px; border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--paper); }
 .why-points strong { font-weight: 800; font-size: 1.02rem; }
 .why-points .wp { color: var(--muted); font-size: .94rem; }
-.reels { display: grid; grid-template-columns: repeat(3, minmax(0, 260px)); justify-content: center; gap: 16px; align-items: start; }
+.reels { display: grid; grid-template-columns: repeat(4, minmax(0, 240px)); justify-content: center; gap: 16px; align-items: start; }
 .reel { margin: 0; display: grid; gap: 8px; min-width: 0; }
 .reel-frame { position: relative; aspect-ratio: 9 / 16; max-width: 100%; border-radius: var(--r); overflow: hidden; background: #050b14; box-shadow: var(--shadow); }
-.reel-frame video { width: 100%; height: 100%; object-fit: cover; }
+.reel-frame video, .reel-frame img { width: 100%; height: 100%; object-fit: cover; }
 .reel figcaption { text-align: center; font-size: .84rem; font-weight: 700; color: var(--muted); }
 .vt { position: absolute; right: 10px; bottom: 10px; z-index: 2; width: 36px; height: 36px; border-radius: 50%; border: 0; cursor: pointer; display: grid; place-items: center; background: rgba(255,255,255,.24); color: #fff; backdrop-filter: blur(8px); }
 .vt:hover { background: rgba(255,255,255,.4); }
@@ -440,6 +453,7 @@ fieldset.field legend { padding: 0; margin-bottom: 6px; }
 .facts { display: flex; justify-content: center; flex-wrap: wrap; gap: 6px 22px; color: var(--muted); margin-top: 26px; }
 .facts b { color: var(--ink); }
 @media (max-width: 900px) { .why-points { grid-template-columns: 1fr; } }
+@media (max-width: 900px) { .reels { grid-template-columns: repeat(2, minmax(0, 240px)); } }
 @media (max-width: 560px) { .reels { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 6px; } .reel { flex: 0 0 62%; scroll-snap-align: center; } }
 
 /* ---------- Reviews ---------- */
@@ -550,6 +564,14 @@ details.qa p { padding: 0 0 20px; color: var(--muted); max-width: 70ch; }
 
 /* ---------- Contact ---------- */
 .contact-sec { background: var(--paper); color: var(--ink); overflow: hidden; }
+/* Photo band behind the contact heading, fading into the page so the cards and form below stay on paper */
+.contact-sec.has-photo { position: relative; isolation: isolate; }
+.contact-photo { position: absolute; inset: 0 0 auto; height: clamp(380px, 40vw, 540px); z-index: -1; }
+.contact-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 42%; }
+.contact-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,40,75,.58) 0%, rgba(15,27,45,.46) 48%, rgba(15,27,45,0) 78%), linear-gradient(180deg, transparent 52%, var(--paper) 100%); }
+.contact-sec.has-photo .sec-head { color: #fff; text-shadow: 0 1px 12px rgba(0,0,0,.35); }
+.contact-sec.has-photo .sec-head .eyebrow, .contact-sec.has-photo .sec-head .lede { color: rgba(255,255,255,.92); }
+.contact-sec.has-photo .sec-head .hl { color: #dff3ff; }
 .steps { list-style: none; margin: 0 auto 28px; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; counter-reset: s; max-width: 1100px; }
 .steps li { counter-increment: s; display: grid; justify-items: center; align-content: start; text-align: center; gap: 8px; padding: 22px 16px; border-radius: var(--r-lg); background: var(--mist); }
 .steps li::before { content: counter(s); width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: var(--sun) var(--grad-sun); color: var(--on-sun); font-weight: 800; box-shadow: var(--glow-sun); }
@@ -979,7 +1001,26 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
 <main id="top">
   <!-- Hero: centered headline and tour search -->
   <section class="hero" aria-labelledby="hero-title" data-spy-for="">
-    <div class="hero-bg"><img class="tr" src="img/dunes.jpg" alt="A camel caravan crossing the plain below the Khongoryn Els sand dunes in the Gobi Desert" data-ko-alt="고비 사막 홍고린 엘스 모래언덕 아래를 지나는 낙타 행렬" fetchpriority="high"></div>
+    <div class="hero-bg" data-hero-slides>
+      <img class="tr is-on" src="img/hero-ub-1280.jpg" srcset="img/hero-ub-1280.jpg 1280w, img/hero-ub-2560.jpg 2560w" sizes="100vw" style="--pos: 38% 42%" alt="Chinggis Square in central Ulaanbaatar, with the Blue Sky Tower and the city skyline" data-ko-alt="울란바토르 도심의 칭기스 광장과 블루스카이 타워" fetchpriority="high">
+      <img class="tr" data-src="img/hero-khuvsgul-1280.jpg" data-srcset="img/hero-khuvsgul-1280.jpg 1280w, img/hero-khuvsgul-2560.jpg 2560w" sizes="100vw" style="--pos: 62% 40%" alt="Lake Khövsgöl, with the snow-capped Munku-Sardyk range behind" data-ko-alt="만년설 덮인 뭉크사르딕 산맥을 배경으로 한 홉스골 호수">
+      <img class="tr" data-src="img/hero-yolyn-1280.jpg" data-srcset="img/hero-yolyn-1280.jpg 1280w, img/hero-yolyn-2560.jpg 2560w" sizes="100vw" style="--pos: 56% 45%" alt="The steep rock walls of Yolyn Am gorge in the Gobi" data-ko-alt="고비 사막 욜링암 협곡의 가파른 암벽">
+      <img class="tr" data-src="img/hero-terelj-1280.jpg" data-srcset="img/hero-terelj-1280.jpg 1280w, img/hero-terelj-2560.jpg 2560w" sizes="100vw" style="--pos: 40% 55%" alt="Turtle Rock in Gorkhi-Terelj National Park" data-ko-alt="테렐지 국립공원의 거북바위">
+      <img class="tr" data-src="img/hero-tsagaan-1280.jpg" data-srcset="img/hero-tsagaan-1280.jpg 1280w, img/hero-tsagaan-2560.jpg 2560w" sizes="100vw" style="--pos: 66% 55%" alt="The eroded cliffs of Tsagaan Suvarga in the Gobi" data-ko-alt="고비 사막 차강소브라가의 침식된 절벽">
+      <img class="tr" data-src="img/hero-orkhon-1280.jpg" data-srcset="img/hero-orkhon-1280.jpg 1280w, img/hero-orkhon-2560.jpg 2560w" sizes="100vw" style="--pos: 54% 55%" alt="Orkhon Waterfall (Ulaan Tsutgalan) in the Orkhon Valley" data-ko-alt="어르헝 계곡의 어르헝 폭포">
+      <img class="tr" data-src="img/hero-van-1536.jpg" data-srcset="img/hero-van-1536.jpg 1536w" sizes="100vw" style="--pos: 58% 60%" alt="A Golden Jigu tour van alone on the open steppe under a vast streaky blue sky" data-ko-alt="끝없이 펼쳐진 푸른 하늘 아래 초원 위의 골든지구 투어 차량">
+    </div>
+    <div class="hero-cap">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+      <span class="hc is-on"><span data-en>Ulaanbaatar</span><span data-ko>울란바토르</span></span>
+      <span class="hc"><span data-en>Lake Khövsgöl</span><span data-ko>홉스골 호수</span></span>
+      <span class="hc"><span data-en>Yolyn Am</span><span data-ko>욜링암</span></span>
+      <span class="hc"><span data-en>Turtle Rock, Terelj</span><span data-ko>테렐지 거북바위</span></span>
+      <span class="hc"><span data-en>Tsagaan Suvarga</span><span data-ko>차강소브라가</span></span>
+      <span class="hc"><span data-en>Orkhon Waterfall</span><span data-ko>어르헝 폭포</span></span>
+      <span class="hc"><span data-en>Our tour van on the steppe</span><span data-ko>초원 위의 골든지구 투어 차량</span></span>
+      <button class="hc-btn tr" type="button" aria-pressed="false" aria-label="Pause the photo slideshow" data-ko-aria-label="배경 사진 넘김 멈추기"><svg class="i-pause" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><rect x="2" y="1.5" width="2.6" height="9" rx=".6"/><rect x="7.4" y="1.5" width="2.6" height="9" rx=".6"/></svg><svg class="i-play" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M3 1.6v8.8L10.4 6z"/></svg></button>
+    </div>
     <div class="wrap hero-center">
       <span class="badge-line"><i></i><span data-en>Local tour company in Ulaanbaatar</span><span data-ko>울란바토르 현지 여행사</span></span>
       <h1 id="hero-title"><span data-en>Mongolia, under the <span class="hl">eternal blue sky</span></span><span data-ko>몽골, <span class="hl">영원한 푸른 하늘</span> 아래</span></h1>
@@ -1056,6 +1097,7 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
         <figure class="reel"><div class="reel-frame"><video class="tr" src="video/horses.mp4" poster="video/horses.jpg" muted loop playsinline preload="metadata" aria-label="A herd of dark horses galloping across the steppe" data-ko-aria-label="초원을 달리는 말 떼"></video><button class="vt" type="button"></button></div><figcaption><span data-en>Summer pasture</span><span data-ko>여름 초원</span></figcaption></figure>
         <figure class="reel"><div class="reel-frame"><video class="tr" src="video/eagle.mp4" poster="video/eagle.jpg" muted loop playsinline preload="metadata" aria-label="An eagle hunter on horseback with a golden eagle raised on his arm" data-ko-aria-label="팔에 검독수리를 올리고 말을 탄 독수리 사냥꾼"></video><button class="vt" type="button"></button></div><figcaption><span data-en>Eagle hunter</span><span data-ko>독수리 사냥꾼</span></figcaption></figure>
         <figure class="reel"><div class="reel-frame"><video class="tr" src="video/herd.mp4" poster="video/herd.jpg" muted loop playsinline preload="metadata" aria-label="Sheep and goats grazing on a wide plain below misty mountains" data-ko-aria-label="안개 낀 산 아래 초원에서 풀을 뜯는 양과 염소"></video><button class="vt" type="button"></button></div><figcaption><span data-en>Herds before rain</span><span data-ko>비 오기 전의 가축 떼</span></figcaption></figure>
+        <figure class="reel"><div class="reel-frame"><img class="tr" src="img/road.jpg" loading="lazy" alt="Two travellers walking hand in hand down a straight road across the steppe under big summer clouds" data-ko-alt="뭉게구름 아래 초원을 가로지르는 곧은 길을 손잡고 걷는 두 여행자"></div><figcaption><span data-en>On the open road</span><span data-ko>초원을 가로지르는 길</span></figcaption></figure>
       </div>
       <div class="facts mono"><span><b>1,564,116</b> km²</span><span data-en><b>~2</b> people per km²</span><span data-ko>km²당 약 <b>2</b>명</span><span data-en>More horses than people</span><span data-ko>사람보다 말이 많은 나라</span></div>
     </div>
@@ -1113,7 +1155,8 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
   </section>
 
   <!-- Contact -->
-  <section class="section contact-sec" id="contact" aria-labelledby="c-title" data-spy-for="contact">
+  <section class="section contact-sec has-photo" id="contact" aria-labelledby="c-title" data-spy-for="contact">
+    <div class="contact-photo"><img class="tr" src="img/rocks.jpg" loading="lazy" alt="Two travellers raising V-signs toward red rock mountains across a green plain" data-ko-alt="초록 평원 너머 붉은 바위산을 향해 브이 포즈를 한 두 여행자"></div>
     <div class="wrap">
       <div class="sec-head">
         <span class="eyebrow"><span data-en>Contact</span><span data-ko>여행 문의</span></span>
@@ -1223,7 +1266,12 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
     <span>© 2026 Golden Jigu Tour</span>
     <details>
       <summary><span data-en>Photo credits</span><span data-ko>사진 출처</span></summary>
-      <p class="credits">Videos © Golden Jigu Tour. Photos via Wikimedia Commons:
+      <p class="credits">Videos and the tour van, road and red-rock photos © Golden Jigu Tour. Other photos via Wikimedia Commons:
+        <a href="https://commons.wikimedia.org/wiki/File:Chinggis_Square_2015.JPG" target="_blank" rel="noopener">Chinggis Square</a> and <a href="https://commons.wikimedia.org/wiki/File:Yolyn_Am_2015_(2).JPG" target="_blank" rel="noopener">Yolyn Am</a> by Römert (CC BY-SA 4.0);
+        <a href="https://commons.wikimedia.org/wiki/File:View_from_Hovsgol_Lake_to_Munku-Sardyk_-_panoramio.jpg" target="_blank" rel="noopener">Lake Khövsgöl and Munku-Sardyk</a> by Michael Karavanov (CC BY-SA 3.0);
+        <a href="https://commons.wikimedia.org/wiki/File:Canyon_(20568363291).jpg" target="_blank" rel="noopener">Tsagaan Suvarga</a> by Rob Oo (CC BY 2.0);
+        <a href="https://commons.wikimedia.org/wiki/File:Gorkhi-Terelj_National_Park_45.JPG" target="_blank" rel="noopener">Turtle Rock</a> by Brücke-Osteuropa (public domain);
+        <a href="https://commons.wikimedia.org/wiki/File:Ulaan-Tsutgalan_waterfall,_Orhon_River.jpg" target="_blank" rel="noopener">Orkhon Waterfall</a> by Báthory Péter (CC BY-SA 3.0);
         <a href="https://commons.wikimedia.org/wiki/File:Camels_at_Khongoryn_Els_01.jpg" target="_blank" rel="noopener">Khongoryn Els</a>, <a href="https://commons.wikimedia.org/wiki/File:Khongoryn_Els_05.jpg" target="_blank" rel="noopener">dunes</a>, <a href="https://commons.wikimedia.org/wiki/File:Naadam_2023_-_Horse_racing_09.jpg" target="_blank" rel="noopener">Naadam</a>, <a href="https://commons.wikimedia.org/wiki/File:Bayanzag_09.jpg" target="_blank" rel="noopener">Bayanzag</a> by Bernard Gagnon (CC0);
         <a href="https://commons.wikimedia.org/wiki/File:On_Lake_Hovsgol_(3756943119).jpg" target="_blank" rel="noopener">Lake Khövsgöl</a> by lamoix (CC BY 2.0);
         <a href="https://commons.wikimedia.org/wiki/File:Kazakh_Eagle_Hunter_with_Golden_Eagle_in_Bayan_Olgii_region,_Mongolia.jpg" target="_blank" rel="noopener">eagle hunter</a> by Ceyhun Kavakci (CC BY-SA 2.0);
@@ -2345,7 +2393,7 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
   });
 
   /* ---------- Videos: play only while visible; respect reduced motion and manual pause ---------- */
-  const reels = $$(".reel-frame").map(frame => {
+  const reels = $$(".reel-frame").filter(frame => frame.querySelector("video")).map(frame => {   // photo tiles have no video
     const v = frame.querySelector("video"), btn = frame.querySelector(".vt");
     const r = { frame, v, btn, paused: calm, visible: false };
     r.sync = () => {
@@ -2599,6 +2647,46 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
   });
   const copyBtn = $("#copy-email");
   copyBtn.addEventListener("click", () => copyText(CONFIG.email, copyBtn));
+
+  /* ---------- Hero slideshow: seven photos, one every 4 s ---------- */
+  // Only the first photo is in the HTML src; each next one is fetched while the current one is on screen.
+  // Stops while the tab is hidden; starts paused for prefers-reduced-motion (the button plays it).
+  (() => {
+    const box = $("[data-hero-slides]");
+    if (!box) return;
+    const slides = $$("img", box), caps = $$(".hero-cap .hc"), btn = $(".hc-btn"), EVERY = 4000;
+    let i = 0, timer = 0, run = 0, paused = calm;
+    const load = img => new Promise(done => {
+      if (img.dataset.srcset) { img.srcset = img.dataset.srcset; delete img.dataset.srcset; }
+      if (img.dataset.src) { img.src = img.dataset.src; delete img.dataset.src; }
+      if (img.complete && img.naturalWidth) return done();
+      img.addEventListener("load", done, { once: true });
+      img.addEventListener("error", done, { once: true });
+    });
+    const show = n => {
+      slides[i].classList.remove("is-on"); caps[i]?.classList.remove("is-on");
+      i = n;
+      slides[i].classList.add("is-on"); caps[i]?.classList.add("is-on");
+    };
+    const tick = async me => {
+      const n = (i + 1) % slides.length;
+      await load(slides[n]);
+      if (me !== run) return;              // paused, hidden or restarted meanwhile
+      show(n);
+      load(slides[(n + 1) % slides.length]);
+      timer = setTimeout(() => tick(me), EVERY);
+    };
+    const play = () => {
+      clearTimeout(timer);
+      const me = ++run;
+      if (!paused && !document.hidden) timer = setTimeout(() => tick(me), EVERY);
+    };
+    btn.setAttribute("aria-pressed", String(paused));
+    btn.addEventListener("click", () => { paused = !paused; btn.setAttribute("aria-pressed", String(paused)); play(); });
+    document.addEventListener("visibilitychange", play);
+    if (!paused) load(slides[1]);
+    play();
+  })();
 
   /* ---------- Language ---------- */
   // Static text carries both languages in the markup; attributes and generated content are swapped here.
