@@ -841,6 +841,7 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
 .sd-t { list-style: none; margin: 0; padding: 0; display: grid; gap: 5px; font-size: .9rem; line-height: 1.45; }
 .sd-t li { display: grid; grid-template-columns: 44px 1fr; gap: 8px; }
 .sd-t time { font: 600 .8rem/1.8 var(--f-mono); color: var(--accent-ink); }
+.sd-t time small { display: block; font-size: .72rem; line-height: 1.2; color: var(--muted); }
 .sd-t li.nt { display: block; color: var(--muted); font-size: .82rem; }
 .sd-m { margin: 0; font-size: .82rem; color: var(--muted); }
 .sd-foot { margin: 0; display: flex; flex-wrap: wrap; gap: 6px; }
@@ -1349,7 +1350,10 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
     const both = (en, ko) => [str(en) || str(ko), str(ko) || str(en)];   // [en, ko]; a blank side shows the other language
     const rows = t => str(t).split(/\r?\n/).map(s => s.trim()).filter(Boolean);
     const pairRows = (en, ko) => { const e = rows(en), k = rows(ko); return Array.from({ length: Math.max(e.length, k.length) }, (_, i) => both(e[i], k[i])); };
-    const timed = s => { const m = /^(\d{1,2}:\d{2})\s+(.+)$/.exec(s || ""); return m ? [m[1].padStart(5, "0"), m[2]] : [null, s || ""]; };
+    const timed = s => {   // "08:00 text", or a window "05:00-10:00 text" kept as "05:00–10:00"
+      const m = /^(\d{1,2}:\d{2})(?:\s*[-–~]\s*(\d{1,2}:\d{2}))?\s+(.+)$/.exec(s || "");
+      return m ? [m[1].padStart(5, "0") + (m[2] ? "–" + m[2].padStart(5, "0") : ""), m[3]] : [null, s || ""];
+    };
     const plan = (en, ko) => {   // "08:00 Tour begins" lines -> [time, en, ko]; the English line sets the time
       const e = rows(en).map(timed), k = rows(ko).map(timed);
       return Array.from({ length: Math.max(e.length, k.length) }, (_, i) => {
@@ -1993,7 +1997,7 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
   const schedHTML = t => `<ol class="days">${t.sched.map((d, i) => `<li class="day">${dayPhoto(d)}
       <div class="day-h"><span class="day-n">${T("Day " + (i + 1), (i + 1) + "일차")}</span><h4>${esc(pair(d.p))}</h4></div>
       <div class="day-b">
-        <ul class="sd-t">${d.t.map(([tm, e, k]) => `<li${tm ? "" : ' class="nt"'}>${tm ? `<time>${tm}</time>` : ""}<span>${esc(T(e, k))}</span></li>`).join("")}</ul>
+        <ul class="sd-t">${d.t.map(([tm, e, k]) => `<li${tm ? "" : ' class="nt"'}>${tm ? `<time>${tm.replace(/–(.+)$/, "<small>~$1</small>")}</time>` : ""}<span>${esc(T(e, k))}</span></li>`).join("")}</ul>
         ${d.m ? `<p class="sd-m">${esc(pair(d.m))}</p>` : ""}
       </div>${dayFoot(d)}</li>`).join("")}</ol>`;
   const dayFoot = d => {
