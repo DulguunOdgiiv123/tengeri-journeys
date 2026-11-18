@@ -1427,7 +1427,7 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
       const fac = Object.fromEntries(["shower", "private_bath", "power", "wifi", "restaurant"]
         .filter(k => l.fac?.[k] === "yes" || l.fac?.[k] === "no").map(k => [k, l.fac[k] === "yes"]));
       if (Object.keys(fac).length) o.fac = fac;
-      for (const k of ["url", "phone", "photo"]) if (str(l[k])) o[k] = str(l[k]);
+      for (const k of ["url", "google", "phone", "photo"]) if (str(l[k])) o[k] = str(l[k]);
       return o;
     });
 
@@ -2028,6 +2028,8 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
   const lodgesAt = (t, k) => LODGES.filter(l => l.stop === k && (!isWinter(t) || l.season === "all"));
   const nightsAt = (t, k) => t.sched.map((d, i) => i < t.sched.length - 1 && d.p[0].toLowerCase().includes(PLACES[k].name.toLowerCase()) ? i + 1 : 0).filter(Boolean);
   // A camp's link is its own site when it has one, otherwise a listing; name the listing so nobody expects the camp's site.
+  // The Google Maps listing (reviews, photos, directions) wins over Facebook; the camp's own site or a booking listing still shows.
+  const lodgeLinks = l => [l.google && [l.google, "Google Maps ↗"], l.url && !(l.google && /facebook\.com/i.test(l.url)) && [l.url, linkLabel(l.url)]].filter(Boolean);
   const linkLabel = u => /facebook\.com/i.test(u) ? "Facebook ↗" : /tripadvisor\./i.test(u) ? "Tripadvisor ↗" : /booking\.com/i.test(u) ? "Booking.com ↗" : T("Website ↗", "홈페이지 ↗");
   function lodgeCard(l) {
     const tier = TIER[l.tier], fac = l.fac ? FAC.filter(([k]) => k in l.fac) : [];
@@ -2039,7 +2041,7 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
       <p class="lp">${l.price ? esc(pair(l.price)) : T(tier[2], tier[3])}</p>
       ${fac.length ? `<div class="fac">${fac.map(([k, e, ko]) => l.fac[k] ? `<span>${T(e, ko)}</span>` : `<span class="no">${T("No " + e.toLowerCase(), ko + " 없음")}</span>`).join("")}</div>` : ""}
       ${l.about ? `<p>${esc(pair(l.about))}</p>` : ""}
-      <div class="lodge-acts">${l.ll ? `<button class="txt-btn" type="button" data-lodge-pin="${l.id}">${T("Show on map", "지도에서 보기")}</button>` : `<small>${T("Location to be confirmed", "위치 확인 중")}</small>`}${l.url ? `<a href="${esc(l.url)}" target="_blank" rel="noopener">${linkLabel(l.url)}</a>` : ""}</div>
+      <div class="lodge-acts">${l.ll ? `<button class="txt-btn" type="button" data-lodge-pin="${l.id}">${T("Show on map", "지도에서 보기")}</button>` : `<small>${T("Location to be confirmed", "위치 확인 중")}</small>`}${lodgeLinks(l).map(([u, label]) => `<a href="${esc(u)}" target="_blank" rel="noopener">${label}</a>`).join("")}</div>
     </article>`;
   }
   // "Night of day 2 · 5 h drive that day": shared by the stop panel and the stop's map preview
@@ -2058,7 +2060,7 @@ details.m-more p { margin: 0 0 16px; color: var(--muted); font-size: .94rem; }
     const photo = l.photo ? peekPhoto(l.photo)
       : p && p.img ? peekPhoto(p.img, T(`Photo of the ${p.name} area`, `${p.ko} 일대 사진`))
       : ger ? peekPhoto(GER_PHOTO, T("Inside a typical ger", "일반적인 게르 내부")) : "";
-    return `${photo}<span class="pk-body"><b>${esc(l.n)}</b><span class="pk-tier ${l.tier}">${T(tier[0], tier[1])}</span>${l.ty ? `<span>${esc(pair(l.ty))}</span>` : ""}<span class="pk-note">${l.price ? esc(pair(l.price)) : T(tier[2], tier[3])}</span>${l.url ? `<span class="pk-note">${T("Click for its photos link", "눌러서 숙소 사진 링크 보기")}</span>` : ""}</span>`;
+    return `${photo}<span class="pk-body"><b>${esc(l.n)}</b><span class="pk-tier ${l.tier}">${T(tier[0], tier[1])}</span>${l.ty ? `<span>${esc(pair(l.ty))}</span>` : ""}<span class="pk-note">${l.price ? esc(pair(l.price)) : T(tier[2], tier[3])}</span>${l.url || l.google ? `<span class="pk-note">${T("Click for its photos link", "눌러서 숙소 사진 링크 보기")}</span>` : ""}</span>`;
   }
   function stopPeek(t, k, n) {
     const p = PLACES[k], when = stopWhen(t, k), camps = lodgesAt(t, k).length;

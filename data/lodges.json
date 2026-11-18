@@ -7,8 +7,8 @@
       "season": "summer",
       "type": "Traditional Mongolian ger",
       "type_ko": "전통 몽골 게르",
-      "lat": null,
-      "lon": null,
+      "lat": 44.57872,
+      "lon": 105.78463,
       "price": "",
       "price_ko": "",
       "about": "",
@@ -21,6 +21,7 @@
         "restaurant": ""
       },
       "url": "https://www.facebook.com/profile.php?id=100063623081350",
+      "google": "https://www.google.com/maps/place/Tsagaan+Suvraga+Tourist+Camp+-+%D0%A6%D0%B0%D0%B3%D0%B0%D0%B0%D0%BD+%D0%A1%D1%83%D0%B2%D1%80%D0%B0%D0%B3%D0%B0+%D0%96%D1%83%D1%83%D0%BB%D1%87%D0%BD%D1%8B+%D0%91%D0%B0%D0%B0%D0%B7/data=!4m7!3m6!1s0x5d8bb7c985bfa01d:0x124fd520d2450c75!8m2!3d44.578716!4d105.784631!16s%2Fg%2F11kz76d34v!19sChIJHaC_hcm3i10RdQxF0iDVTxI",
       "phone": "",
       "photo": "",
       "id": "tsagaan-tsagaan-suwarga-camp"
@@ -71,6 +72,7 @@
         "restaurant": ""
       },
       "url": "https://www.facebook.com/GobiCaravanserai/",
+      "google": "https://www.google.com/maps/place/Gobi+Caravanserai+Lodge/data=!4m9!3m8!1s0x5d8bcdf49cc9e5c3:0x83d5c288503492ff!5m2!4m1!1i2!8m2!3d44.5751009!4d105.6461016!16s%2Fg%2F11kqdsh_dt",
       "phone": "",
       "photo": "",
       "id": "tsagaan-gobi-caravanserai-camp"
@@ -121,6 +123,7 @@
         "restaurant": ""
       },
       "url": "https://www.facebook.com/103256768197937",
+      "google": "https://www.google.com/maps/place/%D0%93%D0%BE%D0%B2%D1%8C+%D3%A9%D1%80%D0%B3%D3%A9%D3%A9+%D0%BA%D1%8D%D0%BC%D0%BF/data=!4m6!3m5!1s0x3627b30015b3acd9:0xac42dfb10be8881f!8m2!3d43.55713!4d104.0334!16s%2Fg%2F11ntmqs_zn",
       "phone": "",
       "photo": "",
       "id": "yolyn-goviin-urguu-camp"
@@ -132,8 +135,8 @@
       "season": "summer",
       "type": "Traditional Mongolian ger",
       "type_ko": "전통 몽골 게르",
-      "lat": null,
-      "lon": null,
+      "lat": 43.55681,
+      "lon": 104.13182,
       "price": "",
       "price_ko": "",
       "about": "",
@@ -146,6 +149,7 @@
         "restaurant": ""
       },
       "url": "",
+      "google": "https://www.google.com/maps/place/Dungenee+tourist+camp/data=!4m6!3m5!1s0x3627ad3eb158683f:0xf542e2698fc78b2c!8m2!3d43.5568128!4d104.1318196!16s%2Fg%2F11v5tgpdrd",
       "phone": "",
       "photo": "",
       "id": "yolyn-dungenee-camp"
@@ -207,8 +211,8 @@
       "season": "summer",
       "type": "Traditional Mongolian ger",
       "type_ko": "전통 몽골 게르",
-      "lat": null,
-      "lon": null,
+      "lat": 43.78782,
+      "lon": 102.25819,
       "price": "",
       "price_ko": "",
       "about": "",
@@ -221,6 +225,7 @@
         "restaurant": ""
       },
       "url": "",
+      "google": "https://www.google.com/maps/place/Gobi+tugul+Guest+house/data=!4m7!3m6!1s0x36299d002a2b337d:0x7446bba7888bb6c5!8m2!3d43.7878183!4d102.2581864!16s%2Fg%2F11w1vqb4sb!19sChIJfTMrKgCdKTYRxbaLiKe7RnQ",
       "phone": "",
       "photo": "",
       "id": "khongor-goviin-tugul-camp"
@@ -232,8 +237,8 @@
       "season": "summer",
       "type": "Traditional Mongolian ger",
       "type_ko": "전통 몽골 게르",
-      "lat": null,
-      "lon": null,
+      "lat": 43.79595,
+      "lon": 102.30394,
       "price": "",
       "price_ko": "",
       "about": "",
@@ -246,6 +251,7 @@
         "restaurant": ""
       },
       "url": "https://www.tripadvisor.com/Hotel_Review-g33311053-d33306091-Reviews-Sand_of_Treasures-Sevrei_Omnogovi_Province.html",
+      "google": "https://www.google.com/maps/place/Sand+of+Treasures/data=!4m10!3m9!1s0x3629772871c5302b:0x1867f1caf5985a9d!5m2!4m1!1i2!8m2!3d43.7959474!4d102.3039412!16s%2Fg%2F11lmncvt7n!19sChIJKzDFcSh3KTYRnVqY9crxZxg",
       "phone": "",
       "photo": "",
       "id": "khongor-sand-of-treasures-camp"
@@ -321,6 +327,7 @@
         "restaurant": ""
       },
       "url": "",
+      "google": "https://www.google.com/maps/place/Mongol+Gobi+tourist+camp/data=!4m7!3m6!1s0x3627f938792aef1f:0xdbada64c62088318!8m2!3d44.1305182!4d103.7009786!16s%2Fg%2F11fmd9r35m!19sChIJH-8qeTj5JzYRGIMIYkymrds",
       "phone": "",
       "photo": "",
       "id": "bayanzag-mongol-gobi-camp"
@@ -357,8 +364,8 @@
       "season": "summer",
       "type": "Traditional Mongolian ger",
       "type_ko": "전통 몽골 게르",
-      "lat": null,
-      "lon": null,
+      "lat": 46.23072,
+      "lon": 106.06991,
       "price": "",
       "price_ko": "",
       "about": "",
@@ -371,6 +378,7 @@
         "restaurant": ""
       },
       "url": "https://www.tripadvisor.com/Hotel_Review-g33009965-d34492753-Reviews-Bayanbulag_Tourist_Camp-Choiri_sume_Dundgovi_Province.html",
+      "google": "https://www.google.com/maps/place/Bayanbulag+Tourist+Camp/data=!4m9!3m8!1s0x5d8e050078616b67:0x66bed05d94f3faf3!5m2!4m1!1i2!8m2!3d46.2307228!4d106.0699112!16s%2Fg%2F11x2xkzlcs",
       "phone": "",
       "photo": "",
       "id": "bagagazar-bayanbulag-camp"
@@ -407,8 +415,8 @@
       "season": "summer",
       "type": "Traditional Mongolian ger",
       "type_ko": "전통 몽골 게르",
-      "lat": null,
-      "lon": null,
+      "lat": 45.33589,
+      "lon": 104.00777,
       "price": "",
       "price_ko": "",
       "about": "",
@@ -421,6 +429,7 @@
         "restaurant": ""
       },
       "url": "https://www.tripadvisor.com/Hotel_Review-g13440895-d34377415-Reviews-Ongi_Energy_Tourist_Camp-Saikhan_Ovoo_Dundgovi_Province.html",
+      "google": "https://www.google.com/maps/place/Ongi+Energy+Tourist+Camp/data=!4m9!3m8!1s0x5d860199986d3449:0x8f541ca48abb241f!5m2!4m1!1i2!8m2!3d45.3358913!4d104.0077721!16s%2Fg%2F11ssfcr2xv",
       "phone": "",
       "photo": "",
       "id": "ongi-ongi-energy"
@@ -432,8 +441,8 @@
       "season": "summer",
       "type": "Traditional Mongolian ger",
       "type_ko": "전통 몽골 게르",
-      "lat": null,
-      "lon": null,
+      "lat": 46.7763,
+      "lon": 101.96255,
       "price": "",
       "price_ko": "",
       "about": "",
@@ -446,6 +455,7 @@
         "restaurant": ""
       },
       "url": "https://www.facebook.com/muyangam/",
+      "google": "https://www.google.com/maps/place/ORKHON+CAMP+WATERFALL/data=!4m10!3m9!1s0x5d82cbd9221d4665:0x2a4cebcfbb9d1055!5m2!4m1!1i2!8m2!3d46.776298!4d101.962546!16s%2Fg%2F11svnv_rk3!19sChIJZUYdItnLgl0RVRCdu8_rTCo",
       "phone": "",
       "photo": "",
       "id": "orkhon-orkhon-waterfall-camp"
@@ -604,7 +614,7 @@
       "name": "Bichigt Khad Camp",
       "stop": "elsen",
       "tier": "upgrade",
-      "season": "summer",
+      "season": "all",
       "type": "Modern ger",
       "type_ko": "현대식 게르",
       "lat": 47.36611,
@@ -621,6 +631,7 @@
         "restaurant": ""
       },
       "url": "https://www.facebook.com/bichigtkhad/",
+      "google": "https://www.google.com/maps/place/Bichigt+Khad+Tourist+Camp/data=!4m6!3m5!1s0x5d9b9854184fc62b:0xf9dfac20bd841e24!8m2!3d47.3656005!4d103.8152084!16s%2Fg%2F11fx95x6lv",
       "phone": "",
       "photo": "",
       "id": "elsen-bichigt-khad-camp"
@@ -696,6 +707,7 @@
         "restaurant": ""
       },
       "url": "https://www.facebook.com/altannutagcamp/",
+      "google": "https://www.google.com/maps/place/%D0%90%D0%BB%D1%82%D0%B0%D0%BD+%D0%BD%D1%83%D1%82%D0%B0%D0%B3+%D0%B6%D1%83%D1%83%D0%BB%D1%87%D0%BD%D1%8B+%D0%B1%D0%B0%D0%B0%D0%B7/data=!4m6!3m5!1s0x5d77d9e62d9e0ebd:0x815929f03599bb8a!8m2!3d47.3185941!4d101.6505801!16s%2Fg%2F11h9y_gc_s",
       "phone": "",
       "photo": "",
       "id": "tsenkher-altannutag-camp"
@@ -721,6 +733,7 @@
         "restaurant": ""
       },
       "url": "https://www.facebook.com/khangairesort/",
+      "google": "https://www.google.com/maps/place/Khangai+resort/data=!4m6!3m5!1s0x5d77d9002da034c9:0x76b7aa510526d9e6!8m2!3d47.321686!4d101.656052!16s%2Fg%2F11z6sr16_0",
       "phone": "",
       "photo": "",
       "id": "tsenkher-khangai-camp"
@@ -771,6 +784,7 @@
         "restaurant": ""
       },
       "url": "",
+      "google": "https://www.google.com/maps/place/Ugii+Dalai+resort/data=!4m6!3m5!1s0x5d9c35c6453a84f1:0x37bdda623ef202cd!8m2!3d47.7591372!4d102.8138764!16s%2Fg%2F11jvqhx_b4",
       "phone": "",
       "photo": "",
       "id": "ugii-ugii-dalai-camp"
@@ -782,8 +796,8 @@
       "season": "summer",
       "type": "Traditional Mongolian ger",
       "type_ko": "전통 몽골 게르",
-      "lat": null,
-      "lon": null,
+      "lat": 47.75395,
+      "lon": 102.80894,
       "price": "",
       "price_ko": "",
       "about": "",
@@ -796,6 +810,7 @@
         "restaurant": ""
       },
       "url": "",
+      "google": "https://www.google.com/maps/place/Ugii+Khishig+Resort/data=!4m7!3m6!1s0x5d9c35cfd2b84fe9:0x82926754d2356362!8m2!3d47.7539533!4d102.8089428!16s%2Fg%2F11hz1_phf8!19sChIJ6U-40s81nF0RYmM10lRnkoI",
       "phone": "",
       "photo": "",
       "id": "ugii-ugii-khishig-camp"
@@ -821,6 +836,7 @@
         "restaurant": ""
       },
       "url": "https://www.facebook.com/profile.php?id=100045070185076",
+      "google": "https://www.google.com/maps/place/Dalai+Van+camp/data=!4m6!3m5!1s0x5d717b006b55900d:0x59383503f1a8529!8m2!3d48.1433366!4d99.7691437!16s%2Fg%2F11zg41v6xd",
       "phone": "",
       "photo": "",
       "id": "terkhiin-dalai-van-camp"
@@ -832,8 +848,8 @@
       "season": "summer",
       "type": "Traditional Mongolian ger",
       "type_ko": "전통 몽골 게르",
-      "lat": null,
-      "lon": null,
+      "lat": 49.12728,
+      "lon": 99.57024,
       "price": "",
       "price_ko": "",
       "about": "",
@@ -846,6 +862,7 @@
         "restaurant": ""
       },
       "url": "https://www.tripadvisor.com/Hotel_Review-g680701-d19091627-Reviews-Ulziit_Khishig_Ger_Camp-Erdenet_Orkhon_Province.html",
+      "google": "https://www.google.com/maps/place/Ulziit+Khishig+tourist+camp/data=!4m6!3m5!1s0x5d725fdd905b67d9:0xc5c65de7e2790956!8m2!3d49.1272844!4d99.5702413!16s%2Fg%2F11w3z43fcy",
       "phone": "",
       "photo": "",
       "id": "shineider-ulziit-khishig-camp"
@@ -871,6 +888,7 @@
         "restaurant": ""
       },
       "url": "https://www.facebook.com/khuvsgulmisheelcamp/",
+      "google": "https://www.google.com/maps/place/Misheel+Camp/data=!4m6!3m5!1s0x5d0dc7ac4464c48b:0x65f2c2b37353289f!8m2!3d50.603952!4d100.1965748!16s%2Fg%2F11c550n296",
       "phone": "",
       "photo": "",
       "id": "khuvsgul-misheel-camp"
@@ -896,6 +914,7 @@
         "restaurant": ""
       },
       "url": "",
+      "google": "https://www.google.com/maps/place/Khuvsgul-Sor+Resort/data=!4m7!3m6!1s0x5d0dc7613f2455d9:0xe1367442d36d93bd!8m2!3d50.5719808!4d100.1580997!16s%2Fg%2F11h5vrn7sw!19sChIJ2VUkP2HHDV0RvZNt00J0NuE",
       "phone": "",
       "photo": "",
       "id": "khuvsgul-khuvsgul-sor-camp"
@@ -926,14 +945,39 @@
       "id": "khuvsgul-toilogt-camp"
     },
     {
+      "name": "Urlag Camp",
+      "stop": "khuvsgul",
+      "tier": "standard",
+      "season": "all",
+      "type": "Cabin with indoor facilities (winter)",
+      "type_ko": "오두막 (내부 시설, 겨울)",
+      "lat": null,
+      "lon": null,
+      "price": "",
+      "price_ko": "",
+      "about": "Winter base in Khatgal village for the frozen-lake programs.",
+      "about_ko": "하트갈 마을의 겨울 홉스골 숙소.",
+      "fac": {
+        "shower": "yes",
+        "private_bath": "",
+        "power": "yes",
+        "wifi": "yes",
+        "restaurant": ""
+      },
+      "url": "",
+      "phone": "",
+      "photo": "",
+      "id": "khuvsgul-urlag-camp"
+    },
+    {
       "name": "Bulgan Suite Hotel",
       "stop": "bulgan",
       "tier": "standard",
-      "season": "summer",
+      "season": "all",
       "type": "Hotel, twin or double rooms",
       "type_ko": "호텔 (트윈·더블룸)",
-      "lat": null,
-      "lon": null,
+      "lat": 48.82852,
+      "lon": 103.51282,
       "price": "",
       "price_ko": "",
       "about": "",
@@ -946,6 +990,7 @@
         "restaurant": ""
       },
       "url": "https://www.facebook.com/profile.php?id=61561258770511",
+      "google": "https://www.google.com/maps/place/SUITE+hotel/data=!4m6!3m5!1s0x5d9f13000c4fbe8f:0x2066686c9b83b7a5!8m2!3d48.8285151!4d103.5128177!16s%2Fg%2F11y773rtmx",
       "phone": "",
       "photo": "",
       "id": "bulgan-bulgan-suite-hotel"
@@ -954,7 +999,7 @@
       "name": "Deedes Hotel",
       "stop": "erdenet",
       "tier": "standard",
-      "season": "summer",
+      "season": "all",
       "type": "Hotel, rooms for 2–3",
       "type_ko": "호텔 (2~3인실)",
       "lat": 49.03664,
@@ -971,6 +1016,7 @@
         "restaurant": ""
       },
       "url": "",
+      "google": "https://www.google.com/maps/place/Deedes+Hotel/data=!4m9!3m8!1s0x5d9f508a3c0ecfeb:0x34284035bad6cf7!5m2!4m1!1i2!8m2!3d49.0367942!4d104.0571983!16s%2Fg%2F11c46k149s",
       "phone": "",
       "photo": "",
       "id": "erdenet-deedes-hotel"

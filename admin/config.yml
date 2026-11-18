@@ -443,6 +443,7 @@ collections:
                   - { name: wifi, label: Wi-Fi, widget: select, required: false, options: *yesno }
                   - { name: restaurant, label: Ресторан, widget: select, required: false, options: *yesno }
               - { name: url, label: Вэб сайт, widget: string, required: false }
+              - { name: google, label: Google Maps холбоос, widget: string, required: false, hint: "Google Maps дээрх баазын хуудасны холбоос (сэтгэгдэл, зураг, зам). Байвал сайт Facebook-ийн оронд үүнийг харуулна." }
               - { name: phone, label: Утас, widget: string, required: false }
               - { name: photo, label: Зургийн холбоос, widget: string, required: false }
               - { name: id, widget: hidden, default: "{{uuid_short}}" }
