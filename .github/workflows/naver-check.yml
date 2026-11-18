@@ -1,0 +1,59 @@
+# Check the Naver cafe for tour changes the site hasn't picked up yet.
+# Runs every morning at 08:30 Ulaanbaatar time, whenever the admin saves "Naver шалгалт" (data/naver.json, e.g. after
+# ticking "Одоо шалгах" or "Хийж дууссан"), and by hand from the Actions tab.
+# .github/scripts/naver_check.py fixes re-posted links and changed cover photos itself, and lists the rest (changed
+# itinerary or price images, new posts, deleted posts, new notices) in data/naver.json for staff. It only commits when
+# something changed, so quiet days leave no commit.
+name: Naver check
+
+on:
+  schedule:
+    - cron: "30 0 * * *"   # 00:30 UTC = 08:30 in Ulaanbaatar
+  push:
+    branches: [main]
+    paths: [data/naver.json]
+  workflow_dispatch:
+
+permissions:
+  contents: write   # commit data/naver.json, the snapshot, fixed links and covers
+  pages: write      # ask GitHub Pages to rebuild after that commit
+
+concurrency:
+  group: naver-check
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Pillow (crops cover photos)
+        run: python -m pip install --quiet pillow
+
+      - name: Compare the Naver cafe with the site
+        run: python .github/scripts/naver_check.py
+
+      - name: Save what changed
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ -z "$(git status --porcelain -- data img/cafe)" ]; then echo "Nothing new to save."; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/naver.json data/naver-snapshot.json data/tours.json img/cafe
+          git commit -m "Naver check: $(jq -r .summary data/naver.json)"
+          # The admin may have saved again meanwhile: replay on top of it and retry
+          for i in 1 2 3; do
+            if git pull --rebase origin main && git push origin HEAD:main; then
+              gh api -X POST "repos/${{ github.repository }}/pages/builds" --silent || true
+              exit 0
+            fi
+            sleep 5
+          done
+          exit 1

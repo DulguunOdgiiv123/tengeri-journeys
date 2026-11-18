@@ -29,6 +29,50 @@ collections:
     label: Сайтын агуулга
     icon: edit_note
     files:
+      # Filled by .github/workflows/naver-check.yml every morning and after every save: it compares the Naver cafe
+      # (cafe.naver.com/goldenjigu) with the tours here. Staff only tick boxes; the rest is read-only.
+      - name: naver
+        label: Naver шалгалт
+        icon: sync
+        file: data/naver.json
+        format: json
+        editor: { preview: false }
+        fields:
+          - name: check_now
+            label: Одоо шалгах
+            widget: boolean
+            required: false
+            hint: "Чагтлаад «Хадгалах» дарна. 1–2 минутын дараа хуудсыг дахин ачаалахад доорх жагсаалт шинэчлэгдэнэ. Систем өдөр бүр өглөө 8:30-д өөрөө шалгадаг."
+          - { name: checked_at, label: Сүүлд шалгасан, widget: string, required: false, readonly: true }
+          - { name: summary, label: Төлөв, widget: string, required: false, readonly: true }
+          - name: todo
+            label: Хийх зүйлс
+            label_singular: зүйл
+            widget: list
+            required: false
+            allow_add: false
+            allow_remove: false
+            allow_reorder: false
+            summary: "{{title}}"
+            hint: "Naver дээр өөрчлөгдсөн ч сайтад хараахан тусгаагүй зүйлс. Холбоосоор нийтлэлийг нээж, сайтыг засаад «Хийж дууссан»-ыг чагтлаад хадгална."
+            fields:
+              - { name: key, widget: hidden }
+              - { name: kind, widget: hidden }
+              - { name: title, label: Naver нийтлэл, widget: string, readonly: true }
+              - { name: tour, label: Сайт дээрх аялал, widget: string, required: false, readonly: true }
+              - { name: link, label: Naver холбоос, widget: string, type: url, readonly: true }
+              - { name: what, label: "Юу өөрчлөгдсөн, юу хийх вэ", widget: text, readonly: true }
+              - { name: done, label: Хийж дууссан, widget: boolean, required: false }
+          - name: log
+            label: Автоматаар засварласан
+            widget: list
+            required: false
+            allow_add: false
+            allow_remove: false
+            allow_reorder: false
+            hint: "Naver дээр дахин нийтэлсэн аяллын холбоос, солигдсон нүүр зургийг систем өөрөө засдаг."
+            field: { name: line, label: Мөр, widget: string, readonly: true }
+
       - name: tours
         label: Аялалууд
         icon: landscape
